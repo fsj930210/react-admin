@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import viteEslint from 'vite-plugin-eslint';
+import UnoCSS from 'unocss/vite';
 
 const root = process.cwd();
 
@@ -19,6 +20,7 @@ export default defineConfig({
     react(),
     viteEslint({
       failOnError: false
-    })
+    }),
+    UnoCSS(),
   ]
 })
