@@ -1,2 +1,12 @@
-# react-admin
-一个react技术栈的后台管理系统
+# react 后台管理系统
+
+技术栈:
+
+- react18
+- react-router-v6
+- antd5
+- ahooks
+- zustand
+- unocss
+- lightningcss
+- eslint9

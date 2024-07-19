@@ -1,0 +1,92 @@
+{
+  "name": "react-admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "一个react的后台管理系统",
+  "keywords": [
+    "react",
+    "antd5",
+    "zustand",
+    "react-router-v6",
+    "eslint9",
+    "lightningcss",
+    "vite",
+    "react-admin",
+    "ahooks",
+    "esm"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint:eslint": "eslint --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,ts,json,tsx,css,html,md}\"",
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{html,css}\" --cache-location node_modules/.cache/stylelint/",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier && pnpm lint:stylelint",
+    "lint:fix": "lint-staged",
+    "preview": "vite preview",
+    "prepare": "husky",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "lint-staged": {
+    "**/src/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{js,jsx,,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ],
+    "*.css": [
+      "stylelint --fix"
+    ]
+  },
+  "dependencies": {
+    "ahooks": "^3.8.0",
+    "antd": "^5.19.1",
+    "axios": "^1.7.2",
+    "dayjs": "^1.11.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/compat": "^1.1.1",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.7.0",
+    "@types/node": "^20.14.11",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "browserslist": "^4.23.2",
+    "eslint": "^9.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "globals": "^15.8.0",
+    "husky": "^9.1.1",
+    "lightningcss": "^1.25.1",
+    "lint-staged": "^15.2.7",
+    "postcss-nesting": "^12.1.5",
+    "prettier": "^3.3.3",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "stylelint": "^16.7.0",
+    "stylelint-config-standard": "^36.0.1",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^7.16.1",
+    "unocss": "^0.61.5",
+    "vite": "^5.3.4",
+    "vite-plugin-compression": "^0.5.1"
+  },
+  "engines": {
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0",
+    "pnpm": ">=9"
+  }
+}
