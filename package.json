@@ -3,13 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "一个react的后台管理系统",
+  "description": "一个react的中后台管理系统",
   "keywords": [
     "react",
     "antd5",
     "zustand",
-    "react-router-v6",
-    "eslint9",
+    "react-router",
     "lightningcss",
     "vite",
     "react-admin",
@@ -43,6 +42,10 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^5.4.0",
+    "@emotion/react": "^11.13.0",
+    "@zxcvbn-ts/core": "^3.0.4",
+    "@zxcvbn-ts/language-common": "^3.0.4",
     "ahooks": "^3.8.0",
     "antd": "^5.19.1",
     "axios": "^1.7.2",
@@ -64,9 +67,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "browserslist": "^4.23.2",
     "eslint": "^9.7.0",
-    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.34.4",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
@@ -83,7 +84,8 @@
     "typescript-eslint": "^7.16.1",
     "unocss": "^0.61.5",
     "vite": "^5.3.4",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0",

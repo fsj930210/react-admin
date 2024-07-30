@@ -1,0 +1,12 @@
+.quick-login-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background-color: #fff;
+  box-shadow: rgb(227 227 227) 0 4px 11px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.3s ease-in-out;
+}

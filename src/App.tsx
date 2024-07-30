@@ -14,13 +14,18 @@ dayjs.locale('zh-cn');
 
 const App = () => {
   const { primaryColor } = useGlobalStore();
-  console.log(222);
   return (
     <ConfigProvider
       locale={zhCN}
       theme={{
         token: {
           colorPrimary: primaryColor,
+          borderRadius: 4,
+        },
+        components: {
+          Form: {
+            itemMarginBottom: 16,
+          },
         },
       }}
     >

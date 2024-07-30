@@ -1,0 +1,10 @@
+.login-wrapper {
+  :global(.ant-tabs-nav-list) {
+    flex: 1;
+  }
+
+  :global(.ant-tabs-tab) {
+    flex: 1;
+    justify-content: center;
+  }
+}

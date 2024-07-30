@@ -6,7 +6,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import pluginJs from '@eslint/js';
 // import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js';
 import pluginEslintImport from 'eslint-plugin-import';
-import pluginEslintPrettier from 'eslint-plugin-prettier/recommended';
+// import pluginEslintPrettier from 'eslint-plugin-prettier/recommended';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
@@ -32,7 +32,11 @@ export default [
           jsx: true,
         },
       },
-      globals: { ...globals.node, ...globals.es2022, ...globals.browser },
+      globals: {
+        ...globals.node,
+        ...globals.es2022,
+        ...globals.browser,
+      },
     },
     settings: {
       react: {
@@ -46,7 +50,7 @@ export default [
   },
   pluginJs.configs.recommended,
   ...tsEslint.configs.recommended,
-  pluginEslintPrettier,
+  // pluginEslintPrettier,
   // ...fixupConfigRules(pluginReactConfig),
   // 因为v9变化较大，为了兼容之前的 config，官方提供了转换整个旧的 config 的方法
   ...fixupConfigRules(
@@ -57,15 +61,35 @@ export default [
   ),
   {
     rules: {
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      '@typescript-eslint/no-explicit-any': 'error',
+      'react-refresh/only-export-components': [
+        'warn',
+        {
+          allowConstantExport: true,
+        },
+      ],
+      '@typescript-eslint/no-explicit-any': 'off',
+      'react/no-unknown-property': [
+        'error',
+        {
+          ignore: ['css'],
+        },
+      ],
       'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       //import导入顺序规则
       'import/order': [
         'error',
         {
           //按照分组顺序进行排序
-          groups: ['builtin', 'external', 'parent', 'sibling', 'index', 'internal', 'object', 'type'],
+          groups: [
+            'builtin',
+            'external',
+            'parent',
+            'sibling',
+            'index',
+            'internal',
+            'object',
+            'type',
+          ],
           //通过路径自定义分组
           pathGroups: [
             {

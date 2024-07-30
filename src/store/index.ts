@@ -5,7 +5,7 @@ interface GlobalState {
 }
 
 const useGloabalState = create<GlobalState>()(() => ({
-  primaryColor: '#00b96b',
+  primaryColor: '#3f8cff',
 }));
 
 export default useGloabalState;

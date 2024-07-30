@@ -6,6 +6,12 @@ import LazyLoadComponent from '@/components/LazyLoadComponent';
 
 const routes: RouteObject[] = [
   {
+    path: '/login',
+    element: (
+      <LazyLoadComponent Component={lazy(() => import('@/pages/login'))} />
+    ),
+  },
+  {
     path: '/',
     children: [
       {
@@ -14,11 +20,15 @@ const routes: RouteObject[] = [
       },
       {
         path: 'home',
-        element: <LazyLoadComponent Component={lazy(() => import('@/pages/home'))} />,
+        element: (
+          <LazyLoadComponent Component={lazy(() => import('@/pages/home'))} />
+        ),
       },
       {
         path: 'about',
-        element: <LazyLoadComponent Component={lazy(() => import('@/pages/about'))} />,
+        element: (
+          <LazyLoadComponent Component={lazy(() => import('@/pages/about'))} />
+        ),
       },
     ],
   },

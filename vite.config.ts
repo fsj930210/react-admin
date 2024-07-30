@@ -8,6 +8,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import UnoCSS from 'unocss/vite';
 import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
@@ -15,6 +16,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   return defineConfig({
     plugins: [
       react(),
+      svgr(),
       // gz包
       {
         ...viteCompression(),
