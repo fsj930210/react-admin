@@ -4,6 +4,8 @@ import type { RouteObject } from 'react-router-dom';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import Layout from '@/layouts/index';
+
 const routes: RouteObject[] = [
   {
     path: '/login',
@@ -13,6 +15,7 @@ const routes: RouteObject[] = [
   },
   {
     path: '/',
+    element: <Layout />,
     children: [
       {
         index: true,

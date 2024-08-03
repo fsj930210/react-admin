@@ -11,6 +11,7 @@ import styles from './index.module.css';
 import useLogin, { LOGIN_STATE_ENUM } from './useLogin';
 
 import loginImg from '@/assets/images/login-img.svg';
+import AppFooter from '@/layouts/components/Footer';
 
 const { useToken } = theme;
 
@@ -63,35 +64,39 @@ const Login = () => {
           <img src={loginImg} alt="" className="w-[500]" />
         </div>
       </div>
-      <div className={`w-[45%] bg-white p[80px] flex justify-center`}>
-        <div className="w-[420px]">
-          <h2 className="mb-[16px]">
-            {loginState === LOGIN_STATE_ENUM.LOGIN
-              ? '登录'
-              : loginState === LOGIN_STATE_ENUM.REGISTER
-                ? '注册'
-                : '重置密码'}
-          </h2>
-          {loginState === LOGIN_STATE_ENUM.LOGIN ? (
-            <Tabs
-              className={styles['login-tab']}
-              centered
-              animated
-              items={items}
-              tabBarExtraContent={null}
-              indicator={{
-                size: 140,
-                align: 'center',
-              }}
-            />
-          ) : null}
-          {loginState === LOGIN_STATE_ENUM.REGISTER ? (
-            <RegisterForm switchPage={changeState} />
-          ) : null}
-          {loginState === LOGIN_STATE_ENUM.RESET_PASSWORD ? (
-            <ResetPasswordForm switchPage={changeState} />
-          ) : null}
+      <div className={`w-[45%] flex flex-col items-center`}>
+        <div className="p[80px] bg-white">
+          <div className="w-[420px]">
+            <h2 className="mb-[16px]">
+              {loginState === LOGIN_STATE_ENUM.LOGIN
+                ? '登录'
+                : loginState === LOGIN_STATE_ENUM.REGISTER
+                  ? '注册'
+                  : '重置密码'}
+            </h2>
+            {loginState === LOGIN_STATE_ENUM.LOGIN ? (
+              <Tabs
+                className={styles['login-tab']}
+                centered
+                animated
+                items={items}
+                tabBarExtraContent={null}
+                indicator={{
+                  size: 140,
+                  align: 'center',
+                }}
+              />
+            ) : null}
+            {loginState === LOGIN_STATE_ENUM.REGISTER ? (
+              <RegisterForm switchPage={changeState} />
+            ) : null}
+            {loginState === LOGIN_STATE_ENUM.RESET_PASSWORD ? (
+              <ResetPasswordForm switchPage={changeState} />
+            ) : null}
+          </div>
         </div>
+
+        <AppFooter />
       </div>
     </div>
   );
