@@ -30,6 +30,10 @@ const routes: RouteObject[] = [
           <LazyLoadComponent Component={lazy(() => import('@/pages/about'))} />
         ),
       },
+      {
+        path: '*',
+        element: <Navigate to="/404" />,
+      },
     ],
   },
 ];

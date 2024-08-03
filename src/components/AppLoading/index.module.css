@@ -7,8 +7,6 @@
     position: absolute;
     top: 75px;
     font-size: 20px;
-    letter-spacing: 3px;
-    color: #fff;
     left: 15%;
   }
 }
@@ -18,7 +16,6 @@
   height: 20px;
   position: absolute;
   border-radius: 50%;
-  background-color: #fff;
   left: 10%;
   transform-origin: 50%;
   animation: circle 0.5s alternate infinite ease;

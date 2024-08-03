@@ -1,8 +1,14 @@
 import { Suspense } from 'react';
 
-const LazyLoadComponent = ({ Component }: { Component: React.LazyExoticComponent<() => JSX.Element> }) => {
+import AppLoading from '../AppLoading';
+
+const LazyLoadComponent = ({
+  Component,
+}: {
+  Component: React.LazyExoticComponent<() => JSX.Element>;
+}) => {
   return (
-    <Suspense>
+    <Suspense fallback={<AppLoading />}>
       <Component />
     </Suspense>
   );

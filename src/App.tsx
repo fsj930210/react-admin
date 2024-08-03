@@ -1,12 +1,18 @@
+import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { RouterProvider } from 'react-router-dom';
 
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, App as AntApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 
+import Error500 from '@/components/ErrorPage/500';
+
+import AppLoading from './components/AppLoading';
 import router from './router';
 
 import useGlobalStore from '@/store';
+
 import 'dayjs/locale/zh-cn';
 import 'antd/dist/reset.css';
 
@@ -29,7 +35,18 @@ const App = () => {
         },
       }}
     >
-      <RouterProvider router={router} />
+      <AntApp className="w-full h-full">
+        <ErrorBoundary
+          fallbackRender={({ error }) => {
+            console.log(error);
+            return <Error500 subTitle={error?.message} />;
+          }}
+        >
+          <Suspense fallback={<AppLoading showText />}>
+            <RouterProvider router={router} fallbackElement={<Error500 />} />
+          </Suspense>
+        </ErrorBoundary>
+      </AntApp>
     </ConfigProvider>
   );
 };
