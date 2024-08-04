@@ -23,16 +23,19 @@ const AppSider = () => {
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
+  // 监听路由变化 设置侧边栏展开选中以及面包屑
   useEffect(() => {
     setSelectedKeys([location.pathname]);
     const keysArr = location.pathname.split('/').filter((i) => i);
     const keys: string[] = [];
+    // 根据pathname生成keys
     keysArr.reduce((prev: string, current: string) => {
       const path = prev ? `${prev}/${current}` : `/${current}`;
       keys.push(path);
       return path;
     }, '');
     setOpenKeys(keys);
+    // 根据pathname生成面包屑list
     const breadcrumbList = generateBreadcrumList(
       location.pathname,
       menuItems,
@@ -42,6 +45,7 @@ const AppSider = () => {
     setBreadcrumbList(breadcrumbList);
   }, [location.pathname]);
   const levelKeys = getLevelKeys(menuItems as LevelKeysProps[]);
+  // 菜单展开时关闭其他已经展开的菜单
   const onOpenChange: MenuProps['onOpenChange'] = (allOpenKeys) => {
     const currentOpenKey = allOpenKeys.find(
       (key) => openKeys.indexOf(key) === -1,

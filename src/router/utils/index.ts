@@ -12,6 +12,7 @@ export function getRoutes() {
       routes.push(...metaRoutes[item][key]);
     });
   });
+  // 根据order排序，升序排列，值越小越在前面
   routes.sort((a, b) => (a.meta?.order || 0) - (b.meta?.order || 0));
   return routes;
 }

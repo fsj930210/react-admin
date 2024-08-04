@@ -25,7 +25,7 @@ export interface IRouteObjectMeta {
   key?: string; // 可不用，后面实际是代码生成key，因为填的key不可控
   menu?: boolean; // 是否是菜单，不是菜单的会被过滤掉
   icon?: React.ReactNode; // 菜单icon
-  order?: number; // 菜单排序
+  order?: number; // 菜单排序 值越小越排在前面
 }
 
 export type IRouteObject = RouteObject & {
