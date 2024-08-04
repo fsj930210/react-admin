@@ -13,6 +13,7 @@ const outerPageRouter: IRouteObject[] = [
       key: 'outerPage',
       auth: true,
       menu: true,
+      order: 9,
     },
 
     children: [

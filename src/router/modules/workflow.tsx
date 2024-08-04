@@ -13,6 +13,7 @@ const workflowRouter: IRouteObject[] = [
       key: 'workflow',
       auth: true,
       menu: true,
+      order: 17,
     },
     element: (
       <LazyLoadComponent Component={lazy(() => import('@/pages/workflow'))} />

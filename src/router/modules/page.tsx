@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RouteView from '../RoueView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 各种页面
@@ -13,6 +15,7 @@ const pageRouter: IRouteObject[] = [
       key: 'page',
       auth: true,
       menu: true,
+      order: 6,
     },
 
     children: [
@@ -133,9 +136,11 @@ const pageRouter: IRouteObject[] = [
           title: '列表',
           key: 'page/list',
         },
+        element: <RouteView to="/page/list/cardList" />,
         children: [
           {
             path: 'cardList',
+            index: true,
             element: (
               <LazyLoadComponent
                 Component={lazy(() => import('@/pages/page/list/cardList'))}
@@ -228,9 +233,11 @@ const pageRouter: IRouteObject[] = [
           title: '个人页面',
           key: 'page/user',
         },
+        element: <RouteView to="/page/user/profile" />,
         children: [
           {
             path: 'profile',
+            index: true,
             element: (
               <LazyLoadComponent
                 Component={lazy(() => import('@/pages/page/user/profile'))}

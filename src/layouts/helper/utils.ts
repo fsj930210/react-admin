@@ -3,8 +3,11 @@ import { MenuProps } from 'antd/lib';
 import { ItemType } from 'antd/lib/breadcrumb/Breadcrumb';
 
 import { MenuItem } from '@/types/custom-types';
-
-export function findAncestorsMenu(
+export interface LevelKeysProps {
+  key?: string;
+  children?: LevelKeysProps[];
+}
+export function generateBreadcrumList(
   key: string, // 通过点击的key来寻找
   menuList: MenuItem[], // 菜单列表
   menuItemClick?: MenuProps['onClick'], // 面包屑中菜单点击回调
@@ -52,3 +55,19 @@ function formatMenu(
     }
   }
 }
+
+export const getLevelKeys = (items1: LevelKeysProps[]) => {
+  const key: Record<string, number> = {};
+  const func = (items2: LevelKeysProps[], level = 1) => {
+    items2.forEach((item) => {
+      if (item.key) {
+        key[item.key] = level;
+      }
+      if (item.children) {
+        func(item.children, level + 1);
+      }
+    });
+  };
+  func(items1);
+  return key;
+};

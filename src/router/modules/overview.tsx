@@ -13,6 +13,7 @@ const overviewRouter: IRouteObject[] = [
       key: 'overview',
       auth: true,
       menu: true,
+      order: 1,
     },
 
     children: [

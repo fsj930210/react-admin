@@ -13,6 +13,7 @@ const bookManagementRouter: IRouteObject[] = [
       key: 'bookManagement',
       auth: true,
       menu: true,
+      order: 13,
     },
     element: (
       <LazyLoadComponent

@@ -12,6 +12,6 @@ export function getRoutes() {
       routes.push(...metaRoutes[item][key]);
     });
   });
-
+  routes.sort((a, b) => (a.meta?.order || 0) - (b.meta?.order || 0));
   return routes;
 }

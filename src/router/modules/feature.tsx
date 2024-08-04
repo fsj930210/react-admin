@@ -13,6 +13,7 @@ const featureRouter: IRouteObject[] = [
       key: 'feature',
       auth: true,
       menu: true,
+      order: 7,
     },
 
     children: [

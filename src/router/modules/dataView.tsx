@@ -13,6 +13,7 @@ const dataViewRouter: IRouteObject[] = [
       key: 'dataView',
       auth: true,
       menu: true,
+      order: 2,
     },
     element: (
       <LazyLoadComponent Component={lazy(() => import('@/pages/dataView'))} />

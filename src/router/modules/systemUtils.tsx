@@ -13,6 +13,7 @@ const systemUtilsRouter: IRouteObject[] = [
       key: 'systemUtils',
       auth: true,
       menu: true,
+      order: 10,
     },
 
     children: [

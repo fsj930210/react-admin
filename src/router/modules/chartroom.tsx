@@ -4,7 +4,7 @@ import LazyLoadComponent from '@/components/LazyLoadComponent';
 
 import type { IRouteObject } from '@/types/custom-types';
 
-// 概览
+// 聊天室
 const chartroomRouter: IRouteObject[] = [
   {
     path: '/chartroom',
@@ -13,11 +13,12 @@ const chartroomRouter: IRouteObject[] = [
       key: 'chartroom',
       auth: true,
       menu: true,
+      order: 15,
     },
-
     children: [
       {
         path: 'chart',
+        index: true,
         element: (
           <LazyLoadComponent
             Component={lazy(() => import('@/pages/chartroom/chart'))}

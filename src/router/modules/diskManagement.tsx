@@ -13,6 +13,7 @@ const diskManagementRouter: IRouteObject[] = [
       key: 'diskManagement',
       auth: true,
       menu: true,
+      order: 12,
     },
 
     children: [

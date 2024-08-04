@@ -13,6 +13,7 @@ const meetingRoomManagementRouter: IRouteObject[] = [
       key: 'meetingRoomManagement',
       auth: true,
       menu: true,
+      order: 14,
     },
 
     children: [

@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RouteView from '../RoueView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 图表
@@ -13,10 +15,12 @@ const chartsRouter: IRouteObject[] = [
       key: 'charts',
       auth: true,
       menu: true,
+      order: 4,
     },
     children: [
       {
         path: 'amap',
+        index: true,
         element: (
           <LazyLoadComponent
             Component={lazy(() => import('@/pages/charts/amap'))}
@@ -65,6 +69,7 @@ const chartsRouter: IRouteObject[] = [
           title: 'echarts图表',
           key: 'charts/echarts',
         },
+        element: <RouteView to="/charts/echarts/basic" />,
         children: [
           {
             path: 'basic',

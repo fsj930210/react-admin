@@ -13,6 +13,7 @@ const aboutRouter: IRouteObject[] = [
       key: 'about',
       auth: true,
       menu: true,
+      order: 18,
     },
     element: (
       <LazyLoadComponent Component={lazy(() => import('@/pages/about'))} />

@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RouteView from '../RoueView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 系统管理
@@ -13,37 +15,36 @@ const errorRouter: IRouteObject[] = [
       auth: true,
       menu: true,
       key: 'systemManagement',
+      order: 11,
     },
 
     children: [
       {
-        path: 'dictionary',
+        path: 'user',
         element: (
           <LazyLoadComponent
-            Component={lazy(
-              () => import('@/pages/systemManagement/dictionary'),
-            )}
+            Component={lazy(() => import('@/pages/systemManagement/user'))}
           />
         ),
         meta: {
           auth: true,
           menu: true,
-          title: '字典管理',
-          key: 'systemManagement/dictionary',
+          title: '用户管理',
+          key: 'systemManagement/user',
         },
       },
       {
-        path: 'menu',
+        path: 'role',
         element: (
           <LazyLoadComponent
-            Component={lazy(() => import('@/pages/systemManagement/menu'))}
+            Component={lazy(() => import('@/pages/systemManagement/role'))}
           />
         ),
         meta: {
           auth: true,
           menu: true,
-          title: '菜单管理',
-          key: 'systemManagement/menu',
+          title: '角色管理',
+          key: 'systemManagement/role',
         },
       },
       {
@@ -63,6 +64,36 @@ const errorRouter: IRouteObject[] = [
         },
       },
       {
+        path: 'menu',
+        element: (
+          <LazyLoadComponent
+            Component={lazy(() => import('@/pages/systemManagement/menu'))}
+          />
+        ),
+        meta: {
+          auth: true,
+          menu: true,
+          title: '菜单管理',
+          key: 'systemManagement/menu',
+        },
+      },
+      {
+        path: 'dictionary',
+        element: (
+          <LazyLoadComponent
+            Component={lazy(
+              () => import('@/pages/systemManagement/dictionary'),
+            )}
+          />
+        ),
+        meta: {
+          auth: true,
+          menu: true,
+          title: '字典管理',
+          key: 'systemManagement/dictionary',
+        },
+      },
+      {
         path: 'paramsConfig',
         element: (
           <LazyLoadComponent
@@ -79,20 +110,6 @@ const errorRouter: IRouteObject[] = [
         },
       },
       {
-        path: 'role',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/systemManagement/role'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '角色管理',
-          key: 'systemManagement/role',
-        },
-      },
-      {
         path: 'systemMonitor',
         meta: {
           auth: true,
@@ -100,9 +117,11 @@ const errorRouter: IRouteObject[] = [
           title: '系统监控',
           key: 'systemManagement/systemMonitor',
         },
+        element: <RouteView to="/systemManagement/systemMonitor/loginLogs" />,
         children: [
           {
             path: 'loginLogs',
+            index: true,
             element: (
               <LazyLoadComponent
                 Component={lazy(
@@ -166,9 +185,11 @@ const errorRouter: IRouteObject[] = [
           title: '任务调度',
           key: 'systemManagement/taskScheduler',
         },
+        element: <RouteView to="/systemManagement/taskScheduler/taskLogs" />,
         children: [
           {
             path: 'taskLogs',
+            index: true,
             element: (
               <LazyLoadComponent
                 Component={lazy(
@@ -204,20 +225,6 @@ const errorRouter: IRouteObject[] = [
             },
           },
         ],
-      },
-      {
-        path: 'user',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/systemManagement/user'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '用户管理',
-          key: 'systemManagement/user',
-        },
       },
     ],
   },

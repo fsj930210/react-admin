@@ -13,6 +13,7 @@ const errorRouter: IRouteObject[] = [
       key: 'permissions',
       auth: true,
       menu: true,
+      order: 3,
     },
     children: [
       {

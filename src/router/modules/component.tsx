@@ -13,6 +13,7 @@ const componentRouter: IRouteObject[] = [
       key: 'component',
       auth: true,
       menu: true,
+      order: 5,
     },
 
     children: [

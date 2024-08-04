@@ -13,6 +13,7 @@ const lowcodeRouter: IRouteObject[] = [
       key: 'lowcode',
       auth: true,
       menu: true,
+      order: 16,
     },
     children: [
       {
