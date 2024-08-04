@@ -5,9 +5,9 @@ import { ItemType } from 'antd/lib/breadcrumb/Breadcrumb';
 import { MenuItem } from '@/types/custom-types';
 
 export function findAncestorsMenu(
-  key: string,
-  menuList: MenuItem[],
-  menuItemClick?: MenuProps['onClick'],
+  key: string, // 通过点击的key来寻找
+  menuList: MenuItem[], // 菜单列表
+  menuItemClick?: MenuProps['onClick'], // 面包屑中菜单点击回调
 ) {
   const list: BreadcrumbProps['items'] = [];
   const keyArr: string[] = key.split('/').filter((i) => i);
@@ -20,12 +20,12 @@ export function findAncestorsMenu(
   }
   return list;
 }
-
+// 遍历菜单生成面包屑的格式
 function formatMenu(
-  menList: MenuItem[],
-  breadcrumbList: BreadcrumbProps['items'] = [],
-  key: string,
-  menuItemClick?: MenuProps['onClick'],
+  menList: MenuItem[], // 当前点击的菜单及其子孙菜单
+  breadcrumbList: BreadcrumbProps['items'] = [], // 最后需要的面包屑列表
+  key: string, // 根据他来过滤平级菜单
+  menuItemClick?: MenuProps['onClick'], // 上面透传下来的面包屑菜单里面菜单
 ) {
   for (let i = 0; i < menList.length; i++) {
     const menu = menList[i];
@@ -41,9 +41,11 @@ function formatMenu(
         })),
         onClick: menuItemClick,
       };
+      // 这里有平级菜单需要过滤掉
       if (key.includes(menu.key)) {
         breadcrumbList.push(breadcrumbItem);
       }
+      // 子菜单遍历，这里需要把子菜单提出来，面包屑不是嵌套结构
       formatMenu(menu.children, breadcrumbList, key, menuItemClick);
     } else if (key.includes(menu.key)) {
       breadcrumbList.push(breadcrumbItem);

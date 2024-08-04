@@ -20,16 +20,16 @@ export interface IPagingResponse<T> extends IBasicResponse<T> {
 }
 
 export interface IRouteObjectMeta {
-  auth?: boolean;
-  title?: string;
-  key?: string;
-  menu?: boolean;
-  icon?: React.ReactNode;
+  auth?: boolean; // 是否需要权限
+  title?: string; // 菜单名
+  key?: string; // 可不用，后面实际是代码生成key，因为填的key不可控
+  menu?: boolean; // 是否是菜单，不是菜单的会被过滤掉
+  icon?: React.ReactNode; // 菜单icon
 }
 
 export type IRouteObject = RouteObject & {
   meta?: IRouteObjectMeta;
-  children?: (RouteObject & IRouteObjectMeta)[];
+  children?: (RouteObject & IRouteObjectMeta)[]; // 重写children
 };
 export type MenuItem = {
   label: string;
