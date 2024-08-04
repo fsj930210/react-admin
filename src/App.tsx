@@ -6,7 +6,7 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 
-import Error500 from '@/components/ErrorPage/500';
+import Error500 from '@/components/Error/500';
 
 import AppLoading from './components/AppLoading';
 import router from './router';
@@ -31,6 +31,12 @@ const App = () => {
         components: {
           Form: {
             itemMarginBottom: 16,
+          },
+          Layout: {
+            headerHeight: 48,
+          },
+          Menu: {
+            collapsedWidth: 48,
           },
         },
       }}

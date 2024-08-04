@@ -1,41 +1,47 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-import type { RouteObject } from 'react-router-dom';
 
+import Error404 from '@/components/Error/404';
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
-import Layout from '@/layouts/index';
+import { getRoutes } from './utils';
 
-const routes: RouteObject[] = [
+import Layout from '@/layouts/index';
+import { IRouteObject } from '@/types/custom-types';
+
+const routeArray = getRoutes();
+
+const routes: IRouteObject[] = [
   {
     path: '/login',
     element: (
       <LazyLoadComponent Component={lazy(() => import('@/pages/login'))} />
     ),
+    meta: {
+      menu: false,
+    },
   },
   {
     path: '/',
     element: <Layout />,
+    meta: {
+      menu: false,
+    },
     children: [
       {
         index: true,
-        element: <Navigate to="/home" replace />,
+        element: <Navigate to="/overview/workspace" replace />,
+        meta: {
+          menu: false,
+        },
       },
-      {
-        path: 'home',
-        element: (
-          <LazyLoadComponent Component={lazy(() => import('@/pages/home'))} />
-        ),
-      },
-      {
-        path: 'about',
-        element: (
-          <LazyLoadComponent Component={lazy(() => import('@/pages/about'))} />
-        ),
-      },
+      ...routeArray,
       {
         path: '*',
-        element: <Navigate to="/404" />,
+        element: <Error404 />,
+        meta: {
+          menu: false,
+        },
       },
     ],
   },

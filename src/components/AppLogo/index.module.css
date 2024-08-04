@@ -8,6 +8,16 @@
   }
 }
 
-.logo {
+.logo-animate {
   animation: rotate 3s linear infinite;
+}
+
+.logo-wrapper {
+  height: 48px;
+  padding: 10px 4px 10px 10px;
+  transition: all 0.2s ease;
+
+  img {
+    width: 34px;
+  }
 }

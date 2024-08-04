@@ -19,17 +19,20 @@ const AppLogo = ({
   const { goHome } = useGoto();
   return (
     <div
-      className={`${className} flex items-center cursor-pointer`}
+      className={`${className} ${styles['logo-wrapper']} flex items-center cursor-pointer`}
       style={style}
       onClick={goHome}
     >
       <img
         src="/logo.svg"
         alt="logo"
-        className={animate ? styles.logo : ''}
-        style={style}
+        className={animate ? styles['animate'] : ''}
       />
-      {showTitle ? <h1 className="text-center ml-[10px]">{title}</h1> : null}
+      <h1
+        className={`text-center ml-[10px] text-[16px] ${showTitle ? 'block opacity-100' : 'hidden opacity-0'}`}
+      >
+        {title}
+      </h1>
     </div>
   );
 };
