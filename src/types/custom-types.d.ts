@@ -1,6 +1,5 @@
 import { RouteObject } from 'react-router-dom';
 
-import type { MenuProps } from 'antd';
 export interface IBasicResponse<T> {
   error_code: string;
   message: string;
@@ -32,4 +31,10 @@ export type IRouteObject = RouteObject & {
   meta?: IRouteObjectMeta;
   children?: (RouteObject & IRouteObjectMeta)[];
 };
-export type MenuItem = Required<MenuProps>['items'][number];
+export type MenuItem = {
+  label: string;
+  key: string;
+  children?: MenuItem[];
+  icon?: React.ReactNode;
+  title?: string;
+};

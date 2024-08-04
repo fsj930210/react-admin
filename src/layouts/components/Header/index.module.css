@@ -1,0 +1,5 @@
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+}
