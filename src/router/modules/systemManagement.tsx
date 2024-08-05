@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
-import RouteView from '../RoueView';
+import RedirectRouteView from '../RedirectRouteView';
 
 import type { IRouteObject } from '@/types/custom-types';
 
@@ -117,7 +117,9 @@ const errorRouter: IRouteObject[] = [
           title: '系统监控',
           key: 'systemManagement/systemMonitor',
         },
-        element: <RouteView to="/systemManagement/systemMonitor/loginLogs" />,
+        element: (
+          <RedirectRouteView to="/systemManagement/systemMonitor/loginLogs" />
+        ),
         children: [
           {
             path: 'loginLogs',
@@ -185,7 +187,9 @@ const errorRouter: IRouteObject[] = [
           title: '任务调度',
           key: 'systemManagement/taskScheduler',
         },
-        element: <RouteView to="/systemManagement/taskScheduler/taskLogs" />,
+        element: (
+          <RedirectRouteView to="/systemManagement/taskScheduler/taskLogs" />
+        ),
         children: [
           {
             path: 'taskLogs',

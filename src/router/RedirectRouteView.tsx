@@ -3,10 +3,10 @@
  */
 import { Navigate, Outlet } from 'react-router-dom';
 
-type RouteViewProps = {
+type RedirectRouteViewProps = {
   to: string;
 };
-const RouteView = ({ to }: RouteViewProps) => {
+const RedirectRouteView = ({ to }: RedirectRouteViewProps) => {
   return (
     <>
       <Navigate to={to} />
@@ -15,4 +15,4 @@ const RouteView = ({ to }: RouteViewProps) => {
   );
 };
 
-export default RouteView;
+export default RedirectRouteView;

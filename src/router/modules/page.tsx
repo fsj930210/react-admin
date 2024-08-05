@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
-import RouteView from '../RoueView';
+import RedirectRouteView from '../RedirectRouteView';
 
 import type { IRouteObject } from '@/types/custom-types';
 
@@ -136,7 +136,7 @@ const pageRouter: IRouteObject[] = [
           title: '列表',
           key: 'page/list',
         },
-        element: <RouteView to="/page/list/cardList" />,
+        element: <RedirectRouteView to="/page/list/cardList" />,
         children: [
           {
             path: 'cardList',
@@ -233,7 +233,7 @@ const pageRouter: IRouteObject[] = [
           title: '个人页面',
           key: 'page/user',
         },
-        element: <RouteView to="/page/user/profile" />,
+        element: <RedirectRouteView to="/page/user/profile" />,
         children: [
           {
             path: 'profile',

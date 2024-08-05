@@ -4,7 +4,7 @@ import LazyLoadComponent from '@/components/LazyLoadComponent';
 
 import type { IRouteObject } from '@/types/custom-types';
 
-// 概览
+// 外部页面
 const outerPageRouter: IRouteObject[] = [
   {
     path: '/outerPage',

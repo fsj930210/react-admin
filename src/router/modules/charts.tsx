@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
-import RouteView from '../RoueView';
+import RedirectRouteView from '../RedirectRouteView';
 
 import type { IRouteObject } from '@/types/custom-types';
 
@@ -69,7 +69,7 @@ const chartsRouter: IRouteObject[] = [
           title: 'echarts图表',
           key: 'charts/echarts',
         },
-        element: <RouteView to="/charts/echarts/basic" />,
+        element: <RedirectRouteView to="/charts/echarts/basic" />,
         children: [
           {
             path: 'basic',

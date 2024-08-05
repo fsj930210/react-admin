@@ -2,7 +2,7 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
-import RouteView from '../RoueView';
+import RedirectRouteView from '../RedirectRouteView';
 
 import type { IRouteObject } from '@/types/custom-types';
 
@@ -41,7 +41,7 @@ const nestedMenuRouter: IRouteObject[] = [
           title: '菜单2',
           key: 'nestedMenu/menu2',
         },
-        element: <RouteView to="/nestedMenu/menu2/menu2-1" />,
+        element: <RedirectRouteView to="/nestedMenu/menu2/menu2-1" />,
         children: [
           {
             path: 'menu2-1',
@@ -70,7 +70,7 @@ const nestedMenuRouter: IRouteObject[] = [
           title: '菜单3',
           key: 'nestedMenu/menu3',
         },
-        element: <RouteView to="/nestedMenu/menu3/menu3-1" />,
+        element: <RedirectRouteView to="/nestedMenu/menu3/menu3-1" />,
         children: [
           {
             path: 'menu3-1',
@@ -97,7 +97,9 @@ const nestedMenuRouter: IRouteObject[] = [
               title: '菜单3-2',
               key: 'nestedMenu/menu3/menu3-2',
             },
-            element: <RouteView to="/nestedMenu/menu3/menu3-2/menu3-2-1" />,
+            element: (
+              <RedirectRouteView to="/nestedMenu/menu3/menu3-2/menu3-2-1" />
+            ),
             children: [
               {
                 path: 'menu3-2-1',

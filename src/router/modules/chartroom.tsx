@@ -1,7 +1,3 @@
-import { lazy } from 'react';
-
-import LazyLoadComponent from '@/components/LazyLoadComponent';
-
 import type { IRouteObject } from '@/types/custom-types';
 
 // 聊天室
@@ -15,65 +11,6 @@ const chartroomRouter: IRouteObject[] = [
       menu: true,
       order: 15,
     },
-    children: [
-      {
-        path: 'chart',
-        index: true,
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/chartroom/chart'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '聊天',
-          key: 'chartroom/chart',
-        },
-      },
-      {
-        path: 'collections',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/chartroom/collections'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '收藏',
-          key: 'chartroom/collections',
-        },
-      },
-      {
-        path: 'friends',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/chartroom/friends'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '好友',
-          key: 'chartroom/friends',
-        },
-      },
-      {
-        path: 'notifications',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/chartroom/notifications'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '通知',
-          key: 'chartroom/notifications',
-        },
-      },
-    ],
   },
 ];
 
