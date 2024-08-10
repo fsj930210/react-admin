@@ -10,6 +10,7 @@ import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
 
+import pages from './vite-plugins/vite-plugin-react-file-router';
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
   const envConfig = loadEnv(mode, process.cwd());
@@ -27,12 +28,17 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         open: true,
       }),
       UnoCSS(),
+      pages({
+        useIndexAsRoot: true,
+        excludeRoutesFromRootRoute: ['login'],
+        layoutComponentName: 'Layout',
+      }),
     ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
       },
-      extensions: ['.ts', '.tsx', '.js', 'jsx'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     base: envConfig.VITE_PUBLIC_PATH,
     server: {

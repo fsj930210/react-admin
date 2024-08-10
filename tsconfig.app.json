@@ -34,5 +34,5 @@
       "@emotion/react/types/css-prop"
     ]
   },
-  "include": ["src"]
+  "include": ["src", "./vite-plugins/vite-plugin-react-file-router/client.d.ts"]
 }

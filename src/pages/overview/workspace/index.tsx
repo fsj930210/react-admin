@@ -1,3 +1,11 @@
+/*
+
+      route
+meta:
+  auth: true
+  menu: true
+  title: 工作台
+*/
 import { useCountDown } from 'ahooks';
 import { Button } from 'antd';
 

@@ -1,8 +1,9 @@
 import { AppstoreOutlined } from '@ant-design/icons';
+import routes from 'virtual:vite-plugin-react-file-router';
 
 import type { IRouteObject, MenuItem } from '@/types/custom-types';
 
-import routes from '@/router/routes';
+// import routes from '@/router/routes';
 
 function useMenu() {
   const menuItems: MenuItem[] = [];
@@ -16,7 +17,7 @@ function useMenu() {
       const route = routes[i];
       const meta = route.meta;
       let menuItem: MenuItem | null = null;
-      if (meta?.menu) {
+      if (meta?.menu && route.path) {
         menuItem = {
           label: meta.title as string,
           // key: meta.key as string,
