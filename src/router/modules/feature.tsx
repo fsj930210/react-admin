@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 功能
@@ -15,7 +17,7 @@ const featureRouter: IRouteObject[] = [
       menu: true,
       order: 7,
     },
-
+    element: <RedirectRouteView to="/feature/clipboard" />,
     children: [
       {
         path: 'clipboard',
@@ -85,20 +87,6 @@ const featureRouter: IRouteObject[] = [
           menu: true,
           title: '锁屏',
           key: 'feature/lockScreen',
-        },
-      },
-      {
-        path: 'print',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/feature/print'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '打印',
-          key: 'feature/print',
         },
       },
       {

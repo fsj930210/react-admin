@@ -17,7 +17,7 @@ const errorRouter: IRouteObject[] = [
       key: 'systemManagement',
       order: 11,
     },
-
+    element: <RedirectRouteView to="/systemManagement/user" />,
     children: [
       {
         path: 'user',

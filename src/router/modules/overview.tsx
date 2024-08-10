@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 概览
@@ -15,7 +17,7 @@ const overviewRouter: IRouteObject[] = [
       menu: true,
       order: 1,
     },
-
+    element: <RedirectRouteView to="/overview/workspace" />,
     children: [
       {
         path: 'workspace',

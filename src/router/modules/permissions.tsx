@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 权限管理
@@ -15,6 +17,7 @@ const errorRouter: IRouteObject[] = [
       menu: true,
       order: 3,
     },
+    element: <RedirectRouteView to="/permissions/button" />,
     children: [
       {
         path: 'button',

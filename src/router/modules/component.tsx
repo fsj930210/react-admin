@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 组件
@@ -15,7 +17,7 @@ const componentRouter: IRouteObject[] = [
       menu: true,
       order: 5,
     },
-
+    element: <RedirectRouteView to="/component/clickOutSide" />,
     children: [
       {
         path: 'clickOutSide',

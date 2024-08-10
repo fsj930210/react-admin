@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 低代码
@@ -15,6 +17,7 @@ const lowcodeRouter: IRouteObject[] = [
       menu: true,
       order: 16,
     },
+    element: <RedirectRouteView to="/lowcode/formDesigner" />,
     children: [
       {
         path: 'formDesigner',

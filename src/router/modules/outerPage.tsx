@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 外部页面
@@ -15,7 +17,7 @@ const outerPageRouter: IRouteObject[] = [
       menu: true,
       order: 9,
     },
-
+    element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
     children: [
       {
         path: 'iframe',
@@ -25,6 +27,7 @@ const outerPageRouter: IRouteObject[] = [
           title: '内嵌',
           key: 'outerPage/iframe',
         },
+        element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
         children: [
           {
             path: 'nestjs',

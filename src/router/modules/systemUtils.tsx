@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 系统工具
@@ -15,7 +17,7 @@ const systemUtilsRouter: IRouteObject[] = [
       menu: true,
       order: 10,
     },
-
+    element: <RedirectRouteView to="/systemUtils/mail" />,
     children: [
       {
         path: 'mail',

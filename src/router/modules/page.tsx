@@ -17,7 +17,7 @@ const pageRouter: IRouteObject[] = [
       menu: true,
       order: 6,
     },
-
+    element: <RedirectRouteView to="/page/graphqlTodoList" />,
     children: [
       {
         path: 'bossJDSpider',
@@ -265,20 +265,6 @@ const pageRouter: IRouteObject[] = [
             },
           },
         ],
-      },
-      {
-        path: 'weather',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/weather'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '天气服务',
-          key: 'page/weather',
-        },
       },
     ],
   },

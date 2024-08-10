@@ -2,6 +2,8 @@ import { lazy } from 'react';
 
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RedirectRouteView from '../RedirectRouteView';
+
 import type { IRouteObject } from '@/types/custom-types';
 
 // 会议室预定系统
@@ -9,13 +11,13 @@ const meetingRoomManagementRouter: IRouteObject[] = [
   {
     path: '/meetingRoomManagement',
     meta: {
-      title: '会议室预定系统',
+      title: '会议室预定',
       key: 'meetingRoomManagement',
       auth: true,
       menu: true,
       order: 14,
     },
-
+    element: <RedirectRouteView to="/meetingRoomManagement/roomManagement" />,
     children: [
       {
         path: 'bookHistory',

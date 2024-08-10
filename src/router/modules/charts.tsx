@@ -17,6 +17,7 @@ const chartsRouter: IRouteObject[] = [
       menu: true,
       order: 4,
     },
+    element: <RedirectRouteView to="/charts/amap" />,
     children: [
       {
         path: 'amap',

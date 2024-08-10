@@ -17,7 +17,7 @@ const nestedMenuRouter: IRouteObject[] = [
       menu: true,
       order: 8,
     },
-
+    element: <RedirectRouteView to="/nestedMenu/menu1" />,
     children: [
       {
         path: 'menu1',
