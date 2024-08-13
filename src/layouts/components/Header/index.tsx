@@ -1,5 +1,5 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { Button, Layout, theme } from 'antd';
+import { Button, Layout, Space, theme } from 'antd';
 
 import Breadcrumb from './components/Breadcrumb';
 import UserCenter from './components/UserCenter';
@@ -31,10 +31,12 @@ const AppHeader = () => {
         <Breadcrumb />
       </div>
       <div className={styles['header-right']}>
-        <GlobalSearch />
-        <FullScreen />
-        <Notification />
-        <UserCenter />
+        <Space size={[10, 0]}>
+          <GlobalSearch />
+          <FullScreen />
+          <Notification />
+          <UserCenter />
+        </Space>
       </div>
     </Header>
   );
