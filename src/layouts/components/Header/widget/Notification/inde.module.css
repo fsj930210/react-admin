@@ -1,0 +1,6 @@
+.notification-tabs {
+  :global(.ant-list-items) {
+    max-height: 445px;
+    overflow-y: auto;
+  }
+}

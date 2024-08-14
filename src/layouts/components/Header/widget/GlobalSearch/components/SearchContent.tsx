@@ -1,8 +1,8 @@
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { theme } from 'antd';
 
-/** @jsxImportSource @emotion/react */
-import styles from './index.module.css';
+import styles from '../index.module.css';
 
 const { useToken } = theme;
 

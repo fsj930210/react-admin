@@ -1,4 +1,4 @@
-import styles from './index.module.css';
+import styles from '../index.module.css';
 
 import DownIcon from '@/assets/icons/down.svg?react';
 import EnterIcon from '@/assets/icons/enter.svg?react';

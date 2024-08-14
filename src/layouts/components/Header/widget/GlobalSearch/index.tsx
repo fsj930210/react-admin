@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 
+import SearchContent from './components/SearchContent';
+import SearchFooter from './components/SearchFooter';
+import SearchInput from './components/SearchInput';
 import styles from './index.module.css';
-import SearchContent from './SearchContent';
-import SearchFooter from './SearchFooter';
-import SearchInput from './SearchInput';
 
 const GlobalSearch = () => {
   const [showModal, setShowModal] = useState(false);
