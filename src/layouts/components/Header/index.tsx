@@ -18,7 +18,7 @@ const AppHeader = () => {
   const { colorBgContainer } = token;
   return (
     <Header
-      style={{ padding: 0, background: colorBgContainer }}
+      style={{ padding: '0 12px', background: colorBgContainer }}
       className="flex justify-between items-center"
     >
       <div className={styles['header-left']}>
