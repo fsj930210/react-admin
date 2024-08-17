@@ -2,11 +2,11 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Button, Layout, Space, theme } from 'antd';
 
 import Breadcrumb from './components/Breadcrumb';
+import FullScreen from './components/FullScreen';
+import GlobalSearch from './components/GlobalSearch';
+import Notification from './components/Notification';
 import UserCenter from './components/UserCenter';
 import styles from './index.module.css';
-import FullScreen from './widget/FullScreen';
-import GlobalSearch from './widget/GlobalSearch';
-import Notification from './widget/Notification';
 
 import useMenuStore from '@/store/menu';
 
@@ -19,7 +19,7 @@ const AppHeader = () => {
   return (
     <Header
       style={{ padding: '0 12px', background: colorBgContainer }}
-      className="flex justify-between items-center"
+      className="flex justify-between items-center border-b-[1px] border-b-[#f0f0f0] border-b-solid"
     >
       <div className={styles['header-left']}>
         <Button

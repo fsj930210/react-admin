@@ -1,0 +1,96 @@
+.chrome-tabs-tab-divider {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background-color: #444;
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+/* .chrome-tabs-tab-container {
+  &:has(~ .hovering) {
+    .chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+  }
+} */
+
+.chrome-tabs-tab {
+  position: relative;
+  height: 100%;
+
+  .chrome-tabs-tab-bg {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+    z-index: -10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* 这里选择前一个元素可以用has选择器，但是其兼容性不好，改用js处理 */
+
+  /* &:has(+ .active) {
+    .chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+  } */
+
+  &.no-divider {
+    .chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+  }
+
+  .chrome-tabs-tab-content {
+    .ant-tabs-tab {
+      background-color: transparent;
+      padding: 5px 32px;
+      border-radius: 8px !important;
+      border-bottom: none;
+      border: none;
+      transition: all 0.2s;
+    }
+  }
+
+  &:hover {
+    .ant-tabs-tab {
+      background-color: #ebf5ff;
+    }
+
+    .chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+
+    .ant-tabs-tab-remove {
+      color: #3f8cff;
+    }
+  }
+
+  &.active {
+    color: #ebf5ff;
+
+    .chrome-tabs-tab-bg {
+      opacity: 1;
+    }
+
+    .chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+
+    .ant-tabs-tab-remove {
+      color: #3f8cff;
+    }
+
+    &:hover {
+      .ant-tabs-tab {
+        background-color: transparent;
+      }
+    }
+  }
+}
