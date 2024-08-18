@@ -12,7 +12,7 @@ const componentRouter: IRouteObject[] = [
     path: '/component',
     meta: {
       title: '组件',
-      key: 'component',
+      icon: 'lucide:component',
       auth: true,
       menu: true,
       order: 5,
@@ -30,7 +30,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'clickOutside组件',
-          key: 'component/clickOutSide',
+          icon: 'material-symbols-light:drag-click-rounded',
         },
       },
       {
@@ -44,7 +44,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '容器组件',
-          key: 'component/container',
+          icon: 'carbon:web-services-container',
         },
       },
       {
@@ -58,7 +58,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '可拖拽弹窗组件',
-          key: 'component/modal',
+          icon: 'material-symbols-light:dialogs-outline-rounded',
         },
       },
       {
@@ -72,7 +72,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '车牌组件',
-          key: 'component/plate',
+          icon: 'my-icon:plate',
         },
       },
       {
@@ -86,7 +86,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '表格组件',
-          key: 'component/table',
+          icon: 'ant-design:table-outlined',
         },
       },
       {
@@ -100,7 +100,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '穿梭框组件',
-          key: 'component/transfer',
+          icon: 'lucide:arrow-left-right',
         },
       },
       {
@@ -114,7 +114,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '树组件',
-          key: 'component/tree',
+          icon: 'carbon:tree-view',
         },
       },
       {
@@ -128,7 +128,7 @@ const componentRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '上传组件',
-          key: 'component/upload',
+          icon: 'lucide:upload',
         },
       },
     ],

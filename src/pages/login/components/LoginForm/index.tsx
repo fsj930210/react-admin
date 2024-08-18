@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import { Form, Input, Button, Checkbox, Row } from 'antd';
 
 import { FormPageProps, LOGIN_STATE_ENUM } from '../../useLogin';
@@ -40,7 +41,10 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Input placeholder="用户名" />
+        <Input
+          prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+          placeholder="用户名"
+        />
       </FormItem>
       <FormItem<FieldType>
         name="password"
@@ -55,7 +59,12 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Password placeholder="密码" />
+        <Password
+          prefix={
+            <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+          }
+          placeholder="密码"
+        />
       </FormItem>
       <Row className="mb-0 enter-y">
         <FormItem<FieldType>
@@ -68,7 +77,12 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
           ]}
           className="inline-block w[60%]"
         >
-          <Input placeholder="验证码" />
+          <Input
+            prefix={
+              <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+            }
+            placeholder="验证码"
+          />
         </FormItem>
         <Button
           type="primary"

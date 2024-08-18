@@ -12,10 +12,10 @@ const pageRouter: IRouteObject[] = [
     path: '/page',
     meta: {
       title: '页面',
-      key: 'page',
       auth: true,
       menu: true,
       order: 6,
+      icon: 'ri:pages-line',
     },
     element: <RedirectRouteView to="/page/graphqlTodoList" />,
     children: [
@@ -30,7 +30,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'boss直聘招聘爬虫',
-          key: 'page/bossJDSpider',
+          icon: 'mdi:spider-outline',
         },
       },
       {
@@ -44,7 +44,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'css',
-          key: 'page/css',
+          icon: 'ri:css3-line',
         },
       },
       {
@@ -53,7 +53,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '缺省页',
-          key: 'page/error',
+          icon: 'mdi:lightbulb-error-outline',
         },
         children: [
           {
@@ -67,7 +67,7 @@ const pageRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '403',
-              key: 'page/error/403',
+              icon: 'carbon:error',
             },
           },
           {
@@ -81,7 +81,7 @@ const pageRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '404',
-              key: 'page/error/404',
+              icon: 'tabler:error-404',
             },
           },
           {
@@ -95,7 +95,7 @@ const pageRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '500',
-              key: 'page/error/500',
+              icon: 'carbon:data-error',
             },
           },
         ],
@@ -111,7 +111,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'gif压缩工具',
-          key: 'page/gifCompression',
+          icon: 'ant-design:file-gif-outlined',
         },
       },
       {
@@ -125,7 +125,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'graphqlTodoList',
-          key: 'page/graphqlTodoList',
+          icon: 'lucide:list-todo',
         },
       },
       {
@@ -134,7 +134,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '列表',
-          key: 'page/list',
+          icon: 'ri:list-view',
         },
         element: <RedirectRouteView to="/page/list/cardList" />,
         children: [
@@ -150,7 +150,7 @@ const pageRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '卡片列表',
-              key: 'page/list/cardList',
+              icon: 'material-symbols-light:featured-play-list-outline',
             },
           },
           {
@@ -164,7 +164,7 @@ const pageRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '标准列表',
-              key: 'page/error/defaultList',
+              icon: 'ri:file-list-line',
             },
           },
         ],
@@ -180,21 +180,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '附近充电宝搜索',
-          key: 'page/nearBySearch',
-        },
-      },
-      {
-        path: 'rankList',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/rankList'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '各种排行榜',
-          key: 'page/rankList',
+          icon: 'material-symbols-light:nearby',
         },
       },
       {
@@ -208,7 +194,7 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'reactPlayground',
-          key: 'page/reactPlayground',
+          icon: 'fluent:dual-screen-pagination-24-regular',
         },
       },
       {
@@ -222,49 +208,8 @@ const pageRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '短链服务',
-          key: 'page/shortUrl',
+          icon: 'carbon:url',
         },
-      },
-      {
-        path: 'user',
-        meta: {
-          auth: true,
-          menu: true,
-          title: '个人页面',
-          key: 'page/user',
-        },
-        element: <RedirectRouteView to="/page/user/profile" />,
-        children: [
-          {
-            path: 'profile',
-            index: true,
-            element: (
-              <LazyLoadComponent
-                Component={lazy(() => import('@/pages/page/user/profile'))}
-              />
-            ),
-            meta: {
-              auth: true,
-              menu: true,
-              title: '个人中心',
-              key: 'page/user/profile',
-            },
-          },
-          {
-            path: 'settings',
-            element: (
-              <LazyLoadComponent
-                Component={lazy(() => import('@/pages/page/user/settings'))}
-              />
-            ),
-            meta: {
-              auth: true,
-              menu: true,
-              title: '个人设置',
-              key: 'page/user/settings',
-            },
-          },
-        ],
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Icon } from '@iconify/react';
 import { Button, Layout, Space, theme } from 'antd';
 
 import Breadcrumb from './components/Breadcrumb';
@@ -24,9 +24,16 @@ const AppHeader = () => {
       <div className={styles['header-left']}>
         <Button
           type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          icon={
+            collapsed ? (
+              <Icon icon="ant-design:menu-unfold-outlined" />
+            ) : (
+              <Icon icon="ant-design:menu-fold-outlined" />
+            )
+          }
           onClick={() => toggleCollapsed()}
-          className="text-[16px] h-full"
+          className="h-full text-[24px]"
+          style={{ width: 'auto' }}
         />
         <Breadcrumb />
       </div>

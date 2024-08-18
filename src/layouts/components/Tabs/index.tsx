@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 
 import {
-  DownOutlined,
-  FullscreenOutlined,
-  RedoOutlined,
-} from '@ant-design/icons';
-import {
   DndContext,
   PointerSensor,
   closestCenter,
@@ -18,6 +13,7 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Icon } from '@iconify/react';
 import { Tabs } from 'antd';
 
 import ChromeTab from './components/ChromeTab';
@@ -142,15 +138,21 @@ const AppTabs: React.FC = () => {
       />
       <div className="flex items-center h-full">
         <span className="app-tabs-right-item">
-          <RedoOutlined title="重新加载" />
+          <div className="w-full h-full flex items-center">
+            <Icon icon="ant-design:reload-outlined" />
+          </div>
         </span>
         <span className="app-tabs-right-item">
           <TabDropdown trigger={['click']}>
-            <DownOutlined title="展开" />
+            <div className="w-full h-full flex items-center">
+              <Icon icon="lucide:chevron-down" />
+            </div>
           </TabDropdown>
         </span>
         <span className="app-tabs-right-item">
-          <FullscreenOutlined title="全屏浏览" />
+          <div className="w-full h-full flex items-center">
+            <Icon icon="lucide:fullscreen" />
+          </div>
         </span>
       </div>
     </div>

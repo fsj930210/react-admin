@@ -12,7 +12,7 @@ const systemUtilsRouter: IRouteObject[] = [
     path: '/systemUtils',
     meta: {
       title: '系统工具',
-      key: 'systemUtils',
+      icon: 'carbon:tool-kit',
       auth: true,
       menu: true,
       order: 10,
@@ -30,7 +30,7 @@ const systemUtilsRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '邮件工具',
-          key: 'systemUtils/mail',
+          icon: 'lucide:mail',
         },
       },
       {
@@ -44,7 +44,7 @@ const systemUtilsRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '存储管理',
-          key: 'systemUtils/storage',
+          icon: 'ant-design:database-outlined',
         },
       },
     ],

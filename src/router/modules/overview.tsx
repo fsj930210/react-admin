@@ -12,10 +12,10 @@ const overviewRouter: IRouteObject[] = [
     path: '/overview',
     meta: {
       title: '概览',
-      key: 'overview',
       auth: true,
       menu: true,
       order: 1,
+      icon: 'carbon:dashboard',
     },
     element: <RedirectRouteView to="/overview/workspace" />,
     children: [
@@ -30,7 +30,7 @@ const overviewRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '工作台',
-          key: 'overview/workspace',
+          icon: 'carbon:workspace',
         },
       },
       {
@@ -44,7 +44,7 @@ const overviewRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '仪表盘',
-          key: 'overview/dashboard',
+          icon: 'ri:dashboard-3-line',
         },
       },
     ],

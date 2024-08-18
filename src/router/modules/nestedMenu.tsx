@@ -12,7 +12,7 @@ const nestedMenuRouter: IRouteObject[] = [
     path: '/nestedMenu',
     meta: {
       title: '嵌套菜单',
-      key: 'nestedMenu',
+      icon: 'ant-design:menu-outlined',
       auth: true,
       menu: true,
       order: 8,
@@ -30,7 +30,7 @@ const nestedMenuRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '菜单1',
-          key: 'nestedMenu/menu1',
+          icon: 'ant-design:menu-outlined',
         },
       },
       {
@@ -39,7 +39,7 @@ const nestedMenuRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '菜单2',
-          key: 'nestedMenu/menu2',
+          icon: 'ri:menu-fold-4-line',
         },
         element: <RedirectRouteView to="/nestedMenu/menu2/menu2-1" />,
         children: [
@@ -57,7 +57,7 @@ const nestedMenuRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '菜单2-1',
-              key: 'nestedMenu/menu2/menu2-1',
+              icon: 'ant-design:menu-outlined',
             },
           },
         ],
@@ -68,7 +68,7 @@ const nestedMenuRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '菜单3',
-          key: 'nestedMenu/menu3',
+          icon: 'ri:menu-unfold-4-line',
         },
         element: <RedirectRouteView to="/nestedMenu/menu3/menu3-1" />,
         children: [
@@ -86,7 +86,7 @@ const nestedMenuRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '菜单3-1',
-              key: 'nestedMenu/menu3/menu3-1',
+              icon: 'ant-design:menu-outlined',
             },
           },
           {
@@ -95,7 +95,7 @@ const nestedMenuRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '菜单3-2',
-              key: 'nestedMenu/menu3/menu3-2',
+              icon: 'ri:menu-unfold-4-line',
             },
             element: (
               <RedirectRouteView to="/nestedMenu/menu3/menu3-2/menu3-2-1" />
@@ -115,7 +115,7 @@ const nestedMenuRouter: IRouteObject[] = [
                   auth: true,
                   menu: true,
                   title: '菜单3-2-1',
-                  key: 'nestedMenu/menu3/menu3-2/menu3-2-1',
+                  icon: 'ant-design:menu-outlined',
                 },
               },
             ],

@@ -12,7 +12,7 @@ const meetingRoomManagementRouter: IRouteObject[] = [
     path: '/meetingRoomManagement',
     meta: {
       title: '会议室预定',
-      key: 'meetingRoomManagement',
+      icon: 'guidance:meeting-room',
       auth: true,
       menu: true,
       order: 14,
@@ -32,7 +32,7 @@ const meetingRoomManagementRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '预定历史',
-          key: 'meetingRoomManagement/bookHistory',
+          icon: 'material-symbols-light:history',
         },
       },
       {
@@ -48,7 +48,7 @@ const meetingRoomManagementRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '预定管理',
-          key: 'meetingRoomManagement/bookManagement',
+          icon: 'lucide:swatch-book',
         },
       },
       {
@@ -64,7 +64,7 @@ const meetingRoomManagementRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '会议室管理',
-          key: 'meetingRoomManagement/roomManagement',
+          icon: 'hugeicons:meeting-room',
         },
       },
       {
@@ -80,7 +80,7 @@ const meetingRoomManagementRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '统计',
-          key: 'meetingRoomManagement/statistics',
+          icon: 'carbon:chart-combo',
         },
       },
     ],

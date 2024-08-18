@@ -12,10 +12,10 @@ const errorRouter: IRouteObject[] = [
     path: '/permissions',
     meta: {
       title: '权限管理',
-      key: 'permissions',
       auth: true,
       menu: true,
       order: 3,
+      icon: 'my-icon:permissions',
     },
     element: <RedirectRouteView to="/permissions/button" />,
     children: [
@@ -30,7 +30,7 @@ const errorRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '按钮权限',
-          key: 'permissions/button',
+          icon: 'my-icon:button-permissions',
         },
       },
       {
@@ -44,7 +44,7 @@ const errorRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '页面权限',
-          key: 'permissions/page',
+          icon: 'my-icon:page-permissions',
         },
       },
     ],

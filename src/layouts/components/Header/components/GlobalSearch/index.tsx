@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { SearchOutlined } from '@ant-design/icons';
+import { Icon } from '@iconify/react';
 import { Modal } from 'antd';
 
 import SearchContent from './components/SearchContent';
@@ -17,7 +17,7 @@ const GlobalSearch = () => {
         className="bg-[#f5f5f5] h-8 flex gap-3 items-center cursor-pointer border-none rounded-full px-4 py-[4px] text-[rgba(60,60,60,.7)] hover:bg-[#f5f5f5]"
       >
         <span>
-          <SearchOutlined /> <span>搜索</span>
+          <Icon icon="lucide:search" /> <span>搜索</span>
         </span>
         <span className="flex items-center px-2 h-full border-1 border-[rgba(60,60,60,.33)] border-solid px-[4px] rounded">
           <kbd className="line-height-none mr-[4px]">⌘</kbd>

@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import { RuleObject } from 'antd/es/form';
 
@@ -34,7 +35,7 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入账号',
+            message: '请输入用户名',
           },
           {
             validator: validateUsername,
@@ -42,7 +43,10 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Input placeholder="用户名" />
+        <Input
+          prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+          placeholder="用户名"
+        />
       </FormItem>
       <FormItem<FieldType>
         name="email"
@@ -58,7 +62,10 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Input placeholder="邮箱" />
+        <Input
+          prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+          placeholder="邮箱"
+        />
       </FormItem>
       <Row className="enter-y">
         <FormItem<FieldType>
@@ -66,7 +73,12 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
           rules={[{ required: true, message: '请输入邮箱验证码' }]}
           className="inline-block w[60%]"
         >
-          <Input placeholder="邮箱验证码" />
+          <Input
+            prefix={
+              <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+            }
+            placeholder="邮箱验证码"
+          />
         </FormItem>
         <CountDownButton
           size="large"
@@ -88,7 +100,12 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         className="enter-y"
         style={{ marginBottom: 0 }}
       >
-        <Password placeholder="密码" />
+        <Password
+          prefix={
+            <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+          }
+          placeholder="密码"
+        />
       </FormItem>
       <Row className="enter-y mb-[16px]">
         <Col span={24}>
@@ -113,7 +130,12 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Password placeholder="确认密码" />
+        <Password
+          prefix={
+            <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+          }
+          placeholder="确认密码"
+        />
       </FormItem>
       <FormItem
         name="agreement"

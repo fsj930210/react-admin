@@ -1,6 +1,6 @@
-import { GithubOutlined } from '@ant-design/icons';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { Icon } from '@iconify/react';
 import { Divider, Row, theme } from 'antd';
 
 import styles from './index.module.css';
@@ -23,7 +23,7 @@ const ThirdForm = () => {
             }
           `}
         >
-          <GithubOutlined />
+          <Icon icon="ant-design:github-outlined" />
           <span className="ml-[8px]">GitHub账号登录</span>
         </div>
         <div

@@ -1,4 +1,4 @@
-import { BellOutlined } from '@ant-design/icons';
+import { Icon } from '@iconify/react';
 import { Badge, Popover, Tabs, TabsProps } from 'antd';
 
 import NotificationList from './components/NotificationList';
@@ -23,7 +23,7 @@ const Notification = () => {
   return (
     <Popover arrow={false} content={Content} trigger={['click']}>
       <Badge dot>
-        <BellOutlined title="通知" className="cursor-pointer" />
+        <Icon icon="carbon:notification" className="cursor-pointer" />
       </Badge>
     </Popover>
   );

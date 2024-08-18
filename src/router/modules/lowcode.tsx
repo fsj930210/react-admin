@@ -12,10 +12,10 @@ const lowcodeRouter: IRouteObject[] = [
     path: '/lowcode',
     meta: {
       title: '低代码',
-      key: 'lowcode',
+      icon: 'streamline:code-monitor-1',
       auth: true,
       menu: true,
-      order: 16,
+      order: 15,
     },
     element: <RedirectRouteView to="/lowcode/formDesigner" />,
     children: [
@@ -30,7 +30,7 @@ const lowcodeRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '表单设计器',
-          key: 'lowcode/formDesigner',
+          icon: 'material-symbols-light:dynamic-form-outline',
         },
       },
       {
@@ -44,7 +44,7 @@ const lowcodeRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'h5设计器',
-          key: 'lowcode/h5Designer',
+          icon: 'hugeicons:mobile-programming-01',
         },
       },
       {
@@ -58,7 +58,7 @@ const lowcodeRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '数据大屏设计器',
-          key: 'lowcode/dataViewDesigner',
+          icon: 'wpf:statistics',
         },
       },
     ],

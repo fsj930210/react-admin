@@ -12,7 +12,7 @@ const featureRouter: IRouteObject[] = [
     path: '/feature',
     meta: {
       title: '功能',
-      key: 'feature',
+      icon: 'mdi:feature-highlight',
       auth: true,
       menu: true,
       order: 7,
@@ -30,7 +30,7 @@ const featureRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '剪切板',
-          key: 'feature/clipboard',
+          icon: 'lucide:clipboard-copy',
         },
       },
       {
@@ -44,7 +44,7 @@ const featureRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'excel',
-          key: 'feature/excel',
+          icon: 'ri:file-excel-2-line',
         },
       },
       {
@@ -58,49 +58,7 @@ const featureRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '文件下载',
-          key: 'feature/fileDownload',
-        },
-      },
-      {
-        path: 'fullScreen',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/feature/fullScreen'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '全屏',
-          key: 'feature/fullScreen',
-        },
-      },
-      {
-        path: 'lockScreen',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/feature/lockScreen'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '锁屏',
-          key: 'feature/lockScreen',
-        },
-      },
-      {
-        path: 'rightClick',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/feature/rightClick'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '右键点击',
-          key: 'feature/rightClick',
+          icon: 'ri:file-download-line',
         },
       },
       {
@@ -114,7 +72,7 @@ const featureRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '截图',
-          key: 'feature/screenshot',
+          icon: 'ri:screenshot-line',
         },
       },
     ],

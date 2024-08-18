@@ -1,4 +1,4 @@
-import path from 'node:path';
+import { resolve } from 'node:path';
 
 import react from '@vitejs/plugin-react-swc';
 import browserslist from 'browserslist';
@@ -10,13 +10,26 @@ import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
 
+import rectIconify from './vite-plugins/vite-plugin-react-iconify';
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const envConfig = loadEnv(mode, process.cwd());
+  const root = process.cwd();
+  const envConfig = loadEnv(mode, root);
   return defineConfig({
     plugins: [
       react(),
       svgr(),
+      rectIconify({
+        resolver: '@iconify/react',
+        configs: [
+          {
+            dir: resolve(__dirname, 'src/assets/icons'),
+            monotone: false,
+            prefix: 'my-icon',
+            provider: 'my-icon',
+          },
+        ],
+      }),
       // gz包
       {
         ...viteCompression(),
@@ -30,7 +43,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '@': resolve(__dirname, 'src'),
       },
       extensions: ['.ts', '.tsx', '.js', 'jsx'],
     },

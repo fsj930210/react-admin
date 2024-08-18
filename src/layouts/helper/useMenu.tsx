@@ -1,4 +1,4 @@
-import { AppstoreOutlined } from '@ant-design/icons';
+import { Icon } from '@iconify/react';
 
 import type { IRouteObject, MenuItem } from '@/types/custom-types';
 
@@ -24,7 +24,7 @@ function useMenu() {
           key: parentRoute?.meta?.menu
             ? ((parentMenu?.key + '/' + route.path) as string)
             : (route.path as string),
-          icon: meta.icon ?? <AppstoreOutlined />,
+          icon: <Icon icon={meta.icon || 'ant-design:appstore-outlined'} />,
         };
       }
       // 有嵌套路由递归遍历

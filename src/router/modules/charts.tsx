@@ -12,10 +12,10 @@ const chartsRouter: IRouteObject[] = [
     path: '/charts',
     meta: {
       title: '图表',
-      key: 'charts',
       auth: true,
       menu: true,
       order: 4,
+      icon: 'carbon:chart-histogram',
     },
     element: <RedirectRouteView to="/charts/amap" />,
     children: [
@@ -31,7 +31,7 @@ const chartsRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '高德地图',
-          key: 'charts/amap',
+          icon: 'my-icon:amap',
         },
       },
       {
@@ -45,7 +45,7 @@ const chartsRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '百度地图',
-          key: 'charts/bmap',
+          icon: 'my-icon:bmap',
         },
       },
       {
@@ -59,7 +59,7 @@ const chartsRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: '谷歌地图',
-          key: 'charts/googleMap',
+          icon: 'my-icon:google-map',
         },
       },
       {
@@ -68,7 +68,7 @@ const chartsRouter: IRouteObject[] = [
           auth: true,
           menu: true,
           title: 'echarts图表',
-          key: 'charts/echarts',
+          icon: 'my-icon:echarts',
         },
         element: <RedirectRouteView to="/charts/echarts/basic" />,
         children: [
@@ -84,7 +84,7 @@ const chartsRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: 'echarts基础图表',
-              key: 'charts/echarts/basic',
+              icon: 'my-icon:echarts-basic',
             },
           },
           {
@@ -98,7 +98,7 @@ const chartsRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: 'echarts高级图表',
-              key: 'charts/echarts/advance',
+              icon: 'my-icon:echarts-advance',
             },
           },
           {
@@ -113,7 +113,7 @@ const chartsRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: 'echarts地图',
-              key: 'charts/echarts/map',
+              icon: 'my-icon:echarts-map',
             },
           },
         ],

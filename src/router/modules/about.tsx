@@ -10,10 +10,10 @@ const aboutRouter: IRouteObject[] = [
     path: '/about',
     meta: {
       title: '关于项目',
-      key: 'about',
       auth: true,
       menu: true,
       order: 18,
+      icon: 'carbon:information',
     },
     element: (
       <LazyLoadComponent Component={lazy(() => import('@/pages/about'))} />
