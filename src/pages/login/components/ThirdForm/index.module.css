@@ -9,4 +9,9 @@
   cursor: pointer;
   margin-bottom: 16px;
   transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: #fff;
+    background-color: var(--ant-color-primary);
+  }
 }

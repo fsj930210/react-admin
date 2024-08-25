@@ -3,11 +3,12 @@ import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import { RuleObject } from 'antd/es/form';
 
 import CountDownButton from '@/components/CountDownButton';
+import MaterialInput from '@/components/Material/Input';
 import StrengthMeter from '@/components/StrengthMeter';
 
-import { FormPageProps, LOGIN_STATE_ENUM } from '../../useLogin';
-
 import { validatePassword, validateUsername } from '@/utils/validate';
+
+import { FormPageProps, LoginPageEnum } from '@/store/login';
 
 type FieldType = {
   username: string;
@@ -20,16 +21,16 @@ type FieldType = {
 const FormItem = Form.Item;
 const Password = Input.Password;
 
-const RegisterForm = ({ switchPage }: FormPageProps) => {
+const RegisterForm = ({ switchPage, material }: FormPageProps) => {
   const [form] = Form.useForm<FieldType>();
   const password = Form.useWatch('password', form);
   const onFinish = (values: FieldType) => {
     console.log('Success:', values);
-    switchPage(LOGIN_STATE_ENUM.LOGIN);
+    switchPage?.(LoginPageEnum.login);
   };
 
   return (
-    <Form form={form} onFinish={onFinish} size="large">
+    <Form form={form} onFinish={onFinish}>
       <FormItem<FieldType>
         name="username"
         rules={[
@@ -43,10 +44,17 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Input
-          prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
-          placeholder="用户名"
-        />
+        {material ? (
+          <MaterialInput
+            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            placeholder="用户名"
+          />
+        ) : (
+          <Input
+            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            placeholder="用户名"
+          />
+        )}
       </FormItem>
       <FormItem<FieldType>
         name="email"
@@ -62,10 +70,17 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Input
-          prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
-          placeholder="邮箱"
-        />
+        {material ? (
+          <MaterialInput
+            prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+            placeholder="邮箱"
+          />
+        ) : (
+          <Input
+            prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+            placeholder="邮箱"
+          />
+        )}
       </FormItem>
       <Row className="enter-y">
         <FormItem<FieldType>
@@ -73,15 +88,23 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
           rules={[{ required: true, message: '请输入邮箱验证码' }]}
           className="inline-block w[60%]"
         >
-          <Input
-            prefix={
-              <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
-            }
-            placeholder="邮箱验证码"
-          />
+          {material ? (
+            <MaterialInput
+              prefix={
+                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+              }
+              placeholder="邮箱验证码"
+            />
+          ) : (
+            <Input
+              prefix={
+                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+              }
+              placeholder="邮箱验证码"
+            />
+          )}
         </FormItem>
         <CountDownButton
-          size="large"
           style={{ width: 'calc(40% - 8px)' }}
           className="inline-block  ml[8px]"
         />
@@ -98,16 +121,24 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
           },
         ]}
         className="enter-y"
-        style={{ marginBottom: 0 }}
       >
-        <Password
-          prefix={
-            <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
-          }
-          placeholder="密码"
-        />
+        {material ? (
+          <MaterialInput.Password
+            prefix={
+              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+            }
+            placeholder="密码"
+          />
+        ) : (
+          <Password
+            prefix={
+              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+            }
+            placeholder="密码"
+          />
+        )}
       </FormItem>
-      <Row className="enter-y mb-[16px]">
+      <Row className="enter-y mb-[var(--ant-form-item-margin-bottom)]">
         <Col span={24}>
           <StrengthMeter password={password} />
         </Col>
@@ -130,12 +161,21 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-y"
       >
-        <Password
-          prefix={
-            <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
-          }
-          placeholder="确认密码"
-        />
+        {material ? (
+          <MaterialInput.Password
+            prefix={
+              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+            }
+            placeholder="确认密码"
+          />
+        ) : (
+          <Password
+            prefix={
+              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+            }
+            placeholder="确认密码"
+          />
+        )}
       </FormItem>
       <FormItem
         name="agreement"
@@ -148,7 +188,9 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
           },
         ]}
       >
-        <Checkbox>同意注册协议及隐私政策</Checkbox>
+        <Checkbox>
+          同意 <a>《注册协议》</a>及 <a>《隐私政策》</a>
+        </Checkbox>
       </FormItem>
       <FormItem className="enter-y">
         <Button block type="primary" htmlType="submit">
@@ -157,7 +199,7 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
       </FormItem>
       <Row className="enter-y justify-center">
         已有账号？去
-        <a onClick={() => switchPage(LOGIN_STATE_ENUM.LOGIN)}>登录</a>
+        <a onClick={() => switchPage?.(LoginPageEnum.login)}>登录</a>
       </Row>
     </Form>
   );

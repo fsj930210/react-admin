@@ -44,6 +44,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      rc-slider-captcha:
+        specifier: ^1.5.2
+        version: 1.5.2(react@18.3.1)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -129,9 +132,6 @@ importers:
       eslint-plugin-react-refresh:
         specifier: ^0.4.7
         version: 0.4.8(eslint@9.7.0)
-      fast-glob:
-        specifier: ^3.3.2
-        version: 3.3.2
       globals:
         specifier: ^15.8.0
         version: 15.8.0
@@ -1439,6 +1439,9 @@ packages:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
 
+  cache2@3.0.0:
+    resolution: {integrity: sha512-9atcQQZnXSO2AcGqiWyeC9uP2PG+cm04gmkGhycbzyK6XJSQmrAFEJgbdbDNUHveLFYQDYUKRZ3ysAzsdtdl5Q==}
+
   call-bind@1.0.7:
     resolution: {integrity: sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==}
     engines: {node: '>= 0.4'}
@@ -1729,6 +1732,9 @@ packages:
 
   electron-to-chromium@1.4.829:
     resolution: {integrity: sha512-5qp1N2POAfW0u1qGAxXEtz6P7bO1m6gpZr5hdf5ve6lxpLM7MpiM4jIPz7xcrNlClQMafbyUDDWjlIQZ1Mw0Rw==}
+
+  emitter-pro@1.2.1:
+    resolution: {integrity: sha512-lug8KjGIDpgLcQKWog4y8SowPV1EUtosYTPiX7urGAedCNOqSONgp5eEwO2o6uWXbVXdB1ddxKUs94pl5VdIkg==}
 
   emoji-regex@10.3.0:
     resolution: {integrity: sha512-QpLs9D9v9kArv4lfDEgg1X/gN5XLnf/A6l9cs8SPZLRZR3ZkY9+kwIQTxm+fsSej5UMYGE8fdoaZVIBlqG0XTw==}
@@ -2910,6 +2916,11 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
+  rc-hooks@3.0.13:
+    resolution: {integrity: sha512-ipUV+0Hg0t6/lX5e9iGHwnNYEeoB4qj2ip3F0KiIuHHN5a6RxzgOHXwa7ZCeUW2lZiG7QwIfMe6lvwxC8u9UpQ==}
+    peerDependencies:
+      react: '>= 16.8.6'
+
   rc-image@7.9.0:
     resolution: {integrity: sha512-l4zqO5E0quuLMCtdKfBgj4Suv8tIS011F5k1zBBlK25iMjjiNHxA0VeTzGFtUZERSA45gvpXDg8/P6qNLjR25g==}
     peerDependencies:
@@ -3016,6 +3027,11 @@ packages:
     peerDependencies:
       react: '*'
       react-dom: '*'
+
+  rc-slider-captcha@1.5.2:
+    resolution: {integrity: sha512-egRi6fOIanBF15k8q/XRin4vZIRD91arx8J4nX3ZrBgbe7RMdwVFr4YvQjFdmC3uU3eYFMhfZdMrdnh4PKopuA==}
+    peerDependencies:
+      react: '>=16.9.0'
 
   rc-slider@10.6.2:
     resolution: {integrity: sha512-FjkoFjyvUQWcBo1F3RgSglky3ar0+qHLM41PlFVYB4Bj3RD8E/Mv7kqMouLFBU+3aFglMzzctAIWRwajEuueSw==}
@@ -3539,8 +3555,15 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
+  ut2@1.11.6:
+    resolution: {integrity: sha512-4sgO7VCqiyDZX0CJpXHLTIhA26DWeJWEW+RtOCpSW7oHLq9BvhcED9Pdu5MffQ3pSq7dt01oH/XS3ctYaTkR7A==}
+    engines: {node: '>=10'}
+
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  util-helpers@5.1.3:
+    resolution: {integrity: sha512-hNmapVgH6jxCrYFlMgfs6dfPtfD81HL5NhedyqafLHC5IUsruVcpX10B3xHS5t6bq7PTfBJbZhXG9gt6c8EPuQ==}
 
   vite-plugin-compression@0.5.1:
     resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
@@ -5175,6 +5198,11 @@ snapshots:
 
   cac@6.7.14: {}
 
+  cache2@3.0.0:
+    dependencies:
+      emitter-pro: 1.2.1
+      tslib: 2.6.3
+
   call-bind@1.0.7:
     dependencies:
       es-define-property: 1.0.0
@@ -5477,6 +5505,8 @@ snapshots:
   duplexer@0.1.2: {}
 
   electron-to-chromium@1.4.829: {}
+
+  emitter-pro@1.2.1: {}
 
   emoji-regex@10.3.0: {}
 
@@ -6735,6 +6765,13 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  rc-hooks@3.0.13(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      tslib: 2.6.3
+      ut2: 1.11.6
+      util-helpers: 5.1.3
+
   rc-image@7.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.24.8
@@ -6879,6 +6916,13 @@ snapshots:
       rc-virtual-list: 3.14.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  rc-slider-captcha@1.5.2(react@18.3.1):
+    dependencies:
+      classnames: 2.5.1
+      rc-hooks: 3.0.13(react@18.3.1)
+      react: 18.3.1
+      tslib: 2.6.3
 
   rc-slider@10.6.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -7531,7 +7575,15 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  ut2@1.11.6: {}
+
   util-deprecate@1.0.2: {}
+
+  util-helpers@5.1.3:
+    dependencies:
+      cache2: 3.0.0
+      tslib: 2.6.3
+      ut2: 1.11.6
 
   vite-plugin-compression@0.5.1(vite@5.3.4(@types/node@20.14.11)(lightningcss@1.25.1)):
     dependencies:

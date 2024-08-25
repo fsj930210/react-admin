@@ -1,0 +1,16 @@
+.login-box {
+  position: absolute;
+  width: 920px;
+  display: flex;
+  padding: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 10px 2px rgb(0 0 0 / 10%);
+  border-radius: 4px;
+  background-color: #fff;
+
+  :global(.ant-form-item .ant-form-item-explain) {
+    font-size: 12px;
+  }
+}

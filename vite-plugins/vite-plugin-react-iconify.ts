@@ -1,6 +1,3 @@
-import { resolve } from 'node:path';
-
-import { slash } from '@antfu/utils';
 import {
   importDirectory,
   cleanupSVG,
@@ -9,7 +6,7 @@ import {
   runSVGO,
 } from '@iconify/tools';
 
-import type { ModuleNode, Plugin, ViteDevServer } from 'vite';
+import type { Plugin } from 'vite';
 
 type UserConfigs = {
   dir: string;
@@ -25,61 +22,6 @@ type UserOptions = {
 const VIRTUAL_MODULE_ID = 'virtual:react-iconify';
 const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 
-function isPagesDir(
-  path: string,
-  options: UserConfigs[],
-  root: string = process.cwd(),
-) {
-  for (const page of options) {
-    const dirPath = slash(resolve(root, page.dir));
-    if (path.startsWith(dirPath)) return true;
-  }
-  return false;
-}
-function isTarget(path: string, options: UserConfigs[]) {
-  return isPagesDir(path, options) && /\.svg$/.test(path);
-}
-function invalidatePagesModule(server: ViteDevServer) {
-  const { moduleGraph } = server;
-  const mods = moduleGraph.getModulesByFile(VIRTUAL_MODULE_ID);
-  if (mods) {
-    const seen = new Set<ModuleNode>();
-    mods.forEach((mod) => {
-      moduleGraph.invalidateModule(mod, seen);
-    });
-  }
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function onUpdate(server: ViteDevServer, options: UserOptions) {
-  if (!server) return;
-
-  invalidatePagesModule(server);
-  // await createReactIconifyIcon(options);
-  server.ws.send({
-    type: 'full-reload',
-  });
-}
-function setupWatcher(server: ViteDevServer, options: UserOptions) {
-  const watcher = server.watcher;
-
-  watcher.on('unlink', async (path) => {
-    path = slash(path);
-    if (!isTarget(path, options.configs)) return;
-    onUpdate(server, options);
-  });
-  watcher.on('add', async (path) => {
-    path = slash(path);
-    if (!isTarget(path, options.configs)) return;
-    onUpdate(server, options);
-  });
-
-  watcher.on('change', async (path) => {
-    path = slash(path);
-    if (!isTarget(path, options.configs)) return;
-    onUpdate(server, options);
-  });
-}
-
 async function createReactIconifyIcon(options: UserOptions) {
   let bundle = "import { addCollection } from '" + options.resolver + "';\n\n";
 
@@ -90,7 +32,7 @@ async function createReactIconifyIcon(options: UserOptions) {
       prefix: option.prefix,
     });
     // 验证，清理，修复颜色并优化
-    await iconSet.forEach(async (name, type) => {
+    await iconSet.forEach(async (name: string, type: string) => {
       if (type !== 'icon') return;
       // 获取SVG实例以进行分析
       const svg = iconSet.toSVG(name);
@@ -107,7 +49,7 @@ async function createReactIconifyIcon(options: UserOptions) {
           // If icon is not monotone, remove this code
           await parseColors(svg, {
             defaultColor: 'currentColor',
-            callback: (attr, colorStr, color) => {
+            callback: (attr: any, colorStr: string, color: any) => {
               return !color || isEmptyColor(color) ? colorStr : 'currentColor';
             },
           });
@@ -152,9 +94,6 @@ function reactIconifyPlugin(userOptions: UserOptions): Plugin {
         const iconSet = await createReactIconifyIcon(userOptions);
         return iconSet;
       }
-    },
-    configureServer(server) {
-      setupWatcher(server, userOptions);
     },
   };
 }

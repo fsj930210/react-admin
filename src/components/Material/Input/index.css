@@ -1,0 +1,128 @@
+/* 公用样式 */
+.ra-material-input-label {
+  position: absolute;
+  transform-origin: 0 0;
+  pointer-events: none;
+  transition: all var(--ant-motion-duration-mid);
+  color: var(--ant-color-text-placeholder);
+  z-index: 2;
+}
+
+/* 默认placeholder颜色透明不可见 */
+.ra-material-input:placeholder-shown::placeholder {
+  color: transparent;
+}
+
+.ra-material-input-outlined,
+.ra-material-input-filled,
+.ra-material-input-standard {
+  position: relative;
+}
+
+.ra-material-input-filled,
+.ra-material-input-standard {
+  border-radius: 0;
+  border-color: transparent;
+  border-bottom-color: var(--ant-color-border);
+  padding: 10px var(--ant-input-padding-inline);
+
+  &::after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid var(--ant-input-active-border-color);
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    transform: scaleX(0);
+    transition: transform var(--ant-motion-duration-mid);
+  }
+
+  &:focus-within {
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  .ra-material-input:focus ~ .ra-material-input-label {
+    color: var(--ant-color-primary-text);
+  }
+
+  .ra-material-input:not(:focus) ~ .ra-material-input-label {
+    color: var(--ant-color-text-placeholder);
+  }
+
+  .ra-material-input:not(:placeholder-shown) ~ .ra-material-input-label,
+  .ra-material-input:focus ~ .ra-material-input-label {
+    transform: scale(0.8) translateY(-14px);
+  }
+}
+
+/* 错误状态样式 */
+.ra-material-input-status-error {
+  .ra-material-input-label {
+    color: var(--ant-color-error);
+  }
+
+  .ra-material-input:not(:placeholder-shown) ~ .ra-material-input-label,
+  .ra-material-input:focus ~ .ra-material-input-label {
+    color: var(--ant-color-error);
+  }
+
+  &.ra-material-input-filled,
+  &.ra-material-input-standard {
+    &::after {
+      border-bottom-color: var(--ant-color-error);
+    }
+  }
+
+  &.ra-material-input-filled {
+    border-color: transparent !important;
+  }
+
+  &.ra-material-input-standard {
+    border-color: var(--ant-color-error) !important;
+  }
+}
+
+/* 线框风格样式 */
+.ra-material-input-outlined {
+  .ra-material-input ~ .ra-material-input-label {
+    background-color: #fff;
+  }
+
+  .ra-material-input:not(:focus) ~ .ra-material-input-label {
+    color: var(--ant-color-text-placeholder);
+  }
+
+  .ra-material-input:focus ~ .ra-material-input-label {
+    color: var(--ant-color-primary-text);
+  }
+
+  .ra-material-input:not(:placeholder-shown) ~ .ra-material-input-label,
+  .ra-material-input:focus ~ .ra-material-input-label {
+    transform: scale(0.8) translate(-2px, -16px);
+  }
+
+  &:hover {
+    .ra-material-input:not(:placeholder-shown) ~ .ra-material-input-label {
+      color: var(--ant-color-primary-text);
+    }
+  }
+}
+
+/* 填充风格 */
+.ra-material-input-filled {
+  &:focus,
+  &:focus-within {
+    background-color: var(--ant-color-fill-tertiary);
+    outline: 0;
+    border-color: transparent;
+    border-bottom-color: var(--ant-color-border);
+  }
+}
+
+/* 标准风格 */
+.ra-material-input-standard {
+  padding: 10px 0 0;
+  border-bottom: 1px solid var(--ant-color-border);
+}

@@ -1,0 +1,9 @@
+.login-wrapper {
+  :global(.ant-tabs-top > .ant-tabs-nav::before) {
+    border-bottom: 0;
+  }
+
+  :global(.ant-tabs-top > .ant-tabs-nav .ant-tabs-ink-bar) {
+    height: 3px;
+  }
+}

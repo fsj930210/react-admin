@@ -1,5 +1,11 @@
 import { RouteObject } from 'react-router-dom';
 
+declare global {
+  interface Window {
+    sliderCaptcha: any;
+  }
+}
+
 export interface IBasicResponse<T> {
   error_code: string;
   message: string;

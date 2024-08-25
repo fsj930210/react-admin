@@ -26,7 +26,7 @@ const AppLogo = ({
       <img
         src="/logo.svg"
         alt="logo"
-        className={animate ? styles['animate'] : ''}
+        className={animate ? styles['logo-animate'] : ''}
       />
       <h1
         className={`text-center ml-[10px] text-[16px] ${showTitle ? 'block opacity-100' : 'hidden opacity-0'}`}

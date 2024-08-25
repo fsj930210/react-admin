@@ -24,13 +24,15 @@ const App = () => {
     <ConfigProvider
       locale={zhCN}
       theme={{
+        cssVar: true,
+        hashed: false,
         token: {
           colorPrimary: primaryColor,
           borderRadius: 4,
         },
         components: {
           Form: {
-            itemMarginBottom: 16,
+            itemMarginBottom: 14,
           },
           Layout: {
             headerHeight: 48,

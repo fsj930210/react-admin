@@ -1,45 +1,30 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import { Icon } from '@iconify/react';
-import { Divider, Row, theme } from 'antd';
+import { Divider } from 'antd';
 
 import styles from './index.module.css';
 
-import GoogleIcon from '@/assets/icons/google.svg?react';
-
-const { useToken } = theme;
 const ThirdForm = () => {
-  const { token } = useToken();
   return (
-    <Row className="enter-y">
-      <Divider>快捷登录</Divider>
+    <>
+      <Divider
+        style={{
+          color: 'var(--ant-color-text-description)',
+          fontSize: 'var(--ant-font-size-sm)',
+        }}
+      >
+        快捷登录
+      </Divider>
       <div className="w-full">
-        <div
-          className={styles['quick-login-item']}
-          css={css`
-            &:hover {
-              color: #ffffff;
-              background-color: ${token.colorPrimary};
-            }
-          `}
-        >
+        <div className={styles['quick-login-item']}>
           <Icon icon="ant-design:github-outlined" />
           <span className="ml-[8px]">GitHub账号登录</span>
         </div>
-        <div
-          className={styles['quick-login-item']}
-          css={css`
-            &:hover {
-              color: #ffffff;
-              background-color: ${token.colorPrimary};
-            }
-          `}
-        >
-          <GoogleIcon />
+        <div className={styles['quick-login-item']}>
+          <Icon icon="my-icon:google" />
           <span className="ml-[8px]">Google账号登录</span>
         </div>
       </div>
-    </Row>
+    </>
   );
 };
 
