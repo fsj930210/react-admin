@@ -4,3 +4,21 @@ body,
   width: 100%;
   height: 100%;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--ant-layout-sider-bg);
+  border-radius: 20px;
+}

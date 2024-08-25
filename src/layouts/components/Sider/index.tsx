@@ -6,6 +6,8 @@ import { MenuProps } from 'antd/lib';
 
 import AppLogo from '@/components/AppLogo';
 
+import styles from './index.module.css';
+
 import useMenu from '@/layouts/helper/useMenu';
 import {
   generateBreadcrumList,
@@ -75,7 +77,13 @@ const AppSider = () => {
     // setBreadcrumbList(list);
   };
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed} collapsedWidth={48}>
+    <Sider
+      className={styles['app-layout-sider']}
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      collapsedWidth={48}
+    >
       <AppLogo showTitle={!collapsed} style={{ color: '#ffffff' }} />
       <Menu
         theme="dark"
@@ -86,6 +94,7 @@ const AppSider = () => {
         selectedKeys={selectedKeys}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
+        className="overflow-y-auto flex-1"
       />
     </Sider>
   );

@@ -18,7 +18,7 @@ const AppBreadcrumb = () => {
     );
   }
   return (
-    <div>
+    <div className="ml-[8px]">
       <Breadcrumb items={breadcrumbList} itemRender={itemRender} />
     </div>
   );

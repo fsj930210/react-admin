@@ -51,7 +51,7 @@ const App = () => {
           }}
         >
           <Suspense fallback={<AppLoading showText />}>
-            <RouterProvider router={router} fallbackElement={<Error500 />} />
+            <RouterProvider router={router} fallbackElement={<AppLoading />} />
           </Suspense>
         </ErrorBoundary>
       </AntApp>

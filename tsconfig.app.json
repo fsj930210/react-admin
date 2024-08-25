@@ -16,7 +16,6 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
 
     /* Linting */
     "strict": true,
@@ -28,11 +27,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": [
-      "vite-plugin-svgr/client",
-      "node",
-      "@emotion/react/types/css-prop"
-    ]
+    "types": ["vite-plugin-svgr/client", "node"]
   },
   "include": ["src"]
 }

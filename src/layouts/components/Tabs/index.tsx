@@ -16,6 +16,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { Icon } from '@iconify/react';
 import { Tabs } from 'antd';
 
+import AppContent from '../Content';
+
 import ChromeTab from './components/ChromeTab';
 import TabDropdown from './components/Dropdown';
 
@@ -54,27 +56,27 @@ const AppTabs: React.FC = () => {
     {
       key: '1',
       label: 'Tab 1',
-      children: 'Content of Tab Pane 1',
+      children: <AppContent />,
     },
     {
       key: '2',
       label: 'Tab 2',
-      children: 'Content of Tab Pane 2',
+      children: <AppContent />,
     },
     {
       key: '3',
       label: 'Tab 3',
-      children: 'Content of Tab Pane 3',
+      children: <AppContent />,
     },
     {
       key: '4',
       label: 'Tab 4',
-      children: 'Content of Tab Pane 4',
+      children: <AppContent />,
     },
     {
       key: '5',
       label: 'Tab 5',
-      children: 'Content of Tab Pane 5',
+      children: <AppContent />,
     },
   ]);
   const [activeKey, setActiveKey] = useState('1');
@@ -135,26 +137,30 @@ const AppTabs: React.FC = () => {
             </SortableContext>
           </DndContext>
         )}
-      />
-      <div className="flex items-center h-full">
-        <span className="app-tabs-right-item">
-          <div className="w-full h-full flex items-center">
-            <Icon icon="ant-design:reload-outlined" />
-          </div>
-        </span>
-        <span className="app-tabs-right-item">
-          <TabDropdown trigger={['click']}>
-            <div className="w-full h-full flex items-center">
-              <Icon icon="lucide:chevron-down" />
+        tabBarExtraContent={{
+          right: (
+            <div className="flex items-center h-full">
+              <span className="app-tabs-right-item">
+                <div className="w-full h-full flex items-center">
+                  <Icon icon="ant-design:reload-outlined" />
+                </div>
+              </span>
+              <span className="app-tabs-right-item">
+                <TabDropdown trigger={['click']}>
+                  <div className="w-full h-full flex items-center">
+                    <Icon icon="lucide:chevron-down" />
+                  </div>
+                </TabDropdown>
+              </span>
+              <span className="app-tabs-right-item">
+                <div className="w-full h-full flex items-center">
+                  <Icon icon="lucide:fullscreen" />
+                </div>
+              </span>
             </div>
-          </TabDropdown>
-        </span>
-        <span className="app-tabs-right-item">
-          <div className="w-full h-full flex items-center">
-            <Icon icon="lucide:fullscreen" />
-          </div>
-        </span>
-      </div>
+          ),
+        }}
+      />
     </div>
   );
 };

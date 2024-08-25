@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import Error404 from '@/components/Error/404';
 import LazyLoadComponent from '@/components/LazyLoadComponent';
 
+import RouteError from './RouteError';
 import { getRoutes } from './utils';
 
 import Layout from '@/layouts/index';
@@ -24,6 +25,7 @@ const routes: IRouteObject[] = [
   {
     path: '/',
     element: <Layout />,
+    errorElement: <RouteError />,
     meta: {
       menu: false,
     },

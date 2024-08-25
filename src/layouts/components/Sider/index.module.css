@@ -1,0 +1,6 @@
+.app-layout-sider {
+  :global(.ant-layout-sider-children) {
+    display: flex;
+    flex-direction: column;
+  }
+}
