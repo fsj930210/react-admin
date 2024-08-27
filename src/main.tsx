@@ -9,6 +9,7 @@ import App from './App.tsx';
 import '@/styles/reset.css';
 import '@/styles/global.css';
 import '@/styles/entry.css';
+import '@/styles/animate.css';
 import '@/components/Icon/loadIconifyIcons.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import Error500 from '@/components/Error/500';
 
 import AppLoading from './components/AppLoading';
+// import LockScreen from './components/LockScreen';
 import router from './router';
 
 import useGlobalStore from '@/store';
@@ -55,6 +56,7 @@ const App = () => {
           </Suspense>
         </ErrorBoundary>
       </AntApp>
+      {/* <LockScreen /> */}
     </ConfigProvider>
   );
 };
