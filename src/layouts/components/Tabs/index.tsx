@@ -14,12 +14,14 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Icon } from '@iconify/react';
-import { Tabs } from 'antd';
+import classNames from 'classnames';
+
+import Tabs from '@/components/RaTabs';
 
 import AppContent from '../Content';
 
-import ChromeTab from './components/ChromeTab';
-import TabDropdown from './components/Dropdown';
+// import ChromeTab from './components/ChromeTab';
+import TabDropdown from './components/TabDropdown';
 
 import type { DragEndEvent } from '@dnd-kit/core';
 
@@ -40,7 +42,7 @@ const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
     ...props.style,
     transform: CSS.Translate.toString(transform),
     transition,
-    cursor: 'move',
+    cursor: 'pointer',
   };
 
   return React.cloneElement(props.children as React.ReactElement, {
@@ -52,35 +54,16 @@ const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
 };
 
 const AppTabs: React.FC = () => {
-  const [items, setItems] = useState([
-    {
-      key: '1',
-      label: 'Tab 1',
+  const [items, setItems] = useState(
+    Array.from({ length: 30 }).map((_, index) => ({
+      key: `${index + 1}`,
+      label: `Tab${index + 1}`,
       children: <AppContent />,
-    },
-    {
-      key: '2',
-      label: 'Tab 2',
-      children: <AppContent />,
-    },
-    {
-      key: '3',
-      label: 'Tab 3',
-      children: <AppContent />,
-    },
-    {
-      key: '4',
-      label: 'Tab 4',
-      children: <AppContent />,
-    },
-    {
-      key: '5',
-      label: 'Tab 5',
-      children: <AppContent />,
-    },
-  ]);
+      closable: true,
+    })),
+  );
+  const [tabType, setTabType] = useState('chrome');
   const [activeKey, setActiveKey] = useState('1');
-  const [hoveringKey, setHoveringKey] = useState('');
   const sensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
   });
@@ -95,12 +78,18 @@ const AppTabs: React.FC = () => {
     }
   };
   return (
-    <div className="flex items-center justify-between h-[40px] bg-white border-b-solid border-b-1 border-b-[#f0f0f0]">
+    <div className="flex items-center justify-between h-[36px] bg-white">
       <Tabs
         hideAdd
         items={items}
-        type="editable-card"
-        className="app-tabs flex-1"
+        activeKey={activeKey}
+        tabPosition="top"
+        editable={{
+          onEdit: () => {
+            console.log(1);
+          },
+        }}
+        className="layout-tabs flex-1"
         onChange={(activeKey) => setActiveKey(activeKey)}
         renderTabBar={(tabBarProps, DefaultTabBar) => (
           <DndContext
@@ -113,23 +102,28 @@ const AppTabs: React.FC = () => {
               strategy={horizontalListSortingStrategy}
             >
               <DefaultTabBar {...tabBarProps}>
-                {(node) => (
+                {(node, props) => (
                   <DraggableTabNode {...node.props} key={node.key}>
                     <div
-                      className="chrome-tabs-tab-container"
-                      onMouseEnter={() => {
-                        setHoveringKey(node.key as string);
-                      }}
-                      onMouseLeave={() => {
-                        setHoveringKey('');
-                      }}
+                      data-node-key={
+                        tabType === 'chrome' ? node.key : undefined
+                      }
+                      className={classNames({
+                        'layout-tabs-tab': true,
+                        'layout-tabs-tab-wrapper-active': props.active,
+                        'layout-tabs-tab-chrome': tabType === 'chrome',
+                        'layout-tabs-tab-card': tabType === 'card',
+                        'layout-tabs-tab-classic': tabType === 'classic',
+                        'layout-tabs-tab-trapezoid': tabType === 'trapezoid',
+                        'layout-tabs-tab-brisk': tabType === 'brisk',
+                      })}
                     >
-                      <ChromeTab
-                        activeKey={activeKey}
-                        items={items}
-                        node={node}
-                        hoveringKey={hoveringKey}
-                      />
+                      {/* {tabType === 'chrome' ? (
+                        <ChromeTab {...props} />
+                      ) : (
+                        <TabDropdown>{node}</TabDropdown>
+                      )} */}
+                      <TabDropdown>{node}</TabDropdown>
                     </div>
                   </DraggableTabNode>
                 )}

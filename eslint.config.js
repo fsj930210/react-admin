@@ -67,6 +67,7 @@ export default [
           allowConstantExport: true,
         },
       ],
+      'react/prop-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       'react/no-unknown-property': [
         'error',

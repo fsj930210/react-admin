@@ -1,12 +1,9 @@
 import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import { RouterProvider } from 'react-router-dom';
 
 import { ConfigProvider, App as AntApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
-
-import Error500 from '@/components/Error/500';
 
 import AppLoading from './components/AppLoading';
 // import LockScreen from './components/LockScreen';
@@ -45,16 +42,9 @@ const App = () => {
       }}
     >
       <AntApp className="w-full h-full">
-        <ErrorBoundary
-          fallbackRender={({ error }) => {
-            console.log(error);
-            return <Error500 subTitle={error?.message} />;
-          }}
-        >
-          <Suspense fallback={<AppLoading showText />}>
-            <RouterProvider router={router} fallbackElement={<AppLoading />} />
-          </Suspense>
-        </ErrorBoundary>
+        <Suspense fallback={<AppLoading showText />}>
+          <RouterProvider router={router} fallbackElement={<AppLoading />} />
+        </Suspense>
       </AntApp>
       {/* <LockScreen /> */}
     </ConfigProvider>

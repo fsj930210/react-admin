@@ -9,7 +9,7 @@ const BasicLayout = () => {
   return (
     <Layout className="h-full" hasSider>
       <AppSider />
-      <Layout className="relative">
+      <Layout className="relative overflow-hidden">
         <AppHeader />
         <AppTabs />
         <AppFooter />
