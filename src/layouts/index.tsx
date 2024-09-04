@@ -1,5 +1,6 @@
 import { Layout } from 'antd';
 
+import AppContent from './components/Content';
 import AppFooter from './components/Footer';
 import AppHeader from './components/Header';
 import AppSider from './components/Sider';
@@ -12,6 +13,7 @@ const BasicLayout = () => {
       <Layout className="relative overflow-hidden">
         <AppHeader />
         <AppTabs />
+        <AppContent />
         <AppFooter />
       </Layout>
     </Layout>

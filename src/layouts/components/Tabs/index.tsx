@@ -6,6 +6,7 @@ import {
   closestCenter,
   useSensor,
 } from '@dnd-kit/core';
+import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import {
   arrayMove,
   horizontalListSortingStrategy,
@@ -18,9 +19,7 @@ import classNames from 'classnames';
 
 import Tabs from '@/components/RaTabs';
 
-import AppContent from '../Content';
-
-// import ChromeTab from './components/ChromeTab';
+import ChromeTab from './components/ChromeTab';
 import TabDropdown from './components/TabDropdown';
 
 import type { DragEndEvent } from '@dnd-kit/core';
@@ -58,7 +57,7 @@ const AppTabs: React.FC = () => {
     Array.from({ length: 30 }).map((_, index) => ({
       key: `${index + 1}`,
       label: `Tab${index + 1}`,
-      children: <AppContent />,
+      children: <></>,
       closable: true,
     })),
   );
@@ -78,7 +77,7 @@ const AppTabs: React.FC = () => {
     }
   };
   return (
-    <div className="flex items-center justify-between h-[36px] bg-white">
+    <div className="flex items-center justify-between h-[40px] bg-white">
       <Tabs
         hideAdd
         items={items}
@@ -96,18 +95,20 @@ const AppTabs: React.FC = () => {
             sensors={[sensor]}
             onDragEnd={onDragEnd}
             collisionDetection={closestCenter}
+            modifiers={[restrictToHorizontalAxis]}
           >
             <SortableContext
               items={items.map((i) => i.key)}
               strategy={horizontalListSortingStrategy}
             >
-              <DefaultTabBar {...tabBarProps}>
-                {(node, props) => (
+              <DefaultTabBar
+                {...tabBarProps}
+                className={tabType === 'chrome' ? 'aa' : ''}
+              >
+                {(node, props, nodeKey) => (
                   <DraggableTabNode {...node.props} key={node.key}>
                     <div
-                      data-node-key={
-                        tabType === 'chrome' ? node.key : undefined
-                      }
+                      data-node-key={tabType === 'chrome' ? nodeKey : undefined}
                       className={classNames({
                         'layout-tabs-tab': true,
                         'layout-tabs-tab-wrapper-active': props.active,
@@ -116,14 +117,15 @@ const AppTabs: React.FC = () => {
                         'layout-tabs-tab-classic': tabType === 'classic',
                         'layout-tabs-tab-trapezoid': tabType === 'trapezoid',
                         'layout-tabs-tab-brisk': tabType === 'brisk',
+                        'layout-tabs-tab-rhythm': tabType === 'rhythm',
                       })}
                     >
-                      {/* {tabType === 'chrome' ? (
+                      {tabType === 'chrome' ? (
                         <ChromeTab {...props} />
                       ) : (
                         <TabDropdown>{node}</TabDropdown>
-                      )} */}
-                      <TabDropdown>{node}</TabDropdown>
+                      )}
+                      {/* <TabDropdown>{node}</TabDropdown> */}
                     </div>
                   </DraggableTabNode>
                 )}

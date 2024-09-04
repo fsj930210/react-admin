@@ -22,6 +22,7 @@ export interface TabNodeProps {
   renderWrapper?: (
     node: React.ReactElement,
     props: Omit<TabNodeProps, 'renderWrapper'>,
+    nodeKey: string,
   ) => React.ReactElement;
   removeAriaLabel?: string;
   removeIcon?: React.ReactNode;
@@ -121,7 +122,7 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
     </div>
   );
 
-  return renderWrapper ? renderWrapper(node, props) : node;
+  return renderWrapper ? renderWrapper(node, props, genDataNodeKey(key)) : node;
 };
 
 export default TabNode;

@@ -60,6 +60,7 @@ export interface TabNavListProps {
   children?: (
     node: React.ReactElement,
     props: Omit<TabNodeProps, 'renderWrapper'>,
+    nodeKey: string,
   ) => React.ReactElement;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;
   popupClassName?: string;

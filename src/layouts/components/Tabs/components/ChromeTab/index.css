@@ -1,0 +1,138 @@
+.layout-tabs-tab-chrome {
+  --tab-content-margin: 9px;
+
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+
+  .layout-chrome-tabs-tab-divider {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 2px;
+    height: 14px;
+    background-color: #d0d0d0;
+    transform: translateY(-50%);
+  }
+
+  &:first-child {
+    .layout-chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+  }
+
+  .layout-chrome-tabs-tab-background {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    color: var(--ant-color-primary-bg);
+    z-index: -1;
+  }
+
+  .layout-chrome-tabs-tab-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    overflow: hidden;
+    pointer-events: all;
+    border-radius: 8px;
+    transition: 0.2s ease;
+    color: var(--ant-color-text-tertiary);
+
+    &:hover {
+      color: var(--ant-color-text);
+    }
+  }
+
+  .layout-chrome-tabs-tab-content-icon {
+    font-size: 16px;
+    margin-left: 4px;
+
+    & + .layout-chrome-tabs-tab-content-title {
+      margin-left: 8px;
+    }
+  }
+
+  .layout-chrome-tabs-tab-content-title {
+    flex: 1;
+
+    & + .layout-chrome-tabs-tab-close {
+      margin-left: 16px;
+    }
+  }
+
+  .layout-chrome-tabs-tab-close {
+    font-size: 16px;
+    border-radius: 100%;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    transition: all 0.2s ease;
+  }
+
+  &.layout-tabs-tab-wrapper-active {
+    & + .layout-tabs-tab-chrome {
+      .layout-chrome-tabs-tab-divider {
+        opacity: 0;
+      }
+    }
+
+    .layout-chrome-tabs-tab-divider {
+      opacity: 0;
+    }
+
+    .layout-chrome-tabs-tab-background {
+      opacity: 1;
+    }
+
+    .layout-chrome-tabs-tab-content {
+      color: var(--ant-color-primary);
+    }
+
+    .layout-chrome-tabs-tab-close {
+      &:hover {
+        background-color: var(--ant-color-primary);
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media (hover: hover) {
+  .layout-tabs-tab-chrome:not(.layout-tabs-tab-wrapper-active) {
+    &:hover {
+      .layout-chrome-tabs-tab-divider {
+        opacity: 0;
+      }
+
+      & + .layout-tabs-tab-chrome {
+        .layout-chrome-tabs-tab-divider {
+          opacity: 0;
+        }
+      }
+    }
+
+    .layout-chrome-tabs-tab-content {
+      &:hover {
+        background-color: #dee1e6;
+      }
+    }
+
+    .layout-chrome-tabs-tab-close {
+      &:hover {
+        background-color: #b1b3b8;
+        color: #fff;
+      }
+    }
+  }
+}
