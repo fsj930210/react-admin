@@ -1,6 +1,4 @@
 .layout-tabs-tab-chrome {
-  --tab-content-margin: 9px;
-
   position: relative;
   height: 100%;
   width: 100%;
@@ -12,9 +10,9 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 2px;
+    width: 1px;
     height: 14px;
-    background-color: #d0d0d0;
+    background-color: var(--ant-color-text-secondary);
     transform: translateY(-50%);
   }
 
@@ -47,11 +45,7 @@
     pointer-events: all;
     border-radius: 8px;
     transition: 0.2s ease;
-    color: var(--ant-color-text-tertiary);
-
-    &:hover {
-      color: var(--ant-color-text);
-    }
+    color: var(--ant-color-text);
   }
 
   .layout-chrome-tabs-tab-content-icon {
@@ -72,11 +66,12 @@
   }
 
   .layout-chrome-tabs-tab-close {
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 100%;
     width: 16px;
     height: 16px;
-    line-height: 1;
+    line-height: 16px;
+    text-align: center;
     transition: all 0.2s ease;
   }
 
@@ -101,7 +96,7 @@
 
     .layout-chrome-tabs-tab-close {
       &:hover {
-        background-color: var(--ant-color-primary);
+        background-color: var(--ant-color-primary-hover);
         color: #fff;
       }
     }
@@ -124,13 +119,14 @@
 
     .layout-chrome-tabs-tab-content {
       &:hover {
-        background-color: #dee1e6;
+        color: var(--ant-color-primary);
+        background-color: var(--ant-color-primary-bg-hover);
       }
     }
 
     .layout-chrome-tabs-tab-close {
       &:hover {
-        background-color: #b1b3b8;
+        background-color: var(--ant-color-primary);
         color: #fff;
       }
     }

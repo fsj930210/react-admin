@@ -65,7 +65,7 @@
 
   .ra-material-input:not(:placeholder-shown) ~ .ra-material-input-label,
   .ra-material-input:focus ~ .ra-material-input-label {
-    color: var(--ant-color-error);
+    color: var(--ant-color-error) !important;
   }
 
   &.ra-material-input-filled,
@@ -87,7 +87,7 @@
 /* 线框风格样式 */
 .ra-material-input-outlined {
   .ra-material-input ~ .ra-material-input-label {
-    background-color: #fff;
+    background-color: var(--ant-color-bg-container);
   }
 
   .ra-material-input:not(:focus) ~ .ra-material-input-label {

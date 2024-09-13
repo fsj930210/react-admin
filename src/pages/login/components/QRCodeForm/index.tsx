@@ -16,7 +16,7 @@ const QRCodeForm = ({
 }: QRCodeFormProps) => {
   const { token } = useToken();
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex-center flex-col">
       {showTitle ? (
         <h2
           className={`mb-[var(--ant-form-item-margin-bottom)] ${animateClassName}`}

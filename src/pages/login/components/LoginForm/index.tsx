@@ -47,11 +47,23 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
           <MaterialInput
             allowClear
             placeholder="用户名"
-            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:user"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
           />
         ) : (
           <Input
-            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:user"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="用户名"
           />
         )}
@@ -72,14 +84,22 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
         {material ? (
           <MaterialInput.Password
             prefix={
-              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+              <Icon
+                icon="lucide:lock-keyhole"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
             }
             placeholder="密码"
           />
         ) : (
           <Password
             prefix={
-              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+              <Icon
+                icon="lucide:lock-keyhole"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
             }
             placeholder="密码"
           />
@@ -99,14 +119,22 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
           {material ? (
             <MaterialInput
               prefix={
-                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+                <Icon
+                  icon="lucide:shield-check"
+                  fontSize={16}
+                  color="var(--ant-color-icon)"
+                />
               }
               placeholder="验证码"
             />
           ) : (
             <Input
               prefix={
-                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+                <Icon
+                  icon="lucide:shield-check"
+                  fontSize={16}
+                  color="var(--ant-color-icon)"
+                />
               }
               placeholder="验证码"
             />
@@ -132,7 +160,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
           <Checkbox>7天内免登录</Checkbox>
         </FormItem>
         <a
-          className="inline-block w[50%] p-0 text-right border-none"
+          className="inline-block w[50%] p-0 text-right border-none text-[var(--ant-color-link)]"
           onClick={() => switchPage?.(LoginPageEnum.reset_password)}
         >
           忘记密码？
@@ -148,7 +176,12 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
       </Row>
       <Row className="enter-y justify-center">
         还没有账号？去
-        <a onClick={() => switchPage?.(LoginPageEnum.register)}>注册账号</a>
+        <a
+          onClick={() => switchPage?.(LoginPageEnum.register)}
+          className="text-[var(--ant-color-link)]"
+        >
+          注册账号
+        </a>
       </Row>
     </Form>
   );

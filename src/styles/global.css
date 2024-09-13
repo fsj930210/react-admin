@@ -3,6 +3,7 @@ body,
 #root {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -19,6 +20,6 @@ html::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--ant-layout-sider-bg);
+  background-color: var(--scrollbar-thumb-bg);
   border-radius: 20px;
 }

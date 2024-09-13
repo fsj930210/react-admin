@@ -19,6 +19,7 @@
   left: 10%;
   transform-origin: 50%;
   animation: circle 0.5s alternate infinite ease;
+  background-color: var(--ant-color-primary);
 
   &:nth-child(2) {
     left: 40%;

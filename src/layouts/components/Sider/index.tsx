@@ -24,7 +24,6 @@ const AppSider = () => {
   const { menuItems } = useMenu();
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-
   // 监听路由变化 设置侧边栏展开选中以及面包屑
   useEffect(() => {
     setSelectedKeys([location.pathname]);
@@ -76,6 +75,7 @@ const AppSider = () => {
     // 将面包屑存入store中
     // setBreadcrumbList(list);
   };
+
   return (
     <Sider
       className={styles['app-layout-sider']}
@@ -84,9 +84,14 @@ const AppSider = () => {
       collapsed={collapsed}
       collapsedWidth={48}
     >
-      <AppLogo showTitle={!collapsed} style={{ color: '#ffffff' }} />
+      <AppLogo
+        showTitle={!collapsed}
+        style={{
+          color: 'var(--ant-color-text)',
+          backgroundColor: 'var(--ant-color-bg-container)',
+        }}
+      />
       <Menu
-        theme="dark"
         mode="inline"
         defaultSelectedKeys={['1']}
         items={menuItems}

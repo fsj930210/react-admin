@@ -39,12 +39,24 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
       >
         {material ? (
           <MaterialInput
-            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:user"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="用户名"
           />
         ) : (
           <Input
-            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:user"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="用户名"
           />
         )}
@@ -65,12 +77,24 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
       >
         {material ? (
           <MaterialInput
-            prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:mail"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="邮箱"
           />
         ) : (
           <Input
-            prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:mail"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="邮箱"
           />
         )}
@@ -84,14 +108,22 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
           {material ? (
             <MaterialInput
               prefix={
-                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+                <Icon
+                  icon="lucide:shield-check"
+                  fontSize={16}
+                  color="var(--ant-color-icon)"
+                />
               }
               placeholder="邮箱验证码"
             />
           ) : (
             <Input
               prefix={
-                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+                <Icon
+                  icon="lucide:shield-check"
+                  fontSize={16}
+                  color="var(--ant-color-icon)"
+                />
               }
               placeholder="邮箱验证码"
             />

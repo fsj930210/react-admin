@@ -3,7 +3,7 @@
   height: 6px;
   margin: 0 auto;
   border-radius: 6px;
-  background-color: #00000040;
+  background-color: var(--ant-color-bg-layout);
 
   &::before,
   &::after {
@@ -15,7 +15,7 @@
     height: inherit;
     border-width: 0 5px;
     border-style: solid;
-    border-color: #fff;
+    border-color: var(--ant-color-bg-container);
     background-color: transparent;
   }
 
@@ -35,4 +35,15 @@
     width 0.5s ease-in-out,
     background 0.25s;
   border-radius: inherit;
+}
+
+:global(html.dark) {
+  .strength-meter-bar {
+    background-color: var(--ant-color-bg-container);
+
+    &::before,
+    &::after {
+      border-color: var(--ant-color-bg-layout);
+    }
+  }
 }

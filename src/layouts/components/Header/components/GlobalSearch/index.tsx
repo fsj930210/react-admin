@@ -14,12 +14,12 @@ const GlobalSearch = () => {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="bg-[#f5f5f5] h-8 flex gap-3 items-center cursor-pointer border-none rounded-full px-4 py-[4px] text-[rgba(60,60,60,.7)] hover:bg-[#f5f5f5]"
+        className="bg-[var(--ant-color-bg-layout)] h-8 flex gap-3 items-center cursor-pointer border-none rounded-full px-4 py-[4px] text-[var(--ant-color-text-tertiary)] hover:text-[var(--ant-color-text)] transition-all"
       >
         <span>
           <Icon icon="lucide:search" /> <span>搜索</span>
         </span>
-        <span className="flex items-center px-2 h-full border-1 border-[rgba(60,60,60,.33)] border-solid px-[4px] rounded">
+        <span className="flex items-center px-2 h-full border-1 border-[var(--ant-color-border)] border-solid px-[4px] rounded">
           <kbd className="line-height-none mr-[4px]">⌘</kbd>
           <kbd className="line-height-none">k</kbd>
         </span>

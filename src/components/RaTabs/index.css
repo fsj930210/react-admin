@@ -1,30 +1,3 @@
-.ra-tabs-css-var {
-  --ra-tabs-z-index-popup: 1050;
-  --ra-tabs-card-bg: rgb(0 0 0 / 2%);
-  --ra-tabs-card-height: 40px;
-  --ra-tabs-card-padding: 8px;
-  --ra-tabs-card-padding-sm: 6px 16px;
-  --ra-tabs-card-padding-lg: 8px 16px 6px;
-  --ra-tabs-title-font-size: 14px;
-  --ra-tabs-title-font-size-lg: 16px;
-  --ra-tabs-title-font-size-sm: 14px;
-  --ra-tabs-ink-bar-color: #1677ff;
-  --ra-tabs-horizontal-margin: 0 0 16px 0;
-  --ra-tabs-horizontal-item-gutter: 32px;
-  --ra-tabs-horizontal-item-margin: ;
-  --ra-tabs-horizontal-item-margin-rtl: ;
-  --ra-tabs-horizontal-item-padding: 12px 0;
-  --ra-tabs-horizontal-item-padding-sm: 8px 0;
-  --ra-tabs-horizontal-item-padding-lg: 16px 0;
-  --ra-tabs-vertical-item-padding: 8px 24px;
-  --ra-tabs-vertical-item-margin: 16px 0 0 0;
-  --ra-tabs-item-color: rgb(0 0 0 / 88%);
-  --ra-tabs-item-selected-color: #1677ff;
-  --ra-tabs-item-hover-color: #4096ff;
-  --ra-tabs-item-active-color: #0958d9;
-  --ra-tabs-card-gutter: 2px;
-}
-
 .ra-tabs {
   color: var(--ant-color-text);
   font-size: var(--ant-font-size);
@@ -74,11 +47,16 @@
 
     .ra-tabs-nav-more {
       position: relative;
-      padding: var(--ra-tabs-card-padding);
+      padding: 8px;
       background: transparent;
       border: 0;
       color: var(--ant-color-text);
       border-left: 1px solid var(--ant-color-border);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--ant-color-primary);
+      }
     }
   }
 
@@ -88,13 +66,13 @@
     -webkit-tap-highlight-color: transparent;
     display: inline-flex;
     align-items: center;
-    padding: var(--ra-tabs-horizontal-item-padding);
-    font-size: var(--ra-tabs-title-font-size);
+    padding: 12px 0;
+    font-size: 14px;
     background: transparent;
     border: 0;
     outline: none;
     cursor: pointer;
-    color: var(--ra-tabs-item-color);
+    color: rgb(0 0 0 / 88%);
 
     .ra-tabs-tab-btn {
       outline: none;
@@ -104,7 +82,7 @@
 
   .ra-tabs-ink-bar {
     position: absolute;
-    background: var(--ra-tabs-ink-bar-color);
+    background: var(--ant-color-primary);
     pointer-events: none;
   }
 
@@ -124,7 +102,7 @@
   }
 
   .ra-tabs-tab + .ra-tabs-tab {
-    margin: 0 0 0 var(--ra-tabs-horizontal-item-gutter);
+    margin: 0 0 0 32px;
   }
 
   .ra-tabs-scroll-button-wrapper {
@@ -169,7 +147,7 @@
   flex-direction: column;
 
   > .ra-tabs-nav {
-    margin: var(--ra-tabs-horizontal-margin);
+    margin: 0 0 16px;
 
     .ra-tabs-nav-wrap {
       &.ra-tabs-nav-wrap-ping-right {
@@ -354,7 +332,7 @@
 
   .ra-tabs-nav {
     .ra-tabs-tab {
-      margin: 0 0 0 var(--ra-tabs-horizontal-item-gutter);
+      margin: 0 0 0 32px;
     }
 
     .ra-tabs-nav-more {

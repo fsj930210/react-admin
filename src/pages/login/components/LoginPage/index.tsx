@@ -1,4 +1,4 @@
-import { theme, Tabs, Typography } from 'antd';
+import { Tabs, Typography } from 'antd';
 
 import AppLogo from '@/components/AppLogo';
 
@@ -13,8 +13,6 @@ import styles from './index.module.css';
 import AppFooter from '@/layouts/components/Footer';
 import useLoginStore, { LoginPageEnum } from '@/store/login';
 
-const { useToken } = theme;
-
 const { Title, Paragraph } = Typography;
 
 type LoginPageProps = {
@@ -22,7 +20,6 @@ type LoginPageProps = {
 };
 const LoginPage = ({ material }: LoginPageProps) => {
   const { loginPage, changeLoginPage } = useLoginStore();
-  const { token } = useToken();
   const items = [
     {
       key: '1',
@@ -41,10 +38,9 @@ const LoginPage = ({ material }: LoginPageProps) => {
     },
   ];
   return (
-    <div className={`${styles['login-wrapper']} w-full flex min-h[100vh]`}>
+    <div className={`${styles['login-wrapper']} w-full flex h-[100vh]`}>
       <div
-        className={`w-[55%] text-white p[40px] text-center`}
-        style={{ backgroundColor: token.colorPrimary }}
+        className={`w-[55%] text-white p[40px] text-center bg-[var(--ant-color-primary)] dark:bg-[var(--ant-color-bg-layout)]`}
       >
         <AppLogo animate showTitle className="justify-center" />
         <div>
@@ -64,14 +60,10 @@ const LoginPage = ({ material }: LoginPageProps) => {
         </div>
 
         <div className="mt-[80px] flex justify-center">
-          <img
-            src="/images/fullstack-engineer.svg"
-            alt=""
-            className="w-[500]"
-          />
+          <img src="/images/fullstack-engineer.svg" alt="" className="w-120" />
         </div>
       </div>
-      <div className="w-[45%] flex flex-col items-center relative">
+      <div className="w-[45%] h-full flex flex-col items-center relative bg-white dark:bg-[var(--ant-color-bg-layout)]">
         <div className="p[80px]">
           <div className="w-[420px]">
             <h2 className="mb-[14px] enter-y">

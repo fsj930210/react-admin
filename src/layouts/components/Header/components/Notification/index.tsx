@@ -22,8 +22,10 @@ const Notification = () => {
   );
   return (
     <Popover arrow={false} content={Content} trigger={['click']}>
-      <Badge dot>
-        <Icon icon="carbon:notification" className="cursor-pointer" />
+      <Badge dot className="inline">
+        <span className="text-[20px] cursor-pointer flex-center p-[4] rounded-[100%] bg-tansparent hover:bg-[var(--ant-color-bg-layout)] transition-all">
+          <Icon inline icon="carbon:notification" />
+        </span>
       </Badge>
     </Popover>
   );

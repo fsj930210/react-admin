@@ -46,12 +46,24 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
       >
         {material ? (
           <MaterialInput
-            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:user"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="用户名"
           />
         ) : (
           <Input
-            prefix={<Icon icon="lucide:user" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:user"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="用户名"
           />
         )}
@@ -72,12 +84,24 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
       >
         {material ? (
           <MaterialInput
-            prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:mail"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="邮箱"
           />
         ) : (
           <Input
-            prefix={<Icon icon="lucide:mail" fontSize={16} color="#999" />}
+            prefix={
+              <Icon
+                icon="lucide:mail"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
+            }
             placeholder="邮箱"
           />
         )}
@@ -91,14 +115,22 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
           {material ? (
             <MaterialInput
               prefix={
-                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+                <Icon
+                  icon="lucide:shield-check"
+                  fontSize={16}
+                  color="var(--ant-color-icon)"
+                />
               }
               placeholder="邮箱验证码"
             />
           ) : (
             <Input
               prefix={
-                <Icon icon="lucide:shield-check" fontSize={16} color="#999" />
+                <Icon
+                  icon="lucide:shield-check"
+                  fontSize={16}
+                  color="var(--ant-color-icon)"
+                />
               }
               placeholder="邮箱验证码"
             />
@@ -125,14 +157,22 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         {material ? (
           <MaterialInput.Password
             prefix={
-              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+              <Icon
+                icon="lucide:lock-keyhole"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
             }
             placeholder="密码"
           />
         ) : (
           <Password
             prefix={
-              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+              <Icon
+                icon="lucide:lock-keyhole"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
             }
             placeholder="密码"
           />
@@ -164,14 +204,22 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         {material ? (
           <MaterialInput.Password
             prefix={
-              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+              <Icon
+                icon="lucide:lock-keyhole"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
             }
             placeholder="确认密码"
           />
         ) : (
           <Password
             prefix={
-              <Icon icon="lucide:lock-keyhole" fontSize={16} color="#999" />
+              <Icon
+                icon="lucide:lock-keyhole"
+                fontSize={16}
+                color="var(--ant-color-icon)"
+              />
             }
             placeholder="确认密码"
           />
@@ -189,7 +237,8 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         ]}
       >
         <Checkbox>
-          同意 <a>《注册协议》</a>及 <a>《隐私政策》</a>
+          同意 <a className="text-[var(--ant-color-link)]">《注册协议》</a>及{' '}
+          <a className="text-[var(--ant-color-link)]">《隐私政策》</a>
         </Checkbox>
       </FormItem>
       <FormItem className="enter-y">
@@ -199,7 +248,12 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
       </FormItem>
       <Row className="enter-y justify-center">
         已有账号？去
-        <a onClick={() => switchPage?.(LoginPageEnum.login)}>登录</a>
+        <a
+          onClick={() => switchPage?.(LoginPageEnum.login)}
+          className="text-[var(--ant-color-link)]"
+        >
+          登录
+        </a>
       </Row>
     </Form>
   );

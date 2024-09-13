@@ -8,10 +8,20 @@
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 16px;
-  transition: all 0.3s ease-in-out;
 
   &:hover {
     color: #fff;
     background-color: var(--ant-color-primary);
+  }
+}
+
+:global(.dark) {
+  .quick-login-item {
+    background-color: var(--ant-color-primary-bg);
+    box-shadow: var(--ant-color-primary-bg-hover) 0 4px 11px 0;
+
+    &:hover {
+      background-color: var(--ant-color-primary);
+    }
   }
 }

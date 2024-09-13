@@ -1,5 +1,7 @@
 import { Icon } from '@iconify/react';
-import { Button, Layout, Space, theme } from 'antd';
+import { Button, Layout, Space } from 'antd';
+
+import DarkTheme from '@/components/DarkTheme';
 
 import Breadcrumb from './components/Breadcrumb';
 import FullScreen from './components/FullScreen';
@@ -11,15 +13,16 @@ import styles from './index.module.css';
 import useMenuStore from '@/store/menu';
 
 const { Header } = Layout;
-const { useToken } = theme;
 const AppHeader = () => {
   const { collapsed, toggleCollapsed } = useMenuStore();
-  const { token } = useToken();
-  const { colorBgContainer } = token;
+
   return (
     <Header
-      style={{ padding: '0 12px', background: colorBgContainer }}
-      className="flex justify-between items-center border-b-[1px] border-b-[#f0f0f0] border-b-solid"
+      style={{
+        padding: '0 12px',
+        backgroundColor: 'var(--ant-color-bg-container)',
+      }}
+      className="flex justify-between items-center border-b-[1px] border-b-[var(--ant-color-border)] border-b-solid"
     >
       <div className={styles['header-left']}>
         <Button
@@ -40,6 +43,7 @@ const AppHeader = () => {
       <div className={styles['header-right']}>
         <Space size={[10, 0]}>
           <GlobalSearch />
+          <DarkTheme />
           <FullScreen />
           <Notification />
           <UserCenter />

@@ -9,3 +9,11 @@ export const dayMap: Record<string, string> = {
   '5': '五',
   '6': '六',
 };
+
+export const setCssVar = (
+  prop: string,
+  val: any,
+  dom = document.documentElement,
+) => {
+  dom.style.setProperty(prop, val);
+};

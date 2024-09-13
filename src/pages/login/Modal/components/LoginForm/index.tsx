@@ -89,7 +89,7 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
           <Checkbox>7天内免登录</Checkbox>
         </FormItem>
         <a
-          className="inline-block w[50%] p-0 text-right border-none"
+          className="inline-block w[50%] p-0 text-right border-none text-[var(--ant-color-link)]"
           onClick={() => switchPage?.(LoginPageEnum.reset_password)}
         >
           忘记密码？
@@ -123,7 +123,12 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
       </Row>
       <Row className="enter-x justify-center">
         还没有账号？去
-        <a onClick={() => switchPage?.(LoginPageEnum.register)}>注册账号</a>
+        <a
+          onClick={() => switchPage?.(LoginPageEnum.register)}
+          className="text-[var(--ant-color-link)]"
+        >
+          注册账号
+        </a>
       </Row>
       <Modal
         open={visible}

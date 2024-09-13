@@ -63,8 +63,8 @@ const MaterialContainer = ({
         [`ant-input-status-${status}`]: !!status,
         'ant-input-affix-wrapper': true,
         'ra-material-input-wrapper': true,
-        'css-var-r1': true,
         'ant-input-css-var': true,
+        'ra-css-var': true,
         [`ra-material-input-status-${status}`]: !!status,
         [className as string]: !!className,
       })}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import { useTrackedEffect } from 'ahooks';
 import classNames from 'classnames';
 import ResizeObserver from 'rc-resize-observer';
 import useEvent from 'rc-util/lib/hooks/useEvent';
@@ -518,20 +517,16 @@ const TabNavList = React.forwardRef<HTMLDivElement, TabNavListProps>(
     });
 
     // ========================= Effect ========================
-    useTrackedEffect(
-      (changes) => {
-        console.log(changes);
-        scrollToTab();
-      },
-      [
-        activeKey,
-        transformMin,
-        transformMax,
-        // stringify(activeTabOffset),
-        stringify(tabOffsets as any),
-        tabPositionTopOrBottom,
-      ],
-    );
+    useEffect(() => {
+      scrollToTab();
+    }, [
+      activeKey,
+      transformMin,
+      transformMax,
+      // stringify(activeTabOffset),
+      stringify(tabOffsets as any),
+      tabPositionTopOrBottom,
+    ]);
 
     // Should recalculate when rtl changed
     useEffect(() => {

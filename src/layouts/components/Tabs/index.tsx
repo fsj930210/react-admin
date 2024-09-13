@@ -61,7 +61,7 @@ const AppTabs: React.FC = () => {
       closable: true,
     })),
   );
-  const [tabType, setTabType] = useState('chrome');
+  const [tabType, setTabType] = useState('trapezoid');
   const [activeKey, setActiveKey] = useState('1');
   const sensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
@@ -77,12 +77,17 @@ const AppTabs: React.FC = () => {
     }
   };
   return (
-    <div className="flex items-center justify-between h-[40px] bg-white">
+    <div className="flex items-center justify-between h-[40px] bg-[var(--ant-color-bg-container)]">
       <Tabs
         hideAdd
         items={items}
         activeKey={activeKey}
         tabPosition="top"
+        more={{
+          overlayStyle: {
+            width: 100,
+          },
+        }}
         editable={{
           onEdit: () => {
             console.log(1);
@@ -101,10 +106,7 @@ const AppTabs: React.FC = () => {
               items={items.map((i) => i.key)}
               strategy={horizontalListSortingStrategy}
             >
-              <DefaultTabBar
-                {...tabBarProps}
-                className={tabType === 'chrome' ? 'aa' : ''}
-              >
+              <DefaultTabBar {...tabBarProps}>
                 {(node, props, nodeKey) => (
                   <DraggableTabNode {...node.props} key={node.key}>
                     <div
