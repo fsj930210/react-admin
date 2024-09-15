@@ -1,18 +1,20 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import { ConfigProvider, App as AntApp, theme as antdTehme } from 'antd';
-import zhCN from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 
+// for date-picker i18n
+import 'dayjs/locale/zh-cn';
+// import 'dayjs/locale/en';
 import AppLoading from './components/AppLoading';
 // import LockScreen from './components/LockScreen';
+import useI18n from './hooks/useI18n';
+import useTheme from './hooks/useTheme';
 import router from './router';
-import { setDarkCssVars, setLightCssVars } from './utils/theme';
 
 import useGlobalStore from '@/store';
 
-import 'dayjs/locale/zh-cn';
 import 'antd/dist/reset.css';
 
 dayjs.locale('zh-cn');
@@ -26,47 +28,13 @@ export const AppContext = React.createContext<AppContext>({
   appCssTokenKey: 'ra-css-var',
 });
 const App = () => {
-  const [theme, setTheme] = useState<AppContext['theme']>('light');
-  const { primaryColor, appTheme } = useGlobalStore();
-  // 这里处理是因为有些页面没有引入DarkTheme组件，全局监听
-  useEffect(() => {
-    const themeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-    function onThemeChange(e: MediaQueryListEvent) {
-      if (e.matches) {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-    }
-    if (appTheme === 'system') {
-      if (themeMedia.matches) {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-      themeMedia.addEventListener('change', onThemeChange);
-    } else {
-      themeMedia.removeEventListener('change', onThemeChange);
-      setTheme(appTheme);
-    }
-  }, [appTheme]);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (theme === 'dark') {
-      html.classList.remove('light');
-      html.classList.add('dark');
-      setDarkCssVars();
-    } else {
-      html.classList.remove('dark');
-      html.classList.add('light');
-      setLightCssVars();
-    }
-  }, [theme]);
+  const { antdLang } = useI18n();
+  const { primaryColor } = useGlobalStore();
+  const theme = useTheme();
   return (
     <AppContext.Provider value={{ theme, appCssTokenKey: 'ra-css-var' }}>
       <ConfigProvider
-        locale={zhCN}
+        locale={antdLang}
         theme={{
           cssVar: { key: 'ra-css-var' },
           hashed: false,

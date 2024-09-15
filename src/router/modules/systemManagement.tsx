@@ -11,7 +11,7 @@ const errorRouter: IRouteObject[] = [
   {
     path: '/systemManagement',
     meta: {
-      title: '系统管理',
+      title: 'systemManagement',
       auth: true,
       menu: true,
       icon: 'tdesign:system-setting',
@@ -29,7 +29,7 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '用户管理',
+          title: 'userManagement',
           icon: 'lucide:user-round-cog',
         },
       },
@@ -43,7 +43,7 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '角色管理',
+          title: 'roleManagement',
           icon: 'oui:app-users-roles',
         },
       },
@@ -59,7 +59,7 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '组织管理',
+          title: 'organizationManagement',
           icon: 'fluent:organization-20-regular',
         },
       },
@@ -73,8 +73,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '菜单管理',
-          icon: 'my-icon:menu-management',
+          title: 'menuManagement',
+          icon: 'ra-icon:menu-management',
         },
       },
       {
@@ -89,7 +89,7 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '字典管理',
+          title: 'dictionaryManagement',
           icon: 'streamline:dictionary-language-book',
         },
       },
@@ -105,7 +105,7 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '参数配置',
+          title: 'paramsConfig',
           icon: 'carbon:parameter',
         },
       },
@@ -114,7 +114,7 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '系统监控',
+          title: 'systemMonitor',
           icon: 'mdi:monitor-eye',
         },
         element: (
@@ -135,8 +135,8 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '登录日志',
-              icon: 'my-icon:login-logs',
+              title: 'loginLogs',
+              icon: 'ra-icon:login-logs',
             },
           },
           {
@@ -154,7 +154,7 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '在线用户',
+              title: 'onlineUsers',
               icon: 'carbon:user-online',
             },
           },
@@ -173,7 +173,7 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '服务监控',
+              title: 'serviceMonitor',
               icon: 'eos-icons:monitoring',
             },
           },
@@ -184,8 +184,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '任务调度',
-          icon: 'my-icon:task-scheduler',
+          title: 'taskScheduler',
+          icon: 'ra-icon:task-scheduler',
         },
         element: (
           <RedirectRouteView to="/systemManagement/taskScheduler/taskLogs" />
@@ -206,7 +206,7 @@ const errorRouter: IRouteObject[] = [
               auth: true,
               menu: true,
               title: '任务日志',
-              icon: 'my-icon:task-logs',
+              icon: 'ra-icon:task-logs',
             },
           },
           {
@@ -224,7 +224,7 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '任务管理',
+              title: 'taskManagement',
               icon: 'fluent:task-list-square-settings-20-regular',
             },
           },

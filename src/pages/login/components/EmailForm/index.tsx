@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 import { Form, Input, Button } from 'antd';
 
@@ -14,6 +16,7 @@ type FieldType = {
 const FormItem = Form.Item;
 
 const EmailForm = ({ material }: FormPageProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm<FieldType>();
   const onFinish = (values: FieldType) => {
     console.log('Success:', values);
@@ -26,7 +29,11 @@ const EmailForm = ({ material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入邮箱',
+            message: t('login.requiredEmailReg'),
+          },
+          {
+            type: 'email',
+            message: t('login.emailReg'),
           },
         ]}
         className="enter-y"
@@ -40,7 +47,7 @@ const EmailForm = ({ material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="邮箱"
+            placeholder={t('login.emialPlaceholder')}
           />
         ) : (
           <Input
@@ -51,14 +58,14 @@ const EmailForm = ({ material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="邮箱"
+            placeholder={t('login.emialPlaceholder')}
           />
         )}
       </FormItem>
       <FormItem className="mb-0 enter-y">
         <FormItem<FieldType>
           name="captcha"
-          rules={[{ required: true, message: '请输入邮箱验证码' }]}
+          rules={[{ required: true, message: t('login.requiredCaptchaReg') }]}
           className="inline-block w[60%]"
         >
           {material ? (
@@ -70,7 +77,7 @@ const EmailForm = ({ material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="邮箱验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           ) : (
             <Input
@@ -81,18 +88,20 @@ const EmailForm = ({ material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="邮箱验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           )}
         </FormItem>
         <CountDownButton
           className="inline-block  ml[8px]"
           style={{ width: 'calc(40% - 8px)' }}
+          defaultText={t('login.getCaptcha')}
+          setText={(seconds) => `${seconds}s${t('login.getAgain')}`}
         />
       </FormItem>
       <FormItem className="enter-y">
         <Button block type="primary" htmlType="submit">
-          登录
+          {t('login.loginBtn')}
         </Button>
       </FormItem>
     </Form>

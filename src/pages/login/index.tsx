@@ -1,4 +1,5 @@
 import DarkTheme from '@/components/DarkTheme';
+import Translate from '@/components/Translate/indedx';
 
 import AntDesignLogin from './AntDesign';
 import MaterialDesignLogin from './MaterialDesign';
@@ -13,7 +14,7 @@ const Login = () => {
       <div className="absolute top-2 right-4 z-1">
         <div className="w-[100]"></div>
         <DarkTheme />
-        <div className="w-[80]"></div>
+        <Translate />
       </div>
       {loginStyle === LoginStyleEnum.ant ? (
         <AntDesignLogin />

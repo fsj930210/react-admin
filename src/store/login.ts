@@ -27,7 +27,7 @@ interface LoginState {
 }
 
 const useLoginStore = create<LoginState>()((set) => ({
-  loginStyle: LoginStyleEnum.material,
+  loginStyle: LoginStyleEnum.modal,
   loginPage: LoginPageEnum.login,
   changeLoginStyle: (style) => set(() => ({ loginStyle: style })),
   changeLoginPage: (page) => set(() => ({ loginPage: page })),

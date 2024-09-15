@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import { Button, Layout, Space } from 'antd';
 
 import DarkTheme from '@/components/DarkTheme';
+import Translate from '@/components/Translate/indedx';
 
 import Breadcrumb from './components/Breadcrumb';
 import FullScreen from './components/FullScreen';
@@ -44,6 +45,7 @@ const AppHeader = () => {
         <Space size={[10, 0]}>
           <GlobalSearch />
           <DarkTheme />
+          <Translate />
           <FullScreen />
           <Notification />
           <UserCenter />

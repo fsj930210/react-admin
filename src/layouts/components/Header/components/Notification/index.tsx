@@ -1,22 +1,25 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 import { Badge, Popover, Tabs, TabsProps } from 'antd';
 
 import NotificationList from './components/NotificationList';
 import styles from './inde.module.css';
-const items: TabsProps['items'] = [
-  {
-    key: '1',
-    label: '待办',
-    children: <NotificationList todo />,
-  },
-  {
-    key: '2',
-    label: '全部',
-    children: <NotificationList />,
-  },
-];
 
 const Notification = () => {
+  const { t } = useTranslation();
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: t('notification.todo'),
+      children: <NotificationList todo />,
+    },
+    {
+      key: '2',
+      label: t('notification.all'),
+      children: <NotificationList />,
+    },
+  ];
   const Content = (
     <Tabs items={items} className={styles['notification-tabs']} />
   );

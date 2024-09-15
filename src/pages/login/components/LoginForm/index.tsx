@@ -1,5 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 import { Form, Input, Button, Checkbox, Row } from 'antd';
+import { RuleObject } from 'antd/es/form';
 
 import MaterialInput from '@/components/Material/Input';
 
@@ -21,6 +24,7 @@ const FormItem = Form.Item;
 const Password = Input.Password;
 
 const LoginForm = ({ switchPage, material }: FormPageProps) => {
+  const { t } = useTranslation();
   const { goHome } = useGoto();
   const [form] = Form.useForm<FieldType>();
   const onFinish = (values: FieldType) => {
@@ -35,10 +39,11 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: t('login.requiredUsernameReg'),
           },
           {
-            validator: validateUsername,
+            validator: (_rule: RuleObject, value: string) =>
+              validateUsername(_rule, value, t('login.usernameReg')),
           },
         ]}
         className="enter-y"
@@ -46,7 +51,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
         {material ? (
           <MaterialInput
             allowClear
-            placeholder="用户名"
+            placeholder={t('login.usernamePlaceholder')}
             prefix={
               <Icon
                 icon="lucide:user"
@@ -64,7 +69,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="用户名"
+            placeholder={t('login.usernamePlaceholder')}
           />
         )}
       </FormItem>
@@ -73,10 +78,11 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: t('login.requiredPasswordReg'),
           },
           {
-            validator: validatePassword,
+            validator: (_rule: RuleObject, value: string) =>
+              validatePassword(_rule, value, t('login.passwordReg')),
           },
         ]}
         className="enter-y"
@@ -90,7 +96,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="密码"
+            placeholder={t('login.passwordPlaceholder')}
           />
         ) : (
           <Password
@@ -101,7 +107,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="密码"
+            placeholder={t('login.passwordPlaceholder')}
           />
         )}
       </FormItem>
@@ -111,7 +117,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
           rules={[
             {
               required: true,
-              message: '请输入验证码',
+              message: t('login.requiredPasswordReg'),
             },
           ]}
           className="inline-block w[60%]"
@@ -125,7 +131,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           ) : (
             <Input
@@ -136,7 +142,7 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           )}
         </FormItem>
@@ -157,30 +163,30 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
           valuePropName="checked"
           className="inline-block w[50%] mb-0"
         >
-          <Checkbox>7天内免登录</Checkbox>
+          <Checkbox>7{t('login.remember')}</Checkbox>
         </FormItem>
         <a
           className="inline-block w[50%] p-0 text-right border-none text-[var(--ant-color-link)]"
           onClick={() => switchPage?.(LoginPageEnum.reset_password)}
         >
-          忘记密码？
+          {t('login.forget')}
         </a>
       </Row>
       <Row className="enter-y">
         <Button block type="primary" htmlType="submit">
-          登录
+          {t('login.loginBtn')}
         </Button>
       </Row>
       <Row className="enter-y">
         <ThirdForm />
       </Row>
       <Row className="enter-y justify-center">
-        还没有账号？去
+        {t('login.toRegister')}
         <a
           onClick={() => switchPage?.(LoginPageEnum.register)}
           className="text-[var(--ant-color-link)]"
         >
-          注册账号
+          {t('login.registerBtn')}
         </a>
       </Row>
     </Form>

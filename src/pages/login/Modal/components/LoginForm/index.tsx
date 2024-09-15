@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Form, Button, Checkbox, Row, Col, Modal } from 'antd';
+import { RuleObject } from 'antd/es/form';
 import SliderCaptcha from 'rc-slider-captcha';
 
 import MaterialInput from '@/components/Material/Input';
@@ -24,6 +26,7 @@ const FormItem = Form.Item;
 
 const LoginForm = ({ switchPage }: FormPageProps) => {
   const { goHome } = useGoto();
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm<FieldType>();
   const onFinish = (values: FieldType) => {
@@ -46,36 +49,46 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
   };
   return (
     <Form form={form} onFinish={onFinish}>
-      <h2 className="mb-[var(--ant-form-item-margin-bottom)] enter-x">登录</h2>
+      <h2 className="mb-[var(--ant-form-item-margin-bottom)] enter-x">
+        {t('login.loginTitle')}
+      </h2>
       <FormItem<FieldType>
         name="username"
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: t('login.requiredUsernameReg'),
           },
           {
-            validator: validateUsername,
+            validator: (_rule: RuleObject, value: string) =>
+              validateUsername(_rule, value, t('login.usernameReg')),
           },
         ]}
         className="enter-x"
       >
-        <MaterialInput variant="standard" placeholder="用户名" />
+        <MaterialInput
+          variant="standard"
+          placeholder={t('login.usernamePlaceholder')}
+        />
       </FormItem>
       <FormItem<FieldType>
         name="password"
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: t('login.requiredPasswordReg'),
           },
           {
-            validator: validatePassword,
+            validator: (_rule: RuleObject, value: string) =>
+              validatePassword(_rule, value, t('login.passwordReg')),
           },
         ]}
         className="enter-x"
       >
-        <MaterialInput.Password variant="standard" placeholder="密码" />
+        <MaterialInput.Password
+          variant="standard"
+          placeholder={t('login.passwordPlaceholder')}
+        />
       </FormItem>
       <Row
         className="enter-x mb-[var(--ant-form-item-margin-bottom)]"
@@ -86,18 +99,18 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
           valuePropName="checked"
           className="inline-block w[50%] mb-0"
         >
-          <Checkbox>7天内免登录</Checkbox>
+          <Checkbox>7{t('login.remember')}</Checkbox>
         </FormItem>
         <a
           className="inline-block w[50%] p-0 text-right border-none text-[var(--ant-color-link)]"
           onClick={() => switchPage?.(LoginPageEnum.reset_password)}
         >
-          忘记密码？
+          {t('login.forget')}
         </a>
       </Row>
       <Row className="enter-x mb-[var(--ant-form-item-margin-bottom)]">
         <Button block type="primary" htmlType="submit">
-          登录
+          {t('login.loginBtn')}
         </Button>
       </Row>
       <Row className="enter-x justify-between" gutter={2}>
@@ -106,7 +119,7 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
             className="w-full"
             onClick={() => switchPage?.(LoginPageEnum.email)}
           >
-            邮箱登录
+            {t('login.emailLogin')}
           </Button>
         </Col>
         <Col span={11}>
@@ -114,7 +127,7 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
             className="w-full"
             onClick={() => switchPage?.(LoginPageEnum.qr_code)}
           >
-            二维码登录
+            {t('login.QRCodeLogin')}
           </Button>
         </Col>
       </Row>
@@ -122,18 +135,18 @@ const LoginForm = ({ switchPage }: FormPageProps) => {
         <ThirdForm />
       </Row>
       <Row className="enter-x justify-center">
-        还没有账号？去
+        {t('login.toRegister')}
         <a
           onClick={() => switchPage?.(LoginPageEnum.register)}
           className="text-[var(--ant-color-link)]"
         >
-          注册账号
+          {t('login.registerBtn')}
         </a>
       </Row>
       <Modal
         open={visible}
         onCancel={() => setVisible(false)}
-        title="安全验证"
+        title={t('login.securityVerification')}
         footer={false}
         centered
         width={368}

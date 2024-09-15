@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Tabs, Typography } from 'antd';
 
 import AppLogo from '@/components/AppLogo';
@@ -19,21 +21,22 @@ type LoginPageProps = {
   material?: boolean;
 };
 const LoginPage = ({ material }: LoginPageProps) => {
+  const { t } = useTranslation();
   const { loginPage, changeLoginPage } = useLoginStore();
   const items = [
     {
       key: '1',
-      label: '密码登录',
+      label: t('login.passwordLogin'),
       children: <LoginForm switchPage={changeLoginPage} material={material} />,
     },
     {
       key: '2',
-      label: '验证码登录',
+      label: t('login.emailLogin'),
       children: <EmailForm switchPage={changeLoginPage} material={material} />,
     },
     {
       key: '3',
-      label: '二维码登录',
+      label: t('login.QRCodeLogin'),
       children: <QRCodeForm />,
     },
   ];
@@ -45,16 +48,16 @@ const LoginPage = ({ material }: LoginPageProps) => {
         <AppLogo animate showTitle className="justify-center" />
         <div>
           <Title className="my-[20px] text-[28px]" style={{ color: '#ffffff' }}>
-            开箱即用的React中后台管理系统
+            {t('login.pageTitle')}
           </Title>
           <Paragraph>
             <div className="text-white">
-              前端技术栈：vite、react、react-router、antd5、zustand等
+              {t('login.feSkills')} vite、react、react-router、antd5、zustand
             </div>
           </Paragraph>
           <Paragraph>
             <div className="text-white">
-              后端技术栈：nestjs、typeorm、redis、primsa等
+              {t('login.beSkills')} nestjs、typeorm、redis、primsa等
             </div>
           </Paragraph>
         </div>
@@ -68,10 +71,10 @@ const LoginPage = ({ material }: LoginPageProps) => {
           <div className="w-[420px]">
             <h2 className="mb-[14px] enter-y">
               {loginPage === LoginPageEnum.login
-                ? '登录'
+                ? t('login.loginTitle')
                 : loginPage === LoginPageEnum.register
-                  ? '注册'
-                  : '重置密码'}
+                  ? t('login.registerTitle')
+                  : t('login.resetPasswordTitle')}
             </h2>
             {loginPage === LoginPageEnum.login ? (
               <Tabs

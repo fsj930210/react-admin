@@ -14,13 +14,9 @@ const LoginModal = () => {
     <div className="bg-[var(--ant-color-primary-bg)] w-full h-full relative">
       <div className={styles['login-box']}>
         <div className="flex items-center justify-center">
-          <img
-            src="/images/frontend-engineer.svg"
-            className="h-[416px]"
-            alt=""
-          />
+          <img src="/images/frontend-engineer.svg" className="h-[340]" alt="" />
         </div>
-        <div className="w-[370px]">
+        <div className="flex-1">
           {loginPage === LoginPageEnum.login ? (
             <LoginForm switchPage={changeLoginPage} />
           ) : null}

@@ -9,11 +9,11 @@ const chartroomRouter: IRouteObject[] = [
   {
     path: '/chatroom',
     meta: {
-      title: '聊天室',
+      title: 'chatroom',
       auth: true,
       menu: true,
       order: 16,
-      icon: 'my-icon:chatroom',
+      icon: 'ra-icon:chatroom',
     },
     element: (
       <LazyLoadComponent Component={lazy(() => import('@/pages/chatroom'))} />

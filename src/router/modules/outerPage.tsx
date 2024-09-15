@@ -11,7 +11,7 @@ const outerPageRouter: IRouteObject[] = [
   {
     path: '/outerPage',
     meta: {
-      title: '外部页面',
+      title: 'outerPage',
       icon: 'carbon:link',
       auth: true,
       menu: true,
@@ -24,7 +24,7 @@ const outerPageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '内嵌',
+          title: 'outerPageIframe',
           icon: 'material-symbols-light:iframe-outline',
         },
         element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
@@ -41,7 +41,7 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: 'nestjs文档',
+              title: 'nestjsIframe',
               icon: 'simple-icons:nestjs',
             },
           },
@@ -55,7 +55,7 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: 'react文档',
+              title: 'reactIframe',
               icon: 'carbon:logo-react',
             },
           },
@@ -66,7 +66,7 @@ const outerPageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '外链',
+          title: 'outerLink',
           icon: 'ant-design:export-outlined',
         },
         element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
@@ -76,7 +76,7 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: 'antd文档',
+              title: 'antdOuterLink',
               icon: 'ant-design:ant-design-outlined',
             },
           },
@@ -85,7 +85,7 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '项目github',
+              title: 'projectGithub',
               icon: 'ant-design:github-outlined',
             },
           },

@@ -9,7 +9,7 @@ const dataViewRouter: IRouteObject[] = [
   {
     path: '/dataView',
     meta: {
-      title: '数据大屏',
+      title: 'dataView',
       auth: true,
       menu: true,
       order: 2,

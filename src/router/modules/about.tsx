@@ -9,7 +9,7 @@ const aboutRouter: IRouteObject[] = [
   {
     path: '/about',
     meta: {
-      title: '关于项目',
+      title: 'about',
       auth: true,
       menu: true,
       order: 18,

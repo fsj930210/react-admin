@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 
 import type { IRouteObject, MenuItem } from '@/types/custom-types';
@@ -5,6 +7,7 @@ import type { IRouteObject, MenuItem } from '@/types/custom-types';
 import routes from '@/router/routes';
 
 function useMenu() {
+  const { t } = useTranslation();
   const menuItems: MenuItem[] = [];
   function formatRoutes(
     routes: IRouteObject[], // 路由数组也会是路由嵌套children
@@ -18,7 +21,7 @@ function useMenu() {
       let menuItem: MenuItem | null = null;
       if (meta?.menu) {
         menuItem = {
-          label: meta.title as string,
+          label: t(`menu.${meta.title as string}`),
           // key: meta.key as string,
           // 如果是菜单用父菜单的key加当前路由的path组成，这样既能是唯一的也是当前菜单的完整路由
           key: parentRoute?.meta?.menu

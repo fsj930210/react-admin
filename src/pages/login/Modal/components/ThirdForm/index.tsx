@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
 
 const ThirdForm = () => {
+  const { t } = useTranslation();
   return (
     <>
       <Divider
@@ -10,7 +13,7 @@ const ThirdForm = () => {
           fontSize: 'var(--ant-font-size-sm)',
         }}
       >
-        快捷登录
+        {t('login.quickLogin')}
       </Divider>
       <div className="w-full flex justify-between items-center">
         <span className=" cursor-pointer text-[18px] hover:text-[var(--ant-color-link)]">

@@ -1,5 +1,5 @@
 import { useCountDown } from 'ahooks';
-import { Button } from 'antd';
+import { Button, DatePicker } from 'antd';
 
 import useCounterStore from '@/store/counter';
 
@@ -21,6 +21,7 @@ const Home = () => {
         {milliseconds} milliseconds until {new Date().getFullYear()}-12-31
         23:59:59
       </p>
+      <DatePicker />
     </div>
   );
 };

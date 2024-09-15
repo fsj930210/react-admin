@@ -1,5 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 import { Form, Input, Button, Row } from 'antd';
+import { RuleObject } from 'antd/es/form';
 
 import CountDownButton from '@/components/CountDownButton';
 import MaterialInput from '@/components/Material/Input';
@@ -16,6 +19,7 @@ type FieldType = {
 const FormItem = Form.Item;
 
 const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm<FieldType>();
   const onFinish = (values: FieldType) => {
     console.log('Success:', values);
@@ -29,10 +33,11 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: t('login.requiredUsernameReg'),
           },
           {
-            validator: validateUsername,
+            validator: (_rule: RuleObject, value: string) =>
+              validateUsername(_rule, value, t('login.usernameReg')),
           },
         ]}
         className="enter-y"
@@ -46,7 +51,7 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="用户名"
+            placeholder={t('login.usernamePlaceholder')}
           />
         ) : (
           <Input
@@ -57,7 +62,7 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="用户名"
+            placeholder={t('login.usernamePlaceholder')}
           />
         )}
       </FormItem>
@@ -66,11 +71,11 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入邮箱',
+            message: t('login.requiredEmailReg'),
           },
           {
             type: 'email',
-            message: '请输入正确的邮箱',
+            message: t('login.emailReg'),
           },
         ]}
         className="enter-y"
@@ -84,7 +89,7 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="邮箱"
+            placeholder={t('login.emialPlaceholder')}
           />
         ) : (
           <Input
@@ -95,14 +100,14 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="邮箱"
+            placeholder={t('login.emialPlaceholder')}
           />
         )}
       </FormItem>
       <Row className="enter-y">
         <FormItem<FieldType>
           name="captcha"
-          rules={[{ required: true, message: '请输入邮箱验证码' }]}
+          rules={[{ required: true, message: t('login.requiredCaptchaReg') }]}
           className="inline-block w[60%]"
         >
           {material ? (
@@ -114,7 +119,7 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="邮箱验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           ) : (
             <Input
@@ -125,23 +130,25 @@ const ResetPasswordForm = ({ switchPage, material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="邮箱验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           )}
         </FormItem>
         <CountDownButton
           className="inline-block  ml[8px]"
           style={{ width: 'calc(40% - 8px)' }}
+          defaultText={t('login.getCaptcha')}
+          setText={(seconds) => `${seconds}s ${t('login.getAgain')}`}
         />
       </Row>
       <FormItem className="enter-y">
         <Button block type="primary" htmlType="submit">
-          重置
+          {t('login.resetBtn')}
         </Button>
       </FormItem>
       <FormItem className="enter-y">
         <Button block onClick={() => switchPage?.(LoginPageEnum.login)}>
-          返回登录
+          {t('login.back')}
         </Button>
       </FormItem>
     </Form>

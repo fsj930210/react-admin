@@ -11,7 +11,7 @@ const componentRouter: IRouteObject[] = [
   {
     path: '/component',
     meta: {
-      title: '组件',
+      title: 'component',
       icon: 'lucide:component',
       auth: true,
       menu: true,
@@ -29,7 +29,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: 'clickOutside组件',
+          title: 'clickOutsideComponent',
           icon: 'material-symbols-light:drag-click-rounded',
         },
       },
@@ -43,7 +43,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '容器组件',
+          title: 'containerComponent',
           icon: 'carbon:web-services-container',
         },
       },
@@ -57,7 +57,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '可拖拽弹窗组件',
+          title: 'modalComponent',
           icon: 'material-symbols-light:dialogs-outline-rounded',
         },
       },
@@ -71,8 +71,8 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '车牌组件',
-          icon: 'my-icon:plate',
+          title: 'plateComponent',
+          icon: 'ra-icon:plate',
         },
       },
       {
@@ -85,7 +85,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '表格组件',
+          title: 'tableComponent',
           icon: 'ant-design:table-outlined',
         },
       },
@@ -99,7 +99,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '穿梭框组件',
+          title: 'transferComponent',
           icon: 'lucide:arrow-left-right',
         },
       },
@@ -113,7 +113,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '树组件',
+          title: 'treeComponent',
           icon: 'carbon:tree-view',
         },
       },
@@ -127,7 +127,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '上传组件',
+          title: 'uploadComponent',
           icon: 'lucide:upload',
         },
       },

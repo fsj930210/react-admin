@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Form, Button, Checkbox, Row, Col } from 'antd';
 import { RuleObject } from 'antd/es/form';
 
@@ -21,6 +23,7 @@ const FormItem = Form.Item;
 const Password = MaterialInput.Password;
 
 const RegisterForm = ({ switchPage }: FormPageProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm<FieldType>();
   const password = Form.useWatch('password', form);
   const onFinish = (values: FieldType) => {
@@ -30,49 +33,63 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
 
   return (
     <Form form={form} onFinish={onFinish}>
-      <h2 className="mb-[var(--ant-form-item-margin-bottom)] enter-x">注册</h2>
+      <h2 className="mb-[var(--ant-form-item-margin-bottom)] enter-x">
+        {t('login.registerTitle')}
+      </h2>
       <FormItem<FieldType>
         name="username"
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: t('login.requiredUsernameReg'),
           },
           {
-            validator: validateUsername,
+            validator: (_rule: RuleObject, value: string) =>
+              validateUsername(_rule, value, t('login.usernameReg')),
           },
         ]}
         className="enter-x"
       >
-        <MaterialInput variant="standard" placeholder="用户名" />
+        <MaterialInput
+          variant="standard"
+          placeholder={t('login.usernamePlaceholder')}
+        />
       </FormItem>
       <FormItem<FieldType>
         name="email"
         rules={[
           {
             required: true,
-            message: '请输入邮箱',
+            message: t('login.requiredEmailReg'),
           },
           {
             type: 'email',
-            message: '请输入正确的邮箱',
+            message: t('login.emailReg'),
           },
         ]}
         className="enter-x"
       >
-        <MaterialInput variant="standard" placeholder="邮箱" />
+        <MaterialInput
+          variant="standard"
+          placeholder={t('login.emialPlaceholder')}
+        />
       </FormItem>
       <Row className="enter-x relative">
         <FormItem<FieldType>
           name="captcha"
-          rules={[{ required: true, message: '请输入邮箱验证码' }]}
+          rules={[{ required: true, message: t('login.requiredCaptchaReg') }]}
           className="w-full"
         >
-          <MaterialInput variant="standard" placeholder="邮箱验证码" />
+          <MaterialInput
+            variant="standard"
+            placeholder={t('login.captchaPlaceholder')}
+          />
         </FormItem>
         <CountDownButton
           type="link"
-          className="p-0 line-height-[1] absolute right-0 bottom-[18px]"
+          className="p-0 line-height-[1] absolute right-0 bottom-[18px] z-2"
+          defaultText={t('login.getCaptcha')}
+          setText={(seconds) => `${seconds}s${t('login.getAgain')}`}
         />
       </Row>
       <FormItem<FieldType>
@@ -80,15 +97,19 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: t('login.requiredPasswordReg'),
           },
           {
-            validator: validatePassword,
+            validator: (_rule: RuleObject, value: string) =>
+              validatePassword(_rule, value, t('login.passwordReg')),
           },
         ]}
         className="enter-x"
       >
-        <Password variant="standard" placeholder="密码" />
+        <Password
+          variant="standard"
+          placeholder={t('login.passwordPlaceholder')}
+        />
       </FormItem>
       <Row className="enter-x mb-[var(--ant-form-item-margin-bottom)]">
         <Col span={24}>
@@ -100,12 +121,12 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入确认密码',
+            message: t('login.requiredConfirmPasswordReg'),
           },
           {
             validator: (_rule: RuleObject, value: string) => {
               if (value && value !== password) {
-                return Promise.reject('两次密码不一致');
+                return Promise.reject(t('login.passwordNotSame'));
               }
               return Promise.resolve();
             },
@@ -113,7 +134,10 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         ]}
         className="enter-x"
       >
-        <Password variant="standard" placeholder="确认密码" />
+        <Password
+          variant="standard"
+          placeholder={t('login.confirmPasswordPlaceholder')}
+        />
       </FormItem>
       <FormItem
         name="agreement"
@@ -122,20 +146,31 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请勾选注册协议及隐私政策',
+            message: t('login.requiredCheck'),
           },
         ]}
       >
-        <Checkbox>同意注册协议及隐私政策</Checkbox>
+        <Checkbox>
+          {t('login.agree')}
+          <a className="text-[var(--ant-color-link)]">
+            《{t('login.registerAgreement')}》
+          </a>
+          {t('login.and')}
+          <a className="text-[var(--ant-color-link)]">
+            《{t('login.privacyPolicy')}》
+          </a>
+        </Checkbox>
       </FormItem>
       <FormItem className="enter-x">
         <Button block type="primary" htmlType="submit">
-          注册
+          {t('login.registerBtn')}
         </Button>
       </FormItem>
       <Row className="enter-x justify-center">
-        已有账号？去
-        <a onClick={() => switchPage?.(LoginPageEnum.login)}>登录</a>
+        {t('login.toLogin')}
+        <a onClick={() => switchPage?.(LoginPageEnum.login)}>
+          {t('login.loginBtn')}
+        </a>
       </Row>
     </Form>
   );

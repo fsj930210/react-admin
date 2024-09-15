@@ -11,7 +11,7 @@ const overviewRouter: IRouteObject[] = [
   {
     path: '/overview',
     meta: {
-      title: '概览',
+      title: 'overview',
       auth: true,
       menu: true,
       order: 1,
@@ -29,7 +29,7 @@ const overviewRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '工作台',
+          title: 'workspace',
           icon: 'carbon:workspace',
         },
       },
@@ -43,7 +43,7 @@ const overviewRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '仪表盘',
+          title: 'dashboard',
           icon: 'ri:dashboard-3-line',
         },
       },

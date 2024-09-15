@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 
 import styles from '../index.module.css';
 
 const SearchContent = () => {
+  const { t } = useTranslation();
   return (
     <div className={styles['global-search-content']}>
-      <div className="px-[12px] font-bold">最近搜索</div>
+      <div className="px-[12px] font-bold">{t('search.searchHistory')}</div>
       <ul className="p-[12px] max-h-[353px] overflow-y-auto">
         <li className={styles['global-search-content-item']}>
           <div>
@@ -18,7 +21,7 @@ const SearchContent = () => {
         </li>
       </ul>
       {/* <div className="w-full h-full min-h-[100px] flex-center">
-      没有搜索历史
+      {t('search.searchHistoryEmpty')}
     </div> */}
     </div>
   );

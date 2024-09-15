@@ -11,7 +11,7 @@ const pageRouter: IRouteObject[] = [
   {
     path: '/page',
     meta: {
-      title: '页面',
+      title: 'page',
       auth: true,
       menu: true,
       order: 6,
@@ -19,20 +19,6 @@ const pageRouter: IRouteObject[] = [
     },
     element: <RedirectRouteView to="/page/graphqlTodoList" />,
     children: [
-      {
-        path: 'bossJDSpider',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/bossJDSpider'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: 'boss直聘招聘爬虫',
-          icon: 'mdi:spider-outline',
-        },
-      },
       {
         path: 'css',
         element: (
@@ -43,7 +29,7 @@ const pageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: 'css',
+          title: 'cssPage',
           icon: 'ri:css3-line',
         },
       },
@@ -52,7 +38,7 @@ const pageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '缺省页',
+          title: 'errorPage',
           icon: 'mdi:lightbulb-error-outline',
         },
         children: [
@@ -66,7 +52,7 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '403',
+              title: 'errorPage403',
               icon: 'carbon:error',
             },
           },
@@ -80,7 +66,7 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '404',
+              title: 'errorPage404',
               icon: 'tabler:error-404',
             },
           },
@@ -94,46 +80,18 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '500',
+              title: 'errorPage500',
               icon: 'carbon:data-error',
             },
           },
         ],
       },
       {
-        path: 'gifCompression',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/gifCompression'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: 'gif压缩工具',
-          icon: 'ant-design:file-gif-outlined',
-        },
-      },
-      {
-        path: 'graphqlTodoList',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/gifCompression'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: 'graphqlTodoList',
-          icon: 'lucide:list-todo',
-        },
-      },
-      {
         path: 'list',
         meta: {
           auth: true,
           menu: true,
-          title: '列表',
+          title: 'listPage',
           icon: 'ri:list-view',
         },
         element: <RedirectRouteView to="/page/list/cardList" />,
@@ -149,12 +107,12 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '卡片列表',
+              title: 'cardListPage',
               icon: 'material-symbols-light:featured-play-list-outline',
             },
           },
           {
-            path: 'defaultList',
+            path: 'normalList',
             element: (
               <LazyLoadComponent
                 Component={lazy(() => import('@/pages/page/list/defaultList'))}
@@ -163,53 +121,11 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: '标准列表',
+              title: 'normalListPage',
               icon: 'ri:file-list-line',
             },
           },
         ],
-      },
-      {
-        path: 'nearBySearch',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/nearBySearch'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '附近充电宝搜索',
-          icon: 'material-symbols-light:nearby',
-        },
-      },
-      {
-        path: 'reactPlayground',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/reactPlayground'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: 'reactPlayground',
-          icon: 'fluent:dual-screen-pagination-24-regular',
-        },
-      },
-      {
-        path: 'shortUrl',
-        element: (
-          <LazyLoadComponent
-            Component={lazy(() => import('@/pages/page/shortUrl'))}
-          />
-        ),
-        meta: {
-          auth: true,
-          menu: true,
-          title: '短链服务',
-          icon: 'carbon:url',
-        },
       },
     ],
   },

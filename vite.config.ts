@@ -25,8 +25,8 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           {
             dir: resolve(__dirname, 'src/assets/icons'),
             monotone: false,
-            prefix: 'my-icon',
-            provider: 'my-icon',
+            prefix: 'ra-icon',
+            provider: 'ra-icon',
           },
         ],
       }),

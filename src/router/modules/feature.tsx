@@ -11,7 +11,7 @@ const featureRouter: IRouteObject[] = [
   {
     path: '/feature',
     meta: {
-      title: '功能',
+      title: 'feature',
       icon: 'mdi:feature-highlight',
       auth: true,
       menu: true,
@@ -29,7 +29,7 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '剪切板',
+          title: 'clipboard',
           icon: 'lucide:clipboard-copy',
         },
       },
@@ -57,7 +57,7 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '文件下载',
+          title: 'fileDownload',
           icon: 'ri:file-download-line',
         },
       },
@@ -71,7 +71,7 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '截图',
+          title: 'screenshot',
           icon: 'ri:screenshot-line',
         },
       },

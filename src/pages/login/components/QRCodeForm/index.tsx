@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Button, QRCode, theme } from 'antd';
 
 import { FormPageProps, LoginPageEnum } from '@/store/login';
@@ -15,13 +17,14 @@ const QRCodeForm = ({
   showTitle,
 }: QRCodeFormProps) => {
   const { token } = useToken();
+  const { t } = useTranslation();
   return (
     <div className="flex-center flex-col">
       {showTitle ? (
         <h2
           className={`mb-[var(--ant-form-item-margin-bottom)] ${animateClassName}`}
         >
-          二维码登录
+          {t('login.QRCodeLogin')}
         </h2>
       ) : null}
 
@@ -36,7 +39,7 @@ const QRCodeForm = ({
         />
       </div>
       <div className={`mt-[20px] ${animateClassName}`}>
-        扫描二维码后，点击确定即可登录成功
+        {t('login.QRCodeConfirm')}
       </div>
       {showBackButton ? (
         <Button
@@ -44,7 +47,7 @@ const QRCodeForm = ({
           block
           onClick={() => switchPage?.(LoginPageEnum.login)}
         >
-          返回登录
+          {t('login.back')}
         </Button>
       ) : null}
     </div>

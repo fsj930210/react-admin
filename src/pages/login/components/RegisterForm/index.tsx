@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@iconify/react';
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import { RuleObject } from 'antd/es/form';
@@ -22,6 +24,7 @@ const FormItem = Form.Item;
 const Password = Input.Password;
 
 const RegisterForm = ({ switchPage, material }: FormPageProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm<FieldType>();
   const password = Form.useWatch('password', form);
   const onFinish = (values: FieldType) => {
@@ -36,10 +39,11 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: t('login.requiredUsernameReg'),
           },
           {
-            validator: validateUsername,
+            validator: (_rule: RuleObject, value: string) =>
+              validateUsername(_rule, value, t('login.usernameReg')),
           },
         ]}
         className="enter-y"
@@ -53,7 +57,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="用户名"
+            placeholder={t('login.usernamePlaceholder')}
           />
         ) : (
           <Input
@@ -64,7 +68,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="用户名"
+            placeholder={t('login.usernamePlaceholder')}
           />
         )}
       </FormItem>
@@ -73,11 +77,11 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入邮箱',
+            message: t('login.requiredEmailReg'),
           },
           {
             type: 'email',
-            message: '请输入正确的邮箱',
+            message: t('login.emailReg'),
           },
         ]}
         className="enter-y"
@@ -91,7 +95,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="邮箱"
+            placeholder={t('login.emialPlaceholder')}
           />
         ) : (
           <Input
@@ -102,14 +106,14 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="邮箱"
+            placeholder={t('login.emialPlaceholder')}
           />
         )}
       </FormItem>
       <Row className="enter-y">
         <FormItem<FieldType>
           name="captcha"
-          rules={[{ required: true, message: '请输入邮箱验证码' }]}
+          rules={[{ required: true, message: t('login.requiredCaptchaReg') }]}
           className="inline-block w[60%]"
         >
           {material ? (
@@ -121,7 +125,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="邮箱验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           ) : (
             <Input
@@ -132,13 +136,15 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                   color="var(--ant-color-icon)"
                 />
               }
-              placeholder="邮箱验证码"
+              placeholder={t('login.captchaPlaceholder')}
             />
           )}
         </FormItem>
         <CountDownButton
           style={{ width: 'calc(40% - 8px)' }}
           className="inline-block  ml[8px]"
+          defaultText={t('login.getCaptcha')}
+          setText={(seconds) => `${seconds}s${t('login.getAgain')}`}
         />
       </Row>
       <FormItem<FieldType>
@@ -146,10 +152,11 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入密码',
+            message: t('login.requiredPasswordReg'),
           },
           {
-            validator: validatePassword,
+            validator: (_rule: RuleObject, value: string) =>
+              validatePassword(_rule, value, t('login.passwordReg')),
           },
         ]}
         className="enter-y"
@@ -163,7 +170,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="密码"
+            placeholder={t('login.passwordPlaceholder')}
           />
         ) : (
           <Password
@@ -174,7 +181,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="密码"
+            placeholder={t('login.passwordPlaceholder')}
           />
         )}
       </FormItem>
@@ -188,12 +195,12 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请输入确认密码',
+            message: t('login.requiredConfirmPasswordReg'),
           },
           {
             validator: (_rule: RuleObject, value: string) => {
               if (value && value !== password) {
-                return Promise.reject('两次密码不一致');
+                return Promise.reject(t('login.passwordNotSame'));
               }
               return Promise.resolve();
             },
@@ -210,7 +217,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="确认密码"
+            placeholder={t('login.confirmPasswordPlaceholder')}
           />
         ) : (
           <Password
@@ -221,7 +228,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder="确认密码"
+            placeholder={t('login.confirmPasswordPlaceholder')}
           />
         )}
       </FormItem>
@@ -232,27 +239,33 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
         rules={[
           {
             required: true,
-            message: '请勾选注册协议及隐私政策',
+            message: t('login.requiredCheck'),
           },
         ]}
       >
         <Checkbox>
-          同意 <a className="text-[var(--ant-color-link)]">《注册协议》</a>及{' '}
-          <a className="text-[var(--ant-color-link)]">《隐私政策》</a>
+          {t('login.agree')}
+          <a className="text-[var(--ant-color-link)]">
+            《{t('login.registerAgreement')}》
+          </a>
+          {t('login.and')}
+          <a className="text-[var(--ant-color-link)]">
+            《{t('login.privacyPolicy')}》
+          </a>
         </Checkbox>
       </FormItem>
       <FormItem className="enter-y">
         <Button block type="primary" htmlType="submit">
-          注册
+          {t('login.registerBtn')}
         </Button>
       </FormItem>
       <Row className="enter-y justify-center">
-        已有账号？去
+        {t('login.toLogin')}
         <a
           onClick={() => switchPage?.(LoginPageEnum.login)}
           className="text-[var(--ant-color-link)]"
         >
-          登录
+          {t('login.loginBtn')}
         </a>
       </Row>
     </Form>

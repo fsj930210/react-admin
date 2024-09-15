@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 import { Form, Button, Row } from 'antd';
+import { RuleObject } from 'antd/es/form';
 
 import CountDownButton from '@/components/CountDownButton';
 import MaterialInput from '@/components/Material/Input';
@@ -15,6 +18,7 @@ type FieldType = {
 const FormItem = Form.Item;
 
 const ResetPasswordForm = ({ switchPage }: FormPageProps) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm<FieldType>();
   const onFinish = (values: FieldType) => {
     console.log('Success:', values);
@@ -24,60 +28,72 @@ const ResetPasswordForm = ({ switchPage }: FormPageProps) => {
   return (
     <Form form={form} onFinish={onFinish}>
       <h2 className="mb-[var(--ant-form-item-margin-bottom)] enter-x">
-        重置密码
+        {t('login.resetPasswordTitle')}
       </h2>
       <FormItem<FieldType>
         name="username"
         rules={[
           {
             required: true,
-            message: '请输入用户名',
+            message: t('login.requiredUsernameReg'),
           },
           {
-            validator: validateUsername,
+            validator: (_rule: RuleObject, value: string) =>
+              validateUsername(_rule, value, t('login.usernameReg')),
           },
         ]}
         className="enter-x"
       >
-        <MaterialInput variant="standard" placeholder="用户名" />
+        <MaterialInput
+          variant="standard"
+          placeholder={t('login.usernamePlaceholder')}
+        />
       </FormItem>
       <FormItem<FieldType>
         name="email"
         rules={[
           {
             required: true,
-            message: '请输入邮箱',
+            message: t('login.requiredEmailReg'),
           },
           {
             type: 'email',
-            message: '请输入正确的邮箱',
+            message: t('login.emailReg'),
           },
         ]}
         className="enter-x"
       >
-        <MaterialInput variant="standard" placeholder="邮箱" />
+        <MaterialInput
+          variant="standard"
+          placeholder={t('login.emialPlaceholder')}
+        />
       </FormItem>
       <Row className="enter-x relative">
         <FormItem<FieldType>
           name="captcha"
-          rules={[{ required: true, message: '请输入邮箱验证码' }]}
+          rules={[{ required: true, message: t('login.requiredCaptchaReg') }]}
           className="w-full"
         >
-          <MaterialInput variant="standard" placeholder="邮箱验证码" />
+          <MaterialInput
+            variant="standard"
+            placeholder={t('login.captchaPlaceholder')}
+          />
         </FormItem>
         <CountDownButton
           type="link"
-          className="p-0 line-height-[1] absolute right-0 bottom-[18px]"
+          className="p-0 line-height-[1] absolute right-0 bottom-[18px] z-2"
+          defaultText={t('login.getCaptcha')}
+          setText={(seconds) => `${seconds}s ${t('login.getAgain')}`}
         />
       </Row>
       <FormItem className="enter-x">
         <Button block type="primary" htmlType="submit">
-          重置
+          {t('login.resetBtn')}
         </Button>
       </FormItem>
       <FormItem className="enter-x">
         <Button block onClick={() => switchPage?.(LoginPageEnum.login)}>
-          返回登录
+          {t('login.back')}
         </Button>
       </FormItem>
     </Form>

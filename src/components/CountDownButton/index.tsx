@@ -24,7 +24,6 @@ const CountDownButton = ({
     interval,
   });
   const handleCountDown = () => {
-    console.log(222);
     setTargetDate(Date.now() + targetTime * 1000);
   };
   return (

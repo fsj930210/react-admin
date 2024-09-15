@@ -11,7 +11,7 @@ const chartsRouter: IRouteObject[] = [
   {
     path: '/charts',
     meta: {
-      title: '图表',
+      title: 'charts',
       auth: true,
       menu: true,
       order: 4,
@@ -30,8 +30,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '高德地图',
-          icon: 'my-icon:amap',
+          title: 'amap',
+          icon: 'ra-icon:amap',
         },
       },
       {
@@ -44,8 +44,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '百度地图',
-          icon: 'my-icon:bmap',
+          title: 'bmap',
+          icon: 'ra-icon:bmap',
         },
       },
       {
@@ -58,8 +58,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '谷歌地图',
-          icon: 'my-icon:google-map',
+          title: 'googleMap',
+          icon: 'ra-icon:google-map',
         },
       },
       {
@@ -67,8 +67,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: 'echarts图表',
-          icon: 'my-icon:echarts',
+          title: 'echarts',
+          icon: 'ra-icon:echarts',
         },
         element: <RedirectRouteView to="/charts/echarts/basic" />,
         children: [
@@ -83,8 +83,8 @@ const chartsRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: 'echarts基础图表',
-              icon: 'my-icon:echarts-basic',
+              title: 'echartsBasic',
+              icon: 'ra-icon:echarts-basic',
             },
           },
           {
@@ -97,8 +97,8 @@ const chartsRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: 'echarts高级图表',
-              icon: 'my-icon:echarts-advance',
+              title: 'echartsAdvance',
+              icon: 'ra-icon:echarts-advance',
             },
           },
           {
@@ -112,8 +112,8 @@ const chartsRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
-              title: 'echarts地图',
-              icon: 'my-icon:echarts-map',
+              title: 'echartsMap',
+              icon: 'ra-icon:echarts-map',
             },
           },
         ],

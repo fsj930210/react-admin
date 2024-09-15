@@ -11,7 +11,7 @@ const diskManagementRouter: IRouteObject[] = [
   {
     path: '/netdiskManagement',
     meta: {
-      title: '网盘管理',
+      title: 'netdiskManagement',
       icon: 'ant-design:cloud-server-outlined',
       auth: true,
       menu: true,
@@ -29,7 +29,7 @@ const diskManagementRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '网盘概览',
+          title: 'netdiskOverview',
           icon: 'arcticons:diskdigger-pro',
         },
       },
@@ -43,7 +43,7 @@ const diskManagementRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
-          title: '文件管理',
+          title: 'netdiskFile',
           icon: 'ri:file-cloud-line',
         },
       },

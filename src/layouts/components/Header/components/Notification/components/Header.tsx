@@ -1,13 +1,18 @@
+import { useTranslation } from 'react-i18next';
+
 type HeaderProps = {
   todo?: boolean;
 };
 
 const Header = ({ todo }: HeaderProps) => {
+  const { t } = useTranslation();
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h3>{todo ? '待办' : '消息中心'}</h3>
-        {todo ? <a>全部标记为已读</a> : null}
+        <h3>
+          {todo ? t('notification.todo') : t('notification.messageCenter')}
+        </h3>
+        {todo ? <a>{t('notification.clear')}</a> : null}
       </div>
     </div>
   );
