@@ -24,7 +24,7 @@ i18n
       backendOptions: [],
       cacheHitMode: 'refreshAndUpdateStore',
     },
-    debug: true,
+    // debug: true,
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,

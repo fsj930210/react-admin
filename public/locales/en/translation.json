@@ -113,6 +113,7 @@
     "treeComponent": "Tree",
     "uploadComponent": "Upload",
     "page": "Pages",
+    "cssPage": "CSS",
     "errorPage": "Fallback Page",
     "errorPage403": "403",
     "errorPage404": "404",

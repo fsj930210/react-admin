@@ -17,8 +17,12 @@ const diskManagementRouter: IRouteObject[] = [
       menu: true,
       order: 12,
     },
-    element: <RedirectRouteView to="/netdiskManagement/overview" />,
+
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/netdiskManagement/overview" />,
+      },
       {
         path: 'overview',
         element: (

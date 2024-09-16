@@ -142,6 +142,10 @@
   }
 }
 
+.ra-tabs-tab-icon {
+  margin-right: 4px;
+}
+
 .ra-tabs-top,
 .ra-tabs-bottom {
   flex-direction: column;

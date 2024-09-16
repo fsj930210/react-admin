@@ -58,6 +58,7 @@
     "i18next-chained-backend": "^4.6.2",
     "i18next-http-backend": "^2.6.1",
     "i18next-localstorage-backend": "^4.2.0",
+    "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "rc-motion": "^2.9.2",
     "rc-resize-observer": "^1.4.0",

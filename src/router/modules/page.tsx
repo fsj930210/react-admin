@@ -17,8 +17,12 @@ const pageRouter: IRouteObject[] = [
       order: 6,
       icon: 'ri:pages-line',
     },
-    element: <RedirectRouteView to="/page/graphqlTodoList" />,
+
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/page/css" />,
+      },
       {
         path: 'css',
         element: (

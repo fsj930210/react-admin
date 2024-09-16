@@ -17,8 +17,12 @@ const componentRouter: IRouteObject[] = [
       menu: true,
       order: 5,
     },
-    element: <RedirectRouteView to="/component/clickOutSide" />,
+
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/component/clickOutSide" />,
+      },
       {
         path: 'clickOutSide',
         element: (

@@ -17,8 +17,11 @@ const errorRouter: IRouteObject[] = [
       order: 3,
       icon: 'ra-icon:permissions',
     },
-    element: <RedirectRouteView to="/permissions/button" />,
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/permissions/button" />,
+      },
       {
         path: 'button',
         element: (

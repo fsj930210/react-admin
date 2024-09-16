@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 
 import { Icon } from '@iconify/react';
 import { Form, Input, Button, Checkbox, Row } from 'antd';
-import { RuleObject } from 'antd/es/form';
 
 import MaterialInput from '@/components/Material/Input';
 
@@ -10,8 +9,11 @@ import ThirdForm from '../ThirdForm';
 
 import { validatePassword, validateUsername } from '@/utils/validate';
 
+import type { FormPageProps } from '@/store/login';
+import type { RuleObject } from 'antd/lib/form';
+
 import useGoto from '@/hooks/useGoto';
-import { FormPageProps, LoginPageEnum } from '@/store/login';
+import { LoginPageEnum } from '@/store/login';
 
 type FieldType = {
   username: string;

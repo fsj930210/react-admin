@@ -7,6 +7,7 @@ type RedirectRouteViewProps = {
   to: string;
 };
 const RedirectRouteView = ({ to }: RedirectRouteViewProps) => {
+  console.log(to, 'to');
   return (
     <>
       <Navigate to={to} />

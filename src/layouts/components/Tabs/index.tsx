@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   DndContext,
@@ -25,6 +26,7 @@ import TabDropdown from './components/TabDropdown';
 import type { DragEndEvent } from '@dnd-kit/core';
 
 import './index.css';
+import useTabs from '@/layouts/hooks/useTabs';
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
   'data-node-key': string;
@@ -53,26 +55,24 @@ const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
 };
 
 const AppTabs: React.FC = () => {
-  const [items, setItems] = useState(
-    Array.from({ length: 30 }).map((_, index) => ({
-      key: `${index + 1}`,
-      label: `Tab${index + 1}`,
-      children: <></>,
-      closable: true,
-    })),
-  );
-  const [tabType, setTabType] = useState('trapezoid');
-  const [activeKey, setActiveKey] = useState('1');
+  const { tabItems, activeKey, setActiveKey, setTabItems } = useTabs();
+  const navigate = useNavigate();
+  const handleTabItemClick = (key: string) => {
+    if (key === activeKey) return;
+    setActiveKey(key);
+    navigate(key);
+  };
+  const [tabType, setTabType] = useState('brisk');
   const sensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
   });
 
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
-      setItems((prev) => {
-        const activeIndex = prev.findIndex((i) => i.key === active.id);
-        const overIndex = prev.findIndex((i) => i.key === over?.id);
-        return arrayMove(prev, activeIndex, overIndex);
+      setTabItems((prev) => {
+        const activeIndex = prev!.findIndex((i) => i.key === active.id);
+        const overIndex = prev!.findIndex((i) => i.key === over?.id);
+        return arrayMove(prev!, activeIndex, overIndex);
       });
     }
   };
@@ -80,7 +80,7 @@ const AppTabs: React.FC = () => {
     <div className="flex items-center justify-between h-[40px] bg-[var(--ant-color-bg-container)]">
       <Tabs
         hideAdd
-        items={items}
+        items={tabItems}
         activeKey={activeKey}
         tabPosition="top"
         more={{
@@ -93,6 +93,9 @@ const AppTabs: React.FC = () => {
             console.log(1);
           },
         }}
+        onTabClick={(activeKey) => {
+          handleTabItemClick(activeKey);
+        }}
         className="layout-tabs flex-1"
         onChange={(activeKey) => setActiveKey(activeKey)}
         renderTabBar={(tabBarProps, DefaultTabBar) => (
@@ -103,7 +106,7 @@ const AppTabs: React.FC = () => {
             modifiers={[restrictToHorizontalAxis]}
           >
             <SortableContext
-              items={items.map((i) => i.key)}
+              items={tabItems!.map((i) => i.key)}
               strategy={horizontalListSortingStrategy}
             >
               <DefaultTabBar {...tabBarProps}>

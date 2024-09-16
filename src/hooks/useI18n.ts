@@ -24,11 +24,11 @@ const useI18n = () => {
     }
   }, [appLanguage]);
 
-  const antdLang = useMemo(() => {
+  const antdLanguage = useMemo(() => {
     if (appLanguage === 'en') return enUS;
     return zhCN;
   }, [appLanguage]);
-  return { antdLang };
+  return { antdLanguage };
 };
 
 export default useI18n;

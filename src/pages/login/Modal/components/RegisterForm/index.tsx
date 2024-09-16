@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
 import { Form, Button, Checkbox, Row, Col } from 'antd';
-import { RuleObject } from 'antd/es/form';
 
 import CountDownButton from '@/components/CountDownButton';
 import MaterialInput from '@/components/Material/Input';
@@ -9,7 +8,10 @@ import StrengthMeter from '@/components/StrengthMeter';
 
 import { validatePassword, validateUsername } from '@/utils/validate';
 
-import { FormPageProps, LoginPageEnum } from '@/store/login';
+import type { FormPageProps } from '@/store/login';
+import type { RuleObject } from 'antd/lib/form';
+
+import { LoginPageEnum } from '@/store/login';
 
 type FieldType = {
   username: string;

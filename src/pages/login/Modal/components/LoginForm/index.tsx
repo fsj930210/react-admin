@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Form, Button, Checkbox, Row, Col, Modal } from 'antd';
-import { RuleObject } from 'antd/es/form';
 import SliderCaptcha from 'rc-slider-captcha';
 
 import MaterialInput from '@/components/Material/Input';
@@ -11,10 +10,14 @@ import ThirdForm from '../ThirdForm';
 
 import { validatePassword, validateUsername } from '@/utils/validate';
 
+import type { FormPageProps } from '@/store/login';
+import type { RuleObject } from 'antd/lib/form';
+
 import ImageBg from '@/assets/images/1bg@2x.jpg';
 import ImagePuzzle from '@/assets/images/1puzzle@2x.png';
 import useGoto from '@/hooks/useGoto';
-import { FormPageProps, LoginPageEnum } from '@/store/login';
+import { LoginPageEnum } from '@/store/login';
+
 type FieldType = {
   username: string;
   password: string;

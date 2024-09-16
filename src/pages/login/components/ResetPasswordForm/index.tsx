@@ -2,14 +2,16 @@ import { useTranslation } from 'react-i18next';
 
 import { Icon } from '@iconify/react';
 import { Form, Input, Button, Row } from 'antd';
-import { RuleObject } from 'antd/es/form';
 
 import CountDownButton from '@/components/CountDownButton';
 import MaterialInput from '@/components/Material/Input';
 
 import { validateUsername } from '@/utils/validate';
 
-import { FormPageProps, LoginPageEnum } from '@/store/login';
+import type { FormPageProps } from '@/store/login';
+import type { RuleObject } from 'antd/lib/form';
+
+import { LoginPageEnum } from '@/store/login';
 
 type FieldType = {
   username: string;

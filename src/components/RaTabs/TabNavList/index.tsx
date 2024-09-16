@@ -423,7 +423,6 @@ const TabNavList = React.forwardRef<HTMLDivElement, TabNavListProps>(
             onTabClick(key, e);
           }}
           onFocus={(e) => {
-            console.log('onFocus');
             // scrollToTab(key);
             onTabClick(key, e);
             doLockAnimation();

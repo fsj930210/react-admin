@@ -111,6 +111,7 @@
     "treeComponent": "树组件",
     "uploadComponent": "上传组件",
     "page": "页面",
+    "cssPage": "CSS",
     "errorPage": "缺省页",
     "errorPage403": "403",
     "errorPage404": "404",

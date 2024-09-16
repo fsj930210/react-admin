@@ -17,8 +17,11 @@ const featureRouter: IRouteObject[] = [
       menu: true,
       order: 7,
     },
-    element: <RedirectRouteView to="/feature/clipboard" />,
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/feature/clipboard" />,
+      },
       {
         path: 'clipboard',
         element: (

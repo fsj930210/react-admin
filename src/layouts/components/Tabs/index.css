@@ -11,17 +11,32 @@
   .layout-tabs-tab {
     position: relative;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 150px;
 
     .ra-tabs-tab {
       position: relative;
       height: 100%;
       width: 100%;
       padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       color: var(--ant-color-text);
 
       .ra-tabs-tab-content {
-        padding: 0 32px;
+        padding: 0 20px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > span:not(.ra-tabs-tab-icon) {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
 
       .ra-tabs-tab-remove {
@@ -37,12 +52,14 @@
     &:hover:not(.layout-tabs-tab-wrapper-active) {
       .ra-tabs-tab {
         background-color: var(--ant-color-primary-bg-hover);
+        color: var(--ant-color-primary);
       }
     }
 
     &.layout-tabs-tab-wrapper-active {
       .ra-tabs-tab {
-        background-color: var(--ant-color-primary);
+        background-color: var(--ant-color-primary-bg);
+        color: var(--ant-color-primary);
       }
     }
   }
@@ -63,9 +80,10 @@
   /* 卡片样式 */
   .layout-tabs-tab-card {
     padding: 4px 0;
-    margin: 0 8px;
+    margin: 0 4px;
 
     .ra-tabs-tab {
+      background-color: var(--ant-color-bg-layout);
       border-radius: 8px;
     }
   }
@@ -92,11 +110,11 @@
     }
 
     &::before {
-      top: 0;
+      bottom: 0;
     }
 
     &::after {
-      bottom: 0;
+      top: 0;
       opacity: 0;
     }
 
@@ -168,10 +186,11 @@
   } */
   .layout-tabs-tab-trapezoid {
     .ra-tabs-tab {
-      color: #fff;
+      color: var(--ant-color-text);
 
       .ra-tabs-tab-content {
         margin-top: 8px;
+        padding: 0 20px;
       }
 
       .ra-tabs-tab-remove {
@@ -184,9 +203,9 @@
       content: '';
       position: absolute;
       inset: 0;
-      transform: perspective(40px) scaleY(1.3) rotateX(25deg);
+      transform: perspective(40px) scaleY(1.2) rotateX(25deg);
       transform-origin: bottom;
-      background: var(--ant-color-bg-spotlight);
+      background: var(--ant-color-bg-layout);
       z-index: -1;
       transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -197,7 +216,7 @@
       }
 
       &::after {
-        background-color: var(--ant-color-primary);
+        background-color: var(--ant-color-primary-bg);
       }
     }
 
@@ -207,7 +226,7 @@
       }
 
       &::after {
-        background-color: var(--ant-color-primary-hover);
+        background-color: var(--ant-color-primary-bg-hover);
       }
     }
 

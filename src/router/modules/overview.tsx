@@ -17,8 +17,11 @@ const overviewRouter: IRouteObject[] = [
       order: 1,
       icon: 'carbon:dashboard',
     },
-    element: <RedirectRouteView to="/overview/workspace" />,
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/overview/workspace" />,
+      },
       {
         path: 'workspace',
         element: (

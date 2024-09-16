@@ -17,8 +17,11 @@ const chartsRouter: IRouteObject[] = [
       order: 4,
       icon: 'carbon:chart-histogram',
     },
-    element: <RedirectRouteView to="/charts/amap" />,
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/charts/amap" />,
+      },
       {
         path: 'amap',
         index: true,
@@ -70,8 +73,11 @@ const chartsRouter: IRouteObject[] = [
           title: 'echarts',
           icon: 'ra-icon:echarts',
         },
-        element: <RedirectRouteView to="/charts/echarts/basic" />,
         children: [
+          {
+            index: true,
+            element: <RedirectRouteView to="/charts/echarts/basic" />,
+          },
           {
             path: 'basic',
             index: true,

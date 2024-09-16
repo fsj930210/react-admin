@@ -17,8 +17,12 @@ const outerPageRouter: IRouteObject[] = [
       menu: true,
       order: 9,
     },
-    element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
+
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
+      },
       {
         path: 'iframe',
         meta: {

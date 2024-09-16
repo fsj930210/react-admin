@@ -163,7 +163,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     key: string,
     e: React.MouseEvent | React.KeyboardEvent | React.FocusEvent,
   ) {
-    console.log('onInternalTabClick', key);
+    // console.log('onInternalTabClick', key);
     onTabClick?.(key, e);
     const isActiveChanged = key !== mergedActiveKey;
     setMergedActiveKey(key);

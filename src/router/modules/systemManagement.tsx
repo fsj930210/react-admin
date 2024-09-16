@@ -17,8 +17,12 @@ const errorRouter: IRouteObject[] = [
       icon: 'tdesign:system-setting',
       order: 11,
     },
-    element: <RedirectRouteView to="/systemManagement/user" />,
+
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/systemManagement/user" />,
+      },
       {
         path: 'user',
         element: (
@@ -117,10 +121,14 @@ const errorRouter: IRouteObject[] = [
           title: 'systemMonitor',
           icon: 'mdi:monitor-eye',
         },
-        element: (
-          <RedirectRouteView to="/systemManagement/systemMonitor/loginLogs" />
-        ),
+
         children: [
+          {
+            index: true,
+            element: (
+              <RedirectRouteView to="/systemManagement/systemMonitor/loginLogs" />
+            ),
+          },
           {
             path: 'loginLogs',
             index: true,
@@ -187,10 +195,14 @@ const errorRouter: IRouteObject[] = [
           title: 'taskScheduler',
           icon: 'ra-icon:task-scheduler',
         },
-        element: (
-          <RedirectRouteView to="/systemManagement/taskScheduler/taskLogs" />
-        ),
+
         children: [
+          {
+            index: true,
+            element: (
+              <RedirectRouteView to="/systemManagement/taskScheduler/taskLogs" />
+            ),
+          },
           {
             path: 'taskLogs',
             index: true,

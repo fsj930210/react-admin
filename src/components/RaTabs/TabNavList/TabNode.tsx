@@ -100,7 +100,11 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
         }}
         onFocus={onFocus}
       >
-        {icon && <span className={`${tabPrefix}-icon`}>{icon}</span>}
+        {icon ? (
+          <span className={`${tabPrefix}-icon`}>
+            {typeof icon === 'string' ? <Icon inline icon={icon} /> : icon}
+          </span>
+        ) : null}
         {label && labelNode}
       </div>
 

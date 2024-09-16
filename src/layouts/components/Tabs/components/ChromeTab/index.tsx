@@ -24,7 +24,9 @@ const ChromeTab = (props: Omit<TabNodeProps, 'renderWrapper'>) => {
           <ChromeTabBackground />
         </div>
         <div className="layout-chrome-tabs-tab-content">
-          <span className="layout-chrome-tabs-tab-content-icon">{icon}</span>
+          <span className="layout-chrome-tabs-tab-content-icon">
+            <Icon inline icon={icon as string} />
+          </span>
           <span className="layout-chrome-tabs-tab-content-title">{label}</span>
           {closable ? (
             <div className="layout-chrome-tabs-tab-close">

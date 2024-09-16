@@ -17,8 +17,12 @@ const systemUtilsRouter: IRouteObject[] = [
       menu: true,
       order: 10,
     },
-    element: <RedirectRouteView to="/systemUtils/mail" />,
+
     children: [
+      {
+        index: true,
+        element: <RedirectRouteView to="/systemUtils/mail" />,
+      },
       {
         path: 'mail',
         element: (
