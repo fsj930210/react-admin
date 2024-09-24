@@ -4,25 +4,38 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '@iconify/react';
 import { Popover } from 'antd';
 
+import type { Tab } from '@/components/RaTabs/interface';
+
 import type { PopoverProps } from 'antd';
+
+import useTabActions from '@/layouts/hooks/useTabsActions';
+
 type TabDropdownProps = {
   children: React.ReactNode;
   trigger?: PopoverProps['trigger'];
+  tab: Tab;
+  updateTabItems: (updateFunc: (preItems: Tab[]) => Tab[]) => void;
 };
 const TabDropdown = ({
   children,
-  trigger = ['contextMenu'],
+  tab,
+  trigger = 'contextMenu',
+  updateTabItems,
 }: TabDropdownProps) => {
   const { t } = useTranslation();
+  const { reloadFunc, pinFunc, deleteTab } = useTabActions({ updateTabItems });
   const content = (
     <ul className="pt-2 w-[200px]">
-      <li className="px-2 py-1 cursor-pointer">
+      <li
+        className="px-2 py-1 cursor-pointer"
+        onClick={() => deleteTab(tab.key)}
+      >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
           <Icon icon="lucide:x" />
           <span className="ml-2">{t('tabs.closeCurrent')}</span>
         </div>
       </li>
-      <li className="px-2 py-1 cursor-pointer">
+      <li className="px-2 py-1 cursor-pointer" onClick={reloadFunc}>
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
           <Icon icon="ant-design:reload-outlined" />
           <span className="ml-2">{t('tabs.reload')}</span>

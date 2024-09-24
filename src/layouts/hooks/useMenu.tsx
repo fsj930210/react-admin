@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from '@iconify/react';
 import { useAsyncEffect } from 'ahooks';
 import { TFunction } from 'i18next';
-import localforage from 'localforage';
+// import localforage from 'localforage';
 import { cloneDeep } from 'lodash-es';
 
-import {
-  DB_CACHED_FLAT_MENU_ITEMS_KEY,
-  DB_CACHED_MENU_ITEMS_KEY,
-} from '@/utils/constants';
+// import {
+//   DB_CACHED_FLAT_MENU_ITEMS_KEY,
+//   DB_CACHED_MENU_ITEMS_KEY,
+// } from '@/utils/constants';
 
 import type { IRouteObject, MenuItem } from '@/types/custom-types';
 
@@ -93,23 +93,25 @@ function useMenu() {
       setItems(stringIconMenuItemsRef.current);
       return;
     }
-    const dbMenuItemsMap = await localforage.getItem<
-      Record<string, MenuItem[]>
-    >(DB_CACHED_MENU_ITEMS_KEY);
-    const dbFlatMenuItemsMap = await localforage.getItem<
-      Record<string, MenuItem[]>
-    >(DB_CACHED_FLAT_MENU_ITEMS_KEY);
-    if (dbMenuItemsMap && dbFlatMenuItemsMap) {
-      // 由于localforage不能保存jsx和function 所以需要保存为字符串模式
-      const dbMenuItems = dbMenuItemsMap[appLanguage];
-      const dbFlatMenuItems = dbFlatMenuItemsMap[appLanguage];
-      if (dbMenuItems && dbFlatMenuItems) {
-        setItems(dbMenuItems);
-        flatMenuItemsRef.current = dbFlatMenuItems;
-        stringIconMenuItemsRef.current = dbMenuItems;
-        return;
-      }
-    }
+    // 这里如果需要本地缓存菜单则可以解注释代码
+    // 如果菜单是动态变化的还是不需要本地缓存，内存缓存就行了
+    // const dbMenuItemsMap = await localforage.getItem<
+    //   Record<string, MenuItem[]>
+    // >(DB_CACHED_MENU_ITEMS_KEY);
+    // const dbFlatMenuItemsMap = await localforage.getItem<
+    //   Record<string, MenuItem[]>
+    // >(DB_CACHED_FLAT_MENU_ITEMS_KEY);
+    // if (dbMenuItemsMap && dbFlatMenuItemsMap) {
+    //   // 由于localforage不能保存jsx和function 所以需要保存为字符串模式
+    //   const dbMenuItems = dbMenuItemsMap[appLanguage];
+    //   const dbFlatMenuItems = dbFlatMenuItemsMap[appLanguage];
+    //   if (dbMenuItems && dbFlatMenuItems) {
+    //     setItems(dbMenuItems);
+    //     flatMenuItemsRef.current = dbFlatMenuItems;
+    //     stringIconMenuItemsRef.current = dbMenuItems;
+    //     return;
+    //   }
+    // }
     const menuItems: MenuItem[] = [];
     formatRoutes({
       routes,
@@ -121,14 +123,15 @@ function useMenu() {
     flatMenuItemsRef.current = flatMenuItems;
     stringIconMenuItemsRef.current = stringIconMenuItems;
     setItems(stringIconMenuItems);
-    localforage.setItem(DB_CACHED_MENU_ITEMS_KEY, {
-      ...(dbMenuItemsMap || {}),
-      [appLanguage]: stringIconMenuItems,
-    });
-    localforage.setItem(DB_CACHED_FLAT_MENU_ITEMS_KEY, {
-      ...(dbFlatMenuItemsMap || {}),
-      [appLanguage]: flatMenuItems,
-    });
+    // 如果需要本地缓存菜单则解注释就行
+    // localforage.setItem(DB_CACHED_MENU_ITEMS_KEY, {
+    //   ...(dbMenuItemsMap || {}),
+    //   [appLanguage]: stringIconMenuItems,
+    // });
+    // localforage.setItem(DB_CACHED_FLAT_MENU_ITEMS_KEY, {
+    //   ...(dbFlatMenuItemsMap || {}),
+    //   [appLanguage]: flatMenuItems,
+    // });
   }, [routes, appLanguage]);
 
   return {

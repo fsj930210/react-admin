@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
-import { Tabs, Typography } from 'antd';
+import { Typography } from 'antd';
 
 import AppLogo from '@/components/AppLogo';
+import Tabs from '@/components/RaTabs';
 
 import EmailForm from '../EmailForm';
 import LoginForm from '../LoginForm';
@@ -79,7 +80,7 @@ const LoginPage = ({ material }: LoginPageProps) => {
             {loginPage === LoginPageEnum.login ? (
               <Tabs
                 className={styles['login-tab']}
-                centered
+                showInkBar
                 animated
                 items={items}
                 tabBarExtraContent={null}

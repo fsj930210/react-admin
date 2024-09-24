@@ -1,10 +1,19 @@
 .layout-tabs {
-  /* padding-top: 4px; */
-  height: 100%;
-
   .ra-tabs-nav {
-    height: 100%;
+    height: 36px;
     margin-bottom: 0;
+  }
+
+  .ra-tabs-content-holder {
+    flex: 1;
+
+    .ra-tabs-content-top {
+      height: 100%;
+
+      .ra-tabs-tabpane {
+        height: 100%;
+      }
+    }
   }
 
   /* 通用样式 */
@@ -25,7 +34,7 @@
       color: var(--ant-color-text);
 
       .ra-tabs-tab-content {
-        padding: 0 20px;
+        padding-left: 8px;
         height: 100%;
         width: 100%;
         display: flex;
@@ -40,12 +49,13 @@
       }
 
       .ra-tabs-tab-remove {
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
         line-height: 1;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.2s;
+        padding: 11px 8px;
+        height: 100%;
+        font-size: 12px;
       }
     }
 
@@ -136,102 +146,59 @@
   }
 
   /* 梯形 */
-
-  /* .layout-tabs-tab-trapezoid {
-    flex: 1;
-    height: 100%;
-    padding: 0 12px;
-    .ra-tabs-tab {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background-color: red;
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 12px;
-        height: 100%;
-        z-index: 9;
-        background-color: red;
-        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      &::before {
-        transform: skew(-17deg);
-        left: -6.5px;
-      }
-      &::after {
-        transform: skew(17deg);
-        right: -6.5px;
-      }
-    }
-    &.layout-tabs-tab-wrapper-active {
-      .ra-tabs-tab {
-        &::before,
-        &::after {
-          background: lightgreen;
-        }
-      }
-    }
-    &:hover:not(.layout-tabs-tab-wrapper-active) {
-      .ra-tabs-tab {
-        background-color: lightgreen;
-        &::before,
-        &::after {
-          background-color: lightgreen;
-        }
-      }
-    }
-  } */
   .layout-tabs-tab-trapezoid {
     .ra-tabs-tab {
       color: var(--ant-color-text);
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
 
       .ra-tabs-tab-content {
-        margin-top: 8px;
-        padding: 0 20px;
-      }
+        padding: 4px 0 0;
+        width: 110px;
 
-      .ra-tabs-tab-remove {
-        right: 8px;
-        transform: translateY(calc(-50% + 4px));
+        &::after {
+          content: '';
+          position: absolute;
+          top: 4px;
+          right: 0;
+          width: 100%;
+          height: 0;
+          border-bottom: 32px solid var(--ant-color-bg-layout);
+          border-left: 15px solid transparent;
+          border-right: 15px solid transparent;
+          z-index: -1;
+          pointer-events: none;
+        }
       }
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      transform: perspective(40px) scaleY(1.2) rotateX(25deg);
-      transform-origin: bottom;
-      background: var(--ant-color-bg-layout);
-      z-index: -1;
-      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &.layout-tabs-tab-wrapper-active {
       .ra-tabs-tab {
         background-color: transparent;
-      }
 
-      &::after {
-        background-color: var(--ant-color-primary-bg);
-      }
-    }
-
-    &:hover:not(.layout-tabs-tab-wrapper-active) {
-      .ra-tabs-tab {
-        background-color: transparent;
-      }
-
-      &::after {
-        background-color: var(--ant-color-primary-bg-hover);
+        .ra-tabs-tab-content {
+          &::after {
+            border-bottom-color: var(--ant-color-primary-bg);
+          }
+        }
       }
     }
 
     .ra-tabs-tab-remove {
       opacity: 0;
+    }
+
+    &:hover:not(.layout-tabs-tab-wrapper-active) {
+      .ra-tabs-tab {
+        background-color: transparent;
+
+        .ra-tabs-tab-content {
+          &::after {
+            border-bottom-color: var(--ant-color-primary-bg-hover);
+          }
+        }
+      }
     }
 
     &:hover {

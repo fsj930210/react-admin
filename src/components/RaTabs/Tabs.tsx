@@ -105,13 +105,12 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     hideAdd,
     ...restProps
   } = props;
-  const tabs = React.useMemo<Tab[]>(
-    () =>
-      (items || []).filter(
-        (item) => item && typeof item === 'object' && 'key' in item,
-      ),
-    [items],
-  );
+  const tabs = React.useMemo<Tab[]>(() => {
+    console.log(items);
+    return (items || []).filter(
+      (item) => item && typeof item === 'object' && 'key' in item,
+    );
+  }, [items]);
   const rtl = direction === 'rtl';
 
   const mergedAnimated = useAnimateConfig(animated);

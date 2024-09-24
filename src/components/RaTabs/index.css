@@ -7,6 +7,10 @@
   display: flex;
   width: 100%;
 
+  .ra-tabs-tabpane-hidden {
+    display: none;
+  }
+
   > .ra-tabs-nav {
     position: relative;
     display: flex;

@@ -1,9 +1,9 @@
 <svg className="w-full h-full" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <symbol id="chrome-tab-geometry-left" viewBox="0 0 214 36">
+    <symbol id="chrome-tab-geometry-left" viewBox="0 0 150 36">
       <path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z"/>
     </symbol>
-    <symbol id="chrome-tab-geometry-right" viewBox="0 0 214 36">
+    <symbol id="chrome-tab-geometry-right" viewBox="0 0 150 36">
       <use xlink:href="#chrome-tab-geometry-left"/>
     </symbol>
     <clipPath id="crop">
@@ -11,11 +11,11 @@
     </clipPath>
   </defs>
   <svg width="52%" height="100%">
-    <use xlink:href="#chrome-tab-geometry-left" width="214" height="36" class="chrome-tab-geometry" fill="currentcolor"/>
+    <use xlink:href="#chrome-tab-geometry-left" width="150" height="36" class="chrome-tab-geometry" fill="currentcolor"/>
   </svg>
   <g transform="scale(-1, 1)">
     <svg width="52%" height="100%" x="-100%" y="0">
-      <use xlink:href="#chrome-tab-geometry-right" width="214" height="36" class="chrome-tab-geometry" fill="currentcolor" />
+      <use xlink:href="#chrome-tab-geometry-right" width="150" height="36" class="chrome-tab-geometry" fill="currentcolor" />
     </svg>
   </g>
 </svg>

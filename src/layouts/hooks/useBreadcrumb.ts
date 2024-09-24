@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { useAsyncEffect } from 'ahooks';
-import localforage from 'localforage';
+// import localforage from 'localforage';
 
 import useMenu from './useMenu';
 
@@ -89,32 +89,34 @@ const useBreadcrumb = () => {
         return;
       }
     }
-    const dbBreadCrumbRecord =
-      await localforage.getItem<Record<string, BreadcrumbProps['items']>>(
-        cachedKey,
-      );
-    // // 对于直接刷新浏览器，可以从indexDB里面取，来恢复之前的面包屑
-    if (dbBreadCrumbRecord) {
-      const dbCachedBreadCrumbList = dbBreadCrumbRecord[appLanguage];
-      if (dbCachedBreadCrumbList && dbCachedBreadCrumbList.length > 0) {
-        setBreadcrumbList(dbCachedBreadCrumbList);
-        cachedBreadcrumbListMap.set(cachedKey, {
-          ...(storeBreadCrumbRecord || {}),
-          [appLanguage]: dbCachedBreadCrumbList,
-        });
-        return;
-      }
-    }
+    // 如果需要本地缓存面包屑则，解注释
+    // const dbBreadCrumbRecord =
+    //   await localforage.getItem<Record<string, BreadcrumbProps['items']>>(
+    //     cachedKey,
+    //   );
+
+    // if (dbBreadCrumbRecord) {
+    //   const dbCachedBreadCrumbList = dbBreadCrumbRecord[appLanguage];
+    //   if (dbCachedBreadCrumbList && dbCachedBreadCrumbList.length > 0) {
+    //     setBreadcrumbList(dbCachedBreadCrumbList);
+    //     cachedBreadcrumbListMap.set(cachedKey, {
+    //       ...(storeBreadCrumbRecord || {}),
+    //       [appLanguage]: dbCachedBreadCrumbList,
+    //     });
+    //     return;
+    //   }
+    // }
     // 根据pathname生成面包屑
     const breadcrumbList = generateBreadcrumList(key, stringIconMenuItems, t);
     setBreadcrumbList(breadcrumbList);
     cachedBreadcrumbListMap.set(cachedKey, {
       [appLanguage]: breadcrumbList,
     });
-    localforage.setItem(cachedKey, {
-      ...(dbBreadCrumbRecord || {}),
-      [appLanguage]: breadcrumbList,
-    });
+    // 如果需要本地缓存面包屑则，解注释
+    // localforage.setItem(cachedKey, {
+    //   ...(dbBreadCrumbRecord || {}),
+    //   [appLanguage]: breadcrumbList,
+    // });
   }, [location.pathname, appLanguage, stringIconMenuItems]);
   return breadcrumbList;
 };

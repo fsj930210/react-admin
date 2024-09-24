@@ -36,6 +36,8 @@ export type TabPosition = 'left' | 'right' | 'top' | 'bottom';
 export interface Tab extends Omit<TabPaneProps, 'tab'> {
   key: string;
   label: React.ReactNode;
+  pin?: boolean;
+  labelI18n?: string;
 }
 
 export type RenderTabBarProps = {

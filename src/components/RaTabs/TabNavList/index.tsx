@@ -53,7 +53,7 @@ export interface TabNavListProps {
   locale?: TabsLocale;
   onTabClick: (
     activeKey: string,
-    e: React.MouseEvent | React.KeyboardEvent | React.FocusEvent,
+    e: React.MouseEvent | React.KeyboardEvent,
   ) => void;
   onTabScroll?: OnTabScroll;
   children?: (
@@ -422,19 +422,19 @@ const TabNavList = React.forwardRef<HTMLDivElement, TabNavListProps>(
           onClick={(e) => {
             onTabClick(key, e);
           }}
-          onFocus={(e) => {
-            // scrollToTab(key);
-            onTabClick(key, e);
-            doLockAnimation();
-            if (!tabsWrapperRef.current) {
-              return;
-            }
-            // Focus element will make scrollLeft change which we should reset back
-            if (!rtl) {
-              tabsWrapperRef.current.scrollLeft = 0;
-            }
-            tabsWrapperRef.current.scrollTop = 0;
-          }}
+          // onFocus={(e) => {
+          //   // scrollToTab(key);
+          //   // onTabClick(key, e);
+          //   doLockAnimation();
+          //   if (!tabsWrapperRef.current) {
+          //     return;
+          //   }
+          //   // Focus element will make scrollLeft change which we should reset back
+          //   if (!rtl) {
+          //     tabsWrapperRef.current.scrollLeft = 0;
+          //   }
+          //   tabsWrapperRef.current.scrollTop = 0;
+          // }}
         />
       );
     });

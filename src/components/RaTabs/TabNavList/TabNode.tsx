@@ -15,9 +15,7 @@ export interface TabNodeProps {
   active: boolean;
   closable?: boolean;
   editable?: EditableConfig;
-  onClick?: (
-    e: React.MouseEvent | React.KeyboardEvent | React.FocusEvent,
-  ) => void;
+  onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   onResize?: (width: number, height: number, left: number, top: number) => void;
   renderWrapper?: (
     node: React.ReactElement,
@@ -26,7 +24,7 @@ export interface TabNodeProps {
   ) => React.ReactElement;
   removeAriaLabel?: string;
   removeIcon?: React.ReactNode;
-  onFocus: React.FocusEventHandler;
+  // onFocus: React.FocusEventHandler;
   style?: React.CSSProperties;
 }
 
@@ -41,7 +39,7 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
     removeAriaLabel,
     editable,
     onClick,
-    onFocus,
+    // onFocus,
     style,
   } = props;
   const tabPrefix = `${prefixCls}-tab`;
@@ -78,6 +76,13 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
       })}
       style={style}
       onClick={onInternalClick}
+      onKeyDown={(e) => {
+        if ([KeyCode.SPACE, KeyCode.ENTER].includes(e.which)) {
+          e.preventDefault();
+          onInternalClick(e);
+        }
+      }}
+      // onFocus={onFocus}
     >
       {/* Primary Tab Button */}
       <div
@@ -88,17 +93,10 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
         aria-controls={id && `${id}-panel-${key}`}
         aria-disabled={disabled}
         tabIndex={disabled ? undefined : 0}
-        onClick={(e) => {
-          e.stopPropagation();
-          onInternalClick(e);
-        }}
-        onKeyDown={(e) => {
-          if ([KeyCode.SPACE, KeyCode.ENTER].includes(e.which)) {
-            e.preventDefault();
-            onInternalClick(e);
-          }
-        }}
-        onFocus={onFocus}
+        // onClick={(e) => {
+        //   e.stopPropagation();
+        //   onInternalClick(e);
+        // }}
       >
         {icon ? (
           <span className={`${tabPrefix}-icon`}>
