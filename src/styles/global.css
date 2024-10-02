@@ -20,6 +20,6 @@ html::-webkit-scrollbar-track {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb-bg);
+  background-color: var(--ra-scrollbar-thumb-bg);
   border-radius: 20px;
 }

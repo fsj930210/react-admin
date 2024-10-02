@@ -1,12 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Icon } from '@iconify/react';
 import { Breadcrumb } from 'antd';
 import { cloneDeep } from 'lodash-es';
 
+import Icon from '@/components/Icon';
+
 import useBreadcrumb from '../../../../hooks/useBreadcrumb';
 
-import type { BreadcrumItem } from '@/types/custom-types';
+import type { BreadcrumbItem } from '@/types/custom-types';
 import type { MenuProps } from 'antd/lib';
 import type { ItemType } from 'antd/lib/breadcrumb/Breadcrumb';
 
@@ -24,7 +25,7 @@ const AppBreadcrumb = () => {
     return item;
   });
   function itemRender(
-    currentRoute: BreadcrumItem,
+    currentRoute: BreadcrumbItem,
     _params: any,
     items: ItemType[],
   ) {
@@ -32,9 +33,7 @@ const AppBreadcrumb = () => {
     // 这里判断是最后一个或者是菜单时直接渲染，其他情况用Link组件渲染点击跳转到路由
     return isLast || currentRoute.menu ? (
       <>
-        {currentRoute.icon ? (
-          <Icon inline icon={currentRoute.icon as string} />
-        ) : null}
+        {currentRoute.icon ? <Icon icon={currentRoute.icon as string} /> : null}
         <span className="ml-[8]">{currentRoute.title}</span>
       </>
     ) : (

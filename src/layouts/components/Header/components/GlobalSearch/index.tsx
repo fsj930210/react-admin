@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { Modal } from 'antd';
+
+import Icon from '@/components/Icon';
 
 import SearchContent from './components/SearchContent';
 import SearchFooter from './components/SearchFooter';

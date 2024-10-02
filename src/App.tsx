@@ -1,15 +1,17 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
-import { ConfigProvider, App as AntApp, theme as antdTehme } from 'antd';
+import { ConfigProvider, App as AntApp, theme as antdTheme } from 'antd';
 import dayjs from 'dayjs';
 import localforage from 'localforage';
 
 // for date-picker i18n
 import 'dayjs/locale/zh-cn';
-import AppLoading from './components/AppLoading';
+import { AppContext } from './AppContext';
+import AppLoading from './components/app/AppLoading';
 // import LockScreen from './components/LockScreen';
 import { useBrowserLanguage } from './hooks/useBrowserLanguage';
+import useColors from './hooks/useColors';
 import useI18n from './hooks/useI18n';
 import useTheme from './hooks/useTheme';
 import router from './router';
@@ -23,20 +25,14 @@ localforage.config({
   name: 'react_admin_database',
   storeName: 'react_admin_store',
 });
-export type AppContext = {
-  theme: 'light' | 'dark';
-  appCssTokenKey: string;
-};
-export const AppContext = React.createContext<AppContext>({
-  theme: 'light',
-  appCssTokenKey: 'ra-css-var',
-});
 
 const App = () => {
   useBrowserLanguage();
+  useColors();
   const { antdLanguage } = useI18n();
   const { primaryColor } = useGlobalStore();
   const theme = useTheme();
+
   return (
     <AppContext.Provider value={{ theme, appCssTokenKey: 'ra-css-var' }}>
       <ConfigProvider
@@ -46,8 +42,8 @@ const App = () => {
           hashed: false,
           algorithm:
             theme === 'dark'
-              ? [antdTehme.darkAlgorithm]
-              : [antdTehme.defaultAlgorithm],
+              ? [antdTheme.darkAlgorithm]
+              : [antdTheme.defaultAlgorithm],
           token: {
             colorPrimary: primaryColor,
             colorInfo: primaryColor,

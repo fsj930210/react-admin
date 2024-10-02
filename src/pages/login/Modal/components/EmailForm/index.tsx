@@ -2,10 +2,12 @@ import { useTranslation } from 'react-i18next';
 
 import { Form, Button } from 'antd';
 
-import CountDownButton from '@/components/CountDownButton';
-import MaterialInput from '@/components/Material/Input';
+import CountDown from '@/components/business/CountDown';
+import MaterialInput from '@/components/RaMaterial/Input';
 
-import { FormPageProps, LoginPageEnum } from '@/store/login';
+import type { FormPageProps } from '@/store/login';
+
+import { LoginPageEnum } from '@/store/login';
 
 type FieldType = {
   email: string;
@@ -56,7 +58,7 @@ const EmailForm = ({ switchPage }: FormPageProps) => {
             placeholder={t('login.captchaPlaceholder')}
           />
         </FormItem>
-        <CountDownButton
+        <CountDown
           type="link"
           className="p-0 line-height-[1] absolute right-0 bottom-[18px] z-2"
           defaultText={t('login.getCaptcha')}

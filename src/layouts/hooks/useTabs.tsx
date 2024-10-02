@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Outlet, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 // import localforage from 'localforage';
 
@@ -54,11 +54,7 @@ const useTabs = () => {
         closable: import.meta.env.VITE_APP_HOME_PATH !== meunItem.key,
         pin: false,
         disabled: false,
-        children: (
-          <div>
-            <Outlet />
-          </div>
-        ),
+        children: <></>,
       };
       // tabItemsRef.current = [...tabItemsRef.current, tabItem];
       tabItemsRef.current.push(tabItem);

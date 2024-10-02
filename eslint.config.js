@@ -69,6 +69,11 @@ export default [
       ],
       'react/prop-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
+      // 引入type时使用 type 关键字如： import { type xx } from 'xxx'
+      '@typescript-eslint/no-import-type-side-effects': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      // 引入type另起一行而不是跟现有的import一起使用如： import type { xx } from 'xx'
+      'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
       'react/no-unknown-property': [
         'error',
         {

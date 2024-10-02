@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon } from '@iconify/react';
+import Icon from '@/components/Icon';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
 

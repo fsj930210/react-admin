@@ -7,7 +7,7 @@ import {
   CSSProperties,
 } from 'react';
 
-import { Icon } from '@iconify/react';
+import Icon from '@/components/Icon';
 import { useControllableValue } from 'ahooks';
 import { Form, Input } from 'antd';
 import classNames from 'classnames';

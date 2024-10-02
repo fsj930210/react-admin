@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { setDarkCssVars, setLightCssVars } from '@/utils/theme';
 
-import { AppContext } from '@/App';
-import useGlobalStore from '@/store';
+import type { AppContext } from '@/AppContext';
+
+import useGlobalStore, { AppThemeEnum } from '@/store';
 
 const useTheme = () => {
   const [theme, setTheme] = useState<AppContext['theme']>('light');
@@ -18,7 +19,7 @@ const useTheme = () => {
         setTheme('light');
       }
     }
-    if (appTheme === 'system') {
+    if (appTheme === AppThemeEnum['os']) {
       if (themeMedia.matches) {
         setTheme('dark');
       } else {

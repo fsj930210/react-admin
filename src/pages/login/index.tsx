@@ -1,7 +1,5 @@
-import DarkTheme from '@/components/DarkTheme';
-import Translate from '@/components/Translate/indedx';
-
 import AntDesignLogin from './AntDesign';
+import LoginSettings from './components/LoginSettings';
 import MaterialDesignLogin from './MaterialDesign';
 import Modal from './Modal';
 
@@ -12,9 +10,7 @@ const Login = () => {
   return (
     <div className="overflow-hidden relative h-full">
       <div className="absolute top-2 right-4 z-1">
-        <div className="w-[100]"></div>
-        <DarkTheme />
-        <Translate />
+        <LoginSettings />
       </div>
       {loginStyle === LoginStyleEnum.ant ? (
         <AntDesignLogin />

@@ -1,20 +1,28 @@
 import { create } from 'zustand';
 
-export type AppTheme = 'light' | 'dark' | 'system';
+export enum AppThemeEnum {
+  light = 'light',
+  dark = 'dark',
+  os = 'os',
+}
+
 export interface GlobalState {
   primaryColor: string;
-  appTheme: AppTheme;
+  appTheme: AppThemeEnum;
   appLanguage: string;
-  changeAppTheme: (theme: AppTheme) => void;
+  changeAppTheme: (theme: AppThemeEnum) => void;
   changeAppLanguage: (lang: string) => void;
+  changePrimaryColor: (color: string) => void;
 }
 
 const useGlobalStore = create<GlobalState>()((set) => ({
   primaryColor: '#13c2c2',
-  appTheme: 'light',
+  appTheme: AppThemeEnum.light,
   appLanguage: navigator.language || 'zh-CN',
-  changeAppTheme: (theme: AppTheme) => set(() => ({ appTheme: theme })),
+  changeAppTheme: (theme: AppThemeEnum) =>
+    set(() => ({ appTheme: AppThemeEnum[theme] })),
   changeAppLanguage: (lang: string) => set(() => ({ appLanguage: lang })),
+  changePrimaryColor: (color: string) => set(() => ({ primaryColor: color })),
 }));
 
 export default useGlobalStore;

@@ -1,5 +1,4 @@
-import { Icon } from '@iconify/react';
-
+import Icon from '@/components/Icon';
 import type { TabNodeProps } from '@/components/RaTabs/TabNavList/TabNode';
 
 import ChromeTabBackground from '@/assets/images/chrome-tab-bg.svg?react';

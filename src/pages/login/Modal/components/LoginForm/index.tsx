@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Form, Button, Checkbox, Row, Col, Modal } from 'antd';
 import SliderCaptcha from 'rc-slider-captcha';
 
-import MaterialInput from '@/components/Material/Input';
+import MaterialInput from '@/components/RaMaterial/Input';
 
 import ThirdForm from '../ThirdForm';
 

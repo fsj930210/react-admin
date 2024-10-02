@@ -2,7 +2,10 @@ import { useTranslation } from 'react-i18next';
 
 import { Button, QRCode, theme } from 'antd';
 
-import { FormPageProps, LoginPageEnum } from '@/store/login';
+import type { FormPageProps } from '@/store/login';
+
+import { LoginPageEnum } from '@/store/login';
+
 const { useToken } = theme;
 
 type QRCodeFormProps = FormPageProps & {

@@ -162,5 +162,13 @@
     "eamilUtils": "Eamil Utils",
     "storageManagement": "Storage Management",
     "chatroom": "Chatroom"
+  },
+  "common": {
+    "backHome": "Back Home"
+  },
+  "theme": {
+    "light": "light",
+    "dark": "dark",
+    "os": "OS Default"
   }
 }

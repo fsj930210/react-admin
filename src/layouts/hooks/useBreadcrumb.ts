@@ -7,14 +7,14 @@ import { useAsyncEffect } from 'ahooks';
 
 import useMenu from './useMenu';
 
-import type { BreadcrumItem, MenuItem } from '@/types/custom-types';
+import type { BreadcrumbItem, MenuItem } from '@/types/custom-types';
 import type { BreadcrumbProps } from 'antd/lib';
 import type { TFunction } from 'i18next';
 
 import useGlobalStore from '@/store';
 import useMenuStore from '@/store/menu';
 
-function generateBreadcrumList(
+function generateBreadcrumbList(
   key: string, // 通过点击的key来寻找
   menuList: MenuItem[], // 菜单列表
   t: TFunction<'translation', undefined>,
@@ -39,7 +39,7 @@ function formatMenu(
 ) {
   for (let i = 0; i < menList.length; i++) {
     const menu = menList[i];
-    const breadcrumbItem: BreadcrumItem = {
+    const breadcrumbItem: BreadcrumbItem = {
       title: t(`menu.${menu?.label}`),
       path: menu.key,
       icon: menu?.icon,
@@ -107,7 +107,7 @@ const useBreadcrumb = () => {
     //   }
     // }
     // 根据pathname生成面包屑
-    const breadcrumbList = generateBreadcrumList(key, stringIconMenuItems, t);
+    const breadcrumbList = generateBreadcrumbList(key, stringIconMenuItems, t);
     setBreadcrumbList(breadcrumbList);
     cachedBreadcrumbListMap.set(cachedKey, {
       [appLanguage]: breadcrumbList,

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Typography } from 'antd';
 
-import AppLogo from '@/components/AppLogo';
+import AppLogo from '@/components/app/AppLogo';
 import Tabs from '@/components/RaTabs';
 
 import EmailForm from '../EmailForm';
@@ -67,7 +67,7 @@ const LoginPage = ({ material }: LoginPageProps) => {
           <img src="/images/fullstack-engineer.svg" alt="" className="w-120" />
         </div>
       </div>
-      <div className="w-[45%] h-full flex flex-col items-center relative bg-white dark:bg-[var(--ant-color-bg-layout)]">
+      <div className="w-[45%] h-full flex flex-col items-center relative bg-white dark:bg-[var(--ant-color-bg-container)]">
         <div className="p[80px]">
           <div className="w-[420px]">
             <h2 className="mb-[14px] enter-y">

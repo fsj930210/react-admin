@@ -24,7 +24,6 @@ export interface TabPaneProps {
 
 const TabPane = React.forwardRef<HTMLDivElement, TabPaneProps>((props, ref) => {
   const { prefixCls, className, style, id, active, tabKey, children } = props;
-  console.log(children);
   return (
     <div
       id={id && `${id}-panel-${tabKey}`}

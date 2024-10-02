@@ -160,5 +160,13 @@
     "eamilUtils": "邮件工具",
     "storageManagement": "存储管理",
     "chatroom": "聊天室"
+  },
+  "common": {
+    "backHome": "返回首页"
+  },
+  "theme": {
+    "light": "明亮",
+    "dark": "黑暗",
+    "os": "跟随系统"
   }
 }

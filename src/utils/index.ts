@@ -12,10 +12,17 @@ export const dayMap: Record<string, string> = {
 
 export const setCssVar = (
   prop: string,
-  val: any,
-  dom = document.documentElement,
+  val: string | null,
+  dom: string | HTMLElement = document.documentElement,
 ) => {
-  dom.style.setProperty(prop, val);
+  if (typeof dom === 'string') {
+    const nodes = document.querySelectorAll(dom);
+    nodes.forEach((node) => {
+      (node as HTMLElement).style.setProperty(prop, val);
+    });
+  } else {
+    dom.style.setProperty(prop, val);
+  }
 };
 
 /**

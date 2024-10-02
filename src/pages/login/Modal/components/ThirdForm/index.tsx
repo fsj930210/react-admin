@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { Divider } from 'antd';
+
+import Icon from '@/components/Icon';
 
 const ThirdForm = () => {
   const { t } = useTranslation();

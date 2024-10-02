@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon } from '@iconify/react';
+import Icon from '@/components/Icon';
 import { Button } from 'antd';
 
 import type {

@@ -7,8 +7,9 @@ import LazyLoadComponent from '@/components/LazyLoadComponent';
 import RouteError from './RouteError';
 import { getRoutes } from './utils';
 
+import type { IRouteObject } from '@/types/custom-types';
+
 import Layout from '@/layouts/index';
-import { IRouteObject } from '@/types/custom-types';
 
 const routeArray = getRoutes();
 

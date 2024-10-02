@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Form, Button, Checkbox, Row, Col } from 'antd';
 
-import CountDownButton from '@/components/CountDownButton';
-import MaterialInput from '@/components/Material/Input';
-import StrengthMeter from '@/components/StrengthMeter';
+import CountDown from '@/components/business/CountDown';
+import StrengthMeter from '@/components/business/StrengthMeter';
+import MaterialInput from '@/components/RaMaterial/Input';
 
 import { validatePassword, validateUsername } from '@/utils/validate';
 
@@ -87,7 +87,7 @@ const RegisterForm = ({ switchPage }: FormPageProps) => {
             placeholder={t('login.captchaPlaceholder')}
           />
         </FormItem>
-        <CountDownButton
+        <CountDown
           type="link"
           className="p-0 line-height-[1] absolute right-0 bottom-[18px] z-2"
           defaultText={t('login.getCaptcha')}

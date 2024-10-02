@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import type { NavigateOptions } from 'react-router-dom';
 
 function useGoto() {
   const navigate = useNavigate();
-  const go = (path: string = '/') => {
-    navigate(path);
+  const go = (path: string = '/', options?: NavigateOptions) => {
+    navigate(path, options);
   };
-  const goHome = () => {
-    navigate('/');
+  const goHome = (options?: NavigateOptions) => {
+    navigate('/', options);
   };
   return {
     go,

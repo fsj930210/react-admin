@@ -17,7 +17,7 @@
 
 :global(.dark) {
   .quick-login-item {
-    background-color: var(--ant-color-primary-bg);
+    background-color: var(--ant-color-primary);
     box-shadow: var(--ant-color-primary-bg-hover) 0 4px 11px 0;
 
     &:hover {

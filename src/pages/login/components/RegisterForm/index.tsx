@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 
-import CountDownButton from '@/components/CountDownButton';
-import MaterialInput from '@/components/Material/Input';
-import StrengthMeter from '@/components/StrengthMeter';
+import CountDown from '@/components/business/CountDown';
+import StrengthMeter from '@/components/business/StrengthMeter';
+import Icon from '@/components/Icon';
+import MaterialInput from '@/components/RaMaterial/Input';
 
 import { validatePassword, validateUsername } from '@/utils/validate';
 
@@ -142,7 +142,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
             />
           )}
         </FormItem>
-        <CountDownButton
+        <CountDown
           style={{ width: 'calc(40% - 8px)' }}
           className="inline-block  ml[8px]"
           defaultText={t('login.getCaptcha')}

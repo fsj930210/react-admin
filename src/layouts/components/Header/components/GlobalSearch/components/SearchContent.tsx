@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
+import Icon from '@/components/Icon';
 
 import styles from '../index.module.css';
 

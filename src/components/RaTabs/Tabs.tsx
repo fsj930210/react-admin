@@ -106,7 +106,6 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     ...restProps
   } = props;
   const tabs = React.useMemo<Tab[]>(() => {
-    console.log(items);
     return (items || []).filter(
       (item) => item && typeof item === 'object' && 'key' in item,
     );

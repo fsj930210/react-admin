@@ -3,14 +3,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useDebounceEffect } from 'ahooks';
 import { Layout, Menu } from 'antd';
-import { MenuProps } from 'antd/lib';
 
-import AppLogo from '@/components/AppLogo';
+import AppLogo from '@/components/app/AppLogo';
 
 import useMenu from '../../hooks/useMenu';
-import { getLevelKeys, LevelKeysProps } from '../../utils/utils';
+import { getLevelKeys } from '../../utils/utils';
 
 import styles from './index.module.css';
+
+import type { LevelKeysProps } from '../../utils/utils';
+import type { MenuProps } from 'antd/lib';
 
 import useMenuStore from '@/store/menu';
 

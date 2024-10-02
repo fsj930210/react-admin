@@ -1,5 +1,6 @@
-import { Icon } from '@iconify/react';
 import { Input } from 'antd';
+
+import Icon from '@/components/Icon';
 
 import { usePassword } from '../../usePassword';
 
@@ -12,7 +13,7 @@ import useCurrentTime from '@/hooks/useCurrentTime';
 import { dayMap, padLeftZero } from '@/utils';
 const MacLockScreen = () => {
   const { month, date, day, hours, minutes } = useCurrentTime();
-  const { handleChage, handlePressEnter, errorClassName, value } =
+  const { handleChange, handlePressEnter, errorClassName, value } =
     usePassword();
   return (
     <div className={styles['mac-wrapper']}>
@@ -48,7 +49,7 @@ const MacLockScreen = () => {
           <Input
             type="password"
             placeholder="密码"
-            onChange={handleChage}
+            onChange={handleChange}
             className={`${styles.input} ${errorClassName}`}
             value={value}
             suffix={

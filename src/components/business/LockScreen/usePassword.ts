@@ -1,4 +1,5 @@
-import { useState, ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
+import { useState } from 'react';
 
 export function usePassword() {
   const [errorClassName, setErrorClassName] = useState('');
@@ -10,7 +11,7 @@ export function usePassword() {
       console.log(222);
     }
   };
-  const handleChage = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setErrorClassName('');
   };
@@ -18,6 +19,6 @@ export function usePassword() {
     errorClassName,
     value,
     handlePressEnter,
-    handleChage,
+    handleChange,
   };
 }

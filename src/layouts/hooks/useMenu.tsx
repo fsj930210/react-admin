@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { useAsyncEffect } from 'ahooks';
-import { TFunction } from 'i18next';
 // import localforage from 'localforage';
 import { cloneDeep } from 'lodash-es';
+
+import Icon from '@/components/Icon';
 
 // import {
 //   DB_CACHED_FLAT_MENU_ITEMS_KEY,
@@ -13,6 +13,7 @@ import { cloneDeep } from 'lodash-es';
 // } from '@/utils/constants';
 
 import type { IRouteObject, MenuItem } from '@/types/custom-types';
+import type { TFunction } from 'i18next';
 
 import routes from '@/router/routes';
 import useGlobalStore from '@/store';
@@ -65,7 +66,9 @@ function formatMenuList(
   t: TFunction<'translation', undefined>,
 ) {
   menuList.forEach((item) => {
-    item.icon = <Icon inline icon={item.icon as string} />;
+    item.icon = (
+      <Icon icon={item.icon as string} wrapClassName="leading-none mr-[4]" />
+    );
     item.label = t(`menu.${item.label}`);
     const children = item.children;
     if (children) {

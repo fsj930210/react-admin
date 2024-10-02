@@ -21,7 +21,7 @@ const AppLogo = ({
     <div
       className={`${className} ${styles['logo-wrapper']} flex items-center cursor-pointer`}
       style={style}
-      onClick={goHome}
+      onClick={() => goHome()}
     >
       <img
         src="/logo.svg"

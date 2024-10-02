@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import AppLoading from '../AppLoading';
+import AppLoading from '../app/AppLoading';
 
 const LazyLoadComponent = ({
   Component,

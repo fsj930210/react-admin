@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { Form, Input, Button, Row } from 'antd';
 
-import CountDownButton from '@/components/CountDownButton';
-import MaterialInput from '@/components/Material/Input';
+import CountDownButton from '@/components/business/CountDown';
+import Icon from '@/components/Icon';
+import MaterialInput from '@/components/RaMaterial/Input';
 
 import { validateUsername } from '@/utils/validate';
 

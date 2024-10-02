@@ -1,6 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 
 import type { ItemType as BreadcrumbItemType } from 'antd/lib/breadcrumb/Breadcrumb';
+
 declare global {
   interface Window {
     sliderCaptcha: any;
@@ -46,6 +47,17 @@ export type MenuItem = {
   icon?: React.ReactNode;
   title?: string;
 };
-export type BreadcrumItem = BreadcrumbItemType & {
+export type BreadcrumbItem = BreadcrumbItemType & {
   icon?: React.ReactNode;
+};
+export type DropDownMapValue = {
+  key: string;
+  icon: JSX.Element;
+  label: string;
+  animateIcon?: JSX.Element;
+};
+
+export type ThemeItem = {
+  label: string;
+  value: string;
 };

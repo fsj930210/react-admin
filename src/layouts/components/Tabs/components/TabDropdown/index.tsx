@@ -1,9 +1,9 @@
-import React from 'react';
+import type React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { Popover } from 'antd';
 
+import Icon from '@/components/Icon';
 import type { Tab } from '@/components/RaTabs/interface';
 
 import type { PopoverProps } from 'antd';

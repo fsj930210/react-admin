@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { Icon } from '@iconify/react';
 import { Avatar, Input } from 'antd';
+
+import Icon from '@/components/Icon';
 
 import { usePassword } from '../../usePassword';
 
@@ -13,7 +14,7 @@ import { dayMap, padLeftZero } from '@/utils';
 
 const WindowsLockScreen = () => {
   const { hours, minutes, month, date, day } = useCurrentTime();
-  const { errorClassName, value, handlePressEnter, handleChage } =
+  const { errorClassName, value, handlePressEnter, handleChange } =
     usePassword();
   const [unlockVisible, setUnlockVisible] = useState(false);
 
@@ -61,7 +62,7 @@ const WindowsLockScreen = () => {
           <Input
             type="password"
             placeholder="密码"
-            onChange={handleChage}
+            onChange={handleChange}
             className={`${styles.input} ${errorClassName}`}
             value={value}
             suffix={

@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
-import { Icon } from '@iconify/react';
 import { Form, Input, Button } from 'antd';
 
-import CountDownButton from '@/components/CountDownButton';
-import MaterialInput from '@/components/Material/Input';
+import CountDown from '@/components/business/CountDown';
+import Icon from '@/components/Icon';
+import MaterialInput from '@/components/RaMaterial/Input';
 
-import { FormPageProps } from '@/store/login';
+import type { FormPageProps } from '@/store/login';
 
 type FieldType = {
   email: string;
@@ -92,7 +92,7 @@ const EmailForm = ({ material }: FormPageProps) => {
             />
           )}
         </FormItem>
-        <CountDownButton
+        <CountDown
           className="inline-block  ml[8px]"
           style={{ width: 'calc(40% - 8px)' }}
           defaultText={t('login.getCaptcha')}

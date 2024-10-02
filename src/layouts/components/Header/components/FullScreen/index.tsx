@@ -1,16 +1,17 @@
-import { Icon } from '@iconify/react';
 import { useFullscreen } from 'ahooks';
+
+import Icon from '@/components/Icon';
 const FullScreen = () => {
   const [isFullscreen, { toggleFullscreen }] = useFullscreen(document.body);
   return (
     <span
       onClick={toggleFullscreen}
-      className="text-[20px] cursor-pointer flex-center p-[4] rounded-[100%] bg-tansparent hover:bg-[var(--ant-color-bg-layout)] transition-all"
+      className="cursor-pointer leading-none p-[4] rounded-full bg-transparent hover:bg-[var(--ant-color-bg-layout)] transition-all"
     >
       {isFullscreen ? (
-        <Icon inline icon="ant-design:fullscreen-outlined" />
+        <Icon icon="ant-design:fullscreen-outlined" fontSize={20} />
       ) : (
-        <Icon inline icon="ant-design:fullscreen-exit-outlined" />
+        <Icon icon="ant-design:fullscreen-exit-outlined" fontSize={20} />
       )}
     </span>
   );

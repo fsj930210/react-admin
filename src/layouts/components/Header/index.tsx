@@ -1,8 +1,8 @@
-import { Icon } from '@iconify/react';
 import { Button, Layout, Space } from 'antd';
 
-import DarkTheme from '@/components/DarkTheme';
-import Translate from '@/components/Translate/indedx';
+import DarkTheme from '@/components/business/DarkTheme';
+import I18n from '@/components/business/I18n';
+import Icon from '@/components/Icon';
 
 import Breadcrumb from './components/Breadcrumb';
 import FullScreen from './components/FullScreen';
@@ -45,7 +45,7 @@ const AppHeader = () => {
         <Space size={[10, 0]}>
           <GlobalSearch />
           <DarkTheme />
-          <Translate />
+          <I18n />
           <FullScreen />
           <Notification />
           <UserCenter />

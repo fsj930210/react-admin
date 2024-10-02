@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
   DndContext,
-  DragEndEvent,
   PointerSensor,
   closestCenter,
   useSensor,
@@ -19,6 +18,8 @@ import { CSS } from '@dnd-kit/utilities';
 import type { RenderTabBarProps, Tab } from '@/components/RaTabs/interface';
 import type { TabNavListProps } from '@/components/RaTabs/TabNavList';
 import type { TabNodeProps } from '@/components/RaTabs/TabNavList/TabNode';
+
+import type { DragEndEvent } from '@dnd-kit/core';
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
   'data-node-key': string;

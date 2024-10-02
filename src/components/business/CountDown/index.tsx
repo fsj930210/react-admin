@@ -2,22 +2,23 @@ import { useState } from 'react';
 
 import { useCountDown } from 'ahooks';
 import { Button } from 'antd';
-import { ButtonProps } from 'antd/lib';
 
-type CountDownButtonProps = {
+import type { ButtonProps } from 'antd/lib';
+
+type CountDownProps = {
   defaultText?: string;
   targetTime?: number;
   interval?: number;
   setText?: (leftTime?: number) => string;
 };
-const CountDownButton = ({
+const CountDown = ({
   defaultText = '发送验证码',
   targetTime = 60,
   interval = 1000,
   style,
   setText,
   ...rest
-}: CountDownButtonProps & ButtonProps) => {
+}: CountDownProps & ButtonProps) => {
   const [targetDate, setTargetDate] = useState<number>();
   const [countdown] = useCountDown({
     targetDate,
@@ -42,4 +43,4 @@ const CountDownButton = ({
   );
 };
 
-export default CountDownButton;
+export default CountDown;
