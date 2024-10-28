@@ -12,6 +12,8 @@ const dataViewRouter: IRouteObject[] = [
       title: 'dataView',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 2,
       icon: 'ant-design:pie-chart-outlined',
     },

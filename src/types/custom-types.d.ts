@@ -34,6 +34,8 @@ export interface IRouteObjectMeta {
   menu?: boolean; // 是否是菜单，不是菜单的会被过滤掉
   icon?: string; // 菜单icon
   order?: number; // 菜单排序 值越小越排在前面
+  hidden?: boolean; // 是否隐藏 是否在侧边栏展示
+  openMode?: 'iframe' | 'newBrowserTab' | 'router'; // 菜单打开方式 iframe-使用iframe嵌入系统 newBrowserTab-使用新的浏览器标签打开 router-使用路由打开
 }
 
 export type IRouteObject = RouteObject & {
@@ -46,6 +48,8 @@ export type MenuItem = {
   children?: MenuItem[];
   icon?: React.ReactNode;
   title?: string;
+  iconName?: string;
+  hidden?: boolean;
 };
 export type BreadcrumbItem = BreadcrumbItemType & {
   icon?: React.ReactNode;

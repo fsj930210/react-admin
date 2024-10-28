@@ -17,7 +17,8 @@ import { CSS } from '@dnd-kit/utilities';
 
 import type { RenderTabBarProps, Tab } from '@/components/RaTabs/interface';
 import type { TabNavListProps } from '@/components/RaTabs/TabNavList';
-import type { TabNodeProps } from '@/components/RaTabs/TabNavList/TabNode';
+
+import LayoutTab from '../LayoutTab';
 
 import type { DragEndEvent } from '@dnd-kit/core';
 
@@ -36,7 +37,7 @@ const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
     ...props.style,
     transform: CSS.Translate.toString(transform),
     transition,
-    cursor: 'pointer',
+    cursor: 'move',
   };
 
   return React.cloneElement(props.children as React.ReactElement, {
@@ -51,15 +52,15 @@ type DraggableTabsProps = {
   updateTabItems: any;
   itemKeys: string[];
   defaultProps: RenderTabBarProps;
+  tabsLength: number;
   DefaultTabBar: React.ComponentType<TabNavListProps>;
-  children: TabNodeProps['renderWrapper'];
 };
 const DraggableTabs = ({
   updateTabItems,
   itemKeys,
   DefaultTabBar,
   defaultProps,
-  children,
+  tabsLength,
 }: DraggableTabsProps) => {
   const sensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
@@ -86,16 +87,28 @@ const DraggableTabs = ({
         strategy={horizontalListSortingStrategy}
       >
         <DefaultTabBar {...defaultProps}>
-          {(node, props, nodeKey) =>
+          {(node, props, nodeKey, index) =>
             props.tab.pin ? (
-              children ? (
-                children(node, props, nodeKey)
-              ) : (
-                <></>
-              )
+              <LayoutTab
+                node={node}
+                props={props}
+                nodeKey={nodeKey}
+                updateTabItems={updateTabItems}
+                index={index}
+                tabsLength={tabsLength}
+              />
             ) : (
               <DraggableTabNode {...node.props} key={node.key}>
-                {children ? children(node, props, nodeKey) : <></>}
+                <div data-node-key={nodeKey}>
+                  <LayoutTab
+                    node={node}
+                    props={props}
+                    nodeKey={nodeKey}
+                    updateTabItems={updateTabItems}
+                    index={index}
+                    tabsLength={tabsLength}
+                  />
+                </div>
               </DraggableTabNode>
             )
           }

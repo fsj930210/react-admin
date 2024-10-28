@@ -15,6 +15,8 @@ const featureRouter: IRouteObject[] = [
       icon: 'mdi:feature-highlight',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 7,
     },
     children: [
@@ -32,6 +34,8 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'clipboard',
           icon: 'lucide:clipboard-copy',
         },
@@ -46,6 +50,8 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'excel',
           icon: 'ri:file-excel-2-line',
         },
@@ -60,6 +66,8 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'fileDownload',
           icon: 'ri:file-download-line',
         },
@@ -74,6 +82,8 @@ const featureRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'screenshot',
           icon: 'ri:screenshot-line',
         },

@@ -47,7 +47,7 @@ const EmailForm = ({ material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder={t('login.emialPlaceholder')}
+            placeholder={t('login.emailPlaceholder')}
           />
         ) : (
           <Input
@@ -58,7 +58,7 @@ const EmailForm = ({ material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder={t('login.emialPlaceholder')}
+            placeholder={t('login.emailPlaceholder')}
           />
         )}
       </FormItem>

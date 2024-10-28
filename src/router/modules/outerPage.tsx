@@ -15,6 +15,8 @@ const outerPageRouter: IRouteObject[] = [
       icon: 'carbon:link',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 9,
     },
 
@@ -28,6 +30,8 @@ const outerPageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'iframe',
           title: 'outerPageIframe',
           icon: 'material-symbols-light:iframe-outline',
         },
@@ -45,6 +49,8 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'iframe',
               title: 'nestjsIframe',
               icon: 'simple-icons:nestjs',
             },
@@ -59,6 +65,8 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'iframe',
               title: 'reactIframe',
               icon: 'carbon:logo-react',
             },
@@ -70,6 +78,8 @@ const outerPageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'newBrowserTab',
           title: 'outerLink',
           icon: 'ant-design:export-outlined',
         },
@@ -80,6 +90,8 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'newBrowserTab',
               title: 'antdOuterLink',
               icon: 'ant-design:ant-design-outlined',
             },
@@ -89,6 +101,8 @@ const outerPageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'newBrowserTab',
               title: 'projectGithub',
               icon: 'ant-design:github-outlined',
             },

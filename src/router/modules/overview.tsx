@@ -14,6 +14,8 @@ const overviewRouter: IRouteObject[] = [
       title: 'overview',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 1,
       icon: 'carbon:dashboard',
     },
@@ -32,6 +34,8 @@ const overviewRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'workspace',
           icon: 'carbon:workspace',
         },
@@ -46,6 +50,8 @@ const overviewRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'dashboard',
           icon: 'ri:dashboard-3-line',
         },

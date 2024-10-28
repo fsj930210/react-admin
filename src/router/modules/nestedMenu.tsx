@@ -15,6 +15,8 @@ const nestedMenuRouter: IRouteObject[] = [
       icon: 'ant-design:menu-outlined',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 8,
     },
 
@@ -33,6 +35,8 @@ const nestedMenuRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'nestedMenu1',
           icon: 'ant-design:menu-outlined',
         },
@@ -42,6 +46,8 @@ const nestedMenuRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'nestedMenu2',
           icon: 'ri:menu-fold-4-line',
         },
@@ -64,6 +70,8 @@ const nestedMenuRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'nestedMenu2-1',
               icon: 'ant-design:menu-outlined',
             },
@@ -75,6 +83,8 @@ const nestedMenuRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'nestedMenu3',
           icon: 'ri:menu-unfold-4-line',
         },
@@ -96,6 +106,8 @@ const nestedMenuRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'nestedMenu3-1',
               icon: 'ant-design:menu-outlined',
             },
@@ -105,6 +117,8 @@ const nestedMenuRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'nestedMenu3-2',
               icon: 'ri:menu-unfold-4-line',
             },
@@ -128,6 +142,8 @@ const nestedMenuRouter: IRouteObject[] = [
                 meta: {
                   auth: true,
                   menu: true,
+                  hidden: false,
+                  openMode: 'router',
                   title: '菜单3-2-1',
                   icon: 'ant-design:menu-outlined',
                 },

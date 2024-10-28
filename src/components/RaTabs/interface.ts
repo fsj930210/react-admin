@@ -1,9 +1,8 @@
 import type React from 'react';
 
-import { DropdownProps } from 'antd';
-
 import type { TabNavListProps } from './TabNavList';
 import type { TabPaneProps } from './TabPanelList/TabPane';
+import type { DropdownProps } from 'antd';
 import type { CSSMotionProps } from 'rc-motion';
 
 export type TriggerProps = {
@@ -51,10 +50,7 @@ export type RenderTabBarProps = {
   locale?: TabsLocale;
   more?: MoreProps;
   tabBarGutter?: number;
-  onTabClick: (
-    key: string,
-    e: React.MouseEvent | React.KeyboardEvent | React.FocusEvent,
-  ) => void;
+  onTabClick: (key: string, e: React.MouseEvent | React.KeyboardEvent) => void;
   onTabScroll?: OnTabScroll;
   extra?: TabBarExtraContent;
   style?: React.CSSProperties;

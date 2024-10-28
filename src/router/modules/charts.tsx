@@ -14,6 +14,8 @@ const chartsRouter: IRouteObject[] = [
       title: 'charts',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 4,
       icon: 'carbon:chart-histogram',
     },
@@ -33,6 +35,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'amap',
           icon: 'ra-icon:amap',
         },
@@ -47,6 +51,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'bmap',
           icon: 'ra-icon:bmap',
         },
@@ -61,6 +67,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'googleMap',
           icon: 'ra-icon:google-map',
         },
@@ -70,6 +78,8 @@ const chartsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'echarts',
           icon: 'ra-icon:echarts',
         },
@@ -89,6 +99,8 @@ const chartsRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'echartsBasic',
               icon: 'ra-icon:echarts-basic',
             },
@@ -103,6 +115,8 @@ const chartsRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'echartsAdvance',
               icon: 'ra-icon:echarts-advance',
             },
@@ -118,6 +132,8 @@ const chartsRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'echartsMap',
               icon: 'ra-icon:echarts-map',
             },

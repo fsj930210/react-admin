@@ -97,7 +97,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder={t('login.emialPlaceholder')}
+            placeholder={t('login.emailPlaceholder')}
           />
         ) : (
           <Input
@@ -108,7 +108,7 @@ const RegisterForm = ({ switchPage, material }: FormPageProps) => {
                 color="var(--ant-color-icon)"
               />
             }
-            placeholder={t('login.emialPlaceholder')}
+            placeholder={t('login.emailPlaceholder')}
           />
         )}
       </FormItem>

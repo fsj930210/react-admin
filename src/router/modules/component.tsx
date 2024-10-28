@@ -15,6 +15,8 @@ const componentRouter: IRouteObject[] = [
       icon: 'lucide:component',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 5,
     },
 
@@ -33,6 +35,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'clickOutsideComponent',
           icon: 'material-symbols-light:drag-click-rounded',
         },
@@ -47,6 +50,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'containerComponent',
           icon: 'carbon:web-services-container',
         },
@@ -61,6 +65,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'modalComponent',
           icon: 'material-symbols-light:dialogs-outline-rounded',
         },
@@ -75,6 +80,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'plateComponent',
           icon: 'ra-icon:plate',
         },
@@ -89,6 +95,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'tableComponent',
           icon: 'ant-design:table-outlined',
         },
@@ -103,6 +110,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'transferComponent',
           icon: 'lucide:arrow-left-right',
         },
@@ -117,6 +125,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'treeComponent',
           icon: 'carbon:tree-view',
         },
@@ -131,6 +140,7 @@ const componentRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
           title: 'uploadComponent',
           icon: 'lucide:upload',
         },

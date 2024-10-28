@@ -5,13 +5,15 @@ import LazyLoadComponent from '@/components/LazyLoadComponent';
 import type { IRouteObject } from '@/types/custom-types';
 
 // 聊天室
-const chartroomRouter: IRouteObject[] = [
+const chatroomRouter: IRouteObject[] = [
   {
     path: '/chatroom',
     meta: {
       title: 'chatroom',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 16,
       icon: 'ra-icon:chatroom',
     },
@@ -21,4 +23,4 @@ const chartroomRouter: IRouteObject[] = [
   },
 ];
 
-export default chartroomRouter;
+export default chatroomRouter;

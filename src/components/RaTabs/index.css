@@ -136,6 +136,10 @@
     height: 100%;
   }
 
+  .ra-tabs-tab-pin {
+    margin-right: 4px;
+  }
+
   .ra-tabs-tab-remove,
   .ra-tabs-nav-add {
     background-color: transparent;

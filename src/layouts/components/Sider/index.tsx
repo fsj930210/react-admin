@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { useDebounceEffect } from 'ahooks';
 import { Layout, Menu } from 'antd';
 
 import AppLogo from '@/components/app/AppLogo';
 
-import useMenu from '../../hooks/useMenu';
 import { getLevelKeys } from '../../utils/utils';
 
 import styles from './index.module.css';
@@ -14,6 +12,7 @@ import styles from './index.module.css';
 import type { LevelKeysProps } from '../../utils/utils';
 import type { MenuProps } from 'antd/lib';
 
+import useMenu from '@/layouts/hooks/useMenu';
 import useMenuStore from '@/store/menu';
 
 const { Sider } = Layout;
@@ -25,22 +24,18 @@ const AppSider = () => {
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   // 监听路由变化 设置侧边栏展开选中
-  useDebounceEffect(
-    () => {
-      setSelectedKeys([location.pathname]);
-      const keysArr = location.pathname.split('/').filter((i) => i);
-      const keys: string[] = [];
-      // 根据pathname生成keys
-      keysArr.reduce((prev: string, current: string) => {
-        const path = prev ? `${prev}/${current}` : `/${current}`;
-        keys.push(path);
-        return path;
-      }, '');
-      setOpenKeys(keys);
-    },
-    [location.pathname],
-    { wait: 16 },
-  );
+  useEffect(() => {
+    setSelectedKeys([location.pathname]);
+    const keysArr = location.pathname.split('/').filter((i) => i);
+    const keys: string[] = [];
+    // 根据pathname生成keys
+    keysArr.reduce((prev: string, current: string) => {
+      const path = prev ? `${prev}/${current}` : `/${current}`;
+      keys.push(path);
+      return path;
+    }, '');
+    setOpenKeys(keys);
+  }, [location.pathname]);
   const levelKeys = getLevelKeys(menuItems as LevelKeysProps[]);
   // 菜单展开时关闭其他已经展开的菜单
   const onOpenChange: MenuProps['onOpenChange'] = (allOpenKeys) => {

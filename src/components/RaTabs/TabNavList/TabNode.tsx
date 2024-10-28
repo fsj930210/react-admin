@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Icon from '@/components/Icon';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
+
+import Icon from '@/components/Icon';
 
 import { genDataNodeKey, getRemovable } from '../util';
 
@@ -15,12 +16,15 @@ export interface TabNodeProps {
   active: boolean;
   closable?: boolean;
   editable?: EditableConfig;
+  pinIcon?: React.ReactNode;
+  index: number;
   onClick?: (e: React.MouseEvent | React.KeyboardEvent) => void;
   onResize?: (width: number, height: number, left: number, top: number) => void;
   renderWrapper?: (
     node: React.ReactElement,
     props: Omit<TabNodeProps, 'renderWrapper'>,
     nodeKey: string,
+    index: number,
   ) => React.ReactElement;
   removeAriaLabel?: string;
   removeIcon?: React.ReactNode;
@@ -32,12 +36,14 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
   const {
     prefixCls,
     id,
+    index,
     active,
-    tab: { key, label, disabled, closeIcon, icon },
+    tab: { key, label, disabled, closeIcon, icon, pin },
     closable,
     renderWrapper,
     removeAriaLabel,
     editable,
+    pinIcon,
     onClick,
     // onFocus,
     style,
@@ -105,7 +111,11 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
         ) : null}
         {label && labelNode}
       </div>
-
+      {pin ? (
+        <span className={`${tabPrefix}-pin`}>
+          {pinIcon || <Icon inline icon="lucide:pin" />}
+        </span>
+      ) : null}
       {/* Remove Button */}
       {removable && (
         <button
@@ -124,7 +134,9 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
     </div>
   );
 
-  return renderWrapper ? renderWrapper(node, props, genDataNodeKey(key)) : node;
+  return renderWrapper
+    ? renderWrapper(node, props, genDataNodeKey(key), index)
+    : node;
 };
 
 export default TabNode;

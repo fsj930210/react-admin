@@ -12,6 +12,8 @@ const aboutRouter: IRouteObject[] = [
       title: 'about',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 18,
       icon: 'carbon:information',
     },

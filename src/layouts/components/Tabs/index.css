@@ -5,15 +5,8 @@
   }
 
   .ra-tabs-content-holder {
-    flex: 1;
-
-    .ra-tabs-content-top {
-      height: 100%;
-
-      .ra-tabs-tabpane {
-        height: 100%;
-      }
-    }
+    height: 0;
+    flex: none;
   }
 
   /* 通用样式 */
@@ -21,6 +14,7 @@
     position: relative;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     width: 150px;
+    height: 36px;
 
     .ra-tabs-tab {
       position: relative;
@@ -53,7 +47,7 @@
         align-items: center;
         line-height: 1;
         transition: opacity 0.2s;
-        padding: 11px 8px;
+        padding: 8px 4px;
         height: 100%;
         font-size: 12px;
       }
@@ -187,6 +181,11 @@
 
     .ra-tabs-tab-remove {
       opacity: 0;
+      padding-top: 12px;
+    }
+
+    .ra-tabs-tab-pin {
+      padding-top: 6px;
     }
 
     &:hover:not(.layout-tabs-tab-wrapper-active) {
@@ -204,6 +203,7 @@
     &:hover {
       .ra-tabs-tab-remove {
         opacity: 1;
+        padding-top: 12px;
       }
     }
   }
@@ -268,4 +268,10 @@
       border-left: 1px solid var(--ant-color-border);
     }
   }
+}
+
+.layout-tabs-tab-dropdown-disabled {
+  cursor: not-allowed;
+  color: var(--ant-color-text-disabled);
+  pointer-events: none;
 }

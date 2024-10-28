@@ -14,6 +14,8 @@ const pageRouter: IRouteObject[] = [
       title: 'page',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 6,
       icon: 'ri:pages-line',
     },
@@ -33,6 +35,8 @@ const pageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'cssPage',
           icon: 'ri:css3-line',
         },
@@ -42,6 +46,8 @@ const pageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'errorPage',
           icon: 'mdi:lightbulb-error-outline',
         },
@@ -56,6 +62,8 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'errorPage403',
               icon: 'carbon:error',
             },
@@ -70,6 +78,8 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'errorPage404',
               icon: 'tabler:error-404',
             },
@@ -84,6 +94,8 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'errorPage500',
               icon: 'carbon:data-error',
             },
@@ -95,6 +107,8 @@ const pageRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'listPage',
           icon: 'ri:list-view',
         },
@@ -111,6 +125,8 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'cardListPage',
               icon: 'material-symbols-light:featured-play-list-outline',
             },
@@ -125,6 +141,8 @@ const pageRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'normalListPage',
               icon: 'ri:file-list-line',
             },

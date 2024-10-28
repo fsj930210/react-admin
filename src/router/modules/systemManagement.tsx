@@ -14,6 +14,8 @@ const errorRouter: IRouteObject[] = [
       title: 'systemManagement',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       icon: 'tdesign:system-setting',
       order: 11,
     },
@@ -33,6 +35,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'userManagement',
           icon: 'lucide:user-round-cog',
         },
@@ -47,6 +51,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'roleManagement',
           icon: 'oui:app-users-roles',
         },
@@ -63,6 +69,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'organizationManagement',
           icon: 'fluent:organization-20-regular',
         },
@@ -77,6 +85,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'menuManagement',
           icon: 'ra-icon:menu-management',
         },
@@ -93,6 +103,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'dictionaryManagement',
           icon: 'streamline:dictionary-language-book',
         },
@@ -109,6 +121,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'paramsConfig',
           icon: 'carbon:parameter',
         },
@@ -118,6 +132,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'systemMonitor',
           icon: 'mdi:monitor-eye',
         },
@@ -143,6 +159,8 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'loginLogs',
               icon: 'ra-icon:login-logs',
             },
@@ -162,6 +180,8 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'onlineUsers',
               icon: 'carbon:user-online',
             },
@@ -181,6 +201,8 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'serviceMonitor',
               icon: 'eos-icons:monitoring',
             },
@@ -192,6 +214,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'taskScheduler',
           icon: 'ra-icon:task-scheduler',
         },
@@ -217,6 +241,8 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: '任务日志',
               icon: 'ra-icon:task-logs',
             },
@@ -236,6 +262,8 @@ const errorRouter: IRouteObject[] = [
             meta: {
               auth: true,
               menu: true,
+              hidden: false,
+              openMode: 'router',
               title: 'taskManagement',
               icon: 'fluent:task-list-square-settings-20-regular',
             },

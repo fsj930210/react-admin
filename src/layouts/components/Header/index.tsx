@@ -30,9 +30,9 @@ const AppHeader = () => {
           type="text"
           icon={
             collapsed ? (
-              <Icon icon="ant-design:menu-unfold-outlined" />
+              <Icon icon="ant-design:menu-unfold-outlined" fontSize={22} />
             ) : (
-              <Icon icon="ant-design:menu-fold-outlined" />
+              <Icon icon="ant-design:menu-fold-outlined" fontSize={22} />
             )
           }
           onClick={() => toggleCollapsed()}

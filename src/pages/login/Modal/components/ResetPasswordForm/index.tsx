@@ -67,7 +67,7 @@ const ResetPasswordForm = ({ switchPage }: FormPageProps) => {
       >
         <MaterialInput
           variant="standard"
-          placeholder={t('login.emialPlaceholder')}
+          placeholder={t('login.emailPlaceholder')}
         />
       </FormItem>
       <Row className="enter-x relative">

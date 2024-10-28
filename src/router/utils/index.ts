@@ -1,4 +1,6 @@
-import { IRouteObject } from '@/types/custom-types';
+import type { IRouteObject } from '@/types/custom-types';
+
+import { dfs } from '@/utils';
 
 export function getRoutes() {
   const routes: IRouteObject[] = [];
@@ -15,4 +17,8 @@ export function getRoutes() {
   // 根据order排序，升序排列，值越小越在前面
   routes.sort((a, b) => (a.meta?.order || 0) - (b.meta?.order || 0));
   return routes;
+}
+export function flatRoutes(routes: IRouteObject[]) {
+  const resolvedRoutes = dfs(routes);
+  return resolvedRoutes;
 }

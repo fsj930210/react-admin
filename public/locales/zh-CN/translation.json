@@ -20,12 +20,13 @@
     "closeCurrent": "关闭当前标签",
     "reload": "重新加载",
     "pin": "固定",
-    "openNewWindow": "再新窗口打开",
+    "cancelPin": "取消固定",
+    "openNewWindow": "在新窗口打开",
     "closeLeft": "关闭左侧标签",
     "closeRight": "关闭右侧标签",
     "closeOther": "关闭其他标签",
     "closeAll": "关闭全部标签",
-    "fullscreen": "全屏浏览"
+    "fullScreen": "全屏浏览"
   },
   "search": {
     "outerPlaceholder": "搜索",
@@ -48,7 +49,7 @@
     "usernamePlaceholder": "用户名",
     "passwordPlaceholder": "密码",
     "captchaPlaceholder": "验证码",
-    "emialPlaceholder": "邮箱",
+    "emailPlaceholder": "邮箱",
     "remember": "天内免登录",
     "forget": "忘记密码？",
     "loginBtn": "登录",

@@ -14,7 +14,6 @@ const ChromeTab = (props: Omit<TabNodeProps, 'renderWrapper'>) => {
     onClick?.(e);
   }
   return (
-    // <TabDropdown>
     <div onClick={onInternalClick} className="h-full w-full">
       <div className="layout-chrome-tabs-tab-divider" />
       <div className="layout-chrome-tabs-tab-background">
@@ -32,7 +31,6 @@ const ChromeTab = (props: Omit<TabNodeProps, 'renderWrapper'>) => {
         ) : null}
       </div>
     </div>
-    // </TabDropdown>
   );
 };
 if (process.env.NODE_ENV !== 'production') {

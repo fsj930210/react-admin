@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Tabs from '@/components/RaTabs';
@@ -10,25 +9,28 @@ import TabBarExtraContent from './components/TabBarExtraContent';
 
 import useTabs from '@/layouts/hooks/useTabs';
 import './index.css';
+import useTabActions from '@/layouts/hooks/useTabsActions';
 
-const AppTabs: React.FC = () => {
+const AppTabs = () => {
   const { tabItems, activeKey, setActiveKey, updateTabItems } = useTabs();
+  const { deleteTabFunc } = useTabActions({ updateTabItems });
   const navigate = useNavigate();
-  const handleTabItemClick = (
-    key: string,
-    e: React.MouseEvent | React.KeyboardEvent | React.FocusEvent,
-  ) => {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log(e.target);
+  const handleTabItemClick = (key: string) => {
     if (key === activeKey) return;
     setActiveKey(key);
     navigate(key);
   };
+  const activeTab = useMemo(() => {
+    if (tabItems) return tabItems.find((i) => i.key === activeKey);
+  }, [activeKey, tabItems]);
+  const activeTabIndex = useMemo(() => {
+    if (tabItems) return tabItems.findIndex((i) => i.key === activeKey);
+    return -1;
+  }, [activeKey, tabItems]);
+  const [draggable] = useState(true);
 
-  const [draggable] = useState(false);
   return (
-    <div className=" h-full flex flex-col  bg-[var(--ant-color-bg-container)] flex-1">
+    <div className="flex flex-col bg-[var(--ant-color-bg-container)]">
       <Tabs
         hideAdd
         items={tabItems}
@@ -40,8 +42,10 @@ const AppTabs: React.FC = () => {
           },
         }}
         editable={{
-          onEdit: () => {
-            console.log(1);
+          onEdit: (action, target) => {
+            if (action === 'remove') {
+              deleteTabFunc(target.key as string);
+            }
           },
         }}
         onTabClick={handleTabItemClick}
@@ -54,31 +58,32 @@ const AppTabs: React.FC = () => {
               itemKeys={tabItems!.map((i) => i.key)}
               defaultProps={tabBarProps}
               DefaultTabBar={DefaultTabBar}
-            >
-              {(node, props, nodeKey) => (
-                <LayoutTab
-                  node={node}
-                  props={props}
-                  nodeKey={nodeKey}
-                  updateTabItems={updateTabItems}
-                />
-              )}
-            </DraggableTabs>
+              tabsLength={tabItems?.length || 0}
+            />
           ) : (
             <DefaultTabBar {...tabBarProps}>
-              {(node, props, nodeKey) => (
+              {(node, props, nodeKey, index) => (
                 <LayoutTab
                   node={node}
                   props={props}
                   nodeKey={nodeKey}
                   updateTabItems={updateTabItems}
+                  index={index}
+                  tabsLength={tabItems?.length || 0}
                 />
               )}
             </DefaultTabBar>
           )
         }
         tabBarExtraContent={{
-          right: <TabBarExtraContent />,
+          right: (
+            <TabBarExtraContent
+              updateTabItems={updateTabItems}
+              tab={activeTab}
+              tabIndex={activeTabIndex}
+              tabsLength={tabItems?.length || 0}
+            />
+          ),
         }}
       />
     </div>

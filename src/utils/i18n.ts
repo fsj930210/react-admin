@@ -25,7 +25,7 @@ i18n
       cacheHitMode: 'refreshAndUpdateStore',
     },
     // debug: true,
-    fallbackLng: 'en',
+    fallbackLng: navigator.language,
     interpolation: {
       escapeValue: false,
     },

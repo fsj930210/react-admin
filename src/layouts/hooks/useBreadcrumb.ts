@@ -1,32 +1,23 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { useAsyncEffect } from 'ahooks';
-// import localforage from 'localforage';
 
 import useMenu from './useMenu';
 
 import type { BreadcrumbItem, MenuItem } from '@/types/custom-types';
 import type { BreadcrumbProps } from 'antd/lib';
-import type { TFunction } from 'i18next';
 
 import useGlobalStore from '@/store';
-import useMenuStore from '@/store/menu';
 
 function generateBreadcrumbList(
   key: string, // 通过点击的key来寻找
   menuList: MenuItem[], // 菜单列表
-  t: TFunction<'translation', undefined>,
 ) {
   const list: BreadcrumbProps['items'] = [];
   const keyArr: string[] = key.split('/').filter((i) => i);
   const firstMenuKey = keyArr[0];
   const firstMenu = menuList.find((item) => item?.key === '/' + firstMenuKey);
   if (firstMenu) {
-    formatMenu([firstMenu], list, key, t);
-  } else {
-    console.error('找不到此菜单');
+    formatMenu([firstMenu], list, key);
   }
   return list;
 }
@@ -34,20 +25,19 @@ function generateBreadcrumbList(
 function formatMenu(
   menList: MenuItem[], // 当前点击的菜单及其子孙菜单
   breadcrumbList: BreadcrumbProps['items'] = [], // 最后需要的面包屑列表
-  key: string, // 根据他来过滤平级菜单
-  t: TFunction<'translation', undefined>, // 翻译函数
+  key: string, // 根据他来过滤平级菜单 // 翻译函数
 ) {
   for (let i = 0; i < menList.length; i++) {
     const menu = menList[i];
     const breadcrumbItem: BreadcrumbItem = {
-      title: t(`menu.${menu?.label}`),
+      title: menu.label,
       path: menu.key,
       icon: menu?.icon,
     };
     if (menu.children) {
       breadcrumbItem.menu = {
         items: menu.children.map((item) => ({
-          label: t(`menu.${item?.label}`),
+          label: item.label,
           key: item?.key,
         })),
       };
@@ -56,7 +46,7 @@ function formatMenu(
         breadcrumbList.push(breadcrumbItem);
       }
       // 子菜单遍历，这里需要把子菜单提出来，面包屑不是嵌套结构
-      formatMenu(menu.children, breadcrumbList, key, t);
+      formatMenu(menu.children, breadcrumbList, key);
     } else if (key.includes(menu.key)) {
       breadcrumbList.push(breadcrumbItem);
     }
@@ -65,59 +55,32 @@ function formatMenu(
 
 const useBreadcrumb = () => {
   const location = useLocation();
-  const { t } = useTranslation();
-  const { stringIconMenuItems } = useMenu();
-  const { appLanguage } = useGlobalStore();
+  const { menuItems } = useMenu();
   const [breadcrumbList, setBreadcrumbList] = useState<
     BreadcrumbProps['items']
   >([]);
-  const { cachedBreadcrumbListMap } = useMenuStore();
-  useAsyncEffect(async () => {
+  const cachedBreadcrumbListMapRef = useRef<
+    Map<string, Record<string, BreadcrumbProps['items']>>
+  >(new Map());
+  const { appLanguage } = useGlobalStore();
+  useEffect(() => {
     const key = location.pathname;
-    const cachedKey = `${key}::breadcrumbList`;
-    const storeBreadCrumbRecord = cachedBreadcrumbListMap.get(cachedKey);
+    const cachedBreadCrumbRecord = cachedBreadcrumbListMapRef.current.get(key);
     //  一般情况下从store里面取，比从indexDB取快一些
-    if (storeBreadCrumbRecord) {
-      const storeCachedBreadCrumList = storeBreadCrumbRecord[appLanguage];
-      if (storeCachedBreadCrumList && storeCachedBreadCrumList.length > 0) {
-        setBreadcrumbList(storeCachedBreadCrumList);
-        // 这里没必要存，有store必然有db缓存
-        // localforage.setItem(cachedKey, {
-        //   ...(dbBreadCrumbRecord || {}),
-        //   [appLanguage]: storeCachedBreadCrumList,
-        // });
+    if (cachedBreadCrumbRecord) {
+      const storeCachedBreadCrumbList = cachedBreadCrumbRecord[appLanguage];
+      if (storeCachedBreadCrumbList && storeCachedBreadCrumbList.length > 0) {
+        setBreadcrumbList(storeCachedBreadCrumbList);
         return;
       }
     }
-    // 如果需要本地缓存面包屑则，解注释
-    // const dbBreadCrumbRecord =
-    //   await localforage.getItem<Record<string, BreadcrumbProps['items']>>(
-    //     cachedKey,
-    //   );
-
-    // if (dbBreadCrumbRecord) {
-    //   const dbCachedBreadCrumbList = dbBreadCrumbRecord[appLanguage];
-    //   if (dbCachedBreadCrumbList && dbCachedBreadCrumbList.length > 0) {
-    //     setBreadcrumbList(dbCachedBreadCrumbList);
-    //     cachedBreadcrumbListMap.set(cachedKey, {
-    //       ...(storeBreadCrumbRecord || {}),
-    //       [appLanguage]: dbCachedBreadCrumbList,
-    //     });
-    //     return;
-    //   }
-    // }
     // 根据pathname生成面包屑
-    const breadcrumbList = generateBreadcrumbList(key, stringIconMenuItems, t);
+    const breadcrumbList = generateBreadcrumbList(key, menuItems);
     setBreadcrumbList(breadcrumbList);
-    cachedBreadcrumbListMap.set(cachedKey, {
+    cachedBreadcrumbListMapRef.current.set(key, {
       [appLanguage]: breadcrumbList,
     });
-    // 如果需要本地缓存面包屑则，解注释
-    // localforage.setItem(cachedKey, {
-    //   ...(dbBreadCrumbRecord || {}),
-    //   [appLanguage]: breadcrumbList,
-    // });
-  }, [location.pathname, appLanguage, stringIconMenuItems]);
+  }, [location.pathname, menuItems]);
   return breadcrumbList;
 };
 

@@ -44,7 +44,7 @@ const EmailForm = ({ switchPage }: FormPageProps) => {
       >
         <MaterialInput
           variant="standard"
-          placeholder={t('login.emialPlaceholder')}
+          placeholder={t('login.emailPlaceholder')}
         />
       </FormItem>
       <FormItem className="mb-0 enter-x">

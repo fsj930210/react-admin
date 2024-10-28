@@ -2,13 +2,13 @@
 
 import React from 'react';
 
-import { RenderTabBarProps } from '../interface';
 import TabContext from '../TabContext';
 import TabPane from '../TabPanelList/TabPane';
 
 import TabNavList from '.';
 
 import type { TabNavListProps } from '.';
+import type { RenderTabBarProps } from '../interface';
 
 export type TabNavListWrapperProps = Pick<
   TabNavListProps,
@@ -30,7 +30,6 @@ const TabNavListWrapper: React.FC<TabNavListWrapperProps> = ({
         <TabPane tab={label} key={key} tabKey={key} {...restTabProps} />
       )),
     };
-
     return renderTabBar(tabNavBarProps, TabNavList);
   }
 

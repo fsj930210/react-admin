@@ -19,8 +19,9 @@ import AddButton from './AddButton';
 import ExtraContent from './ExtraContent';
 import OperationNode from './OperationNode';
 import ScrollButton from './ScrollButton';
-import TabNode, { TabNodeProps } from './TabNode';
+import TabNode from './TabNode';
 
+import type { TabNodeProps } from './TabNode';
 import type { GetIndicatorSize } from '../hooks/useIndicator';
 import type {
   AnimatedConfig,
@@ -60,6 +61,7 @@ export interface TabNavListProps {
     node: React.ReactElement,
     props: Omit<TabNodeProps, 'renderWrapper'>,
     nodeKey: string,
+    index: number,
   ) => React.ReactElement;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;
   popupClassName?: string;
@@ -422,6 +424,7 @@ const TabNavList = React.forwardRef<HTMLDivElement, TabNavListProps>(
           onClick={(e) => {
             onTabClick(key, e);
           }}
+          index={i}
           // onFocus={(e) => {
           //   // scrollToTab(key);
           //   // onTabClick(key, e);

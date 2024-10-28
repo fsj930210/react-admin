@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import { ConfigProvider, App as AntApp, theme as antdTheme } from 'antd';
@@ -32,7 +32,6 @@ const App = () => {
   const { antdLanguage } = useI18n();
   const { primaryColor } = useGlobalStore();
   const theme = useTheme();
-
   return (
     <AppContext.Provider value={{ theme, appCssTokenKey: 'ra-css-var' }}>
       <ConfigProvider
@@ -63,9 +62,7 @@ const App = () => {
         }}
       >
         <AntApp className="w-full h-full">
-          <Suspense fallback={<AppLoading showText />}>
-            <RouterProvider router={router} fallbackElement={<AppLoading />} />
-          </Suspense>
+          <RouterProvider router={router} fallbackElement={<AppLoading />} />
         </AntApp>
         {/* <LockScreen /> */}
       </ConfigProvider>

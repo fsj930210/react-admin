@@ -14,6 +14,8 @@ const errorRouter: IRouteObject[] = [
       title: 'permissions',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 3,
       icon: 'ra-icon:permissions',
     },
@@ -32,6 +34,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'buttonPermissions',
           icon: 'ra-icon:button-permissions',
         },
@@ -46,6 +50,8 @@ const errorRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'pagePermissions',
           icon: 'ra-icon:page-permissions',
         },

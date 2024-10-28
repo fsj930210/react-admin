@@ -15,6 +15,8 @@ const systemUtilsRouter: IRouteObject[] = [
       icon: 'carbon:tool-kit',
       auth: true,
       menu: true,
+      hidden: false,
+      openMode: 'router',
       order: 10,
     },
 
@@ -33,6 +35,8 @@ const systemUtilsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'eamilUtils',
           icon: 'lucide:mail',
         },
@@ -47,6 +51,8 @@ const systemUtilsRouter: IRouteObject[] = [
         meta: {
           auth: true,
           menu: true,
+          hidden: false,
+          openMode: 'router',
           title: 'storageManagement',
           icon: 'ant-design:database-outlined',
         },

@@ -12,7 +12,7 @@ const Home = () => {
   });
   const { days, hours, minutes, seconds, milliseconds } = formattedRes;
   return (
-    <div>
+    <div className="h-full overflow-auto">
       <div className="text-blue">Home Page</div>
       <button onClick={() => increase(1)}>counter: {counter}</button>
       <Button type="primary">Primary</Button>
@@ -22,6 +22,9 @@ const Home = () => {
         23:59:59
       </p>
       <DatePicker />
+      {Array.from({ length: 300 }).map((_, index) => {
+        return <div key={index}>workspace {index}</div>;
+      })}
     </div>
   );
 };
