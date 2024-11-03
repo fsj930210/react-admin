@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useShallow } from 'zustand/react/shallow';
+
 import Tabs from '@/components/RaTabs';
 
 import DraggableTabs from './components/DraggableTabs';
@@ -10,9 +12,18 @@ import TabBarExtraContent from './components/TabBarExtraContent';
 import useTabs from '@/layouts/hooks/useTabs';
 import './index.css';
 import useTabActions from '@/layouts/hooks/useTabsActions';
+import useTabsStore from '@/store/tabs';
 
-const AppTabs = () => {
-  const { tabItems, activeKey, setActiveKey, updateTabItems } = useTabs();
+const LayoutTabs = () => {
+  const { updateTabItems } = useTabs();
+  const { tabItems, activeKey, setActiveKey } = useTabsStore(
+    useShallow((state) => ({
+      tabItems: state.tabItems,
+      activeKey: state.activeKey,
+      setActiveKey: state.setActiveKey,
+      setTabItems: state.setTabItems,
+    })),
+  );
   const { deleteTabFunc } = useTabActions({ updateTabItems });
   const navigate = useNavigate();
   const handleTabItemClick = (key: string) => {
@@ -58,7 +69,6 @@ const AppTabs = () => {
               itemKeys={tabItems!.map((i) => i.key)}
               defaultProps={tabBarProps}
               DefaultTabBar={DefaultTabBar}
-              tabsLength={tabItems?.length || 0}
             />
           ) : (
             <DefaultTabBar {...tabBarProps}>
@@ -69,7 +79,6 @@ const AppTabs = () => {
                   nodeKey={nodeKey}
                   updateTabItems={updateTabItems}
                   index={index}
-                  tabsLength={tabItems?.length || 0}
                 />
               )}
             </DefaultTabBar>
@@ -81,7 +90,6 @@ const AppTabs = () => {
               updateTabItems={updateTabItems}
               tab={activeTab}
               tabIndex={activeTabIndex}
-              tabsLength={tabItems?.length || 0}
             />
           ),
         }}
@@ -90,4 +98,4 @@ const AppTabs = () => {
   );
 };
 
-export default AppTabs;
+export default LayoutTabs;

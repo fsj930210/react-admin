@@ -2,24 +2,24 @@ import { forwardRef, useState } from 'react';
 
 import classNames from 'classnames';
 
-import type { Tab } from '@/components/RaTabs/interface';
 import type { TabNodeProps } from '@/components/RaTabs/TabNavList/TabNode';
 
 import ChromeTab from '../ChromeTab';
 import TabDropdown from '../TabDropdown';
+
+import type { UpdateTabItems } from '@/layouts/hooks/useTabs';
 
 type LayoutTabProps = {
   node: React.ReactElement;
   props: Omit<TabNodeProps, 'renderWrapper'>;
   nodeKey: string;
   index: number;
-  tabsLength: number;
-  updateTabItems: (updateFunc: (preItems: Tab[]) => Tab[]) => void;
+  updateTabItems: UpdateTabItems;
 };
 
 const LayoutTab = forwardRef(
   (
-    { node, props, index, tabsLength, updateTabItems }: LayoutTabProps,
+    { node, props, index, updateTabItems }: LayoutTabProps,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _ref,
   ) => {
@@ -29,7 +29,6 @@ const LayoutTab = forwardRef(
         tab={props.tab}
         updateTabItems={updateTabItems}
         index={index}
-        tabsLength={tabsLength}
       >
         <div
           className={classNames({

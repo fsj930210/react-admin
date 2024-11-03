@@ -41,7 +41,8 @@
   position: absolute;
   top: 62px;
   transform-origin: 50%;
-  z-index: -1;
+
+  /* z-index: -1; */
   left: 15%;
   filter: blur(1px);
   animation: shadow 0.5s alternate infinite ease;

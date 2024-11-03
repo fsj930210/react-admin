@@ -1,3 +1,5 @@
+import { useShallow } from 'zustand/react/shallow';
+
 import QRCodeForm from '../components/QRCodeForm';
 
 import EmailForm from './components/EmailForm';
@@ -9,7 +11,12 @@ import styles from './index.module.css';
 import AppFooter from '@/layouts/components/Footer';
 import useLoginStore, { LoginPageEnum } from '@/store/login';
 const LoginModal = () => {
-  const { loginPage, changeLoginPage } = useLoginStore();
+  const { loginPage, changeLoginPage } = useLoginStore(
+    useShallow((state) => ({
+      loginPage: state.loginPage,
+      changeLoginPage: state.changeLoginPage,
+    })),
+  );
   return (
     <div className="bg-[var(--ant-color-primary-bg)] w-full h-full relative">
       <div className={styles['login-box']}>

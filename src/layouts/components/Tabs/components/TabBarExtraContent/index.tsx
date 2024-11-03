@@ -3,18 +3,18 @@ import type { Tab } from '@/components/RaTabs/interface';
 
 import TabDropdown from '../TabDropdown';
 
+import type { UpdateTabItems } from '@/layouts/hooks/useTabs';
+
 import useTabActions from '@/layouts/hooks/useTabsActions';
 
 type TabBarExtraContentProps = {
   tab?: Tab;
   tabIndex: number;
-  tabsLength: number;
-  updateTabItems: (updateFunc: (preItems: Tab[]) => Tab[]) => void;
+  updateTabItems: UpdateTabItems;
 };
 const TabBarExtraContent = ({
   tab,
   tabIndex,
-  tabsLength,
   updateTabItems,
 }: TabBarExtraContentProps) => {
   const { isFullscreen, reloadTabFunc, toggleFullscreen } = useTabActions({
@@ -36,7 +36,6 @@ const TabBarExtraContent = ({
           tab={tab}
           updateTabItems={updateTabItems}
           index={tabIndex}
-          tabsLength={tabsLength}
         >
           <div className="w-full h-full flex items-center">
             <Icon icon="lucide:chevron-down" />

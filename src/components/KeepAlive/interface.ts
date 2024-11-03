@@ -2,24 +2,20 @@ import type {
   CSSProperties,
   ReactNode,
   ReactElement,
-  SetStateAction,
-  Dispatch,
   MutableRefObject,
 } from 'react';
 
-interface KeepAliveCommonProps {
+export interface KeepAliveProps {
   children: ReactElement | null;
   cachedKey?: string;
   style?: CSSProperties;
   className?: string;
-  saveScrollPosition?: boolean;
-}
-
-export type KeepAliveProps = KeepAliveCommonProps;
-export interface KeepAliveRouteProps extends KeepAliveCommonProps {
   includes?: string | RegExp | (string | RegExp)[];
   excludes?: string | RegExp | (string | RegExp)[];
   saveScrollPosition?: boolean;
+  keepRoutes?: boolean;
+  refreshFallback?: React.ReactNode;
+  refreshInterval?: number;
 }
 export type ActivityMode = 'visible' | 'hidden';
 
@@ -42,6 +38,8 @@ export type CachedComponent = {
   cachedScrollNodes?: ScrollNodesPosition[];
   element?: HTMLDivElement | null;
   refreshKey?: string;
+  refreshing?: boolean;
+  el: HTMLDivElement;
 };
 
 export type ExcludeComponent = {
@@ -50,12 +48,11 @@ export type ExcludeComponent = {
   refreshKey?: string;
 };
 export type KeepAliveContextValue = {
-  cachedComponents: CachedComponent[];
-  cachedComponentsRef: MutableRefObject<CachedComponent[]> | null;
-  setCachedComponents: Dispatch<SetStateAction<CachedComponent[]>>;
+  allCachedComponentsRef: MutableRefObject<CachedComponent[]> | null;
+};
+export type KeepAliveRef = {
   onClearCache: () => void;
-  onRemoveCache: (key: string) => void;
   onRefreshCache: (key: string) => void;
+  onRemoveCache: (key: string) => void;
   onRemoveCacheByKeys: (keys: string[]) => void;
-  onRemoveOtherCache: (key: string) => void;
 };

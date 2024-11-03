@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Layout, Menu } from 'antd';
+import { useShallow } from 'zustand/react/shallow';
 
 import AppLogo from '@/components/app/AppLogo';
 
@@ -12,15 +13,18 @@ import styles from './index.module.css';
 import type { LevelKeysProps } from '../../utils/utils';
 import type { MenuProps } from 'antd/lib';
 
-import useMenu from '@/layouts/hooks/useMenu';
 import useMenuStore from '@/store/menu';
 
 const { Sider } = Layout;
 const AppSider = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { collapsed } = useMenuStore();
-  const { menuItems } = useMenu();
+  const { collapsed, menuItems } = useMenuStore(
+    useShallow((state) => ({
+      menuItems: state.menuItems,
+      collapsed: state.collapsed,
+    })),
+  );
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   // 监听路由变化 设置侧边栏展开选中

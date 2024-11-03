@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 
 import {
   Button,
@@ -6,6 +6,8 @@ import {
   ColorPicker,
   Drawer,
   Dropdown,
+  Input,
+  InputNumber,
   Modal,
   Popover,
   Select,
@@ -13,7 +15,6 @@ import {
   Tooltip,
   TreeSelect,
 } from 'antd';
-import { Fragment } from 'react/jsx-runtime';
 
 import { KeepAlive } from '@/components/KeepAlive';
 
@@ -155,6 +156,7 @@ const Dashboard = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [value, setValue] = useState<string>();
+  const [show, setShow] = useState(false);
   const showDrawer = () => {
     setOpenDrawer(true);
   };
@@ -178,19 +180,26 @@ const Dashboard = () => {
     console.log('onPopupScroll', e);
   };
   return (
-    <div className="ooi">
+    <div className="ooi" key="2225">
       <Button type="primary" onClick={showDrawer}>
         Open Drawer
       </Button>
       <Drawer title="Basic Drawer" onClose={onCloseDrawer} open={openDrawer}>
         <KeepAlive className="h-full overflow-auto">
           <Fragment key="aa">
+            <Input />
             {Array.from({ length: 300 }).map((_, index) => {
               return <div key={index}>workspace {index}</div>;
             })}
           </Fragment>
         </KeepAlive>
       </Drawer>
+      <KeepAlive>
+        {show ? <Input key="input" /> : <InputNumber key="inputNumber" />}
+      </KeepAlive>
+      <Button type="primary" onClick={() => setShow(!show)}>
+        toggle
+      </Button>
       <Button type="primary" onClick={showModal}>
         Open Modal
       </Button>

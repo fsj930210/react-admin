@@ -7,7 +7,7 @@ import Icon from '@/components/Icon';
 import useGlobalStore from '@/store';
 const I18n = () => {
   const { t, i18n } = useTranslation();
-  const { changeAppLanguage } = useGlobalStore();
+  const changeAppLanguage = useGlobalStore((state) => state.changeAppLanguage);
   const items = [
     {
       key: 'zh-CN',

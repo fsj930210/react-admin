@@ -48,7 +48,7 @@ export type MenuItem = {
   children?: MenuItem[];
   icon?: React.ReactNode;
   title?: string;
-  iconName?: string;
+  ['data-icon']?: string;
   hidden?: boolean;
 };
 export type BreadcrumbItem = BreadcrumbItemType & {

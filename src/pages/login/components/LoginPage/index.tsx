@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { Typography } from 'antd';
+import { useShallow } from 'zustand/react/shallow';
 
 import AppLogo from '@/components/app/AppLogo';
 import Tabs from '@/components/RaTabs';
@@ -23,7 +24,12 @@ type LoginPageProps = {
 };
 const LoginPage = ({ material }: LoginPageProps) => {
   const { t } = useTranslation();
-  const { loginPage, changeLoginPage } = useLoginStore();
+  const { loginPage, changeLoginPage } = useLoginStore(
+    useShallow((state) => ({
+      loginPage: state.loginPage,
+      changeLoginPage: state.changeLoginPage,
+    })),
+  );
   const items = [
     {
       key: '1',

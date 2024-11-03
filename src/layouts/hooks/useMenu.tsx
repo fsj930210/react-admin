@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useShallow } from 'zustand/react/shallow';
 
 import Icon from '@/components/Icon';
 
@@ -7,6 +9,7 @@ import type { IRouteObject, MenuItem } from '@/types/custom-types';
 
 import routes from '@/router/routes';
 import useGlobalStore from '@/store';
+import useMenuStore from '@/store/menu';
 import { dfs } from '@/utils';
 
 function formatRoutes({
@@ -39,7 +42,7 @@ function formatRoutes({
             wrapClassName="leading-none mr-[4]"
           />
         ),
-        // iconName: meta?.icon || 'ant-design:appstore-outlned',
+        ['data-icon']: meta?.icon || 'ant-design:appstore-outlned',
       };
     }
     // 有嵌套路由递归遍历
@@ -60,11 +63,15 @@ function formatRoutes({
 }
 function useMenu() {
   const { t } = useTranslation();
-  const { appLanguage } = useGlobalStore();
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [flatMenuItems, setFlatMenuItems] = useState<MenuItem[]>([]);
+  const appLanguage = useGlobalStore((state) => state.appLanguage);
+  const { setFlatMenuItems, setMenuItems } = useMenuStore(
+    useShallow((state) => ({
+      setMenuItems: state.setMenuItems,
+      setFlatMenuItems: state.setFlatMenuItems,
+    })),
+  );
   const menuItemsRef = useRef<MenuItem[]>([]);
-
+  const flatMenuItemsRef = useRef<MenuItem[]>([]);
   useEffect(() => {
     const menuItems: MenuItem[] = [];
     formatRoutes({
@@ -72,7 +79,7 @@ function useMenu() {
       menuItems,
     });
     menuItemsRef.current = menuItems[0].children as MenuItem[];
-    setFlatMenuItems(dfs(menuItemsRef.current));
+    flatMenuItemsRef.current = dfs(menuItemsRef.current);
   }, [routes]);
 
   useEffect(() => {
@@ -94,18 +101,12 @@ function useMenu() {
     }
     translate(menuItemsRef.current, filteredMenuItems);
     setMenuItems(filteredMenuItems);
-    setFlatMenuItems((prev) => {
-      const newFlatMenuItems = prev.map((i) => ({
-        ...i,
-        label: t(`menu.${i.title}`),
-      }));
-      return newFlatMenuItems;
-    });
+    const newFlatMenuItems = flatMenuItemsRef.current.map((i) => ({
+      ...i,
+      label: t(`menu.${i.title}`),
+    }));
+    setFlatMenuItems(newFlatMenuItems);
   }, [appLanguage]);
-  return {
-    menuItems,
-    flatMenuItems,
-  };
 }
 
 export default useMenu;

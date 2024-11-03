@@ -1,41 +1,54 @@
-import { memo, forwardRef, useImperativeHandle } from 'react';
+import { memo, Fragment, forwardRef, useImperativeHandle } from 'react';
 import type { Ref } from 'react';
 
 import useKeepAlive from '../../hooks/useKeepAlive';
 import Activity from '../Activity';
 
-import type { KeepAliveRef, KeepAliveRouteProps } from '../../interface';
+import type { KeepAliveProps, KeepAliveRef } from '../../interface';
 
-function KeepAlive(props: KeepAliveRouteProps, ref: Ref<KeepAliveRef>) {
-  const { className, style } = props;
+function KeepAlive(props: KeepAliveProps, ref: Ref<KeepAliveRef>) {
+  const { className, style, refreshFallback } = props;
   const {
-    components,
+    excludeComponents,
+    cachedComponents,
     activeKey,
     containerRef,
-    handleRefresh,
-    handleClear,
-    handleRemove,
-    handleRemoveByKeys,
-    handleRemoveOther,
+    onClearCache,
+    onRefreshCache,
+    onRemoveCache,
+    onRemoveCacheByKeys,
   } = useKeepAlive(props);
   useImperativeHandle(ref, () => ({
-    onClearCache: handleClear,
-    onRemoveCache: handleRemove,
-    onRefreshCache: handleRefresh,
-    onRemoveCacheByKeys: handleRemoveByKeys,
-    onRemoveOtherCache: handleRemoveOther,
+    onRefreshCache,
+    onRemoveCache,
+    onRemoveCacheByKeys,
+    onClearCache,
   }));
 
   return (
-    <div ref={containerRef} className={className} style={style}>
-      {components?.map((o) => (
-        <Activity
-          key={o.refreshKey}
-          mode={o.key === activeKey ? 'visible' : 'hidden'}
-        >
-          {o.component}
-        </Activity>
-      ))}
+    <div
+      ref={containerRef}
+      className={className}
+      style={style}
+      data-key={activeKey}
+    >
+      {cachedComponents?.map((o) =>
+        o.refreshing ? (
+          <Fragment key={o.refreshKey}>{refreshFallback}</Fragment>
+        ) : (
+          <Activity
+            key={o.refreshKey}
+            mode={o.key === activeKey ? 'visible' : 'hidden'}
+          >
+            {o.component}
+          </Activity>
+        ),
+      )}
+      {excludeComponents?.map((item) =>
+        activeKey === item.key ? (
+          <Fragment key={item.refreshKey}>{item.component}</Fragment>
+        ) : null,
+      )}
     </div>
   );
 }

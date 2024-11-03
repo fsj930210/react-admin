@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import useMenu from './useMenu';
-
 import type { BreadcrumbItem, MenuItem } from '@/types/custom-types';
 import type { BreadcrumbProps } from 'antd/lib';
 
 import useGlobalStore from '@/store';
+import useMenuStore from '@/store/menu';
 
 function generateBreadcrumbList(
   key: string, // 通过点击的key来寻找
@@ -55,7 +54,7 @@ function formatMenu(
 
 const useBreadcrumb = () => {
   const location = useLocation();
-  const { menuItems } = useMenu();
+  const menuItems = useMenuStore((state) => state.menuItems);
   const [breadcrumbList, setBreadcrumbList] = useState<
     BreadcrumbProps['items']
   >([]);

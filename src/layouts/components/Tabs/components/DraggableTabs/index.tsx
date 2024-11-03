@@ -52,7 +52,6 @@ type DraggableTabsProps = {
   updateTabItems: any;
   itemKeys: string[];
   defaultProps: RenderTabBarProps;
-  tabsLength: number;
   DefaultTabBar: React.ComponentType<TabNavListProps>;
 };
 const DraggableTabs = ({
@@ -60,7 +59,6 @@ const DraggableTabs = ({
   itemKeys,
   DefaultTabBar,
   defaultProps,
-  tabsLength,
 }: DraggableTabsProps) => {
   const sensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
@@ -95,7 +93,6 @@ const DraggableTabs = ({
                 nodeKey={nodeKey}
                 updateTabItems={updateTabItems}
                 index={index}
-                tabsLength={tabsLength}
               />
             ) : (
               <DraggableTabNode {...node.props} key={node.key}>
@@ -106,7 +103,6 @@ const DraggableTabs = ({
                     nodeKey={nodeKey}
                     updateTabItems={updateTabItems}
                     index={index}
-                    tabsLength={tabsLength}
                   />
                 </div>
               </DraggableTabNode>

@@ -7,7 +7,9 @@ type ThemeItemProps = {
   simple?: boolean;
 };
 const ThemeItem = ({ simple }: ThemeItemProps) => {
-  const { changePrimaryColor } = useGlobalStore();
+  const changePrimaryColor = useGlobalStore(
+    (state) => state.changePrimaryColor,
+  );
   return (
     <div className="flex">
       {builtInThemes.map((item) => {

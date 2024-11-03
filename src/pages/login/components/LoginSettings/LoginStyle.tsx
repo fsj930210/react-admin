@@ -1,4 +1,5 @@
 import { Dropdown } from 'antd';
+import { useShallow } from 'zustand/react/shallow';
 
 import Icon from '@/components/Icon';
 
@@ -7,7 +8,12 @@ import type { DropDownMapValue } from '@/types/custom-types';
 import useLoginStore, { LoginStyleEnum } from '@/store/login';
 
 const LoginStyle = () => {
-  const { changeLoginStyle, loginStyle } = useLoginStore();
+  const { changeLoginStyle, loginStyle } = useLoginStore(
+    useShallow((state) => ({
+      changeLoginStyle: state.changeLoginStyle,
+      loginStyle: state.loginStyle,
+    })),
+  );
   const styleMap: Record<LoginStyleEnum | string, DropDownMapValue> = {
     [LoginStyleEnum.ant]: {
       key: LoginStyleEnum.ant,

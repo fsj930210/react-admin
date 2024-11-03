@@ -1,64 +1,69 @@
-import { useContext, useMemo } from 'react';
+import { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useFullscreen } from 'ahooks';
 
-import { KeepAliveContext } from '@/components/KeepAlive/KeepAliveContext';
 import type { Tab } from '@/components/RaTabs/interface';
 
+import { LayoutTabsContext } from '../components/Content/LayoutTabsContext';
+
 import { HOME_PATH } from '@/utils/constants';
+
+import useTabsStore from '@/store/tabs';
 
 const useTabActions = ({
   updateTabItems,
 }: {
-  updateTabItems: (updateFunc: (preItems: Tab[]) => Tab[]) => void;
+  updateTabItems: (updateFunc: () => Tab[]) => void;
 }) => {
   const navigate = useNavigate();
-  const {
-    onRefreshCache,
-    onRemoveCache,
-    onRemoveCacheByKeys,
-    onRemoveOtherCache,
-  } = useContext(KeepAliveContext);
-  const [isFullscreen, { toggleFullscreen }] = useFullscreen(
-    document.getElementById('ra-content-container'),
-  );
-  const actions = useMemo(() => {
-    // 重新加载
-    const reloadTabFunc = (key: string) => {
+  const { onRemoveCache, onRefreshCache, onRemoveCacheByKeys } =
+    useContext(LayoutTabsContext);
+  const tabItems = useTabsStore((state) => state.tabItems);
+  const [isFullscreen, { toggleFullscreen: toggleFullscreenFunc }] =
+    useFullscreen(document.getElementById('ra-content-container'));
+  // 重新加载
+  const reloadTabFunc = useCallback(
+    (key: string) => {
       onRefreshCache?.(key);
-    };
-    // 删除Tab
-    const deleteTabFunc = (key: string) => {
-      if (key === HOME_PATH) return;
-      updateTabItems((prevTabItems) => {
-        const index = prevTabItems.findIndex((i) => i.key === key);
+    },
+    [onRefreshCache],
+  );
+  // 删除Tab
+  const deleteTabFunc = useCallback(
+    (key: string) => {
+      updateTabItems(() => {
+        const index = tabItems.findIndex((i) => i.key === key);
         const prevIndex = index - 1;
         if (index > -1) {
-          const newTabs = [...prevTabItems];
+          if (!tabItems[index].closable) return tabItems;
+          const newTabs = [...tabItems];
           newTabs.splice(index, 1);
           if (prevIndex > -1) {
             setTimeout(() => {
-              navigate(prevTabItems[prevIndex].key);
+              navigate(tabItems[prevIndex].key);
             }, 0);
           }
+          onRemoveCache?.(key);
           return newTabs;
         } else {
-          return prevTabItems;
+          return tabItems;
         }
       });
-      onRemoveCache?.(key);
-    };
-    // 固定 如果现有items有固定的则放到最后一个固定的后面
-    const pinTabFunc = (item: Tab) => {
-      updateTabItems((prevTabItems) => {
-        const newItems = [...prevTabItems];
-        const index = prevTabItems.findIndex((i) => i.key === item?.key);
+    },
+    [tabItems, onRemoveCache],
+  );
+  // 固定 如果现有items有固定的则放到最后一个固定的后面
+  const togglePinTabFunc = useCallback(
+    (item: Tab) => {
+      updateTabItems(() => {
+        const newItems = [...tabItems];
+        const index = tabItems.findIndex((i) => i.key === item?.key);
         // 取消固定
         if (item.pin) {
           newItems.splice(index, 1, { ...item, pin: false });
         } else {
-          const pinIndexArr = prevTabItems.reduce(
+          const pinIndexArr = tabItems.reduce(
             (pre: number[], current, curIndex) => {
               if (current.pin) {
                 pre.push(curIndex);
@@ -78,65 +83,74 @@ const useTabActions = ({
 
         return newItems;
       });
-    };
-    // 新窗口打开
-    const openNewWindowFunc = (item: Tab) => {
-      const origin = window.location.origin;
-      const url = origin + item.key;
-      window.open(url, '_blank');
-    };
-    // 删除其他
-    const deleteOtherTabsFunc = (key: string) => {
-      updateTabItems((prevTabItems) => {
-        return prevTabItems.filter((item) => item.pin && item.key === key);
+    },
+    [tabItems],
+  );
+  // 新窗口打开
+  const openNewWindowFunc = (item: Tab) => {
+    const origin = window.location.origin;
+    const url = origin + item.key;
+    window.open(url, '_blank');
+  };
+  // 删除其他
+  const deleteOtherTabsFunc = useCallback(
+    (key: string) => {
+      updateTabItems(() => {
+        const deleteKeys = tabItems
+          .filter((item) => item.closable && item.key !== key)
+          .map((i) => i.key);
+
+        onRemoveCacheByKeys?.(deleteKeys);
+        return tabItems.filter((i) => !deleteKeys.includes(i.key));
       });
-      onRemoveOtherCache(key);
-    };
-    // 通过keys删除其他左侧或者右侧
-    const deleteTabsByKeysFunc = (key: string, direction: 'left' | 'right') => {
-      updateTabItems((prevTabItems) => {
-        const index = prevTabItems.findIndex((item) => item.key === key);
+    },
+    [tabItems, onRemoveCacheByKeys],
+  );
+  // 通过keys删除其他左侧或者右侧
+  const deleteTabsByKeysFunc = useCallback(
+    (key: string, direction: 'left' | 'right') => {
+      updateTabItems(() => {
+        const index = tabItems.findIndex((item) => item.key === key);
         if (index > -1) {
-          const keys = prevTabItems
+          const deleteKeys = tabItems
             .filter((item, i) => {
               if (direction === 'left') {
-                return !item.pin && i < index;
+                return i < index && item.closable;
               } else {
-                return !item.pin && i > index;
+                return i > index && item.closable;
               }
             })
             .map((i) => i.key);
-          onRemoveCacheByKeys(keys);
-          return prevTabItems.filter((i) => !keys.includes(i.key));
+          onRemoveCacheByKeys?.(deleteKeys);
+          return tabItems.filter((i) => !deleteKeys.includes(i.key));
         }
-        return prevTabItems;
+        return tabItems;
       });
-    };
-    // 关闭全部
-    const deleteAllFunc = () => {
-      updateTabItems((preTabItems) => {
-        const keys = preTabItems
-          .filter((item) => item.key !== HOME_PATH)
-          .map((i) => i.key);
-        onRemoveCacheByKeys(keys);
-        navigate(HOME_PATH);
-        return preTabItems.filter((i) => i.key === HOME_PATH);
-      });
-    };
-    return {
-      reloadTabFunc,
-      deleteTabFunc,
-      pinTabFunc,
-      openNewWindowFunc,
-      deleteOtherTabsFunc,
-      deleteTabsByKeysFunc,
-      deleteAllFunc,
-      toggleFullscreen,
-      isFullscreen,
-    };
-  }, []);
+    },
+    [tabItems, onRemoveCacheByKeys],
+  );
+  // 关闭全部
+  const deleteAllFunc = useCallback(() => {
+    updateTabItems(() => {
+      const deleteKeys = tabItems
+        .filter((item) => item.closable)
+        .map((i) => i.key);
+      onRemoveCacheByKeys?.(deleteKeys);
+      navigate(HOME_PATH);
+      return tabItems.filter((i) => !i.closable);
+    });
+  }, [tabItems, onRemoveCacheByKeys]);
+
   return {
-    ...actions,
+    reloadTabFunc,
+    deleteTabFunc,
+    deleteAllFunc,
+    deleteOtherTabsFunc,
+    deleteTabsByKeysFunc,
+    openNewWindowFunc,
+    togglePinTabFunc,
+    toggleFullscreenFunc,
+    isFullscreen,
   };
 };
 

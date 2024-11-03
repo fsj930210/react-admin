@@ -1,4 +1,5 @@
 import type React from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Popover } from 'antd';
@@ -6,33 +7,33 @@ import { Popover } from 'antd';
 import Icon from '@/components/Icon';
 import type { Tab } from '@/components/RaTabs/interface';
 
+import type { UpdateTabItems } from '@/layouts/hooks/useTabs';
 import type { PopoverProps } from 'antd';
 
 import useTabActions from '@/layouts/hooks/useTabsActions';
+import useTabsStore from '@/store/tabs';
 
 type TabDropdownProps = {
   children: React.ReactNode;
   trigger?: PopoverProps['trigger'];
   tab?: Tab;
   index: number;
-  tabsLength: number;
-  updateTabItems: (updateFunc: (preItems: Tab[]) => Tab[]) => void;
+  updateTabItems: UpdateTabItems;
 };
 const TabDropdown = ({
   children,
   tab,
   trigger = 'contextMenu',
   index,
-  tabsLength,
   updateTabItems,
 }: TabDropdownProps) => {
   const { t } = useTranslation();
   const {
     reloadTabFunc,
-    pinTabFunc,
+    togglePinTabFunc,
     deleteTabFunc,
     openNewWindowFunc,
-    toggleFullscreen,
+    toggleFullscreenFunc,
     deleteAllFunc,
     deleteOtherTabsFunc,
     deleteTabsByKeysFunc,
@@ -40,10 +41,55 @@ const TabDropdown = ({
   } = useTabActions({
     updateTabItems,
   });
+  const tabItems = useTabsStore((state) => state.tabItems);
+  const disabledClassName = 'layout-tabs-tab-dropdown-disabled';
+  const closeCurrentDisabled = useMemo(() => {
+    return tab?.closable ? '' : disabledClassName;
+  }, [tab]);
+  const closeLeftDisabled = useMemo(() => {
+    let disabled = false;
+    if (index === 0) {
+      disabled = true;
+    } else {
+      const prevItems = tabItems.slice(0, index);
+      if (prevItems.every((i) => !i.closable)) {
+        disabled = true;
+      }
+    }
+    return disabled ? disabledClassName : '';
+  }, [index, tabItems]);
+  const closeRightDisabled = useMemo(() => {
+    let disabled = false;
+    if (index === tabItems.length - 1) {
+      disabled = true;
+    } else {
+      const nextItems = tabItems.slice(index + 1, tabItems.length);
+      if (nextItems.every((i) => !i.closable)) {
+        disabled = true;
+      }
+    }
+    return disabled ? disabledClassName : '';
+  }, [index, tabItems]);
+  const closeOtherDisabled = useMemo(() => {
+    let disabled = false;
+    const newTabItems = [...tabItems];
+    newTabItems.splice(index, 1);
+    if (newTabItems.every((i) => !i.closable)) {
+      disabled = true;
+    }
+    return disabled ? disabledClassName : '';
+  }, [index, tabItems]);
+  const closeAllDisabled = useMemo(() => {
+    let disabled = false;
+    if (tabItems.every((i) => !i.closable)) {
+      disabled = true;
+    }
+    return disabled ? disabledClassName : '';
+  }, [tabItems]);
   const content = (
     <ul className="pt-2 w-[200px]">
       <li
-        className={`px-2 py-1 cursor-pointer ${tab?.closable ? '' : 'layout-tabs-tab-dropdown-disabled'}`}
+        className={`px-2 py-1 cursor-pointer ${closeCurrentDisabled}`}
         onClick={() => deleteTabFunc(tab!.key)}
       >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
@@ -60,7 +106,10 @@ const TabDropdown = ({
           <span className="ml-2">{t('tabs.reload')}</span>
         </div>
       </li>
-      <li className="px-2 py-1 cursor-pointer" onClick={() => pinTabFunc(tab!)}>
+      <li
+        className="px-2 py-1 cursor-pointer"
+        onClick={() => togglePinTabFunc(tab!)}
+      >
         <div className="flex items-center p-[2]  hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
           {tab?.pin ? (
             <>
@@ -86,7 +135,7 @@ const TabDropdown = ({
       </li>
       <li
         className="px-2 py-1 pb-2 cursor-pointer border-b-solid border-b-[var(--ant-color-border)] border-b-1"
-        onClick={toggleFullscreen}
+        onClick={toggleFullscreenFunc}
       >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
           {isFullscreen ? (
@@ -98,7 +147,7 @@ const TabDropdown = ({
         </div>
       </li>
       <li
-        className={`px-2 py-1 pt-2 cursor-pointer ${index > 0 ? '' : 'layout-tabs-tab-dropdown-disabled'}`}
+        className={`px-2 py-1 pt-2 cursor-pointer ${closeLeftDisabled}`}
         onClick={() => deleteTabsByKeysFunc(tab!.key, 'left')}
       >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
@@ -107,7 +156,7 @@ const TabDropdown = ({
         </div>
       </li>
       <li
-        className={`px-2 py-1 cursor-pointer border-b-solid border-b-[var(--ant-color-border)] border-b-1 ${index !== tabsLength - 1 ? '' : 'layout-tabs-tab-dropdown-disabled'}`}
+        className={`px-2 py-1 cursor-pointer border-b-solid border-b-[var(--ant-color-border)] border-b-1 ${closeRightDisabled}`}
         onClick={() => deleteTabsByKeysFunc(tab!.key, 'right')}
       >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
@@ -116,7 +165,7 @@ const TabDropdown = ({
         </div>
       </li>
       <li
-        className="px-2 py-1 pt-2 cursor-pointer"
+        className={`px-2 py-1 pt-2 cursor-pointer ${closeOtherDisabled}`}
         onClick={() => deleteOtherTabsFunc(tab!.key)}
       >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
@@ -125,7 +174,7 @@ const TabDropdown = ({
         </div>
       </li>
       <li
-        className="px-2 py-1 pb-2 cursor-pointer"
+        className={`px-2 py-1 pb-2 cursor-pointer ${closeAllDisabled}`}
         onClick={() => deleteAllFunc()}
       >
         <div className="flex items-center p-[2] hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">

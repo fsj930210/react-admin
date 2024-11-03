@@ -1,14 +1,11 @@
-// import { Suspense } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import { ConfigProvider, App as AntApp, theme as antdTheme } from 'antd';
 import dayjs from 'dayjs';
-import localforage from 'localforage';
-
-// for date-picker i18n
 import 'dayjs/locale/zh-cn';
+import { useShallow } from 'zustand/react/shallow';
+
 import { AppContext } from './AppContext';
-import AppLoading from './components/app/AppLoading';
 // import LockScreen from './components/LockScreen';
 import { useBrowserLanguage } from './hooks/useBrowserLanguage';
 import useColors from './hooks/useColors';
@@ -21,16 +18,16 @@ import useGlobalStore from '@/store';
 import 'antd/dist/reset.css';
 
 dayjs.locale('zh-cn');
-localforage.config({
-  name: 'react_admin_database',
-  storeName: 'react_admin_store',
-});
 
 const App = () => {
   useBrowserLanguage();
   useColors();
   const { antdLanguage } = useI18n();
-  const { primaryColor } = useGlobalStore();
+  const { primaryColor } = useGlobalStore(
+    useShallow((state) => ({
+      primaryColor: state.primaryColor,
+    })),
+  );
   const theme = useTheme();
   return (
     <AppContext.Provider value={{ theme, appCssTokenKey: 'ra-css-var' }}>
@@ -62,7 +59,7 @@ const App = () => {
         }}
       >
         <AntApp className="w-full h-full">
-          <RouterProvider router={router} fallbackElement={<AppLoading />} />
+          <RouterProvider router={router} />
         </AntApp>
         {/* <LockScreen /> */}
       </ConfigProvider>

@@ -1,4 +1,5 @@
 import { Button, Layout, Space } from 'antd';
+import { useShallow } from 'zustand/react/shallow';
 
 import DarkTheme from '@/components/business/DarkTheme';
 import I18n from '@/components/business/I18n';
@@ -15,7 +16,12 @@ import useMenuStore from '@/store/menu';
 
 const { Header } = Layout;
 const AppHeader = () => {
-  const { collapsed, toggleCollapsed } = useMenuStore();
+  const { collapsed, toggleCollapsed } = useMenuStore(
+    useShallow((state) => ({
+      toggleCollapsed: state.toggleCollapsed,
+      collapsed: state.collapsed,
+    })),
+  );
 
   return (
     <Header

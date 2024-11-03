@@ -1,9 +1,6 @@
 import type { ThemeItem } from '@/types/custom-types';
 
-export const DB_CACHED_MENU_ITEMS_KEY = 'RA::DB_CACHED_MENU_ITEMS_KEY';
-export const DB_CACHED_FLAT_MENU_ITEMS_KEY =
-  'RA::DB_CACHED_FLAT_MENU_ITEMS_KEY';
-export const DB_CACHED_TABS_KEY = 'RA::DB_CACHED_TABS_KEY';
+export const RA_CACHED_TABS_KEY = 'RA::CACHED_TABS_KEY';
 export const HOME_PATH = import.meta.env.VITE_APP_HOME_PATH;
 export const builtInThemes: ThemeItem[] = [
   {

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Dropdown } from 'antd';
+import { useShallow } from 'zustand/react/shallow';
 
 import Icon from '@/components/Icon';
 
@@ -12,7 +13,12 @@ import useGlobalStore from '@/store';
 
 const DarkTheme = () => {
   const { t } = useTranslation();
-  const { changeAppTheme, appTheme } = useGlobalStore();
+  const { changeAppTheme, appTheme } = useGlobalStore(
+    useShallow((state) => ({
+      appTheme: state.appTheme,
+      changeAppTheme: state.changeAppTheme,
+    })),
+  );
   const [show, setShow] = useState(true);
   const themeMap: Record<AppThemeEnum | string, DropDownMapValue> = {
     [AppThemeEnum.light]: {

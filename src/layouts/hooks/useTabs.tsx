@@ -1,61 +1,73 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// import localforage from 'localforage';
+import { useShallow } from 'zustand/react/shallow';
 
-import type { TabsProps } from '@/components/RaTabs';
 import type { Tab } from '@/components/RaTabs/interface';
 
-import { HOME_PATH } from '@/utils/constants';
+import { HOME_PATH, RA_CACHED_TABS_KEY } from '@/utils/constants';
+import storage from '@/utils/storage';
 
-import useMenu from './useMenu';
+import useMenuStore from '@/store/menu';
+import useTabsStore from '@/store/tabs';
 
+export type UpdateTabItems = (updateFunc: () => Tab[]) => void;
 const useTabs = () => {
   const location = useLocation();
-  const [tabItems, setTabItems] = useState<TabsProps['items']>([]);
-  const [activeKey, setActiveKey] = useState('');
-  const { flatMenuItems } = useMenu();
+  const { tabItems, setActiveKey, setTabItems } = useTabsStore(
+    useShallow((state) => ({
+      tabItems: state.tabItems,
+      setActiveKey: state.setActiveKey,
+      setTabItems: state.setTabItems,
+    })),
+  );
+  const flatMenuItems = useMenuStore((state) => state.flatMenuItems);
   const tabItemsRef = useRef<Tab[]>([]);
   useEffect(() => {
-    // const dbCachedTabItemsString = localStorage.getItem(DB_CACHED_TABS_KEY);
-    // if (dbCachedTabItemsString) {
-    //   const dbCachedTabItems = JSON.parse(dbCachedTabItemsString);
-    //   setTabItems(dbCachedTabItems);
-    //   tabItemsRef.current = dbCachedTabItems;
-    // }
+    const cachedTabItems: Tab[] = storage.getItem(RA_CACHED_TABS_KEY);
+    if (cachedTabItems) {
+      tabItemsRef.current = cachedTabItems.map((i) => ({
+        ...i,
+        icon: i['data-icon'],
+      }));
+    }
   }, []);
   useEffect(() => {
-    const key = location.pathname;
-    const existedTabItem = tabItemsRef.current!.find((i) => i.key === key);
-
-    const menuItem = flatMenuItems.find((i) => i.key === key);
-    if (existedTabItem && menuItem?.label === existedTabItem.label) {
-      setActiveKey(key);
-      return;
-    } else if (existedTabItem && menuItem?.label !== existedTabItem.label) {
-      setTabItems((prev) => {
-        const newTabItems = [...(prev as Tab[])];
-        newTabItems.forEach((item) => {
-          const menuItem = flatMenuItems.find((i) => i.key === item.key);
-          item.label = menuItem?.label;
-        });
-        return newTabItems;
-      });
-    } else {
-      if (menuItem) {
-        const tabItem: Tab = {
-          label: menuItem.label,
-          icon: menuItem.icon,
-          key: menuItem.key,
-          closable: HOME_PATH !== menuItem.key,
-          pin: HOME_PATH === menuItem.key,
-          disabled: false,
-          children: null,
-        };
-        setActiveKey(key);
-        setTabItems((pre) => {
-          const newTabItems = [...pre!];
-          const homeTabItem = pre!.find((i) => i.key === HOME_PATH);
+    if (flatMenuItems.length > 0) {
+      const key = location.pathname;
+      const existedTabItem = tabItemsRef.current.find((i) => i.key === key);
+      const menuItem = flatMenuItems.find((i) => i.key === key);
+      if (existedTabItem) {
+        if (menuItem?.label === existedTabItem.label) {
+          const newTabItems = [...tabItemsRef.current];
+          setActiveKey(key);
+          setCachedTabItems(newTabItems);
+          setTabItems(newTabItems);
+        } else {
+          const newTabItems = [...tabItemsRef.current];
+          newTabItems.forEach((item) => {
+            const menuItem = flatMenuItems.find((i) => i.key === item.key);
+            item.label = menuItem?.label;
+          });
+          tabItemsRef.current = newTabItems;
+          setCachedTabItems(newTabItems);
+          setTabItems(newTabItems);
+        }
+      } else {
+        if (menuItem) {
+          const tabItem: Tab = {
+            label: menuItem.label,
+            icon: menuItem.icon,
+            key: menuItem.key,
+            closable: HOME_PATH !== menuItem.key,
+            pin: HOME_PATH === menuItem.key,
+            disabled: false,
+            children: null,
+            ['data-icon']: menuItem['data-icon'],
+          };
+          setActiveKey(key);
+          const newTabItems = [...tabItems];
+          const homeTabItem = newTabItems!.find((i) => i.key === HOME_PATH);
           if (!homeTabItem) {
             const homeMenuItem = flatMenuItems.find((i) => i.key === HOME_PATH);
             if (homeMenuItem) {
@@ -70,6 +82,7 @@ const useTabs = () => {
                   pin: true,
                   disabled: false,
                   children: null,
+                  ['data-icon']: homeMenuItem['data-icon'],
                 };
                 newTabItems.unshift(homeItem);
                 newTabItems.push(tabItem);
@@ -79,28 +92,27 @@ const useTabs = () => {
             newTabItems.push(tabItem);
           }
           tabItemsRef.current = newTabItems;
-          // localforage.setItem(DB_CACHED_TABS_KEY, newTabItems);
-          // localStorage.setItem(DB_CACHED_TABS_KEY, JSON.stringify(newTabItems));
-          return newTabItems;
-        });
+          setCachedTabItems(tabItemsRef.current);
+          setTabItems(newTabItems);
+        }
       }
     }
   }, [location.pathname, flatMenuItems]);
-  const updateTabItems = useCallback(
-    (updateFunc: (preItems: Tab[]) => Tab[]) => {
-      setTabItems((prevItems) => {
-        const newTabItems = updateFunc(prevItems || []);
-        tabItemsRef.current = newTabItems;
-        return newTabItems;
-      });
-    },
-    [],
-  );
+  const updateTabItems = useCallback((updateFunc: () => Tab[]) => {
+    const newTabItems = updateFunc();
+    tabItemsRef.current = newTabItems;
+    setCachedTabItems(newTabItems);
+    setTabItems(newTabItems);
+  }, []);
+  const setCachedTabItems = useCallback((items: Tab[]) => {
+    const storageTabItems = items.map((i) => ({
+      ...i,
+      icon: i['data-icon'],
+    }));
+    storage.setItem(RA_CACHED_TABS_KEY, storageTabItems, 0);
+  }, []);
   return {
-    tabItems,
-    activeKey,
     updateTabItems,
-    setActiveKey,
   };
 };
 
