@@ -1,16 +1,11 @@
-import {
-  ChangeEventHandler,
-  useLayoutEffect,
-  ReactNode,
-  useRef,
-  useState,
-  CSSProperties,
-} from 'react';
+import type { ChangeEventHandler, ReactNode, CSSProperties } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
-import Icon from '@/components/Icon';
 import { useControllableValue } from 'ahooks';
 import { Form, Input } from 'antd';
 import classNames from 'classnames';
+
+import Icon from '@/components/Icon';
 import 'antd/es/input/style/index.js';
 import './index.css';
 

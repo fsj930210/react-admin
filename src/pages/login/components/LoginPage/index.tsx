@@ -12,6 +12,8 @@ import QRCodeForm from '../QRCodeForm';
 import RegisterForm from '../RegisterForm';
 import ResetPasswordForm from '../ResetPasswordForm';
 
+import { PUBLIC_PATH } from '@/utils/constants';
+
 import styles from './index.module.css';
 
 import AppFooter from '@/layouts/components/Footer';
@@ -70,7 +72,11 @@ const LoginPage = ({ material }: LoginPageProps) => {
         </div>
 
         <div className="mt-[80px] flex justify-center">
-          <img src="/images/fullstack-engineer.svg" alt="" className="w-120" />
+          <img
+            src={`${PUBLIC_PATH}/images/fullstack-engineer.svg`}
+            alt=""
+            className="w-120"
+          />
         </div>
       </div>
       <div className="w-[45%] h-full flex flex-col items-center relative bg-white dark:bg-[var(--ant-color-bg-container)]">

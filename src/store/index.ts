@@ -16,7 +16,7 @@ export interface GlobalState {
 }
 
 const useGlobalStore = create<GlobalState>()((set) => ({
-  primaryColor: '#13c2c2',
+  primaryColor: '#1677FF',
   appTheme: AppThemeEnum.light,
   appLanguage: navigator.language || 'zh-CN',
   changeAppTheme: (theme: AppThemeEnum) =>

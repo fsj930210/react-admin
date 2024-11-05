@@ -17,7 +17,7 @@ const TabBarExtraContent = ({
   tabIndex,
   updateTabItems,
 }: TabBarExtraContentProps) => {
-  const { isFullscreen, reloadTabFunc, toggleFullscreen } = useTabActions({
+  const { isFullscreen, reloadTabFunc, toggleFullscreenFunc } = useTabActions({
     updateTabItems,
   });
   return (
@@ -42,7 +42,7 @@ const TabBarExtraContent = ({
           </div>
         </TabDropdown>
       </span>
-      <span className="app-tabs-right-item" onClick={toggleFullscreen}>
+      <span className="app-tabs-right-item" onClick={toggleFullscreenFunc}>
         <div className="w-full h-full flex items-center">
           {isFullscreen ? (
             <Icon icon="ant-design:fullscreen-exit-outlined" />

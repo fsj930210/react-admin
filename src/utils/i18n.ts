@@ -2,12 +2,12 @@ import { initReactI18next } from 'react-i18next';
 
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import ChainedBackend from 'i18next-chained-backend';
-import HttpApi from 'i18next-http-backend'; // fallback http load
-import LocalStorageBackend from 'i18next-localstorage-backend'; // primary use cache
+import Backend from 'i18next-http-backend'; // fallback http load
+
+import { PUBLIC_PATH } from './constants';
 
 i18n
-  .use(ChainedBackend)
+  .use(Backend)
   // 检测用户当前使用的语言
   // 文档: https://github.com/i18next/i18next-browser-languageDetector
   .use(LanguageDetector)
@@ -17,15 +17,11 @@ i18n
   // 配置参数的文档: https://www.i18next.com/overview/configuration-options
   .init({
     backend: {
-      backends: [
-        LocalStorageBackend, // primary backend
-        HttpApi, // fallback backend
-      ],
-      backendOptions: [],
-      cacheHitMode: 'refreshAndUpdateStore',
+      // for all available options read the backend's repository readme file
+      loadPath: `${PUBLIC_PATH}/locales/{{lng}}/{{ns}}.json`,
     },
     // debug: true,
-    fallbackLng: navigator.language,
+    fallbackLng: 'zh-CN',
     interpolation: {
       escapeValue: false,
     },

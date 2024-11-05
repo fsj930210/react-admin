@@ -1,4 +1,4 @@
-import { RuleObject } from 'antd/lib/form';
+import type { RuleObject } from 'antd/lib/form';
 
 const passwordReg = /^(?![a-zA-Z]+$)(?!\d+$)(?![^\da-zA-Z\s]+$).{6,12}$/;
 const usernameReg = /^[a-zA-Z][a-zA-Z0-9]{2,32}$/;

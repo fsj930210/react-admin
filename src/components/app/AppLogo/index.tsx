@@ -1,3 +1,5 @@
+import { PUBLIC_PATH } from '@/utils/constants';
+
 import styles from './index.module.css';
 
 import useGoto from '@/hooks/useGoto';
@@ -24,7 +26,7 @@ const AppLogo = ({
       onClick={() => goHome()}
     >
       <img
-        src="/logo.svg"
+        src={`${PUBLIC_PATH}/logo.svg`}
         alt="logo"
         className={animate ? styles['logo-animate'] : ''}
       />

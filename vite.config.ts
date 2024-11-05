@@ -6,11 +6,13 @@ import { browserslistToTargets } from 'lightningcss';
 import postcssNesting from 'postcss-nesting';
 import { visualizer } from 'rollup-plugin-visualizer';
 import UnoCSS from 'unocss/vite';
-import { ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
 
-import rectIconify from './vite-plugins/vite-plugin-react-iconify';
+import reactIconify from './vite-plugins/vite-plugin-react-iconify';
+
+import type { ConfigEnv, UserConfig } from 'vite';
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
@@ -19,7 +21,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     plugins: [
       react(),
       svgr(),
-      rectIconify({
+      reactIconify({
         resolver: '@iconify/react',
         configs: [
           {
