@@ -13,6 +13,11 @@ import styles from './index.module.css';
 const GlobalSearch = () => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value, 'onChange');
+    setSearchValue(e.target.value);
+  };
   return (
     <>
       <button
@@ -33,7 +38,7 @@ const GlobalSearch = () => {
         closable={false}
         open={showModal}
         onCancel={() => setShowModal(false)}
-        title={<SearchInput />}
+        title={<SearchInput onChange={handleInputChange} value={searchValue} />}
         style={{
           padding: 0,
         }}

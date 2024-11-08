@@ -1,23 +1,24 @@
 import { useControllableValue } from 'ahooks';
-import { Input } from 'antd';
 import classNames from 'classnames';
 
 import MaterialContainer from '../Container';
-import MaterialPassword from '../Password';
-import MaterialTextArea from '../TextArea';
 
-import type { MaterialContainerProps } from '../Container';
+import type { MaterialInputProps } from '../Input';
 
-export type MaterialInputProps = Omit<MaterialContainerProps, 'children'>;
-
-const MaterialInput = ({
+type MaterialTextAreaProps = MaterialInputProps & {
+  cols?: number;
+  rows?: number;
+};
+const MaterialTextArea = ({
   value,
   defaultValue,
   placeholder,
-  onChange,
+  cols,
+  rows = 2,
   onClear,
+  onChange,
   ...rest
-}: MaterialInputProps) => {
+}: MaterialTextAreaProps) => {
   const [state, setState] = useControllableValue({
     value,
     defaultValue,
@@ -32,20 +33,24 @@ const MaterialInput = ({
         onClear?.();
       }}
       {...rest}
+      prefix=""
+      suffix=""
     >
-      <Input
+      <textarea
         className={classNames({
+          'ant-input': true,
           'ra-material-input': true,
+          'ra-material-textarea': true,
         })}
-        variant="borderless"
+        placeholder={placeholder}
         value={state}
-        onChange={(e) => setState?.(e)}
-        placeholder={placeholder || ''}
+        onChange={setState}
+        defaultValue={defaultValue}
+        cols={cols}
+        rows={rows}
       />
     </MaterialContainer>
   );
 };
 
-MaterialInput.Password = MaterialPassword;
-MaterialInput.TextArea = MaterialTextArea;
-export default MaterialInput;
+export default MaterialTextArea;
