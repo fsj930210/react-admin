@@ -5,18 +5,47 @@ import { Modal } from 'antd';
 
 import Icon from '@/components/Icon';
 
+import { RA_CACHED_GLOBAL_SEARCH_KEY } from '@/utils/constants';
+import storage from '@/utils/storage';
+
 import SearchContent from './components/SearchContent';
 import SearchFooter from './components/SearchFooter';
 import SearchInput from './components/SearchInput';
 import styles from './index.module.css';
 
+import type { MenuItem } from '@/types/custom-types';
+
+import useMenuStore from '@/store/menu';
+
 const GlobalSearch = () => {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
+  const flatMenuItems = useMenuStore((state) => state.flatMenuItems);
   const [searchValue, setSearchValue] = useState('');
+  const [searchContentList, setSearchContentList] = useState<MenuItem[]>([]);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value, 'onChange');
-    setSearchValue(e.target.value);
+    const value = e.target.value;
+    if (value) {
+      const filteredList = flatMenuItems.filter(
+        (item) => item.label.includes(value) || item.key.includes(value),
+      );
+      setSearchContentList(filteredList);
+    } else {
+      const cachedList = storage.getItem<MenuItem[]>(
+        RA_CACHED_GLOBAL_SEARCH_KEY,
+      );
+      if (cachedList) {
+        setSearchContentList(cachedList);
+      } else {
+        setSearchContentList([]);
+      }
+    }
+    setSearchValue(value);
+  };
+  const onClose = () => {
+    setShowModal(false);
+    setSearchValue('');
+    setSearchContentList([]);
   };
   return (
     <>
@@ -37,7 +66,7 @@ const GlobalSearch = () => {
         maskClosable
         closable={false}
         open={showModal}
-        onCancel={() => setShowModal(false)}
+        onCancel={onClose}
         title={<SearchInput onChange={handleInputChange} value={searchValue} />}
         style={{
           padding: 0,
@@ -45,7 +74,11 @@ const GlobalSearch = () => {
         className={styles['global-search-modal']}
         footer={<SearchFooter />}
       >
-        <SearchContent />
+        <SearchContent
+          data={searchContentList}
+          type={searchValue ? 'search' : 'history'}
+          onItemClick={onClose}
+        />
       </Modal>
     </>
   );

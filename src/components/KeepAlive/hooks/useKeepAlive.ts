@@ -10,7 +10,9 @@ import type { MutableRefObject } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useDebounce, useEventListener, useMemoizedFn } from 'ahooks';
-import { isArray, isRegExp, isString } from 'lodash-es';
+import isArray from 'lodash-es/isArray';
+import isRegExp from 'lodash-es/isRegExp';
+import isString from 'lodash-es/isString';
 import { v4 as uuidv4 } from 'uuid';
 
 import { KeepAliveContext } from '../KeepAliveContext';
@@ -116,15 +118,15 @@ const useRouteCache = (props: KeepAliveProps) => {
   const shouldCached = (key: string) => {
     let inExcludes = false;
     if (isArray(excludes)) {
-      inExcludes = excludes.some((item) => {
+      inExcludes = (excludes as (string | RegExp)[]).some((item) => {
         if (isRegExp(item)) {
-          return item.test(key);
+          return (item as RegExp).test(key);
         } else {
           return item === key;
         }
       });
     } else if (isRegExp(excludes)) {
-      inExcludes = excludes.test(key);
+      inExcludes = (excludes as RegExp).test(key);
     } else if (isString(excludes)) {
       inExcludes = excludes === key;
     }
@@ -132,16 +134,17 @@ const useRouteCache = (props: KeepAliveProps) => {
     if (!includes) return true;
     if (includes) {
       let cached = true;
+
       if (isArray(includes)) {
-        cached = includes.some((item) => {
+        cached = (includes as (string | RegExp)[]).some((item) => {
           if (isRegExp(item)) {
-            return item.test(key);
+            return (item as RegExp).test(key);
           } else {
             return item === key;
           }
         });
       } else if (isRegExp(includes)) {
-        cached = includes.test(key);
+        cached = (includes as RegExp).test(key);
       } else if (isString(includes)) {
         cached = includes === key;
       }

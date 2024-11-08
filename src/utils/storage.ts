@@ -56,7 +56,7 @@ class RaStorage {
       console.error(error);
     }
   }
-  getItem(key: string) {
+  getItem<T>(key: string): T | null {
     try {
       const { expiredKeyName, prefix } = this.options;
       const keyName = prefix + key;
@@ -79,6 +79,7 @@ class RaStorage {
       }
     } catch (error) {
       console.error(error);
+      return null;
     }
   }
   removeItem(key: string) {

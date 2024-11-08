@@ -1,29 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Breadcrumb } from 'antd';
-import { cloneDeep } from 'lodash-es';
 
 import Icon from '@/components/Icon';
 
 import useBreadcrumb from '../../../../hooks/useBreadcrumb';
 
 import type { BreadcrumbItem } from '@/types/custom-types';
-import type { MenuProps } from 'antd/lib';
 import type { ItemType } from 'antd/lib/breadcrumb/Breadcrumb';
 
 const AppBreadcrumb = () => {
-  const navigate = useNavigate();
   const breadcrumbList = useBreadcrumb();
-  const handleMenuItemClick: MenuProps['onClick'] = ({ key }) => {
-    navigate(key);
-  };
-  // 这里做是因为localforage不能缓存函数
-  const finalBreadcrumbList = cloneDeep(breadcrumbList)?.map((item) => {
-    if (item.menu) {
-      item.menu.onClick = handleMenuItemClick;
-    }
-    return item;
-  });
+
   function itemRender(
     currentRoute: BreadcrumbItem,
     _params: any,
@@ -42,7 +30,7 @@ const AppBreadcrumb = () => {
   }
   return (
     <div className="ml-[8px]">
-      <Breadcrumb items={finalBreadcrumbList} itemRender={itemRender} />
+      <Breadcrumb items={breadcrumbList} itemRender={itemRender} />
     </div>
   );
 };

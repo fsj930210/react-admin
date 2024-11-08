@@ -19,14 +19,14 @@ type UserOptions = {
   configs: UserConfigs[];
 };
 
-const VIRTUAL_MODULE_ID = 'virtual:react-iconify';
+const VIRTUAL_MODULE_ID = 'virtual:local-react-iconify';
 const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 
 async function createReactIconifyIcon(options: UserOptions) {
   let bundle = "import { addCollection } from '" + options.resolver + "';\n\n";
 
   for (const option of options.configs) {
-    option.prefix = option.prefix || 'my-icon';
+    option.prefix = option.prefix || 'ra-icon';
     // 导入图标
     const iconSet = await importDirectory(option.dir, {
       prefix: option.prefix,
@@ -73,7 +73,7 @@ async function createReactIconifyIcon(options: UserOptions) {
 }
 function reactIconifyPlugin(userOptions: UserOptions): Plugin {
   return {
-    name: 'vite-plugin-react-inconify',
+    name: 'vite-plugin-react-iconify',
     enforce: 'pre',
     configResolved() {
       if (
