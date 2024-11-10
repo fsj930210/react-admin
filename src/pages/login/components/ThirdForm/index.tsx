@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Divider } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import styles from './index.module.css';
 

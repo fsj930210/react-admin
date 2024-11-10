@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'antd';
 import { useShallow } from 'zustand/react/shallow';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import type { DropDownMapValue } from '@/types/custom-types';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import type { EditableConfig, TabsLocale } from '../interface';
 

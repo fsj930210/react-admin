@@ -4,7 +4,7 @@ import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
 
 import CountDown from '@/components/business/CountDown';
 import StrengthMeter from '@/components/business/StrengthMeter';
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 import MaterialInput from '@/components/RaMaterial/Input';
 
 import { validatePassword, validateUsername } from '@/utils/validate';

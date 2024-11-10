@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Popover } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 import type { Tab } from '@/components/RaTabs/interface';
 
 import type { UpdateTabItems } from '@/layouts/hooks/useTabs';

@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import { genDataNodeKey, getRemovable } from '../util';
 

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Form, Input, Button, Checkbox, Row } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 import MaterialInput from '@/components/RaMaterial/Input';
 
 import ThirdForm from '../ThirdForm';

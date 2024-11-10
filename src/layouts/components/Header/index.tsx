@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow';
 
 import DarkTheme from '@/components/business/DarkTheme';
 import I18n from '@/components/business/I18n';
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import Breadcrumb from './components/Breadcrumb';
 import FullScreen from './components/FullScreen';

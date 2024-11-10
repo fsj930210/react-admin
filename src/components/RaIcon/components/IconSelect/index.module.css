@@ -1,0 +1,25 @@
+.icon-select {
+  :global(.ant-popover-content) {
+    height: 100%;
+  }
+
+  :global(.ant-popover-inner-content) {
+    flex: 1;
+  }
+}
+
+.icon-select-input {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 480px;
+  height: 32px;
+  border: 1px solid var(--ant-color-border);
+
+  &:hover,
+  &:focus {
+    border-color: var(--ant-color-primary);
+  }
+}

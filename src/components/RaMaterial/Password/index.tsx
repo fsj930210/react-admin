@@ -5,7 +5,7 @@ import { useControllableValue } from 'ahooks';
 import { Input } from 'antd';
 import classNames from 'classnames';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import MaterialContainer from '../Container';
 

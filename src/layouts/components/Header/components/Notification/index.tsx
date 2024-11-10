@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Badge, Popover, Tabs } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import NotificationList from './components/NotificationList';
 import styles from './inde.module.css';

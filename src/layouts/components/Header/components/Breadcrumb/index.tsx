@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { Breadcrumb } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import useBreadcrumb from '../../../../hooks/useBreadcrumb';
 

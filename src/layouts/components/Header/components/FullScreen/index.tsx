@@ -1,6 +1,6 @@
 import { useFullscreen } from 'ahooks';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 const FullScreen = () => {
   const [isFullscreen, { toggleFullscreen }] = useFullscreen(document.body);
   return (

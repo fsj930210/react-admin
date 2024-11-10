@@ -1,5 +1,11 @@
 import React from 'react';
 
+// 本地化图标 从npm安装想要的icon json
+import { addCollection } from '@iconify/react';
+import { icons as antdIcons } from '@iconify-json/ant-design';
+import { icons as carbonIcons } from '@iconify-json/carbon';
+import { icons as lucideIcons } from '@iconify-json/lucide';
+import { icons as riIcons } from '@iconify-json/ri';
 import ReactDOM from 'react-dom/client';
 
 import 'virtual:uno.css';
@@ -10,8 +16,13 @@ import '@/styles/reset.css';
 import '@/styles/global.css';
 import '@/styles/entry.css';
 import '@/styles/animate.css';
-import '@/components/Icon/loadIconifyIcons.ts';
+// import '@/components/RaIcon/loadIconifyIcons.ts';
 import '@/utils/i18n.ts';
+// 本地化图标，如果不需要则去掉
+addCollection(antdIcons);
+addCollection(carbonIcons);
+addCollection(lucideIcons);
+addCollection(riIcons);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

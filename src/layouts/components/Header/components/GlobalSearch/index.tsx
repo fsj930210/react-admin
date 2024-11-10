@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Modal } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import { RA_CACHED_GLOBAL_SEARCH_KEY } from '@/utils/constants';
 import storage from '@/utils/storage';

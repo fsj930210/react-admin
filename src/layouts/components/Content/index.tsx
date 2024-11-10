@@ -4,9 +4,10 @@ import { useOutlet } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import AppLoading from '@/components/app/AppLoading';
-import { KeepAlive } from '@/components/KeepAlive';
-import type { KeepAliveRef } from '@/components/KeepAlive/interface';
+import { KeepAlive } from '@/components/RaKeepAlive';
+import type { KeepAliveRef } from '@/components/RaKeepAlive/interface';
 
+import AppFooter from '../Footer';
 import LayoutTabs from '../Tabs';
 
 import { LayoutTabsContext } from './LayoutTabsContext';
@@ -22,17 +23,20 @@ const AppContent = () => {
 
   return (
     <LayoutTabsContext.Provider value={{ ...cacheFuncs }}>
-      <div className="h-full" id="ra-content-container">
+      <div className="flex-1 overflow-hidden" id="ra-content-container">
         <Content className="flex flex-col h-full">
           <LayoutTabs />
-          <KeepAlive
-            className="h-full flex-1"
-            keepRoutes
-            ref={keepAliveRef}
-            refreshFallback={<AppLoading />}
-          >
-            {outlet}
-          </KeepAlive>
+          <div className="flex-1 overflow-auto">
+            <KeepAlive
+              className="flex-1 p-[8px]"
+              keepRoutes
+              ref={keepAliveRef}
+              refreshFallback={<AppLoading />}
+            >
+              {outlet}
+            </KeepAlive>
+            <AppFooter />
+          </div>
         </Content>
       </div>
     </LayoutTabsContext.Provider>

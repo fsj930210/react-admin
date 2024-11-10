@@ -1,4 +1,4 @@
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 import type { Tab } from '@/components/RaTabs/interface';
 
 import TabDropdown from '../TabDropdown';

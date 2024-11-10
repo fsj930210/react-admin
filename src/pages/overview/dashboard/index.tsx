@@ -16,7 +16,7 @@ import {
   TreeSelect,
 } from 'antd';
 
-import { KeepAlive } from '@/components/KeepAlive';
+import { KeepAlive } from '@/components/RaKeepAlive';
 
 import type { MenuProps, TreeSelectProps } from 'antd';
 interface Option {

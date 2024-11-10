@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { Form } from 'antd';
 import classNames from 'classnames';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 import './index.css';
 
 export interface MaterialContainerProps {

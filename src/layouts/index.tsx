@@ -1,9 +1,8 @@
 import { Layout } from 'antd';
 
-import { KeepAliveRoot } from '@/components/KeepAlive';
+import { KeepAliveRoot } from '@/components/RaKeepAlive';
 
 import AppContent from './components/Content';
-import AppFooter from './components/Footer';
 import AppHeader from './components/Header';
 import AppSider from './components/Sider';
 import useMenu from './hooks/useMenu';
@@ -14,10 +13,9 @@ const BasicLayout = () => {
     <KeepAliveRoot>
       <Layout className="h-full" hasSider>
         <AppSider />
-        <Layout className="relative overflow-hidden h-full">
+        <Layout className="relative overflow-hidden h-full flex flex-col">
           <AppHeader />
           <AppContent />
-          <AppFooter />
         </Layout>
       </Layout>
     </KeepAliveRoot>

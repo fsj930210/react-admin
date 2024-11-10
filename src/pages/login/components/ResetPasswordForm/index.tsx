@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Form, Input, Button, Row } from 'antd';
 
 import CountDownButton from '@/components/business/CountDown';
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 import MaterialInput from '@/components/RaMaterial/Input';
 
 import { validateUsername } from '@/utils/validate';

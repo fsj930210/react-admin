@@ -1,5 +1,5 @@
 import ThemeItem from '@/components/business/ThemeItem';
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 const LoginTheme = () => {
   return (

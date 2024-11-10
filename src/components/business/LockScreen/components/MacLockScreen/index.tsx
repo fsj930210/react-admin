@@ -1,6 +1,6 @@
 import { Input } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import { usePassword } from '../../usePassword';
 

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Avatar, Popover } from 'antd';
 
-import Icon from '@/components/Icon';
+import Icon from '@/components/RaIcon';
 
 import styles from './index.module.css';
 const UserCenter = () => {

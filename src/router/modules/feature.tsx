@@ -25,6 +25,22 @@ const featureRouter: IRouteObject[] = [
         element: <RedirectRouteView to="/feature/clipboard" />,
       },
       {
+        path: 'icon',
+        element: (
+          <LazyLoadComponent
+            Component={lazy(() => import('@/pages/feature/icon'))}
+          />
+        ),
+        meta: {
+          auth: true,
+          menu: true,
+          hidden: false,
+          openMode: 'router',
+          title: 'icon',
+          icon: 'lineicons:emoji-smile',
+        },
+      },
+      {
         path: 'clipboard',
         element: (
           <LazyLoadComponent
