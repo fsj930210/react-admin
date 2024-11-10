@@ -52,7 +52,7 @@ const LoginStyle = () => {
       getPopupContainer={(triggerNode) =>
         (triggerNode?.parentNode as HTMLElement) || document.body
       }
-      overlayStyle={{ width: 120 }}
+      overlayStyle={{ width: 122 }}
     >
       <span className="flex-center p-[4] cursor-pointer bg-transparent rounded-full hover:bg-[var(--ant-color-bg-layout)] transition-all">
         {styleMap[loginStyle].icon}
