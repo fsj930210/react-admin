@@ -111,18 +111,6 @@ importers:
       '@eslint/js':
         specifier: ^9.14.0
         version: 9.14.0
-      '@iconify-icons/ant-design':
-        specifier: ^1.2.7
-        version: 1.2.7
-      '@iconify-icons/carbon':
-        specifier: ^1.2.20
-        version: 1.2.20
-      '@iconify-icons/lucide':
-        specifier: ^1.2.135
-        version: 1.2.135
-      '@iconify-icons/ri':
-        specifier: ^1.2.10
-        version: 1.2.10
       '@iconify-json/ant-design':
         specifier: ^1.2.2
         version: 1.2.2
@@ -837,18 +825,6 @@ packages:
   '@humanwhocodes/retry@0.4.0':
     resolution: {integrity: sha512-xnRgu9DxZbkWak/te3fcytNyp8MTbuiZIaueg2rgEvBuN55n04nwLYLU9TX/VVlusc9L2ZNXi99nUFNkHXtr5g==}
     engines: {node: '>=18.18'}
-
-  '@iconify-icons/ant-design@1.2.7':
-    resolution: {integrity: sha512-PEQPQMX0TiSGTyUqBv7c3f+bzQqDSpsEwSSh0XFjDd6SnVjE0AoZTl2NYEUADsbTgnPXAH9YM9AF4GdtkiyJ2Q==}
-
-  '@iconify-icons/carbon@1.2.20':
-    resolution: {integrity: sha512-QCsqNX5VRK8ZqAnwDhUHdJFdRIDCHM3bF+72DUCIi1bQ6L8n5amOP4ZND2q1TadtAjP7g6DEnS2a6780iPjx9Q==}
-
-  '@iconify-icons/lucide@1.2.135':
-    resolution: {integrity: sha512-t2Dya1a+PInBmHScbbGyseze7rrGHRW/dYF4GTR6f51N08sCg6KrtE4zmplnZE1ul2NyC+sxKpXRCv48hEgaQw==}
-
-  '@iconify-icons/ri@1.2.10':
-    resolution: {integrity: sha512-wNaXsQYK55WDUWCbcjvnwnODV4Jtsp+VC0duPanibEVu876TUYf6kdgTGtH7/GErBCNdJuJJbncG7vbOaeQi7w==}
 
   '@iconify-json/ant-design@1.2.2':
     resolution: {integrity: sha512-/jE53ePZZSAQUGPgnRgm7y2l0N/Z814AzaEpdD3W1Magzx+Q1/VhW5eRdF6XewoOYlPoUCkDvdgMCSjs9XefEA==}
@@ -4503,22 +4479,6 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.0': {}
-
-  '@iconify-icons/ant-design@1.2.7':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-icons/carbon@1.2.20':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-icons/lucide@1.2.135':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-icons/ri@1.2.10':
-    dependencies:
-      '@iconify/types': 2.0.0
 
   '@iconify-json/ant-design@1.2.2':
     dependencies:
