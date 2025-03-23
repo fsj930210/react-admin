@@ -41,7 +41,7 @@ class RaStorage {
       }
     }
   }
-  setItem<T>(key: string, value: T, expires: number) {
+  setItem<T>(key: string, value: T, expires: number = -1) {
     try {
       const { expiredKeyName, prefix } = this.options;
       const keyName = prefix + key;

@@ -29,13 +29,20 @@ const IconSelect = (props: IconSelectProps) => {
         />
       }
       trigger={['click']}
-      overlayStyle={{ width: 480, height: 600 }}
-      overlayInnerStyle={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
+      styles={{
+        root: {
+          width: 480,
+          height: 600,
+        },
+        body: {
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        },
       }}
-      overlayClassName={styles['icon-select']}
+      classNames={{
+        root: styles['icon-select'],
+      }}
       open={open}
       onOpenChange={(v) => setOpen(v)}
     >

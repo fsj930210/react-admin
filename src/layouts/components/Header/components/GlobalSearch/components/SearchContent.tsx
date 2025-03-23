@@ -8,17 +8,26 @@ import styles from '../index.module.css';
 import { RA_CACHED_GLOBAL_SEARCH_KEY } from '@/utils/constants';
 import storage from '@/utils/storage';
 
-import type { MenuItem } from '@/types/custom-types';
+import type { MenuItem } from '@/types/menu';
 
 type SearchContentProps = {
   data: MenuItem[];
   type: 'search' | 'history';
-  onItemClick: (item: MenuItem) => void;
+  onItemClick?: (item: MenuItem) => void;
+  onItemRemove?: (item: MenuItem) => void;
 };
-const SearchContent = ({ data, type, onItemClick }: SearchContentProps) => {
+const SearchContent = ({
+  data,
+  type,
+  onItemClick,
+  onItemRemove,
+}: SearchContentProps) => {
   const { t } = useTranslation();
+  console.log(data);
   const navigate = useNavigate();
   const handleClick = (item: MenuItem) => {
+    navigate(item.key);
+    onItemClick?.(item);
     const cachedList = storage.getItem<MenuItem[]>(RA_CACHED_GLOBAL_SEARCH_KEY);
     if (cachedList) {
       const index = cachedList.findIndex((i) => i.key === item.key);
@@ -26,8 +35,9 @@ const SearchContent = ({ data, type, onItemClick }: SearchContentProps) => {
         cachedList.splice(index, 1);
       }
       cachedList.unshift(item);
-      navigate(item.key);
-      onItemClick(item);
+      storage.setItem(RA_CACHED_GLOBAL_SEARCH_KEY, cachedList);
+    } else {
+      storage.setItem(RA_CACHED_GLOBAL_SEARCH_KEY, [item]);
     }
   };
   return (
@@ -43,10 +53,16 @@ const SearchContent = ({ data, type, onItemClick }: SearchContentProps) => {
                 onClick={() => handleClick(item)}
               >
                 <div>
-                  {item['data-icon'] ? <Icon icon={item['data-icon']} /> : null}
+                  {item.icon ? <Icon icon={item.icon} /> : null}
                   <span className="ml-[8px]">{item.label}</span>
                 </div>
-                <span className="text-[16px] line-height-[1] bg-transparent p-[4] hover:bg-[var(--ant-color-primary-hover)] rounded-[100%] transition-all">
+                <span
+                  className="text-[16px] line-height-[1] bg-transparent p-[4] hover:bg-[var(--ant-color-primary-hover)] rounded-[100%] transition-all"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onItemRemove?.(item);
+                  }}
+                >
                   {type === 'history' ? (
                     <Icon icon="lucide:x" />
                   ) : (

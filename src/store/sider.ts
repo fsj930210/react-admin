@@ -2,9 +2,11 @@ import { create } from 'zustand';
 
 import { HOME_PATH } from '@/utils/constants';
 
-import type { MenuItem } from '@/types/custom-types';
+import { createSelector } from './createSelector';
 
-interface MenuState {
+import type { MenuItem } from '@/types/menu';
+
+interface SiderState {
   // 侧边栏展开收起
   collapsed: boolean;
   menuItems: MenuItem[];
@@ -14,7 +16,7 @@ interface MenuState {
   setFlatMenuItems: (items: MenuItem[]) => void;
 }
 
-const useMenuStore = create<MenuState>()((set) => ({
+const useSiderStore = create<SiderState>()((set) => ({
   collapsed: false,
   activeKey: HOME_PATH,
   menuItems: [],
@@ -25,4 +27,6 @@ const useMenuStore = create<MenuState>()((set) => ({
   setMenuItems: (items: MenuItem[]) => set(() => ({ menuItems: items })),
 }));
 
-export default useMenuStore;
+const useSiderStoreSelector = createSelector(useSiderStore);
+
+export default useSiderStoreSelector;

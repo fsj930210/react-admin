@@ -4,14 +4,13 @@ import { Dropdown } from 'antd';
 
 import Icon from '@/components/RaIcon';
 
-import useGlobalStore from '@/store';
+import useGlobalStore from '@/store/global';
 const I18n = () => {
   const { t, i18n } = useTranslation();
   const changeAppLanguage = useGlobalStore((state) => state.changeAppLanguage);
   const items = [
     {
       key: 'zh-CN',
-      icon: '',
       label: (
         <div className="flex items-center">
           <Icon
@@ -44,8 +43,9 @@ const I18n = () => {
       menu={{
         items,
         selectable: true,
-        onClick: ({ key }) => {
-          i18n.changeLanguage(key);
+        selectedKeys: [i18n.language],
+        onClick: async ({ key }) => {
+          await i18n.changeLanguage(key);
           changeAppLanguage(key);
         },
       }}

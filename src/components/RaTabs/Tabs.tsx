@@ -24,6 +24,7 @@ import type {
   TabsLocale,
 } from './interface';
 import './index.css';
+import { DEFAULT_SCROLL_CONFIG, type ScrollConfig } from './config';
 
 /**
  * Should added antd:
@@ -74,9 +75,11 @@ export interface TabsProps
     size?: GetIndicatorSize;
     align?: 'start' | 'center' | 'end';
   };
+  ref?: React.Ref<HTMLDivElement>;
+  scrollConfig?: ScrollConfig;
 }
 
-const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
+const Tabs = (props: TabsProps) => {
   const {
     id,
     prefixCls = 'ra-tabs',
@@ -103,6 +106,8 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
     indicator,
     showInkBar,
     hideAdd,
+    ref,
+    scrollConfig = DEFAULT_SCROLL_CONFIG,
     ...restProps
   } = props;
   const tabs = React.useMemo<Tab[]>(() => {
@@ -182,6 +187,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
 
   const tabNavBarProps = {
     ...sharedProps,
+    scrollConfig,
     hideAdd,
     editable,
     locale,
@@ -224,7 +230,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
       </div>
     </TabContext.Provider>
   );
-});
+};
 
 if (process.env.NODE_ENV !== 'production') {
   Tabs.displayName = 'Tabs';

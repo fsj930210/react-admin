@@ -1,9 +1,4 @@
-import type {
-  CSSProperties,
-  ReactNode,
-  ReactElement,
-  MutableRefObject,
-} from 'react';
+import type { CSSProperties, ReactNode, ReactElement, Ref } from 'react';
 
 export interface KeepAliveProps {
   children: ReactElement | null;
@@ -16,6 +11,7 @@ export interface KeepAliveProps {
   keepRoutes?: boolean;
   refreshFallback?: React.ReactNode;
   refreshInterval?: number;
+  ref?: Ref<KeepAliveRef>;
 }
 export type ActivityMode = 'visible' | 'hidden';
 
@@ -47,9 +43,7 @@ export type ExcludeComponent = {
   component: ReactNode;
   refreshKey?: string;
 };
-export type KeepAliveContextValue = {
-  allCachedComponentsRef: MutableRefObject<CachedComponent[]> | null;
-};
+
 export type KeepAliveRef = {
   onClearCache: () => void;
   onRefreshCache: (key: string) => void;

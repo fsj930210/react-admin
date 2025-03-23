@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -17,39 +17,29 @@ type LayoutTabProps = {
   updateTabItems: UpdateTabItems;
 };
 
-const LayoutTab = forwardRef(
-  (
-    { node, props, index, updateTabItems }: LayoutTabProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _ref,
-  ) => {
-    const [tabType] = useState('trapezoid');
-    return (
-      <TabDropdown
-        tab={props.tab}
-        updateTabItems={updateTabItems}
-        index={index}
+const LayoutTab = ({ node, props, index, updateTabItems }: LayoutTabProps) => {
+  const [tabType] = useState('trapezoid');
+  return (
+    <TabDropdown tab={props.tab} updateTabItems={updateTabItems} index={index}>
+      <div
+        className={classNames({
+          'layout-tabs-tab': true,
+          'layout-tabs-tab-wrapper-active': props.active,
+          'layout-tabs-tab-chrome': tabType === 'chrome',
+          'layout-tabs-tab-card': tabType === 'card',
+          'layout-tabs-tab-classic': tabType === 'classic',
+          'layout-tabs-tab-trapezoid': tabType === 'trapezoid',
+          'layout-tabs-tab-brisk': tabType === 'brisk',
+          'layout-tabs-tab-rhythm': tabType === 'rhythm',
+        })}
+        onContextMenu={(e) => {
+          e.preventDefault();
+        }}
       >
-        <div
-          className={classNames({
-            'layout-tabs-tab': true,
-            'layout-tabs-tab-wrapper-active': props.active,
-            'layout-tabs-tab-chrome': tabType === 'chrome',
-            'layout-tabs-tab-card': tabType === 'card',
-            'layout-tabs-tab-classic': tabType === 'classic',
-            'layout-tabs-tab-trapezoid': tabType === 'trapezoid',
-            'layout-tabs-tab-brisk': tabType === 'brisk',
-            'layout-tabs-tab-rhythm': tabType === 'rhythm',
-          })}
-          onContextMenu={(e) => {
-            e.preventDefault();
-          }}
-        >
-          {tabType === 'chrome' ? <ChromeTab {...props} /> : node}
-        </div>
-      </TabDropdown>
-    );
-  },
-);
+        {tabType === 'chrome' ? <ChromeTab {...props} /> : node}
+      </div>
+    </TabDropdown>
+  );
+};
 LayoutTab.displayName = 'LayoutTab';
 export default LayoutTab;

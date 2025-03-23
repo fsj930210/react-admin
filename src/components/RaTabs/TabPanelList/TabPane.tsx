@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type Ref } from 'react';
 
 import classNames from 'classnames';
 
@@ -20,10 +20,12 @@ export interface TabPaneProps {
   animated?: boolean;
   active?: boolean;
   destroyInactiveTabPane?: boolean;
+  ref?: Ref<HTMLDivElement>;
 }
 
-const TabPane = React.forwardRef<HTMLDivElement, TabPaneProps>((props, ref) => {
-  const { prefixCls, className, style, id, active, tabKey, children } = props;
+const TabPane = (props: TabPaneProps) => {
+  const { prefixCls, className, style, id, active, tabKey, children, ref } =
+    props;
   return (
     <div
       id={id && `${id}-panel-${tabKey}`}
@@ -42,7 +44,7 @@ const TabPane = React.forwardRef<HTMLDivElement, TabPaneProps>((props, ref) => {
       {children}
     </div>
   );
-});
+};
 
 if (process.env.NODE_ENV !== 'production') {
   TabPane.displayName = 'TabPane';

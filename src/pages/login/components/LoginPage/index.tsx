@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
 import { Typography } from 'antd';
-import { useShallow } from 'zustand/react/shallow';
 
 import AppLogo from '@/components/app/AppLogo';
 import Tabs from '@/components/RaTabs';
@@ -17,7 +16,7 @@ import { PUBLIC_PATH } from '@/utils/constants';
 import styles from './index.module.css';
 
 import AppFooter from '@/layouts/components/Footer';
-import useLoginStore, { LoginPageEnum } from '@/store/login';
+import useLoginStoreSelector, { LoginPageEnum } from '@/store/login';
 
 const { Title, Paragraph } = Typography;
 
@@ -26,12 +25,10 @@ type LoginPageProps = {
 };
 const LoginPage = ({ material }: LoginPageProps) => {
   const { t } = useTranslation();
-  const { loginPage, changeLoginPage } = useLoginStore(
-    useShallow((state) => ({
-      loginPage: state.loginPage,
-      changeLoginPage: state.changeLoginPage,
-    })),
-  );
+  const { loginPage, changeLoginPage } = useLoginStoreSelector([
+    'loginPage',
+    'changeLoginPage',
+  ]);
   const items = [
     {
       key: '1',

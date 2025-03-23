@@ -243,7 +243,7 @@ const errorRouter: IRouteObject[] = [
               menu: true,
               hidden: false,
               openMode: 'router',
-              title: '任务日志',
+              title: 'taskLogs',
               icon: 'ra-icon:task-logs',
             },
           },

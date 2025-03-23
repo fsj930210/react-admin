@@ -4,7 +4,7 @@ import { Breadcrumb } from 'antd';
 
 import Icon from '@/components/RaIcon';
 
-import useBreadcrumb from '../../../../hooks/useBreadcrumb';
+import useBreadcrumb from './hooks/useBreadcrumb';
 
 import type { BreadcrumbItem } from '@/types/custom-types';
 import type { ItemType } from 'antd/lib/breadcrumb/Breadcrumb';
@@ -22,7 +22,7 @@ const AppBreadcrumb = () => {
     return isLast || currentRoute.menu ? (
       <>
         {currentRoute.icon ? <Icon icon={currentRoute.icon as string} /> : null}
-        <span className="ml-[8]">{currentRoute.title}</span>
+        <span>{currentRoute.title}</span>
       </>
     ) : (
       <Link to={currentRoute.path as string}>{currentRoute.title}</Link>

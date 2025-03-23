@@ -8,13 +8,13 @@ import type { Tab } from '@/components/RaTabs/interface';
 import { HOME_PATH, RA_CACHED_TABS_KEY } from '@/utils/constants';
 import storage from '@/utils/storage';
 
-import useMenuStore from '@/store/menu';
-import useTabsStore from '@/store/tabs';
+import useMenuStore from '@/store/sider';
+import useTabsStoreSelector from '@/store/tabs';
 
 export type UpdateTabItems = (updateFunc: () => Tab[]) => void;
 const useTabs = () => {
   const location = useLocation();
-  const { tabItems, setActiveKey, setTabItems } = useTabsStore(
+  const { tabItems, setActiveKey, setTabItems } = useTabsStoreSelector(
     useShallow((state) => ({
       tabItems: state.tabItems,
       setActiveKey: state.setActiveKey,

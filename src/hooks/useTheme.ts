@@ -4,11 +4,11 @@ import { setDarkCssVars, setLightCssVars } from '@/utils/theme';
 
 import type { AppContext } from '@/AppContext';
 
-import useGlobalStore, { AppThemeEnum } from '@/store';
+import useGlobalStore, { AppThemeEnum } from '@/store/global';
 
 const useTheme = () => {
   const [theme, setTheme] = useState<AppContext['theme']>('light');
-  const { appTheme } = useGlobalStore();
+  const { appTheme } = useGlobalStore('appTheme');
   // 这里处理是因为有些页面没有引入DarkTheme组件，全局监听
   useEffect(() => {
     const themeMedia = window.matchMedia('(prefers-color-scheme: dark)');

@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { createSelector } from './createSelector';
+
 export type FormPageProps = {
   material?: boolean;
   switchPage?: (page: LoginPageEnum) => void;
@@ -33,4 +35,6 @@ const useLoginStore = create<LoginState>()((set) => ({
   changeLoginPage: (page) => set(() => ({ loginPage: page })),
 }));
 
-export default useLoginStore;
+const useLoginStoreSelector = createSelector(useLoginStore);
+
+export default useLoginStoreSelector;

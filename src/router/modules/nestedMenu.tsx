@@ -144,7 +144,7 @@ const nestedMenuRouter: IRouteObject[] = [
                   menu: true,
                   hidden: false,
                   openMode: 'router',
-                  title: '菜单3-2-1',
+                  title: 'nestedMenu3-2-1',
                   icon: 'ant-design:menu-outlined',
                 },
               },

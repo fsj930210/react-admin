@@ -26,7 +26,6 @@ const chartsRouter: IRouteObject[] = [
       },
       {
         path: 'amap',
-        index: true,
         element: (
           <LazyLoadComponent
             Component={lazy(() => import('@/pages/charts/amap'))}

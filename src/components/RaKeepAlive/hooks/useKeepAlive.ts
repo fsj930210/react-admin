@@ -6,8 +6,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import type { MutableRefObject } from 'react';
-import { useLocation } from 'react-router-dom';
+import type { JSXElementConstructor, ReactElement } from 'react';
 
 import { useDebounce, useEventListener, useMemoizedFn } from 'ahooks';
 import isArray from 'lodash-es/isArray';
@@ -25,8 +24,17 @@ import type {
   KeepAliveProps,
   ScrollNodesPosition,
 } from '../interface';
-
-const useRouteCache = (props: KeepAliveProps) => {
+/**
+ * @description 缓存组件 适用于路由和非路由缓存；
+ * 注意当react-router-dom是v7时，此组件不会正常工作
+ * 表现为路由切换了(resolvedKey变化了)但是useEffect回调函数没有执行
+ * 直接打印（不在useEffect里）打印resolvedKey是不同的值，但是在useEffect回调不执行
+ * 怀疑是被Suspense组件给缓存了
+ * 所以要使用此组件react-touter-dom保持在v6版本，如果大家有好的解决方法，欢迎提pr
+ * @param props
+ * @returns
+ */
+const useKeepAlive = (props: KeepAliveProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const {
     cachedKey,
@@ -34,10 +42,8 @@ const useRouteCache = (props: KeepAliveProps) => {
     excludes,
     includes,
     children,
-    keepRoutes,
     refreshInterval = 200,
   } = props;
-  const location = useLocation();
   const [cachedComponents, setCachedComponents] = useState<CachedComponent[]>(
     [],
   );
@@ -45,19 +51,17 @@ const useRouteCache = (props: KeepAliveProps) => {
     ExcludeComponent[]
   >([]);
   const { fixAntdStyle, revertAntdStyle } = useFixAntdStyle();
-  // 缓存的组件，所有的操作都在它上
+  // 缓存的组件，所有的操作都在它上,
+  // 频繁操作，直接在ref上操作，而不是频繁更新cachedComponents
   const cachedComponentsRef = useRef<CachedComponent[]>([]);
-  const { allCachedComponentsRef } = useContext(KeepAliveContext);
+  // 全局存一份缓存是因为当缓存非路由组件时，卸载后再恢复能恢复数据
+  const globalCachedComponents = useContext(KeepAliveContext);
   const container = containerRef.current;
-  const defaultRouteKey = useMemo(
-    () => location.pathname + location.search,
-    [location.pathname, location.search],
-  );
-  const resolvedKey = keepRoutes
-    ? cachedKey
-      ? cachedKey
-      : defaultRouteKey || uuidv4()
-    : children?.key || uuidv4();
+
+  const resolvedKey = useMemo(() => {
+    return cachedKey || uuidv4();
+  }, [cachedKey]);
+
   // 容器滚动位置
   const containerScrollTo = useMemoizedFn((scrollOffsets) =>
     container?.scrollTo?.({
@@ -67,9 +71,9 @@ const useRouteCache = (props: KeepAliveProps) => {
   );
 
   const saveCachedNodeChildren = useMemoizedFn(() => {
-    const index = (
-      cachedComponentsRef as MutableRefObject<CachedComponent[]>
-    ).current.findIndex((i) => i.key === resolvedKey);
+    const index = cachedComponentsRef.current.findIndex(
+      (i) => i.key === resolvedKey,
+    );
     if (index > -1) {
       const el = cachedComponentsRef.current[index].el;
       const nodeList: undefined | NodeListOf<Element> =
@@ -89,19 +93,12 @@ const useRouteCache = (props: KeepAliveProps) => {
       ) {
         cachedScrollNodes.unshift([el, { x: el.scrollLeft, y: el.scrollTop }]);
       }
-      // 更新全部缓存组件的cachedScrollNodes
-      const allCachedIndex =
-        allCachedComponentsRef?.current?.findIndex?.(
-          (i) => i.key === resolvedKey,
-        ) || -1;
-      (cachedComponentsRef as MutableRefObject<CachedComponent[]>).current[
-        index
-      ].cachedScrollNodes = cachedScrollNodes;
-
-      if (allCachedIndex > -1) {
-        (allCachedComponentsRef as MutableRefObject<CachedComponent[]>).current[
-          allCachedIndex
-        ].cachedScrollNodes = cachedScrollNodes;
+      // 更新缓存里的cachedScrollNodes
+      cachedComponentsRef.current[index].cachedScrollNodes = cachedScrollNodes;
+      // 更新全局缓存里的cachedScrollNodes
+      const globalCachedItem = globalCachedComponents.get(resolvedKey);
+      if (globalCachedItem) {
+        globalCachedItem.cachedScrollNodes = cachedScrollNodes;
       }
     }
   });
@@ -119,11 +116,7 @@ const useRouteCache = (props: KeepAliveProps) => {
     let inExcludes = false;
     if (isArray(excludes)) {
       inExcludes = (excludes as (string | RegExp)[]).some((item) => {
-        if (isRegExp(item)) {
-          return (item as RegExp).test(key);
-        } else {
-          return item === key;
-        }
+        return isRegExp(item) ? (item as RegExp).test(key) : item === key;
       });
     } else if (isRegExp(excludes)) {
       inExcludes = (excludes as RegExp).test(key);
@@ -134,14 +127,9 @@ const useRouteCache = (props: KeepAliveProps) => {
     if (!includes) return true;
     if (includes) {
       let cached = true;
-
       if (isArray(includes)) {
         cached = (includes as (string | RegExp)[]).some((item) => {
-          if (isRegExp(item)) {
-            return (item as RegExp).test(key);
-          } else {
-            return item === key;
-          }
+          return isRegExp(item) ? (item as RegExp).test(key) : item === key;
         });
       } else if (isRegExp(includes)) {
         cached = (includes as RegExp).test(key);
@@ -157,68 +145,78 @@ const useRouteCache = (props: KeepAliveProps) => {
     callback();
     revertAntdStyle();
   };
+  const createCachedComponentItem = useCallback(
+    (
+      key: string,
+      component: ReactElement<
+        unknown,
+        string | JSXElementConstructor<any>
+      > | null,
+    ) => {
+      return {
+        component,
+        key,
+        refreshKey: uuidv4(),
+        cachedScrollNodes: [],
+        el: containerRef.current as HTMLDivElement,
+        refreshing: false,
+      };
+    },
+    [],
+  );
+  const updateGlobalCachedComponents = (
+    key: string | string[],
+    callback: (
+      globalCachedComponents: Map<string, CachedComponent>,
+      key: string,
+    ) => void,
+  ) => {
+    if (isArray(key)) {
+      key.forEach((i) => {
+        callback(globalCachedComponents, i);
+      });
+    } else {
+      callback(globalCachedComponents, key);
+    }
+  };
+
+  const updateCachedComponents = (
+    key: string,
+    children: ReactElement<unknown, string | JSXElementConstructor<any>> | null,
+  ) => {
+    const newCachedComponents = [...cachedComponentsRef.current];
+    const index = newCachedComponents.findIndex((item) => item.key === key);
+    // 找不到则分两种情况
+    if (index < 0) {
+      // 1. 从全局缓存里面找
+      const globalCachedItem = globalCachedComponents.get(key);
+      if (globalCachedItem) {
+        newCachedComponents.push(globalCachedItem);
+      } else {
+        // 2. 从全局缓存里面找不到则创建一个
+        const newCachedItem = createCachedComponentItem(key, children);
+        newCachedComponents.push(newCachedItem);
+        // 更新全局缓存
+        updateGlobalCachedComponents(key, (globalCachedComponents, key) => {
+          globalCachedComponents.set(key, newCachedItem);
+        });
+      }
+      // 更新缓存
+      cachedComponentsRef.current = newCachedComponents;
+    } else {
+      // 找到则更新
+      newCachedComponents[index].component = children;
+      // 更新全局缓存
+      updateGlobalCachedComponents(key, (globalCachedComponents, key) => {
+        globalCachedComponents.set(key, newCachedComponents[index]);
+      });
+    }
+    return newCachedComponents;
+  };
   useEffect(() => {
     if (shouldCached(resolvedKey)) {
       fixStyle(() => {
-        setCachedComponents((prev) => {
-          const newCachedComponents = [...prev];
-          const index = newCachedComponents.findIndex(
-            (item) => item.key === resolvedKey,
-          );
-          if (index < 0) {
-            let cachedItem: CachedComponent;
-            const allCachedItem = allCachedComponentsRef?.current?.find?.(
-              (i) => i.key === resolvedKey,
-            );
-            // 如果从全局里面找到则用全局缓存
-            if (allCachedItem) {
-              cachedItem = allCachedItem;
-            } else {
-              cachedItem = {
-                component: children,
-                key: resolvedKey,
-                refreshKey: uuidv4(),
-                cachedScrollNodes: [],
-                el: containerRef.current as HTMLDivElement,
-                refreshing: false,
-              };
-            }
-
-            newCachedComponents.push(cachedItem);
-            (
-              cachedComponentsRef as MutableRefObject<CachedComponent[]>
-            ).current = newCachedComponents;
-            if (allCachedComponentsRef) {
-              const allCachedIndex = allCachedComponentsRef.current.findIndex(
-                (i) => i.key === resolvedKey,
-              );
-              if (allCachedIndex < 0) {
-                allCachedComponentsRef.current.push(cachedItem);
-              }
-            }
-            return newCachedComponents;
-          }
-          const oldCachedComponents = [
-            ...(cachedComponentsRef as MutableRefObject<CachedComponent[]>)
-              .current,
-          ];
-          if (allCachedComponentsRef) {
-            const allCachedIndex = allCachedComponentsRef.current.findIndex(
-              (i) => i.key === resolvedKey,
-            );
-            const cachedComponent = oldCachedComponents.find(
-              (i) => i.key === resolvedKey,
-            );
-            if (allCachedIndex > -1 && cachedComponent) {
-              allCachedComponentsRef.current.splice(
-                allCachedIndex,
-                1,
-                cachedComponent,
-              );
-            }
-          }
-          return oldCachedComponents;
-        });
+        setCachedComponents(updateCachedComponents(resolvedKey, children));
       });
     } else {
       setExcludeComponents((prev) => {
@@ -239,68 +237,55 @@ const useRouteCache = (props: KeepAliveProps) => {
         return newExcludeComponents;
       });
     }
-  }, [resolvedKey, keepRoutes]);
+  }, [resolvedKey]);
 
   useEffect(() => {
     // 如果不需要缓存滚动条置顶
     if (!shouldCached(resolvedKey) || !saveScrollPosition) {
       containerScrollTo({ left: 0, top: 0 });
-      const cachedItem = cachedComponents.find((i) => i.key === resolvedKey);
-      if (cachedItem) {
-        cachedItem.cachedScrollNodes?.forEach?.(([node]) => {
-          node?.scrollTo({ left: 0, top: 0 });
+      // const cachedItem = cachedComponents.find((i) => i.key === resolvedKey);
+      // if (cachedItem) {
+      //   cachedItem.cachedScrollNodes?.forEach?.(([node]) => {
+      //     node?.scrollTo({ left: 0, top: 0 });
+      //   });
+      // }
+    }
+    // 如果需要保存滚动条位置
+    if (shouldCached(resolvedKey) && saveScrollPosition) {
+      const globalCachedItem = globalCachedComponents.get(resolvedKey);
+      if (globalCachedItem) {
+        globalCachedItem.cachedScrollNodes?.forEach?.(([node, { x, y }]) => {
+          setTimeout(() => {
+            node?.scrollTo({ left: x || 0, top: y || 0 });
+          }, 20);
         });
       }
     }
-    if (saveScrollPosition || shouldCached(resolvedKey)) {
-      if (allCachedComponentsRef?.current) {
-        const cachedItem = allCachedComponentsRef?.current.find(
-          (i) => i.key === resolvedKey,
-        );
-        if (cachedItem) {
-          cachedItem.cachedScrollNodes?.forEach?.(([node, { x, y }]) => {
-            setTimeout(() => {
-              node?.scrollTo({ left: x || 0, top: y || 0 });
-            }, 20);
-          });
-        }
-      }
-    }
-  }, [saveScrollPosition, resolvedKey, cachedComponents, children]);
-  const updateAllCachedComponents = (
-    key: string | string[],
-    callback: (
-      cachedComponents: MutableRefObject<CachedComponent[]>,
-      index: number,
-    ) => void,
-  ) => {
-    if (allCachedComponentsRef) {
-      const allCachedComponents = allCachedComponentsRef.current;
-      if (typeof key === 'string') {
-        const index = allCachedComponents.findIndex((i) => i.key === key);
-        if (index > -1) {
-          callback(allCachedComponentsRef, index);
-        }
-      } else {
-        callback(allCachedComponentsRef, -1);
-      }
-    }
-  };
+  }, [saveScrollPosition, resolvedKey]);
 
   const onRefreshCache = useCallback((key: string) => {
+    // 刷新缓存需要滚动条回到最开始的地方
+    containerScrollTo({ left: 0, top: 0 });
     setCachedComponents((prev) => {
       const newCachedComponents = [...prev];
       const index = cachedComponents.findIndex((item) => item.key === key);
       const newRefreshKey = uuidv4();
       if (index > -1) {
-        newCachedComponents[index].refreshKey = newRefreshKey;
-        newCachedComponents[index].refreshing = true;
+        const cachedItem = newCachedComponents[index];
+        cachedItem.refreshKey = newRefreshKey;
+        cachedItem.refreshing = true;
+        cachedItem.cachedScrollNodes?.forEach?.(([node]) => {
+          node?.scrollTo({ left: 0, top: 0 });
+        });
+        cachedItem.cachedScrollNodes = [];
       }
       cachedComponentsRef.current = newCachedComponents;
-      updateAllCachedComponents(key, (allCachedComponentsRef, index) => {
-        if (index > -1) {
-          allCachedComponentsRef.current[index].refreshKey = newRefreshKey;
-          allCachedComponentsRef.current[index].refreshing = true;
+      updateGlobalCachedComponents(key, (globalCachedComponents, key) => {
+        const globalCachedItem = globalCachedComponents.get(key);
+        if (globalCachedItem) {
+          globalCachedItem.refreshKey = newRefreshKey;
+          globalCachedItem.refreshing = true;
+          globalCachedItem.cachedScrollNodes = [];
         }
       });
       return newCachedComponents;
@@ -311,14 +296,16 @@ const useRouteCache = (props: KeepAliveProps) => {
         const index = cachedComponents.findIndex((item) => item.key === key);
         const newRefreshKey = uuidv4();
         if (index > -1) {
-          newCachedComponents[index].refreshKey = newRefreshKey;
-          newCachedComponents[index].refreshing = false;
+          const cachedItem = newCachedComponents[index];
+          cachedItem.refreshKey = newRefreshKey;
+          cachedItem.refreshing = false;
         }
         cachedComponentsRef.current = newCachedComponents;
-        updateAllCachedComponents(key, (allCachedComponentsRef, index) => {
-          if (index > -1) {
-            allCachedComponentsRef.current[index].refreshKey = newRefreshKey;
-            allCachedComponentsRef.current[index].refreshing = false;
+        updateGlobalCachedComponents(key, (globalCachedComponents, key) => {
+          const globalCachedItem = globalCachedComponents.get(key);
+          if (globalCachedItem) {
+            globalCachedItem.refreshKey = newRefreshKey;
+            globalCachedItem.refreshing = false;
           }
         });
         return newCachedComponents;
@@ -327,26 +314,8 @@ const useRouteCache = (props: KeepAliveProps) => {
   }, []);
   const onClearCache = useCallback(() => {
     cachedComponentsRef.current = [];
-    if (allCachedComponentsRef) {
-      allCachedComponentsRef.current = [];
-    }
+    globalCachedComponents.clear();
     setCachedComponents([]);
-  }, []);
-  const onRemoveCache = useCallback((key: string) => {
-    setCachedComponents((prev) => {
-      const newCachedComponents = [...prev];
-      const index = cachedComponents.findIndex((item) => item.key === key);
-      if (index > -1) {
-        newCachedComponents.splice(index, 1);
-      }
-      cachedComponentsRef.current = newCachedComponents;
-      updateAllCachedComponents(key, (allCachedComponentsRef, index) => {
-        if (index > -1) {
-          allCachedComponentsRef.current.splice(index, 1);
-        }
-      });
-      return newCachedComponents;
-    });
   }, []);
   const onRemoveCacheByKeys = useCallback((keys: string[]) => {
     setCachedComponents((prev) => {
@@ -354,17 +323,16 @@ const useRouteCache = (props: KeepAliveProps) => {
         (item) => !keys.includes(item.key),
       );
       cachedComponentsRef.current = newCachedComponents;
-      updateAllCachedComponents(keys, (allCachedComponentsRef, index) => {
-        if (index) {
-          allCachedComponentsRef.current =
-            allCachedComponentsRef.current.filter(
-              (item) => !keys.includes(item.key),
-            );
-        }
+      updateGlobalCachedComponents(keys, (globalCachedComponents, key) => {
+        globalCachedComponents.delete(key);
       });
       return newCachedComponents;
     });
   }, []);
+  const onRemoveCache = useCallback((key: string) => {
+    onRemoveCacheByKeys([key]);
+  }, []);
+
   return {
     cachedComponents,
     excludeComponents,
@@ -377,4 +345,4 @@ const useRouteCache = (props: KeepAliveProps) => {
   };
 };
 
-export default useRouteCache;
+export default useKeepAlive;

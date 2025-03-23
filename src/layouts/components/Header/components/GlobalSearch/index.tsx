@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Modal } from 'antd';
@@ -13,9 +13,9 @@ import SearchFooter from './components/SearchFooter';
 import SearchInput from './components/SearchInput';
 import styles from './index.module.css';
 
-import type { MenuItem } from '@/types/custom-types';
+import type { MenuItem } from '@/types/menu';
 
-import useMenuStore from '@/store/menu';
+import useMenuStore from '@/store/sider';
 
 const GlobalSearch = () => {
   const { t } = useTranslation();
@@ -29,16 +29,15 @@ const GlobalSearch = () => {
       const filteredList = flatMenuItems.filter(
         (item) => item.label.includes(value) || item.key.includes(value),
       );
-      setSearchContentList(filteredList);
-    } else {
-      const cachedList = storage.getItem<MenuItem[]>(
-        RA_CACHED_GLOBAL_SEARCH_KEY,
+      setSearchContentList(
+        filteredList.map((item) => ({
+          ...item,
+          label: t(`menu.${item.title}`),
+          icon: item['data-icon'],
+        })),
       );
-      if (cachedList) {
-        setSearchContentList(cachedList);
-      } else {
-        setSearchContentList([]);
-      }
+    } else {
+      processCachedList();
     }
     setSearchValue(value);
   };
@@ -47,6 +46,45 @@ const GlobalSearch = () => {
     setSearchValue('');
     setSearchContentList([]);
   };
+  const handleRemove = (item: MenuItem) => {
+    const filteredList = searchContentList.filter((i) => i.key !== item.key);
+    setSearchContentList(filteredList);
+    if (!searchValue) {
+      const cachedList = storage.getItem<MenuItem[]>(
+        RA_CACHED_GLOBAL_SEARCH_KEY,
+      );
+      if (cachedList) {
+        const index = cachedList.findIndex((i) => i.key === item.key);
+        if (index > -1) {
+          cachedList.splice(index, 1);
+        }
+        storage.setItem(RA_CACHED_GLOBAL_SEARCH_KEY, cachedList);
+      }
+    }
+  };
+  const afterOpenChange = (open: boolean) => {
+    if (!open) {
+      setSearchValue('');
+      setSearchContentList([]);
+    } else {
+      processCachedList();
+    }
+  };
+  const processCachedList = () => {
+    const cachedList = storage.getItem<MenuItem[]>(RA_CACHED_GLOBAL_SEARCH_KEY);
+    if (cachedList) {
+      const newList = cachedList.map((item) => ({
+        ...item,
+        label: t(`menu.${item.title}`),
+      }));
+      setSearchContentList(newList);
+    } else {
+      setSearchContentList([]);
+    }
+  };
+  useEffect(() => {
+    processCachedList();
+  }, []);
   return (
     <>
       <button
@@ -67,6 +105,7 @@ const GlobalSearch = () => {
         closable={false}
         open={showModal}
         onCancel={onClose}
+        afterOpenChange={afterOpenChange}
         title={<SearchInput onChange={handleInputChange} value={searchValue} />}
         style={{
           padding: 0,
@@ -78,6 +117,7 @@ const GlobalSearch = () => {
           data={searchContentList}
           type={searchValue ? 'search' : 'history'}
           onItemClick={onClose}
+          onItemRemove={handleRemove}
         />
       </Modal>
     </>

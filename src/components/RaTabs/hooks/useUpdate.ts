@@ -9,7 +9,7 @@ import { useLayoutUpdateEffect } from 'rc-util/lib/hooks/useLayoutEffect';
 export default function useUpdate(callback: VoidFunction): () => void {
   const [count, setCount] = useState(0);
   const effectRef = useRef(0);
-  const callbackRef = useRef<VoidFunction>();
+  const callbackRef = useRef<VoidFunction>(null);
   callbackRef.current = callback;
 
   // Trigger on `useLayoutEffect`

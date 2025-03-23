@@ -158,6 +158,7 @@ const Dashboard = () => {
   const [value, setValue] = useState<string>();
   const [show, setShow] = useState(false);
   const showDrawer = () => {
+    console.log(2);
     setOpenDrawer(true);
   };
 
@@ -185,8 +186,8 @@ const Dashboard = () => {
         Open Drawer
       </Button>
       <Drawer title="Basic Drawer" onClose={onCloseDrawer} open={openDrawer}>
-        <KeepAlive className="h-full overflow-auto">
-          <Fragment key="aa">
+        <KeepAlive className="h-full overflow-auto" cachedKey="aa">
+          <Fragment>
             <Input />
             {Array.from({ length: 300 }).map((_, index) => {
               return <div key={index}>workspace {index}</div>;
@@ -194,7 +195,7 @@ const Dashboard = () => {
           </Fragment>
         </KeepAlive>
       </Drawer>
-      <KeepAlive>
+      <KeepAlive cachedKey="inputNumber">
         {show ? <Input key="input" /> : <InputNumber key="inputNumber" />}
       </KeepAlive>
       <Button type="primary" onClick={() => setShow(!show)}>

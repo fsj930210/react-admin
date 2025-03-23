@@ -3,10 +3,10 @@ import LoginSettings from './components/LoginSettings';
 import MaterialDesignLogin from './MaterialDesign';
 import Modal from './Modal';
 
-import useLoginStore, { LoginStyleEnum } from '@/store/login';
+import useLoginStoreSelector, { LoginStyleEnum } from '@/store/login';
 
 const Login = () => {
-  const { loginStyle } = useLoginStore();
+  const { loginStyle } = useLoginStoreSelector('loginStyle');
   return (
     <div className="overflow-hidden relative h-full">
       <div className="absolute top-2 right-4 z-1">

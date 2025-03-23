@@ -3,38 +3,36 @@ import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider, App as AntApp, theme as antdTheme } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { useShallow } from 'zustand/react/shallow';
+
+import useI18n from '@/components/business/I18n/useI18n';
 
 import { AppContext } from './AppContext';
 // import LockScreen from './components/LockScreen';
-import { useBrowserLanguage } from './hooks/useBrowserLanguage';
 import useColors from './hooks/useColors';
-import useI18n from './hooks/useI18n';
 import useTheme from './hooks/useTheme';
 import router from './router';
+import { RA_ANTD_APP_CSS_TOKEN_KEY } from './utils/constants';
 
-import useGlobalStore from '@/store';
+import useGlobalStoreSelector from '@/store/global';
 
 import 'antd/dist/reset.css';
 
 dayjs.locale('zh-cn');
 
 const App = () => {
-  useBrowserLanguage();
   useColors();
   const { antdLanguage } = useI18n();
-  const { primaryColor } = useGlobalStore(
-    useShallow((state) => ({
-      primaryColor: state.primaryColor,
-    })),
-  );
+  const { primaryColor } = useGlobalStoreSelector('primaryColor');
   const theme = useTheme();
+
   return (
-    <AppContext.Provider value={{ theme, appCssTokenKey: 'ra-css-var' }}>
+    <AppContext.Provider
+      value={{ theme, appCssTokenKey: RA_ANTD_APP_CSS_TOKEN_KEY }}
+    >
       <ConfigProvider
         locale={antdLanguage}
         theme={{
-          cssVar: { key: 'ra-css-var' },
+          cssVar: { key: RA_ANTD_APP_CSS_TOKEN_KEY },
           hashed: false,
           algorithm:
             theme === 'dark'

@@ -36,6 +36,7 @@ export interface Tab extends Omit<TabPaneProps, 'tab'> {
   key: string;
   label: React.ReactNode;
   pin?: boolean;
+  title?: string;
   ['data-icon']?: string;
 }
 

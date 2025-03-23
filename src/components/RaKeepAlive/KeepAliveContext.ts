@@ -1,9 +1,7 @@
 import { createContext } from 'react';
 
-import type { KeepAliveContextValue } from './interface';
-export const defaultKeepAliveContextValue: KeepAliveContextValue = {
-  allCachedComponentsRef: null,
-};
-export const KeepAliveContext = createContext<KeepAliveContextValue>(
-  defaultKeepAliveContextValue,
+import type { CachedComponent } from './interface';
+
+export const KeepAliveContext = createContext<Map<string, CachedComponent>>(
+  new Map(),
 );

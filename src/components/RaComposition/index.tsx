@@ -58,11 +58,11 @@ const RaComposition = ({
     keyDownHandler,
     triggerValueChangeCallback,
   } = useComposition({
-    value,
+    value: value as any,
     maxLength,
-    onChange,
+    onChange: onChange as any,
     onKeyDown,
-    onPressEnter,
+    onPressEnter: onPressEnter as any,
     normalizeHandler,
   });
   const inputProps: Omit<RaCompositionProps, 'children'> = {
@@ -91,7 +91,10 @@ const RaComposition = ({
     },
     ...rest,
   };
-  return cloneElement(children, { ...inputProps });
+  // @ts-ignore
+  return cloneElement(children as React.ReactElement<any>, {
+    ...(inputProps as any),
+  });
 };
 
 export const RaCompositionInput = (

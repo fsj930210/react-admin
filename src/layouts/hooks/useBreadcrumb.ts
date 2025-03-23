@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import type { BreadcrumbItem, MenuItem } from '@/types/custom-types';
+import type { BreadcrumbItem } from '@/types/custom-types';
 import type { BreadcrumbProps } from 'antd/lib';
 
-import useGlobalStore from '@/store';
-import useMenuStore from '@/store/menu';
+import useGlobalStore from '@/store/global';
+import useMenuStore from '@/store/sider';
+import type { MenuItem } from '@/types/menu';
 
 function generateBreadcrumbList(
   key: string, // 通过点击的key来寻找

@@ -22,7 +22,7 @@ const useIndicator = (options: UseIndicatorOptions) => {
   const { size, align = 'center' } = indicator;
 
   const [inkStyle, setInkStyle] = useState<React.CSSProperties>();
-  const inkBarRafRef = useRef<number>();
+  const inkBarRafRef = useRef<number>(-1);
 
   const getLength = React.useCallback(
     (origin: number) => {

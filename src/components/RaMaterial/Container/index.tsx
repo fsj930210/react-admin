@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import Icon from '@/components/RaIcon';
 import './index.css';
+import { RA_ANTD_APP_CSS_TOKEN_KEY } from '@/utils/constants';
 
 export interface MaterialContainerProps {
   variant?: 'outlined' | 'standard' | 'filled';
@@ -57,7 +58,7 @@ const MaterialContainer = ({
         'ant-input-affix-wrapper': true,
         'ra-material-input-wrapper': true,
         'ant-input-css-var': true,
-        'ra-css-var': true,
+        [RA_ANTD_APP_CSS_TOKEN_KEY]: true,
         [`ra-material-input-status-${status}`]: !!status,
         [className as string]: !!className,
       })}

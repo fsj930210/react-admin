@@ -15,17 +15,21 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import type { RenderTabBarProps, Tab } from '@/components/RaTabs/interface';
+import type { RenderTabBarProps } from '@/components/RaTabs/interface';
 import type { TabNavListProps } from '@/components/RaTabs/TabNavList';
 
 import LayoutTab from '../LayoutTab';
+import useTabsStoreSelector from '@/store/tabs';
 
-import type { DragEndEvent } from '@dnd-kit/core';
+import type { DragEndEvent, DraggableAttributes } from '@dnd-kit/core';
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
   'data-node-key': string;
 }
-
+interface DraggableTabNodeProps extends DraggableAttributes {
+  style: React.CSSProperties;
+  ref: (node: HTMLElement | null) => void;
+}
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -40,12 +44,15 @@ const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
     cursor: 'move',
   };
 
-  return React.cloneElement(props.children as React.ReactElement, {
-    ref: setNodeRef,
-    style,
-    ...attributes,
-    ...listeners,
-  });
+  return React.cloneElement<DraggableTabNodeProps>(
+    props.children as React.ReactElement<DraggableTabNodeProps>,
+    {
+      ref: setNodeRef,
+      style,
+      ...attributes,
+      ...listeners,
+    },
+  );
 };
 
 type DraggableTabsProps = {
@@ -60,16 +67,17 @@ const DraggableTabs = ({
   DefaultTabBar,
   defaultProps,
 }: DraggableTabsProps) => {
+  const { tabItems } = useTabsStoreSelector('tabItems');
   const sensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },
   });
 
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
-      updateTabItems((prev: Tab[]) => {
-        const activeIndex = prev!.findIndex((i) => i.key === active.id);
-        const overIndex = prev!.findIndex((i) => i.key === over?.id);
-        return arrayMove(prev!, activeIndex, overIndex);
+      updateTabItems(() => {
+        const activeIndex = tabItems!.findIndex((i) => i.key === active.id);
+        const overIndex = tabItems!.findIndex((i) => i.key === over?.id);
+        return arrayMove(tabItems!, activeIndex, overIndex);
       });
     }
   };
@@ -95,7 +103,11 @@ const DraggableTabs = ({
                 index={index}
               />
             ) : (
-              <DraggableTabNode {...node.props} key={node.key}>
+              <DraggableTabNode
+                {...(node.props || {})}
+                key={node.key}
+                data-node-key={nodeKey}
+              >
                 <div data-node-key={nodeKey}>
                   <LayoutTab
                     node={node}

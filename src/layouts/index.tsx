@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 
-import { KeepAliveRoot } from '@/components/RaKeepAlive';
+import { KeepAliveProvider } from '@/components/RaKeepAlive';
 
 import AppContent from './components/Content';
 import AppHeader from './components/Header';
@@ -9,8 +9,9 @@ import useMenu from './hooks/useMenu';
 
 const BasicLayout = () => {
   useMenu();
+
   return (
-    <KeepAliveRoot>
+    <KeepAliveProvider>
       <Layout className="h-full" hasSider>
         <AppSider />
         <Layout className="relative overflow-hidden h-full flex flex-col">
@@ -18,7 +19,7 @@ const BasicLayout = () => {
           <AppContent />
         </Layout>
       </Layout>
-    </KeepAliveRoot>
+    </KeepAliveProvider>
   );
 };
 

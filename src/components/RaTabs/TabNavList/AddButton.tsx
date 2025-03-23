@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type Ref } from 'react';
 
 import Icon from '@/components/RaIcon';
 
@@ -9,31 +9,30 @@ export interface AddButtonProps {
   editable?: EditableConfig;
   locale?: TabsLocale;
   style?: React.CSSProperties;
+  ref?: Ref<HTMLButtonElement>;
 }
 
-const AddButton = React.forwardRef<HTMLButtonElement, AddButtonProps>(
-  (props, ref) => {
-    const { prefixCls, editable, locale, style } = props;
-    if (!editable || editable.showAdd === false) {
-      return null;
-    }
+const AddButton = (props: AddButtonProps) => {
+  const { prefixCls, editable, locale, style, ref } = props;
+  if (!editable || editable.showAdd === false) {
+    return null;
+  }
 
-    return (
-      <button
-        ref={ref}
-        type="button"
-        className={`${prefixCls}-nav-add`}
-        style={style}
-        aria-label={locale?.addAriaLabel || 'Add tab'}
-        onClick={(event) => {
-          editable.onEdit('add', { event });
-        }}
-      >
-        {editable.addIcon || <Icon inline icon="lucide:plus" />}
-      </button>
-    );
-  },
-);
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={`${prefixCls}-nav-add`}
+      style={style}
+      aria-label={locale?.addAriaLabel || 'Add tab'}
+      onClick={(event) => {
+        editable.onEdit('add', { event });
+      }}
+    >
+      {editable.addIcon || <Icon inline icon="lucide:plus" />}
+    </button>
+  );
+};
 
 if (process.env.NODE_ENV !== 'production') {
   AddButton.displayName = 'AddButton';

@@ -5,11 +5,12 @@ import { useFullscreen } from 'ahooks';
 
 import type { Tab } from '@/components/RaTabs/interface';
 
-import { LayoutTabsContext } from '../components/Content/LayoutTabsContext';
+import { LayoutTabsContext } from '../../../components/Content/LayoutTabsContext';
 
 import { HOME_PATH } from '@/utils/constants';
 
-import useTabsStore from '@/store/tabs';
+import useGlobalStoreSelector from '@/store/global';
+import useTabsStoreSelector from '@/store/tabs';
 
 const useTabActions = ({
   updateTabItems,
@@ -17,15 +18,20 @@ const useTabActions = ({
   updateTabItems: (updateFunc: () => Tab[]) => void;
 }) => {
   const navigate = useNavigate();
-  const { onRemoveCache, onRefreshCache, onRemoveCacheByKeys } =
+  const { onRemoveCache, onRefreshCache, onRemoveCacheByKeys, refresh } =
     useContext(LayoutTabsContext);
-  const tabItems = useTabsStore((state) => state.tabItems);
+  const tabItems = useTabsStoreSelector((state) => state.tabItems);
+  const { keepAlive } = useGlobalStoreSelector('keepAlive');
   const [isFullscreen, { toggleFullscreen: toggleFullscreenFunc }] =
     useFullscreen(document.getElementById('ra-content-container'));
   // 重新加载
   const reloadTabFunc = useCallback(
     (key: string) => {
-      onRefreshCache?.(key);
+      if (keepAlive) {
+        onRefreshCache?.(key);
+      } else {
+        refresh?.();
+      }
     },
     [onRefreshCache],
   );
@@ -80,7 +86,6 @@ const useTabActions = ({
             newItems.splice(maxIndex + 1, 0, item);
           }
         }
-
         return newItems;
       });
     },

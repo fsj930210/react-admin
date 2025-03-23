@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 import { builtInThemes } from '@/utils/constants';
 
-import useGlobalStore from '@/store';
+import useGlobalStore from '@/store/global';
 type ThemeItemProps = {
   simple?: boolean;
 };

@@ -1,13 +1,12 @@
-import { memo, Fragment, forwardRef, useImperativeHandle } from 'react';
-import type { Ref } from 'react';
+import { Fragment, useImperativeHandle } from 'react';
 
 import useKeepAlive from '../../hooks/useKeepAlive';
 import Activity from '../Activity';
 
 import type { KeepAliveProps, KeepAliveRef } from '../../interface';
 
-function KeepAlive(props: KeepAliveProps, ref: Ref<KeepAliveRef>) {
-  const { className, style, refreshFallback } = props;
+function KeepAlive(props: KeepAliveProps) {
+  const { className, style, refreshFallback, ref } = props;
   const {
     excludeComponents,
     cachedComponents,
@@ -18,20 +17,14 @@ function KeepAlive(props: KeepAliveProps, ref: Ref<KeepAliveRef>) {
     onRemoveCache,
     onRemoveCacheByKeys,
   } = useKeepAlive(props);
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle<KeepAliveRef, KeepAliveRef>(ref, () => ({
     onRefreshCache,
     onRemoveCache,
     onRemoveCacheByKeys,
     onClearCache,
   }));
-
   return (
-    <div
-      ref={containerRef}
-      className={className}
-      style={style}
-      data-key={activeKey}
-    >
+    <div ref={containerRef} className={className} style={style}>
       {cachedComponents?.map((o) =>
         o.refreshing ? (
           <Fragment key={o.refreshKey}>{refreshFallback}</Fragment>
@@ -52,5 +45,4 @@ function KeepAlive(props: KeepAliveProps, ref: Ref<KeepAliveRef>) {
     </div>
   );
 }
-const ForwardKeepAlive = forwardRef(KeepAlive);
-export default memo(ForwardKeepAlive);
+export default KeepAlive;

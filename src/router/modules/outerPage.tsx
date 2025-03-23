@@ -35,8 +35,11 @@ const outerPageRouter: IRouteObject[] = [
           title: 'outerPageIframe',
           icon: 'material-symbols-light:iframe-outline',
         },
-        element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
         children: [
+          {
+            index: true,
+            element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
+          },
           {
             path: 'nestjs',
             element: (
@@ -83,7 +86,6 @@ const outerPageRouter: IRouteObject[] = [
           title: 'outerLink',
           icon: 'ant-design:export-outlined',
         },
-        element: <RedirectRouteView to="/outerPage/iframe/nestjs" />,
         children: [
           {
             path: 'https://ant-design.antgroup.com/index-cn',

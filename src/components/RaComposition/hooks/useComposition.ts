@@ -5,8 +5,9 @@ import type {
 } from 'react';
 import { useRef, useState } from 'react';
 
-import type { NormalizeTriggerType, RaInputProps } from '..';
-
+import type { NormalizeTriggerType } from '..';
+import type { InputProps } from 'antd/lib';
+import type { TextAreaProps } from 'antd/lib/input';
 // Handle input text like Chinese
 function useComposition({
   value,
@@ -17,17 +18,17 @@ function useComposition({
   beforeTriggerValueChangeCallback,
   normalizeHandler,
 }: {
-  value: RaInputProps['value'];
+  value: string | undefined;
   maxLength?: number;
-  onChange: RaInputProps['onChange'];
-  onKeyDown: RaInputProps['onKeyDown'];
-  onPressEnter: RaInputProps['onPressEnter'];
-  beforeTriggerValueChangeCallback?: (newValue: RaInputProps['value']) => void;
+  onChange: InputProps['onChange'];
+  onKeyDown: InputProps['onKeyDown'] | TextAreaProps['onKeyDown'];
+  onPressEnter: InputProps['onPressEnter'];
+  beforeTriggerValueChangeCallback?: (newValue: string) => void;
   normalizeHandler?: (
     type: NormalizeTriggerType[number],
-  ) => RaInputProps['normalize'];
+  ) => ((value: string) => string) | undefined;
 }): {
-  compositionValue: RaInputProps['value'];
+  compositionValue: string | undefined;
   triggerValueChangeCallback: typeof onChange;
   compositionHandler: CompositionEventHandler<
     HTMLInputElement | HTMLTextAreaElement
@@ -38,8 +39,9 @@ function useComposition({
   keyDownHandler: KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 } {
   const refIsComposition = useRef(false);
-  const [compositionValue, setCompositionValue] =
-    useState<RaInputProps['value']>(undefined);
+  const [compositionValue, setCompositionValue] = useState<string | undefined>(
+    undefined,
+  );
 
   const triggerValueChangeCallback: typeof onChange = (
     e: React.ChangeEvent<HTMLInputElement>,

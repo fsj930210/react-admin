@@ -2,6 +2,7 @@ import type { ThemeItem } from '@/types/custom-types';
 
 export const RA_CACHED_TABS_KEY = 'RA::CACHED_TABS_KEY';
 export const RA_CACHED_GLOBAL_SEARCH_KEY = 'RA::CACHED_GLOBAL_SEARCH_KEY';
+export const RA_ANTD_APP_CSS_TOKEN_KEY = 'ra-css-var';
 export const HOME_PATH = import.meta.env.VITE_APP_HOME_PATH;
 export const PUBLIC_PATH = import.meta.env.VITE_PUBLIC_PATH;
 export const builtInThemes: ThemeItem[] = [

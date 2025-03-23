@@ -1,19 +1,16 @@
 import { Dropdown } from 'antd';
-import { useShallow } from 'zustand/react/shallow';
 
 import Icon from '@/components/RaIcon';
 
 import type { DropDownMapValue } from '@/types/custom-types';
 
-import useLoginStore, { LoginStyleEnum } from '@/store/login';
+import useLoginStoreSelector, { LoginStyleEnum } from '@/store/login';
 
 const LoginStyle = () => {
-  const { changeLoginStyle, loginStyle } = useLoginStore(
-    useShallow((state) => ({
-      changeLoginStyle: state.changeLoginStyle,
-      loginStyle: state.loginStyle,
-    })),
-  );
+  const { changeLoginStyle, loginStyle } = useLoginStoreSelector([
+    'loginStyle',
+    'changeLoginStyle',
+  ]);
   const styleMap: Record<LoginStyleEnum | string, DropDownMapValue> = {
     [LoginStyleEnum.ant]: {
       key: LoginStyleEnum.ant,
@@ -48,11 +45,15 @@ const LoginStyle = () => {
     <Dropdown
       trigger={['click']}
       placement="bottom"
-      menu={{ items, selectable: true }}
+      menu={{
+        items,
+        selectable: true,
+        defaultSelectedKeys: [LoginStyleEnum.ant],
+      }}
       getPopupContainer={(triggerNode) =>
         (triggerNode?.parentNode as HTMLElement) || document.body
       }
-      overlayStyle={{ width: 122 }}
+      overlayStyle={{ width: 130 }}
     >
       <span className="flex-center p-[4] cursor-pointer bg-transparent rounded-full hover:bg-[var(--ant-color-bg-layout)] transition-all">
         {styleMap[loginStyle].icon}

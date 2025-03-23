@@ -1,6 +1,6 @@
-import { useShallow } from 'zustand/react/shallow';
-
 import QRCodeForm from '../components/QRCodeForm';
+
+import { PUBLIC_PATH } from '@/utils/constants';
 
 import EmailForm from './components/EmailForm';
 import LoginForm from './components/LoginForm';
@@ -9,19 +9,22 @@ import ResetPasswordForm from './components/ResetPasswordForm';
 import styles from './index.module.css';
 
 import AppFooter from '@/layouts/components/Footer';
-import useLoginStore, { LoginPageEnum } from '@/store/login';
+import useLoginStoreSelector, { LoginPageEnum } from '@/store/login';
 const LoginModal = () => {
-  const { loginPage, changeLoginPage } = useLoginStore(
-    useShallow((state) => ({
-      loginPage: state.loginPage,
-      changeLoginPage: state.changeLoginPage,
-    })),
-  );
+  const { loginPage, changeLoginPage } = useLoginStoreSelector([
+    'loginPage',
+    'changeLoginPage',
+  ]);
+  // const banner = new URL(`${PUBLIC_PATH}/images/fullstack-engineer.svg`, import.meta.url).href
   return (
     <div className="bg-[var(--ant-color-primary-bg)] w-full h-full relative">
       <div className={styles['login-box']}>
         <div className="flex items-center justify-center">
-          <img src="/images/frontend-engineer.svg" className="h-[340]" alt="" />
+          <img
+            src={`${PUBLIC_PATH}/images/fullstack-engineer.svg`}
+            className="h-[340]"
+            alt=""
+          />
         </div>
         <div className="flex-1">
           {loginPage === LoginPageEnum.login ? (

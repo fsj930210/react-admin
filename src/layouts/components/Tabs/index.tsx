@@ -1,31 +1,25 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { useShallow } from 'zustand/react/shallow';
 
 import Tabs from '@/components/RaTabs';
 
 import DraggableTabs from './components/DraggableTabs';
 import LayoutTab from './components/LayoutTab';
 import TabBarExtraContent from './components/TabBarExtraContent';
+import useTabs from './hooks/useTabs';
+import useTabActions from './hooks/useTabsActions';
 
-import useTabs from '@/layouts/hooks/useTabs';
+import useTabsStoreSelector from '@/store/tabs';
 import './index.css';
-import useTabActions from '@/layouts/hooks/useTabsActions';
-import useTabsStore from '@/store/tabs';
 
 const LayoutTabs = () => {
   const { updateTabItems } = useTabs();
-  const { tabItems, activeKey, setActiveKey } = useTabsStore(
-    useShallow((state) => ({
-      tabItems: state.tabItems,
-      activeKey: state.activeKey,
-      setActiveKey: state.setActiveKey,
-      setTabItems: state.setTabItems,
-    })),
+  const { tabItems, activeKey, setActiveKey, draggable } = useTabsStoreSelector(
+    ['activeKey', 'tabItems', 'setActiveKey', 'setTabItems', 'draggable'],
   );
   const { deleteTabFunc } = useTabActions({ updateTabItems });
   const navigate = useNavigate();
+
   const handleTabItemClick = (key: string) => {
     if (key === activeKey) return;
     setActiveKey(key);
@@ -38,10 +32,9 @@ const LayoutTabs = () => {
     if (tabItems) return tabItems.findIndex((i) => i.key === activeKey);
     return -1;
   }, [activeKey, tabItems]);
-  const [draggable] = useState(true);
 
   return (
-    <div className="flex flex-col bg-[var(--ant-color-bg-container)]">
+    <div className="flex flex-col bg-[var(--ant-color-bg-container)] border-b-[1px] border-b-[var(--ant-color-border)] border-b-solid">
       <Tabs
         hideAdd
         items={tabItems}

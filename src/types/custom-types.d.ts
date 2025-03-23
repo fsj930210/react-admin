@@ -42,15 +42,7 @@ export type IRouteObject = RouteObject & {
   meta?: IRouteObjectMeta;
   children?: (RouteObject & IRouteObjectMeta)[]; // 重写children
 };
-export type MenuItem = {
-  label: string;
-  key: string;
-  children?: MenuItem[];
-  icon?: React.ReactNode;
-  title?: string;
-  ['data-icon']?: string;
-  hidden?: boolean;
-};
+
 export type BreadcrumbItem = BreadcrumbItemType & {
   icon?: React.ReactNode;
 };

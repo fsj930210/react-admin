@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, type JSX } from 'react';
 
 import AppLoading from '../app/AppLoading';
 

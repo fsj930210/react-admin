@@ -1,3 +1,3 @@
 import KeepAlive from './components/KeepAlive';
-import KeepAliveRoot from './components/KeepAliveRoot';
-export { KeepAlive, KeepAliveRoot };
+import KeepAliveProvider from './components/KeepAliveProvider';
+export { KeepAlive, KeepAliveProvider };

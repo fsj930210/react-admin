@@ -1,15 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useShallow } from 'zustand/react/shallow';
-
 import Icon from '@/components/RaIcon';
 
 import type { IRouteObject, MenuItem } from '@/types/custom-types';
 
 import routes from '@/router/routes';
-import useGlobalStore from '@/store';
-import useMenuStore from '@/store/menu';
+import useGlobalStoreSelector from '@/store/global';
+import useMenuStore from '@/store/sider';
 import { dfs } from '@/utils';
 
 function formatRoutes({
@@ -63,13 +61,11 @@ function formatRoutes({
 }
 function useMenu() {
   const { t } = useTranslation();
-  const appLanguage = useGlobalStore((state) => state.appLanguage);
-  const { setFlatMenuItems, setMenuItems } = useMenuStore(
-    useShallow((state) => ({
-      setMenuItems: state.setMenuItems,
-      setFlatMenuItems: state.setFlatMenuItems,
-    })),
-  );
+  const appLanguage = useGlobalStoreSelector((state) => state.appLanguage);
+  const { setFlatMenuItems, setMenuItems } = useMenuStore([
+    'setFlatMenuItems',
+    'setMenuItems',
+  ]);
   const menuItemsRef = useRef<MenuItem[]>([]);
   const flatMenuItemsRef = useRef<MenuItem[]>([]);
   useEffect(() => {
