@@ -19,9 +19,10 @@ import type { RenderTabBarProps } from '@/components/RaTabs/interface';
 import type { TabNavListProps } from '@/components/RaTabs/TabNavList';
 
 import LayoutTab from '../LayoutTab';
-import useTabsStoreSelector from '@/store/tabs';
 
 import type { DragEndEvent, DraggableAttributes } from '@dnd-kit/core';
+
+import useTabsStoreSelector from '@/store/tabs';
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
   'data-node-key': string;

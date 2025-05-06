@@ -42,7 +42,7 @@ const LayoutTabs = () => {
         tabPosition="top"
         more={{
           overlayStyle: {
-            width: 100,
+            minWidth: 120,
           },
         }}
         editable={{

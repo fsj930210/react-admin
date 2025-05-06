@@ -263,7 +263,7 @@ const useKeepAlive = (props: KeepAliveProps) => {
     }
   }, [saveScrollPosition, resolvedKey]);
 
-  const onRefreshCache = useCallback((key: string) => {
+  const onRefreshCache = (key: string) => {
     // 刷新缓存需要滚动条回到最开始的地方
     containerScrollTo({ left: 0, top: 0 });
     setCachedComponents((prev) => {
@@ -311,13 +311,13 @@ const useKeepAlive = (props: KeepAliveProps) => {
         return newCachedComponents;
       });
     }, refreshInterval);
-  }, []);
-  const onClearCache = useCallback(() => {
+  };
+  const onClearCache = () => {
     cachedComponentsRef.current = [];
     globalCachedComponents.clear();
     setCachedComponents([]);
-  }, []);
-  const onRemoveCacheByKeys = useCallback((keys: string[]) => {
+  };
+  const onRemoveCacheByKeys = (keys: string[]) => {
     setCachedComponents((prev) => {
       const newCachedComponents = prev.filter(
         (item) => !keys.includes(item.key),
@@ -328,10 +328,10 @@ const useKeepAlive = (props: KeepAliveProps) => {
       });
       return newCachedComponents;
     });
-  }, []);
-  const onRemoveCache = useCallback((key: string) => {
+  };
+  const onRemoveCache = (key: string) => {
     onRemoveCacheByKeys([key]);
-  }, []);
+  };
 
   return {
     cachedComponents,

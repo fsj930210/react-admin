@@ -1,4 +1,5 @@
-import React, { type Ref } from 'react';
+import type React from 'react';
+import type { Ref } from 'react';
 
 import Icon from '@/components/RaIcon';
 

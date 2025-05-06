@@ -7,8 +7,8 @@ import AppLogo from '@/components/app/AppLogo';
 
 import { getLevelKeys } from '../../utils/utils';
 
+import { useMenu } from './hooks/useMenu';
 import styles from './index.module.css';
-import { useMenu } from './utils/useMenu';
 
 import type { MenuItem } from '@/types/menu';
 import type { MenuProps } from 'antd/lib';

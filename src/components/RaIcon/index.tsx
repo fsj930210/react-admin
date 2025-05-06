@@ -8,8 +8,10 @@ const RaIcon = ({
   ...rest
 }: IconProps & { wrapClassName?: string }) => {
   return (
-    <span className={`text-[0px] ${wrapClassName ? wrapClassName : ''}`}>
-      <Icon inline={inline} fontSize={16} {...rest} />
+    <span
+      className={`text-[0px] leading-none ${wrapClassName ? wrapClassName : ''}`}
+    >
+      <Icon inline={inline} fontSize={14} {...rest} />
     </span>
   );
 };

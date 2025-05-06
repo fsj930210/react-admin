@@ -1,5 +1,8 @@
 import type { ThemeItem } from '@/types/custom-types';
 
+export const API_SUCCESS_CODE = '0000000000';
+export const REACT_ADMIN_API_PREFIX = '/react-admin-api';
+export const REACT_ADMIN_API_PREFIX_V1 = `${REACT_ADMIN_API_PREFIX}/v1`;
 export const RA_CACHED_TABS_KEY = 'RA::CACHED_TABS_KEY';
 export const RA_CACHED_GLOBAL_SEARCH_KEY = 'RA::CACHED_GLOBAL_SEARCH_KEY';
 export const RA_ANTD_APP_CSS_TOKEN_KEY = 'ra-css-var';

@@ -14,7 +14,6 @@ import router from './router';
 import { RA_ANTD_APP_CSS_TOKEN_KEY } from './utils/constants';
 
 import useGlobalStoreSelector from '@/store/global';
-
 import 'antd/dist/reset.css';
 
 dayjs.locale('zh-cn');

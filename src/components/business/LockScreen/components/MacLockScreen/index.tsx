@@ -10,7 +10,7 @@ import styles from './index.module.css';
 import macEarth from '@/assets/images/lockScreen/mac-earth.png';
 import macNightBg from '@/assets/images/lockScreen/mac-night.jpg';
 import useCurrentTime from '@/hooks/useCurrentTime';
-import { dayMap, padLeftZero } from '@/utils';
+import { dayMap, padLeftZero } from '@/utils/utils';
 const MacLockScreen = () => {
   const { month, date, day, hours, minutes } = useCurrentTime();
   const { handleChange, handlePressEnter, errorClassName, value } =

@@ -1,7 +1,9 @@
-import React, { type Ref } from 'react';
+import React from 'react';
+import type { Ref } from 'react';
+
+import { Button } from 'antd';
 
 import Icon from '@/components/RaIcon';
-import { Button } from 'antd';
 
 import type {
   TabBarScrollButtonContent,

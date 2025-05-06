@@ -1,10 +1,12 @@
-import React, { type Ref } from 'react';
+import type { Ref } from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 
-import Icon from '@/components/RaIcon';
 import { Dropdown } from 'antd';
 import classNames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
+
+import Icon from '@/components/RaIcon';
 
 import { getRemovable } from '../util';
 
@@ -189,7 +191,6 @@ const OperationNode = (props: OperationNodeProps) => {
       menu={{
         items: menuItems,
         onClick: ({ key, domEvent }) => {
-          console.log('Dropdown');
           onTabClick(key, domEvent);
           setOpen(false);
         },

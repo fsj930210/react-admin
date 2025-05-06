@@ -6,11 +6,13 @@ import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import isMobile from 'rc-util/lib/isMobile';
 
+import { DEFAULT_SCROLL_CONFIG } from './config';
 import useAnimateConfig from './hooks/useAnimateConfig';
 import TabContext from './TabContext';
 import TabNavListWrapper from './TabNavList/Wrapper';
 import TabPanelList from './TabPanelList';
 
+import type { ScrollConfig } from './config';
 import type { GetIndicatorSize } from './hooks/useIndicator';
 import type {
   AnimatedConfig,
@@ -24,7 +26,6 @@ import type {
   TabsLocale,
 } from './interface';
 import './index.css';
-import { DEFAULT_SCROLL_CONFIG, type ScrollConfig } from './config';
 
 /**
  * Should added antd:

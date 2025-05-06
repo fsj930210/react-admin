@@ -10,7 +10,7 @@ import styles from './index.module.css';
 
 import windowsBg from '@/assets/images/lockScreen/windows.jpg';
 import useCurrentTime from '@/hooks/useCurrentTime';
-import { dayMap, padLeftZero } from '@/utils';
+import { dayMap, padLeftZero } from '@/utils/utils';
 
 const WindowsLockScreen = () => {
   const { hours, minutes, month, date, day } = useCurrentTime();

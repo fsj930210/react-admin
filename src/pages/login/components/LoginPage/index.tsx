@@ -5,7 +5,6 @@ import { Typography } from 'antd';
 import AppLogo from '@/components/app/AppLogo';
 import Tabs from '@/components/RaTabs';
 
-import EmailForm from '../EmailForm';
 import LoginForm from '../LoginForm';
 import QRCodeForm from '../QRCodeForm';
 import RegisterForm from '../RegisterForm';
@@ -37,11 +36,6 @@ const LoginPage = ({ material }: LoginPageProps) => {
     },
     {
       key: '2',
-      label: t('login.emailLogin'),
-      children: <EmailForm switchPage={changeLoginPage} material={material} />,
-    },
-    {
-      key: '3',
       label: t('login.QRCodeLogin'),
       children: <QRCodeForm />,
     },

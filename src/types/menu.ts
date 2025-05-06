@@ -7,7 +7,7 @@ export interface BaseMenuItem extends MenuItemType {
   key: string; // 菜单唯一标识
   label: string; // 显示的菜单名称
   title: string; // 原始标题，用于国际化
-  icon?: string; // 菜单图标
+  icon?: React.ReactNode; // 菜单图标
   path?: string; // 菜单路径
   hidden?: boolean; // 是否隐藏菜单
   children?: MenuItem[]; // 子菜单

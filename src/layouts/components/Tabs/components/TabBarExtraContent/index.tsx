@@ -4,7 +4,7 @@ import type { Tab } from '@/components/RaTabs/interface';
 import useTabActions from '../../hooks/useTabsActions';
 import TabDropdown from '../TabDropdown';
 
-import type { UpdateTabItems } from '@/layouts/hooks/useTabs';
+import type { UpdateTabItems } from '../../hooks/useTabs';
 
 type TabBarExtraContentProps = {
   tab?: Tab;

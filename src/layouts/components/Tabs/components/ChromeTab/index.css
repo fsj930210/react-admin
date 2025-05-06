@@ -73,9 +73,9 @@
   .layout-chrome-tabs-tab-close {
     font-size: 12px;
     border-radius: 100%;
-    width: 14px;
-    height: 14px;
-    line-height: 14px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
     text-align: center;
     transition: all 0.2s ease;
 

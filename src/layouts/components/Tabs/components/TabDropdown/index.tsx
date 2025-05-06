@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Popover } from 'antd';
@@ -9,7 +9,6 @@ import type { Tab } from '@/components/RaTabs/interface';
 
 import useTabActions from '../../hooks/useTabsActions';
 
-import type { UpdateTabItems } from '@/layouts/hooks/useTabs';
 import type { PopoverProps } from 'antd';
 
 import useTabsStoreSelector from '@/store/tabs';
@@ -19,7 +18,7 @@ type TabDropdownProps = {
   trigger?: PopoverProps['trigger'];
   tab?: Tab;
   index: number;
-  updateTabItems: UpdateTabItems;
+  updateTabItems: (updateFunc: (prevTabItems: Tab[]) => Tab[]) => void;
 };
 const TabDropdown = ({
   children,
@@ -49,10 +48,10 @@ const TabDropdown = ({
   });
   const tabItems = useTabsStoreSelector((state) => state.tabItems);
   const disabledClassName = 'layout-tabs-tab-dropdown-disabled';
-  const closeCurrentDisabled = useMemo(() => {
+  const closeCurrentDisabled = () => {
     return tab?.closable ? '' : disabledClassName;
-  }, [tab]);
-  const closeLeftDisabled = useMemo(() => {
+  };
+  const closeLeftDisabled = () => {
     let disabled = false;
     if (index === 0) {
       disabled = true;
@@ -63,8 +62,8 @@ const TabDropdown = ({
       }
     }
     return disabled ? disabledClassName : '';
-  }, [index, tabItems]);
-  const closeRightDisabled = useMemo(() => {
+  };
+  const closeRightDisabled = () => {
     let disabled = false;
     if (index === tabItems.length - 1) {
       disabled = true;
@@ -75,8 +74,8 @@ const TabDropdown = ({
       }
     }
     return disabled ? disabledClassName : '';
-  }, [index, tabItems]);
-  const closeOtherDisabled = useMemo(() => {
+  };
+  const closeOtherDisabled = () => {
     let disabled = false;
     const newTabItems = [...tabItems];
     newTabItems.splice(index, 1);
@@ -84,14 +83,14 @@ const TabDropdown = ({
       disabled = true;
     }
     return disabled ? disabledClassName : '';
-  }, [index, tabItems]);
-  const closeAllDisabled = useMemo(() => {
+  };
+  const closeAllDisabled = () => {
     let disabled = false;
     if (tabItems.every((i) => !i.closable)) {
       disabled = true;
     }
     return disabled ? disabledClassName : '';
-  }, [tabItems]);
+  };
   const content = (
     <ul className="pt-2 w-[200px]">
       <li

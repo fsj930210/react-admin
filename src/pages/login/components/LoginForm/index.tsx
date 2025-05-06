@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Form, Input, Button, Checkbox, Row } from 'antd';
+import { useMount } from 'ahooks';
+import { Form, Input, Button, Checkbox, Row, message } from 'antd';
 
 import Icon from '@/components/RaIcon';
 import MaterialInput from '@/components/RaMaterial/Input';
@@ -9,6 +11,12 @@ import ThirdForm from '../ThirdForm';
 
 import { validatePassword, validateUsername } from '@/utils/validate';
 
+import { getCaptcha, login } from '@/services/user';
+import type {
+  IGetCaptchaResponse,
+  ILoginParams,
+} from '@/services/user/interface';
+
 import type { FormPageProps } from '@/store/login';
 import type { RuleObject } from 'antd/lib/form';
 
@@ -16,10 +24,11 @@ import useGoto from '@/hooks/useGoto';
 import { LoginPageEnum } from '@/store/login';
 
 type FieldType = {
-  username: string;
+  account: string;
   password: string;
   captcha: string;
   remember?: string;
+  captcha_id: string;
 };
 
 const FormItem = Form.Item;
@@ -28,24 +37,64 @@ const Password = Input.Password;
 const LoginForm = ({ switchPage, material }: FormPageProps) => {
   const { t } = useTranslation();
   const { goHome } = useGoto();
+  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm<FieldType>();
-  const onFinish = (values: FieldType) => {
-    console.log('Success:', values);
-    goHome();
+  const [captchaInfo, setCaptchaInfo] = useState<IGetCaptchaResponse>({
+    image: '',
+    id: '',
+  });
+
+  const getCaptchaImage = async () => {
+    try {
+      const res = await getCaptcha({ width: 100, height: 32 });
+      setCaptchaInfo(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  const onFinish = async (values: FieldType) => {
+    try {
+      setLoading(true);
+      const params: ILoginParams = {
+        ...values,
+        captcha_id: captchaInfo.id,
+      };
+      const res = await login(params);
+      if (!res.success) {
+        if (res.code === '1000000005') {
+          getCaptchaImage();
+        }
+        return message.error(res.message);
+      }
+      goHome();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useMount(() => {
+    getCaptchaImage();
+  });
   return (
-    <Form form={form} onFinish={onFinish}>
+    <Form
+      form={form}
+      onFinish={onFinish}
+      onFinishFailed={(e) => {
+        console.log(e);
+      }}
+    >
       <FormItem<FieldType>
-        name="username"
+        name="account"
         rules={[
           {
             required: true,
-            message: t('login.requiredUsernameReg'),
+            message: t('login.requiredAccountReg'),
           },
           {
             validator: (_rule: RuleObject, value: string) =>
-              validateUsername(_rule, value, t('login.usernameReg')),
+              validateUsername(_rule, value, t('login.accountReg')),
           },
         ]}
         className="enter-y"
@@ -148,13 +197,14 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
             />
           )}
         </FormItem>
-        <Button
-          type="primary"
-          className="inline-block  ml[8px]"
-          style={{ width: 'calc(40% - 8px)' }}
+        <span
+          className="flex items-center justify-center w-[calc(40%-8px)] inline-block h-[var(--ant-control-height)] cursor-pointer"
+          onClick={() => getCaptchaImage()}
         >
-          图形验证码
-        </Button>
+          {captchaInfo.image ? (
+            <img src={captchaInfo.image} alt="captcha" />
+          ) : null}
+        </span>
       </Row>
       <Row
         className="enter-y mb-[var(--ant-form-item-margin-bottom)]"
@@ -174,11 +224,11 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
           {t('login.forget')}
         </a>
       </Row>
-      <Row className="enter-y">
-        <Button block type="primary" htmlType="submit">
+      <FormItem className="enter-y">
+        <Button block type="primary" htmlType="submit" loading={loading}>
           {t('login.loginBtn')}
         </Button>
-      </Row>
+      </FormItem>
       <Row className="enter-y">
         <ThirdForm />
       </Row>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { dfs } from '@/utils/utils';
+
 import { MenuService } from './MenuService';
 
 import routes from '@/router/routes';
@@ -8,7 +10,6 @@ import { flattenRoutes } from '@/router/utils';
 import useGlobalStoreSelector from '@/store/global';
 import useRouteStoreSelector from '@/store/route';
 import useSiderStoreSelector from '@/store/sider';
-import { dfs } from '@/utils';
 
 /**
  * 菜单处理 Hook
@@ -46,7 +47,6 @@ export function useMenu() {
       const processedMenus = menuService.sortMenuItems(
         menuService.filterHiddenMenus(routeMenus),
       );
-
       // 更新菜单状态
       setMenuItems(processedMenus);
       // 扁平化菜单

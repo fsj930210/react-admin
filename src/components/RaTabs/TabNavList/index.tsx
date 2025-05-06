@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { Ref, RefObject } from 'react';
+
 import classNames from 'classnames';
 import ResizeObserver from 'rc-resize-observer';
 import useEvent from 'rc-util/lib/hooks/useEvent';
@@ -13,6 +14,7 @@ import useUpdate, { useUpdateState } from '../hooks/useUpdate';
 import useVisibleRange from '../hooks/useVisibleRange';
 import TabContext from '../TabContext';
 import { genDataNodeKey, stringify } from '../util';
+import { calculateScrollDistance, smoothScroll } from '../utils/scroll';
 
 import AddButton from './AddButton';
 import ExtraContent from './ExtraContent';
@@ -20,9 +22,9 @@ import OperationNode from './OperationNode';
 import ScrollButton from './ScrollButton';
 import TabNode from './TabNode';
 // 引入工具函数
-import { calculateScrollDistance, smoothScroll } from '../utils/scroll';
 
 import type { TabNodeProps } from './TabNode';
+import type { ScrollConfig } from '../config';
 import type { GetIndicatorSize } from '../hooks/useIndicator';
 import type {
   AnimatedConfig,
@@ -37,7 +39,6 @@ import type {
   TabSizeMap,
   TabsLocale,
 } from '../interface';
-import type { ScrollConfig } from '../config';
 
 export interface TabNavListProps {
   id?: string;

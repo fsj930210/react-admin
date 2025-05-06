@@ -53,7 +53,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     server: {
       port: Number(envConfig.VITE_APP_PORT),
       proxy: {
-        '/api': {
+        '/react-admin-api': {
           target: 'http://localhost:3000',
           changeOrigin: true,
         },

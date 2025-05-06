@@ -1,3 +1,5 @@
+import RaIcon from '@/components/RaIcon';
+
 import type { IRouteObject } from '@/types/custom-types';
 import type { MenuItem, MenuServiceOptions } from '@/types/menu';
 import type { TFunction } from 'i18next';
@@ -38,23 +40,26 @@ export class MenuService {
       parentPath = '',
     ): MenuItem | null => {
       const { meta } = route;
-      if (!meta?.menu) return null;
-
+      if (!meta?.menu && (!route.children || route.children.length <= 0))
+        return null;
       const currentPath = `${parentPath}/${route.path}`.replace(/\/+/g, '/');
-
-      const menuItem: MenuItem = {
-        key: currentPath,
-        title: meta.title || '',
-        label: meta.title || '',
-        path: currentPath,
-        icon: meta.icon,
-        hidden: meta.hidden,
-        order: meta.order,
-        openMode: meta.openMode,
-        children: [],
-      };
-
+      let menuItem: MenuItem | null = null;
+      if (meta?.menu) {
+        menuItem = {
+          key: currentPath,
+          title: meta.title || '',
+          label: meta.title || '',
+          path: currentPath,
+          icon: meta.icon,
+          hidden: meta.hidden,
+          order: meta.order,
+          openMode: meta.openMode,
+        };
+      }
       if (route.children?.length) {
+        if (!menuItem) {
+          menuItem = { key: '', label: '', title: '' };
+        }
         const childMenus = route.children
           .map((child) => processRoute(child, currentPath))
           .filter(Boolean) as MenuItem[];
@@ -63,14 +68,13 @@ export class MenuService {
           menuItem.children = childMenus;
         }
       }
-
-      return menuItem;
+      return menuItem || null;
     };
 
     routes.forEach((route) => {
       const menuItem = processRoute(route);
-      if (menuItem) {
-        menuItems.push(menuItem);
+      if (menuItem && !menuItem.title && menuItem.children) {
+        menuItems.push(...menuItem.children);
       }
     });
     return this.processMenuItems(menuItems, translate);
@@ -86,7 +90,14 @@ export class MenuService {
     const processItem = (item: MenuItem): MenuItem => {
       const processed: MenuItem = {
         ...item,
-        icon: item.icon || (this.options.defaultIcon as string),
+        icon: (
+          <RaIcon
+            fontSize={14}
+            icon={(item.icon as string) || (this.options.defaultIcon as string)}
+          />
+        ),
+        ['data-icon']:
+          (item.icon as string) || (this.options.defaultIcon as string),
         openMode: item.openMode || this.options.defaultOpenMode,
         label: translate(`${this.options.i18nPrefix}.${item.title}`),
       };

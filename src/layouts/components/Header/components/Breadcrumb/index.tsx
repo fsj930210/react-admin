@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { Breadcrumb } from 'antd';
 
-import Icon from '@/components/RaIcon';
+import RaIcon from '@/components/RaIcon';
 
 import useBreadcrumb from './hooks/useBreadcrumb';
 
@@ -21,7 +21,9 @@ const AppBreadcrumb = () => {
     // 这里判断是最后一个或者是菜单时直接渲染，其他情况用Link组件渲染点击跳转到路由
     return isLast || currentRoute.menu ? (
       <>
-        {currentRoute.icon ? <Icon icon={currentRoute.icon as string} /> : null}
+        {currentRoute.icon ? (
+          <RaIcon fontSize={14} icon={currentRoute.icon as string} />
+        ) : null}
         <span>{currentRoute.title}</span>
       </>
     ) : (

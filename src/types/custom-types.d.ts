@@ -9,7 +9,7 @@ declare global {
 }
 
 export interface IBasicResponse<T> {
-  error_code: string;
+  code: string;
   message: string;
   data: T;
   success: boolean;

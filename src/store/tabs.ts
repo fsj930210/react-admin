@@ -10,8 +10,10 @@ interface TabsState {
   activeKey: string;
   tabItems: Tab[];
   draggable: boolean;
+  tabStyle: 'chrome' | 'card' | 'classic' | 'trapezoid' | 'brisk' | 'rhythm';
   setTabItems: (items: Tab[]) => void;
   setActiveKey: (key: string) => void;
+  setTabStyle: (style: TabsState['tabStyle']) => void;
 }
 
 const useTabsStore = create<TabsState>()((set) => ({
@@ -21,6 +23,9 @@ const useTabsStore = create<TabsState>()((set) => ({
   setTabItems: (items: Tab[]) => set(() => ({ tabItems: items })),
   draggable: true,
   setDraggable: (draggable: boolean) => set(() => ({ draggable })),
+  tabStyle: 'trapezoid',
+  setTabStyle: (style: TabsState['tabStyle']) =>
+    set(() => ({ tabStyle: style })),
 }));
 
 const useTabsStoreSelector = createSelector(useTabsStore);

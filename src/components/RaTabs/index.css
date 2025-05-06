@@ -149,6 +149,24 @@
   }
 }
 
+  .ra-tabs-tab-remove{
+    margin-right: 8px;
+    width: 16px;
+    height: 16px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* padding: 0 !important; */
+    border-radius: 50%;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      color: #fff;
+      background-color: var(--ant-color-primary-hover);
+    }
+  }
+
 .ra-tabs-tab-icon {
   margin-right: 4px;
 }
@@ -329,11 +347,25 @@
     cursor: pointer;
     border: none;
     padding: 0;
+    transition: 0.2s ease-in-out;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      color: #fff;
+      background-color: var(--ant-control-item-bg-hover);
+
+    }
   }
 
   .ra-tabs-dropdown-menu-title-content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
   }
 }

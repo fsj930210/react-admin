@@ -1,4 +1,5 @@
-import React, { type Ref } from 'react';
+import React from 'react';
+import type { Ref } from 'react';
 
 import type {
   TabBarExtraContent,

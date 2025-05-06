@@ -1,3 +1,5 @@
+import mitt from 'mitt';
+
 export const padLeftZero = (val: string | number) =>
   +val < 10 ? `0${val}` : val;
 export const dayMap: Record<string, string> = {
@@ -55,3 +57,6 @@ export function dfs<T extends Record<string, any>>(
   }
   return returnArr;
 }
+
+// 全局emitter
+export const emitter = mitt<any>();

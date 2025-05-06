@@ -24,16 +24,15 @@ const AppContent = () => {
   ]);
   const { pathname, search } = useLocation();
   const keepAliveRef = useRef<KeepAliveRef | null>(null);
-  const cacheFuncs = useMemo(
-    () => ({
-      ...(keepAliveRef.current || {}),
-      refresh: () => setContentId(uuidV4()),
-    }),
-    [keepAliveRef.current],
-  );
+
   const cacheKey = useMemo(() => pathname + search, [pathname, search]);
   return (
-    <LayoutTabsContext.Provider value={{ ...cacheFuncs }}>
+    <LayoutTabsContext.Provider
+      value={{
+        keepAliveRef: keepAliveRef,
+        refresh: () => setContentId(uuidV4()),
+      }}
+    >
       <div className="flex-1 overflow-hidden">
         <Content className="flex flex-col h-full">
           {showTabs ? <LayoutTabs /> : null}

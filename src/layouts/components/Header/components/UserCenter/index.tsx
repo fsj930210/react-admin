@@ -4,9 +4,23 @@ import { Avatar, Popover } from 'antd';
 
 import Icon from '@/components/RaIcon';
 
+import { logout } from '@/services/user';
+
 import styles from './index.module.css';
+
+import useGoto from '@/hooks/useGoto';
+
 const UserCenter = () => {
   const { t } = useTranslation();
+  const { go } = useGoto();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      go('/login', { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const content = (
     <div className="w-[200px]">
       <div className={styles['user-center-item']}>
@@ -37,7 +51,7 @@ const UserCenter = () => {
         </span>
         <span>⌥ L</span>
       </div>
-      <div className={styles['user-center-item']}>
+      <div className={styles['user-center-item']} onClick={handleLogout}>
         <span className="flex items-center">
           <Icon inline icon="ri:logout-box-r-line" fontSize={16} />
           <span className="ml-2">{t('userCenter.logout')}</span>

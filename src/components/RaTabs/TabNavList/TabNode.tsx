@@ -106,14 +106,14 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
       >
         {icon ? (
           <span className={`${tabPrefix}-icon`}>
-            {typeof icon === 'string' ? <Icon inline icon={icon} /> : icon}
+            {typeof icon === 'string' ? <Icon icon={icon} /> : icon}
           </span>
         ) : null}
         {label && labelNode}
       </div>
       {pin ? (
         <span className={`${tabPrefix}-pin`}>
-          {pinIcon || <Icon inline icon="lucide:pin" />}
+          {pinIcon || <Icon icon="lucide:pin" />}
         </span>
       ) : null}
       {/* Remove Button */}
@@ -128,7 +128,7 @@ const TabNode: React.FC<TabNodeProps> = (props) => {
             onRemoveTab(e);
           }}
         >
-          {closeIcon || editable?.removeIcon || <Icon inline icon="lucide:x" />}
+          {closeIcon || editable?.removeIcon || <Icon icon="lucide:x" />}
         </button>
       )}
     </div>

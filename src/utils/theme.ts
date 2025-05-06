@@ -1,4 +1,4 @@
-import { setCssVar } from '.';
+import { setCssVar } from './utils';
 
 export function setLightCssVars() {
   setCssVar('--ra-scrollbar-thumb-bg', 'rgba(0,0,0,0.1)');
