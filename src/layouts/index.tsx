@@ -1,7 +1,9 @@
+import { useMount } from 'ahooks';
 import { App, Layout } from 'antd';
 
 import { KeepAliveProvider } from '@/components/RaKeepAlive';
 
+import storage from '@/utils/storage';
 import { emitter } from '@/utils/utils';
 
 import AppContent from './components/Content';
@@ -13,16 +15,25 @@ import useGoto from '@/hooks/useGoto';
 const BasicLayout = () => {
   const { message } = App.useApp();
   const { go } = useGoto();
-  // 全局401
-  emitter.on('api_401', () => {
-    go('/login', { replace: true });
+  function goToLogin() {
+    const currentPath = window.location.pathname;
+    go(`/login?redirect=${currentPath}`, { replace: true });
+  }
+  useMount(() => {
+    // 全局401
+    emitter.on('api_401', () => {
+      storage.removeItem('access_token');
+      goToLogin();
+    });
+    // 全局api错误
+    emitter.on('api_error', (error: any) => {
+      message.destroy();
+      message.error(error?.message || '系统内部异常');
+    });
+    if (!storage.getItem('access_token')) {
+      goToLogin();
+    }
   });
-  // 全局api错误
-  emitter.on('api_error', (error: any) => {
-    message.destroy();
-    message.error(error?.message || '系统内部异常');
-  });
-
   return (
     <KeepAliveProvider>
       <Layout className="h-full" hasSider>

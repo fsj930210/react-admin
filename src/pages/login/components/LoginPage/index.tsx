@@ -43,11 +43,14 @@ const LoginPage = ({ material }: LoginPageProps) => {
   return (
     <div className={`${styles['login-wrapper']} w-full flex h-[100vh]`}>
       <div
-        className={`w-[55%] text-white p[40px] text-center bg-[var(--ant-color-primary)] dark:bg-[var(--ant-color-bg-layout)]`}
+        className={`w-[55%] text-white p[40px] bg-[var(--ant-color-primary)] dark:bg-[var(--ant-color-bg-layout)]`}
       >
         <AppLogo animate showTitle className="justify-center" />
         <div>
-          <Title className="my-[20px] text-[28px]" style={{ color: '#ffffff' }}>
+          <Title
+            className="my-[20px] text-[28px] text-center"
+            style={{ color: '#ffffff' }}
+          >
             {t('login.pageTitle')}
           </Title>
           <Paragraph>
@@ -57,7 +60,7 @@ const LoginPage = ({ material }: LoginPageProps) => {
           </Paragraph>
           <Paragraph>
             <div className="text-white">
-              {t('login.beSkills')} nestjs、typeorm、redis、primsa等
+              {t('login.beSkills')} nestjs、typeorm、redis等
             </div>
           </Paragraph>
         </div>

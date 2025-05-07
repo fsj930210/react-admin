@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 import { useMount } from 'ahooks';
-import { Form, Input, Button, Checkbox, Row, message } from 'antd';
+import { Form, Input, Button, Checkbox, Row, App } from 'antd';
 
 import Icon from '@/components/RaIcon';
 import MaterialInput from '@/components/RaMaterial/Input';
 
 import ThirdForm from '../ThirdForm';
 
+import storage from '@/utils/storage';
 import { validatePassword, validateUsername } from '@/utils/validate';
 
 import { getCaptcha, login } from '@/services/user';
@@ -36,7 +38,9 @@ const Password = Input.Password;
 
 const LoginForm = ({ switchPage, material }: FormPageProps) => {
   const { t } = useTranslation();
-  const { goHome } = useGoto();
+  const { goHome, go } = useGoto();
+  const [searchParams] = useSearchParams();
+  const { message } = App.useApp();
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm<FieldType>();
   const [captchaInfo, setCaptchaInfo] = useState<IGetCaptchaResponse>({
@@ -47,6 +51,10 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
   const getCaptchaImage = async () => {
     try {
       const res = await getCaptcha({ width: 100, height: 32 });
+      if (!res.success) {
+        message.error(res.message);
+        return;
+      }
       setCaptchaInfo(res.data);
     } catch (error) {
       console.log(error);
@@ -65,9 +73,18 @@ const LoginForm = ({ switchPage, material }: FormPageProps) => {
         if (res.code === '1000000005') {
           getCaptchaImage();
         }
-        return message.error(res.message);
+        message.error(res.message);
+        return;
       }
-      goHome();
+      message.success('登录成功');
+      const accessToken = res.data.access_token;
+      storage.setItem('access_token', accessToken);
+      const redirect = searchParams.get('redirect');
+      if (redirect) {
+        go(redirect, { replace: true });
+      } else {
+        goHome({ replace: true });
+      }
     } catch (error) {
       console.log(error);
     } finally {

@@ -46,7 +46,7 @@
     "passwordLogin": "Password Login",
     "emailLogin": "Email Login",
     "QRCodeLogin": "QRCode Login",
-    "usernamePlaceholder": "Username",
+    "usernamePlaceholder": "Username/Email",
     "passwordPlaceholder": "Password",
     "captchaPlaceholder": "Captcha",
     "confirmPasswordPlaceholder": "Confirm Password",

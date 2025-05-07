@@ -45,7 +45,7 @@
     "loginTitle": "登录",
     "passwordLogin": "密码登录",
     "QRCodeLogin": "二维码登录",
-    "usernamePlaceholder": "用户名",
+    "usernamePlaceholder": "用户名/邮箱",
     "passwordPlaceholder": "密码",
     "captchaPlaceholder": "验证码",
     "emailPlaceholder": "邮箱",

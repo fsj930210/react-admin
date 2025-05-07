@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
+import { dfs } from '@/utils/utils';
+
 import { createSelector } from './createSelector';
 
 import type { IRouteObject } from '@/types/custom-types';
-
-import { dfs } from '@/utils/utils';
 
 interface RouteState {
   flatRoutes: IRouteObject[];
