@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 
 import { hex2hsl } from '@/utils/color';
 
-import useGlobalStore, { AppThemeEnum } from '@/store/global';
+import useAppConfigStore, { AppThemeEnum } from '@/store/appConfig';
 import { setCssVar } from '@/utils/utils';
 import { RA_ANTD_APP_CSS_TOKEN_KEY } from '@/utils/constants';
 
 function useColors() {
-  const { primaryColor, appTheme } = useGlobalStore([
+  const { primaryColor, appTheme } = useAppConfigStore([
     'primaryColor',
     'appTheme',
   ]);

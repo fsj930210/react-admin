@@ -1,24 +1,21 @@
-import styles from './index.module.css';
+import BlockLoading from "./BlockLoading";
+import BoxLoading from "./BoxLoading";
+import DotLoading from "./DotLoading";
 
 type AppLoadingProps = {
+  type?: 'block' | 'box' | 'dot';
   text?: string;
-  showText?: boolean;
-};
-
-const AppLoading = ({ text = 'Loading...', showText }: AppLoadingProps) => {
+}
+const AppLoading = ({ type = 'block', text }: AppLoadingProps) => {
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <div className={styles['loading-wrapper']}>
-        <div className={styles['loading-circle']} />
-        <div className={styles['loading-circle']} />
-        <div className={styles['loading-circle']} />
-        <div className={styles['loading-shadow']} />
-        <div className={styles['loading-shadow']} />
-        <div className={styles['loading-shadow']} />
-        {showText ? <div className="mt-[16px]">{text}</div> : null}
-      </div>
-    </div>
-  );
-};
+    type === 'box' ? (
+      <BoxLoading text={text} />
+    ) : type === 'dot' ? (
+      <DotLoading text={text} />
+    ) : (
+      <BlockLoading text={text} />
+    )
+  )
+}
 
 export default AppLoading;

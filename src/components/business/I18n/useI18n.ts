@@ -5,11 +5,11 @@ import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 
-import useGlobalStore from '@/store/global';
+import useAppConfigStore from '@/store/appConfig';
 
 const useI18n = () => {
   const { i18n } = useTranslation();
-  const { changeAppLanguage, appLanguage } = useGlobalStore([
+  const { changeAppLanguage, appLanguage } = useAppConfigStore([
     'appLanguage',
     'changeAppLanguage',
   ]);

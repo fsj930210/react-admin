@@ -2,12 +2,12 @@ import { Fragment } from 'react';
 
 import { builtInThemes } from '@/utils/constants';
 
-import useGlobalStore from '@/store/global';
+import useAppConfigStore from '@/store/appConfig';
 type ThemeItemProps = {
   simple?: boolean;
 };
 const ThemeItem = ({ simple }: ThemeItemProps) => {
-  const changePrimaryColor = useGlobalStore(
+  const changePrimaryColor = useAppConfigStore(
     (state) => state.changePrimaryColor,
   );
   return (

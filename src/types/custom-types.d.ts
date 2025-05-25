@@ -14,9 +14,12 @@ export interface IBasicResponse<T> {
   data: T;
   success: boolean;
 }
-
+export interface IPaginationParams {
+  page?: number;
+  page_size?: number;
+}
 export interface IPaging {
-  page_no: number;
+  page: number;
   page_size: number;
   total: number;
 }

@@ -10,3 +10,5 @@ export const AppContext = React.createContext<AppContext>({
   theme: 'light',
   appCssTokenKey: RA_ANTD_APP_CSS_TOKEN_KEY,
 });
+
+export const useAppContext = () => React.useContext(AppContext);

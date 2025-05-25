@@ -4,10 +4,10 @@ import { Dropdown } from 'antd';
 
 import Icon from '@/components/RaIcon';
 
-import useGlobalStore from '@/store/global';
+import useAppConfigStore from '@/store/appConfig';
 const I18n = () => {
   const { t, i18n } = useTranslation();
-  const changeAppLanguage = useGlobalStore((state) => state.changeAppLanguage);
+  const changeAppLanguage = useAppConfigStore((state) => state.changeAppLanguage);
   const items = [
     {
       key: 'zh-CN',

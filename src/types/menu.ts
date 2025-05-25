@@ -6,14 +6,16 @@ import type { MenuItemType } from 'antd/lib/menu/interface';
 export interface BaseMenuItem extends MenuItemType {
   key: string; // 菜单唯一标识
   label: string; // 显示的菜单名称
-  title: string; // 原始标题，用于国际化
+  title: string; // 菜单标题
   icon?: React.ReactNode; // 菜单图标
   path?: string; // 菜单路径
   hidden?: boolean; // 是否隐藏菜单
   children?: MenuItem[]; // 子菜单
   order?: number; // 排序权重
-  openMode?: 'iframe' | 'newBrowserTab' | 'router'; // 打开方式
-  ['data-icon']?: string;
+  open_mode?: 'iframe' | 'newBrowserTab' | 'router'; // 打开方式
+  i18n_key?: string; // 原始标题，用于国际化
+  iconify_name?: string;
+  parent_key?: string; // 父级菜单key
 }
 
 // 前端路由菜单项
@@ -24,7 +26,7 @@ export interface RouteMenuItem extends BaseMenuItem {
 // 后端接口菜单项
 export interface ApiMenuItem extends BaseMenuItem {
   id: string; // 后端菜单ID
-  parentId?: string; // 父菜单ID
+  parent_id?: string; // 父菜单ID
   permission?: string; // 权限标识
 }
 

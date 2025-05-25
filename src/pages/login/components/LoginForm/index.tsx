@@ -13,11 +13,11 @@ import ThirdForm from '../ThirdForm';
 import storage from '@/utils/storage';
 import { validatePassword, validateUsername } from '@/utils/validate';
 
-import { getCaptcha, login } from '@/services/user';
+import { getCaptcha, login } from '@/services/systemManagement/user';
 import type {
   IGetCaptchaResponse,
   ILoginParams,
-} from '@/services/user/interface';
+} from '@/services/systemManagement/user/interface';
 
 import type { FormPageProps } from '@/store/login';
 import type { RuleObject } from 'antd/lib/form';

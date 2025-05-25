@@ -13,20 +13,22 @@ import useTheme from './hooks/useTheme';
 import router from './router';
 import { RA_ANTD_APP_CSS_TOKEN_KEY } from './utils/constants';
 
-import useGlobalStoreSelector from '@/store/global';
-import 'antd/dist/reset.css';
+import useAppConfigStoreSelector from '@/store/appConfig';
 
 dayjs.locale('zh-cn');
 
 const App = () => {
   useColors();
   const { antdLanguage } = useI18n();
-  const { primaryColor } = useGlobalStoreSelector('primaryColor');
+  const { primaryColor } = useAppConfigStoreSelector('primaryColor');
   const theme = useTheme();
 
   return (
     <AppContext.Provider
-      value={{ theme, appCssTokenKey: RA_ANTD_APP_CSS_TOKEN_KEY }}
+      value={{
+        theme,
+        appCssTokenKey: RA_ANTD_APP_CSS_TOKEN_KEY
+      }}
     >
       <ConfigProvider
         locale={antdLanguage}
@@ -48,9 +50,11 @@ const App = () => {
             },
             Layout: {
               headerHeight: 48,
+              headerPadding: '0 16px',
+              footerPadding: '8px 16px',
             },
             Menu: {
-              collapsedWidth: 48,
+              collapsedWidth: 80,
             },
           },
         }}

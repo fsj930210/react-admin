@@ -1,18 +1,40 @@
+import type { FC } from 'react';
+
 import { useMount } from 'ahooks';
-import { App, Layout } from 'antd';
+import { App } from 'antd';
 
 import { KeepAliveProvider } from '@/components/RaKeepAlive';
 
 import storage from '@/utils/storage';
 import { emitter } from '@/utils/utils';
 
-import AppContent from './components/Content';
-import AppHeader from './components/Header';
-import AppSider from './components/Sider';
+import DoubleColumnLayout from './components/DoubleColumnLayout';
+import FullScreenLayout from './components/FullScreenLayout';
+import HorizontalLayout from './components/HorizontalLayout';
+import MixDoubleColumnLayout from './components/MixDoubleColumnLayout';
+import MixVerticalLayout from './components/MixVerticalLayout';
+import SideLayout from './components/SideLayout';
+import VerticalLayout from './components/VerticalLayout';
+import { useInitMenu } from './hooks/useInitMenu';
+
+import type { LayoutType } from '@/store/appConfig';
 
 import useGoto from '@/hooks/useGoto';
+import useAppConfigStoreSelector from '@/store/appConfig';
+
+const layoutComponents: Record<LayoutType, FC> = {
+  vertical: VerticalLayout,
+  horizontal: HorizontalLayout,
+  doubleColumn: DoubleColumnLayout,
+  mixVertical: MixVerticalLayout,
+  mixDoubleColumn: MixDoubleColumnLayout,
+  fullScreen: FullScreenLayout,
+  side: SideLayout
+};
 
 const BasicLayout = () => {
+  useInitMenu();
+  const { layoutType } = useAppConfigStoreSelector(['layoutType'])
   const { message } = App.useApp();
   const { go } = useGoto();
   function goToLogin() {
@@ -34,15 +56,10 @@ const BasicLayout = () => {
       goToLogin();
     }
   });
+  const Layout = layoutComponents[layoutType];
   return (
     <KeepAliveProvider>
-      <Layout className="h-full" hasSider>
-        <AppSider />
-        <Layout className="relative overflow-hidden h-full flex flex-col">
-          <AppHeader />
-          <AppContent />
-        </Layout>
-      </Layout>
+      <Layout />
     </KeepAliveProvider>
   );
 };

@@ -7,12 +7,12 @@ import Icon from '@/components/RaIcon';
 
 import type { DropDownMapValue } from '@/types/custom-types';
 
-import { AppThemeEnum } from '@/store/global';
-import useGlobalStore from '@/store/global';
+import { AppThemeEnum } from '@/store/appConfig';
+import useAppConfigStore from '@/store/appConfig';
 
 const DarkTheme = () => {
   const { t } = useTranslation();
-  const { changeAppTheme, appTheme } = useGlobalStore([
+  const { changeAppTheme, appTheme } = useAppConfigStore([
     'appTheme',
     'changeAppTheme',
   ]);

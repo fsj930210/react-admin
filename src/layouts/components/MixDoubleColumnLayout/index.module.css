@@ -1,0 +1,25 @@
+.second-level-menu :global(.ant-menu-item) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+  height: auto;
+  line-height: 1;
+}
+.second-level-menu :global(.anticon) {
+  line-height: 1 !important;
+}
+.second-level-menu :global(.ant-menu-title-content) {
+  line-height: 1;
+  margin-top: 8px;
+  opacity: 1 !important;
+  margin-left: 0 !important;
+}
+.second-level-menu{
+  flex: 1;
+}
+.second-sider :global(.ant-layout-sider-children){
+  display: flex;
+  flex-direction: column;
+}
