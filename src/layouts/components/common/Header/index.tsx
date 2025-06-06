@@ -13,7 +13,7 @@ import Notification from './components/Notification';
 import UserCenter from './components/UserCenter';
 import styles from './index.module.css';
 
-import useAppConfigStoreSelector from '@/store/appConfig';
+import useLayoutStoreSelector from '@/store/layout';
 import useMenuStore from '@/store/menu';
 
 const { Header } = Layout;
@@ -24,70 +24,61 @@ type AppHeaderPorps = {
   style?: React.CSSProperties;
   className?: string;
   showCollapsed?: boolean;
-}
+};
 const AppHeader = ({
   showCollapsed = true,
   showLeft = true,
   showLogo = false,
   children = null,
   className,
-  style
+  style,
 }: AppHeaderPorps) => {
   const { collapsed, toggleCollapsed } = useMenuStore([
     'collapsed',
     'toggleCollapsed',
   ]);
-  const { showBreadcrumb } = useAppConfigStoreSelector(['showBreadcrumb'])
+  const { showBreadcrumb } = useLayoutStoreSelector(['showBreadcrumb']);
   return (
     <Header
       style={{
         backgroundColor: 'var(--ant-color-bg-container)',
         ...style,
       }}
-      className={classNames(`flex-items-center justify-between  border-b-[1px] border-b-[var(--ant-color-border)] border-b-solid `, className)}
+      className={classNames(
+        `flex-items-center justify-between  border-b-[1px] border-b-[var(--ant-color-border)] border-b-solid `,
+        className,
+      )}
     >
-      {
-        showLogo ? (
-          <AppLogo
-            showTitle
-            style={{
-              color: 'var(--ant-color-text)',
-              backgroundColor: 'var(--ant-color-bg-container)',
-              minWidth: 138,
-              padding: 0,
-            }}
-          />
-        ) : null
-      }
-      {
-        showLeft ? (
-          <div className={styles['header-left']}>
-            {
-              showCollapsed ? (
-                <Button
-                  type="text"
-                  onClick={() => toggleCollapsed()}
-                  className="h-full text-[24px] line-height-[1]"
-                  style={{ width: 'auto', padding: 0 }}
-
-                >
-                  {
-                    collapsed ? (
-                      <Icon icon="ant-design:menu-unfold-outlined" fontSize={22} />
-                    ) : (
-                      <Icon icon="ant-design:menu-fold-outlined" fontSize={22} />
-                    )
-                  }
-                </Button>
-
-              ) : null
-            }
-            {
-              showBreadcrumb ? <Breadcrumb /> : null
-            }
-          </div>
-        ) : null
-      }
+      {showLogo ? (
+        <AppLogo
+          showTitle
+          style={{
+            color: 'var(--ant-color-text)',
+            backgroundColor: 'var(--ant-color-bg-container)',
+            minWidth: 138,
+            padding: 0,
+          }}
+        />
+      ) : null}
+      {showLeft ? (
+        <div className={styles['header-left']}>
+          {showCollapsed ? (
+            <Button
+              type="text"
+              onClick={() => toggleCollapsed()}
+              className="h-full text-[24px] line-height-[1]"
+              style={{ width: 'auto', padding: 0 }}
+            >
+              {collapsed ? (
+                <Icon icon="ant-design:menu-unfold-outlined" fontSize={22} />
+              ) : (
+                <Icon icon="ant-design:menu-fold-outlined" fontSize={22} />
+              )}
+            </Button>
+          ) : null}
+          {showBreadcrumb ? <Breadcrumb /> : null}
+        </div>
+      ) : null}
       {children || null}
       <div className={styles['header-right']}>
         <GlobalSearch />

@@ -1,0 +1,4 @@
+.breadcrumb :global(.ant-dropdown-trigger) {
+  display: flex;
+  align-items: center;
+}

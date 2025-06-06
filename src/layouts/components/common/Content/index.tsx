@@ -5,7 +5,7 @@ import { Layout } from 'antd';
 import { v4 as uuidV4 } from 'uuid';
 
 import AppLoading from '@/components/app/AppLoading';
-import AppPageTransition from '@/components/app/AppPageTransition';
+import RaAnimator from '@/components/RaAnimator';
 import { KeepAlive } from '@/components/RaKeepAlive';
 import type { KeepAliveRef } from '@/components/RaKeepAlive/interface';
 
@@ -15,15 +15,16 @@ import LayoutTabs from '../Tabs';
 import { LayoutTabsContext } from './LayoutTabsContext';
 
 import useAppConfigStoreSelector from '@/store/appConfig';
+import useLayoutStoreSelector from '@/store/layout';
 const { Content } = Layout;
 
 const AppContent = () => {
   const [contentId, setContentId] = useState(uuidV4());
-  const { showTabs, keepAlive, animationType } = useAppConfigStoreSelector([
-    'showTabs',
+  const { keepAlive, pageTransitionType } = useAppConfigStoreSelector([
     'keepAlive',
-    'animationType'
+    'pageTransitionType',
   ]);
+  const { showTabs } = useLayoutStoreSelector(['showTabs']);
   const { pathname, search } = useLocation();
   const keepAliveRef = useRef<KeepAliveRef | null>(null);
 
@@ -52,9 +53,19 @@ const AppContent = () => {
                   id="ra-content-container"
                 >
                   <div className="flex-1 relative">
-                    <AppPageTransition pageKey={cacheKey} animationType={animationType}>
+                    <RaAnimator
+                      key={cacheKey}
+                      config={{
+                        type: pageTransitionType,
+                        duration: 0.4,
+                        variants: {
+                          initial: { x: -20 }, // 覆盖初始x位移（原默认-50）
+                          exit: { x: -20 }, // 覆盖退出x位移（原默认-50）
+                        },
+                      }}
+                    >
                       <Outlet />
-                    </AppPageTransition>
+                    </RaAnimator>
                   </div>
                   <AppFooter />
                 </div>
@@ -64,10 +75,23 @@ const AppContent = () => {
                 className="h-full flex flex-col overflow-auto bg-[var(--ant-layout-body-bg)]"
                 id="ra-content-container"
               >
-                <div className="flex-1 relative ra-page-container" key={contentId}>
-                  <AppPageTransition pageKey={cacheKey} animationType={animationType}>
+                <div
+                  className="flex-1 relative ra-page-container"
+                  key={contentId}
+                >
+                  <RaAnimator
+                    key={cacheKey}
+                    config={{
+                      type: pageTransitionType,
+                      duration: 0.4,
+                      variants: {
+                        initial: { x: -20 }, // 覆盖初始x位移（原默认-50）
+                        exit: { x: -20 }, // 覆盖退出x位移（原默认-50）
+                      },
+                    }}
+                  >
                     <Outlet />
-                  </AppPageTransition>
+                  </RaAnimator>
                 </div>
                 <AppFooter />
               </div>
@@ -75,7 +99,7 @@ const AppContent = () => {
           </div>
         </Content>
       </div>
-    </LayoutTabsContext.Provider >
+    </LayoutTabsContext.Provider>
   );
 };
 

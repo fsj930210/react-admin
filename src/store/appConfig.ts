@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { AnimationType } from '@/components/app/AppPageTransition';
+import type { AnimationType } from '@/components/RaAnimator';
 
 import { createSelector } from './createSelector';
 
@@ -9,24 +9,26 @@ export enum AppThemeEnum {
   dark = 'dark',
   os = 'os',
 }
-export type LayoutType = 'vertical' | 'horizontal' | 'doubleColumn' | 'mixVertical' | 'mixDoubleColumn' | 'fullScreen' | 'side';
+export type LayoutType =
+  | 'vertical'
+  | 'horizontal'
+  | 'doubleColumn'
+  | 'mixVertical'
+  | 'mixDoubleColumn'
+  | 'fullScreen'
+  | 'side';
+export type BreadcrumbType = 'menu' | 'flat';
 export interface AppConfigState {
   primaryColor: string;
   appTheme: AppThemeEnum;
   appLanguage: string;
-  showBreadcrumb: boolean;
-  showTabs: boolean;
   keepAlive: boolean;
-  animationType: AnimationType;
-  layoutType: LayoutType;
+  pageTransitionType: AnimationType;
   changeAppTheme: (theme: AppThemeEnum) => void;
   changeAppLanguage: (lang: string) => void;
   changePrimaryColor: (color: string) => void;
   changeKeepAlive: (keepAlive: boolean) => void;
-  changeShowBreadcrumb: (showBreadcrumb: boolean) => void;
-  changeShowTabs: (showTabs: boolean) => void;
-  changeAnimationType: (animationType: AnimationType) => void;
-  changeLayoutType: (layout: LayoutType) => void;
+  changePageTransitionType: (animationType: AnimationType) => void;
 }
 
 const useAppConfigStore = create<AppConfigState>()((set) => ({
@@ -39,16 +41,9 @@ const useAppConfigStore = create<AppConfigState>()((set) => ({
   changeAppLanguage: (lang: string) => set(() => ({ appLanguage: lang })),
   keepAlive: false,
   changeKeepAlive: (keepAlive: boolean) => set(() => ({ keepAlive })),
-  showBreadcrumb: true,
-  changeShowBreadcrumb: (showBreadcrumb: boolean) =>
-    set(() => ({ showBreadcrumb })),
-  showTabs: true,
-  changeShowTabs: (showTabs: boolean) => set(() => ({ showTabs })),
-  animationType: 'fade',
-  changeAnimationType: (animationType: AnimationType) =>
-    set(() => ({ animationType })),
-  layoutType: 'mixDoubleColumn',
-  changeLayoutType: (layoutType: LayoutType) => set(() => ({ layoutType })),
+  pageTransitionType: 'fadeRight',
+  changePageTransitionType: (pageTransitionType: AnimationType) =>
+    set(() => ({ pageTransitionType })),
 }));
 
 const useAppConfigStoreSelector = createSelector(useAppConfigStore);

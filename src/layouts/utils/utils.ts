@@ -1,4 +1,4 @@
-import type { MenuItem } from "@/types/menu";
+import type { MenuItem } from '@/types/menu';
 
 export interface LevelKeysProps {
   key?: string;
@@ -21,11 +21,15 @@ export const getLevelKeys = (items1: LevelKeysProps[]) => {
   return key;
 };
 
-export function getAncestorLevelKey(item: MenuItem, items: MenuItem[], result: string[]) {
+export function getAncestorLevelKey(
+  item: MenuItem,
+  items: Record<string, MenuItem>,
+  result: string[],
+) {
   const parentKey = item.parent_key;
   if (parentKey) {
     result.unshift(parentKey);
-    const parentItem = items.find((i) => i.key === parentKey);
+    const parentItem = items[parentKey];
     if (parentItem) {
       getAncestorLevelKey(parentItem, items, result);
     }

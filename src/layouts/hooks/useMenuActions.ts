@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-import { getLevelKeys } from "../utils/utils";
+import { getLevelKeys } from '../utils/utils';
 
-import type { MenuItem } from "@/types/menu";
+import type { MenuItem } from '@/types/menu';
 
-import useMenuStoreSelector from "@/store/menu";
+import useMenuStoreSelector from '@/store/menu';
 
-const useMenuActions = (menuItems: MenuItem[]): {
+const useMenuActions = (
+  menuItems: MenuItem[],
+): {
   openKeys: string[];
   selectedKeys: string[];
   onOpenChange: (menuItems: MenuItem[]) => (allOpenKeys: string[]) => void;
@@ -16,7 +18,10 @@ const useMenuActions = (menuItems: MenuItem[]): {
 } => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { accordion, flatMenuItems } = useMenuStoreSelector(['accordion', 'flatMenuItems']);
+  const { accordion, flatMenuItems } = useMenuStoreSelector([
+    'accordion',
+    'flatMenuItems',
+  ]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   // 处理菜单展开/收起
@@ -52,7 +57,7 @@ const useMenuActions = (menuItems: MenuItem[]): {
   // 处理菜单项点击
   const handleItemClick = ({ key }: { key: string }) => {
     setSelectedKeys([key]);
-    const item = flatMenuItems.find((item: MenuItem) => item.key === key);
+    const item = flatMenuItems[key];
     if (!item || item.disabled) return;
     if (item?.open_mode === 'newBrowserTab') {
       window.open(item?.path, '_blank');
@@ -61,10 +66,10 @@ const useMenuActions = (menuItems: MenuItem[]): {
     }
   };
   /**
- * 检查路径是否存在于菜单中
- * @param path 需要检查的路径
- * @param items 菜单项数组
- */
+   * 检查路径是否存在于菜单中
+   * @param path 需要检查的路径
+   * @param items 菜单项数组
+   */
   const isPathInMenu = (path: string, items: MenuItem[]): boolean => {
     for (const item of items) {
       if (item.key === path) return true;
@@ -72,7 +77,7 @@ const useMenuActions = (menuItems: MenuItem[]): {
         return true;
     }
     return false;
-  }
+  };
 
   /**
    * 获取默认选中的菜单项
@@ -82,7 +87,7 @@ const useMenuActions = (menuItems: MenuItem[]): {
     if (!items?.length) return '';
     const firstAvailableItem = items.find((item) => !item.hidden);
     return firstAvailableItem?.key || '';
-  }
+  };
   /**
    * 根据路径生成展开的菜单键数组
    */
@@ -97,7 +102,7 @@ const useMenuActions = (menuItems: MenuItem[]): {
     }
 
     return keys;
-  }
+  };
   // 处理路由变化，更新菜单状态
   useEffect(() => {
     if (!menuItems?.length) return;
@@ -120,17 +125,14 @@ const useMenuActions = (menuItems: MenuItem[]): {
         setOpenKeys(generateOpenKeys(defaultPath));
       }
     }
-  }, [
-    location.pathname,
-    menuItems,
-  ]);
+  }, [location.pathname, menuItems]);
   return {
     openKeys,
     selectedKeys,
     onOpenChange,
     handleItemClick,
     setSelectedKeys,
-  }
-}
+  };
+};
 
 export default useMenuActions;

@@ -32,13 +32,13 @@ export function useTabs() {
     return {
       key: menuItem.key,
       label: menuItem.label,
-      icon: <RaIcon icon={menuItem['data-icon'] as string} />,
+      icon: <RaIcon icon={menuItem.iconify_name as string} />,
       closable: menuItem.key !== HOME_PATH,
       pin: menuItem.key === HOME_PATH,
       disabled: false,
       children: null,
       title: menuItem.title, // 主要用于国际化
-      'data-icon': menuItem['data-icon'],
+      'data-icon': menuItem.iconify_name,
     };
   };
 
@@ -72,7 +72,7 @@ export function useTabs() {
    * 确保首页标签存在
    */
   const ensureHomeTab = (currentItems: Tab[]) => {
-    const homeMenuItem = flatMenuItems.find((item) => item.key === HOME_PATH);
+    const homeMenuItem = flatMenuItems[HOME_PATH];
     if (!homeMenuItem) return currentItems;
 
     const homeTab = currentItems.find((item) => item.key === HOME_PATH);
@@ -101,20 +101,18 @@ export function useTabs() {
    */
   useEffect(() => {
     const currentPath = location.pathname;
-    const menuItem = flatMenuItems.find((item) => item.key === currentPath);
+    const menuItem = flatMenuItems[currentPath];
 
     // 更新所有已存在的标签页
     const updatedItems = tabItemsRef.current.map((tab) => {
-      const matchedMenuItem = flatMenuItems.find(
-        (item) => item.key === tab.key,
-      );
+      const matchedMenuItem = flatMenuItems[tab.key];
       if (matchedMenuItem) {
         return {
           ...tab,
           label: matchedMenuItem.label,
           title: matchedMenuItem.title,
-          icon: <RaIcon icon={matchedMenuItem['data-icon'] as string} />,
-          'data-icon': matchedMenuItem['data-icon'],
+          icon: <RaIcon icon={matchedMenuItem.iconify_name as string} />,
+          'data-icon': matchedMenuItem.iconify_name,
         };
       }
       return tab;

@@ -1,125 +1,128 @@
-import { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import { Layout, Menu } from "antd";
+import { Layout, Menu } from 'antd';
 
-import AppLogo from "@/components/app/AppLogo";
+import AppLogo from '@/components/app/AppLogo';
 
-import AppContent from "../common/Content";
-import AppHeader from "../common/Header";
+import AppContent from '../common/Content';
+import AppHeader from '../common/Header';
 
-import styles from './index.module.css'
+import styles from './index.module.css';
 
-import type { MenuItem } from "@/types/menu";
+import type { MenuItem } from '@/types/menu';
 
-import { useAppContext } from "@/AppContext";
-import useMenuActions from "@/layouts/hooks/useMenuActions";
-import { getAncestorLevelKey } from "@/layouts/utils/utils";
-import useMenuStoreSelector from "@/store/menu";
+import { useAppContext } from '@/AppContext';
+import useMenuActions from '@/layouts/hooks/useMenuActions';
+import { getAncestorLevelKey } from '@/layouts/utils/utils';
+import useMenuStoreSelector from '@/store/menu';
 const { Sider } = Layout;
 
 const MixDoubleColumnLayout = () => {
-  const location = useLocation()
-  const { theme } = useAppContext()
-  const {
-    collapsed,
-    menuItems,
-    flatMenuItems,
-    toggleCollapsed,
-  } = useMenuStoreSelector(
-    [
+  const location = useLocation();
+  const { theme } = useAppContext();
+  const { collapsed, menuItems, flatMenuItems, toggleCollapsed } =
+    useMenuStoreSelector([
       'collapsed',
       'menuItems',
       'flatMenuItems',
       'toggleCollapsed',
-    ]
+    ]);
+  const [firstLevelMenuSelectedKeys, setFirstLevelMenuSelectedKeys] = useState<
+    string[]
+  >([]);
+  const [secondLevelMenuSelectedKeys, setSecondLevelMenuSelectedKeys] =
+    useState<string[]>([]);
+  const [secondLevelMenuItems, setSecondLevelMenuItems] = useState<MenuItem[]>(
+    [],
   );
-  const [firstLevelMenuSelectedKeys, setFirstLevelMenuSelectedKeys] = useState<string[]>([]);
-  const [secondLevelMenuSelectedKeys, setSecondLevelMenuSelectedKeys] = useState<string[]>([]);
-  const [secondLevelMenuItems, setSecondLevelMenuItems] = useState<MenuItem[]>([]);
-  const [thirdLevelMenuItems, setThirdLevelMenuItems] = useState<MenuItem[]>([]);
-  const firstLevelMenuItems = menuItems.map(item => {
+  const [thirdLevelMenuItems, setThirdLevelMenuItems] = useState<MenuItem[]>(
+    [],
+  );
+  const firstLevelMenuItems = menuItems.map((item) => {
     return {
       ...item,
-      children: undefined
-    }
-  })
-  const {
-    selectedKeys,
-    openKeys,
-    handleItemClick,
-    onOpenChange,
-  } = useMenuActions(menuItems)
+      children: undefined,
+    };
+  });
+  const { selectedKeys, openKeys, handleItemClick, onOpenChange } =
+    useMenuActions(menuItems);
   useEffect(() => {
-    const selectedItem = flatMenuItems.find(item => location.pathname === item.key);
+    const selectedItem = flatMenuItems[location.pathname];
     if (selectedItem) {
-      const ancestorLevelKeys: string[] = []
+      const ancestorLevelKeys: string[] = [];
       getAncestorLevelKey(selectedItem, flatMenuItems, ancestorLevelKeys);
       const length = ancestorLevelKeys.length;
-      const firstLevelMenuSelectedKeys = length > 0 ? [ancestorLevelKeys[0]] : [selectedItem.key];
-      const secondLevelMenuSelectedKeys = length > 0 ? length > 1 ? [ancestorLevelKeys[1]] : [selectedItem.key] : []
+      const firstLevelMenuSelectedKeys =
+        length > 0 ? [ancestorLevelKeys[0]] : [selectedItem.key];
+      const secondLevelMenuSelectedKeys =
+        length > 0
+          ? length > 1
+            ? [ancestorLevelKeys[1]]
+            : [selectedItem.key]
+          : [];
       setFirstLevelMenuSelectedKeys(firstLevelMenuSelectedKeys);
       setSecondLevelMenuSelectedKeys(secondLevelMenuSelectedKeys);
-      const firstLevelMenuItem = flatMenuItems.find(item => item.key === ancestorLevelKeys[0]);
+      const firstLevelMenuItem = flatMenuItems[ancestorLevelKeys[0]];
       if (firstLevelMenuItem?.children) {
-        const secondLevelItem = flatMenuItems.find(item => item.key === secondLevelMenuSelectedKeys[0]);
-        console.log(secondLevelItem)
+        const secondLevelItem = flatMenuItems[secondLevelMenuSelectedKeys[0]];
+        console.log(secondLevelItem);
         if (secondLevelItem?.children) {
-          setThirdLevelMenuItems(secondLevelItem.children)
+          setThirdLevelMenuItems(secondLevelItem.children);
         } else {
-          setThirdLevelMenuItems([])
+          setThirdLevelMenuItems([]);
         }
-        setSecondLevelMenuItems(firstLevelMenuItem.children.map(i => ({ ...i, children: undefined })));
+        setSecondLevelMenuItems(
+          firstLevelMenuItem.children.map((i) => ({
+            ...i,
+            children: undefined,
+          })),
+        );
       } else {
         setSecondLevelMenuItems([]);
         setThirdLevelMenuItems([]);
       }
     }
-  }, [location.pathname, flatMenuItems])
+  }, [location.pathname, flatMenuItems]);
   return (
     <Layout className="h-full" hasSider>
-      {
-        secondLevelMenuItems.length > 0 ? (
-          <Sider
-            collapsed
+      {secondLevelMenuItems.length > 0 ? (
+        <Sider
+          collapsed
+          theme={theme}
+          className={` ${styles['second-sider']} overflow-y-auto`}
+        >
+          <AppLogo
+            showTitle={false}
+            style={{
+              color: 'var(--ant-color-text)',
+              backgroundColor: 'var(--ant-color-bg-container)',
+            }}
+          />
+          <Menu
+            className={styles['second-level-menu']}
             theme={theme}
-            className={` ${styles['second-sider']} overflow-y-auto`}
-
-          >
-            <AppLogo
-              showTitle={false}
-              style={{
-                color: 'var(--ant-color-text)',
-                backgroundColor: 'var(--ant-color-bg-container)',
-              }}
-            />
-            <Menu
-              className={styles['second-level-menu']}
-              theme={theme}
-              inlineCollapsed
-              mode="inline"
-              items={secondLevelMenuItems}
-              selectedKeys={secondLevelMenuSelectedKeys}
-              onClick={({ key }) => {
-                const item = flatMenuItems.find(item => item.key === key)
-                if (!item) {
-                  setThirdLevelMenuItems([]);
-                  return
-                }
-                if (!item.children || item.children.length === 0) {
-                  setThirdLevelMenuItems([]);
-                  handleItemClick({ key });
-                  return
-                }
-                setThirdLevelMenuItems(item?.children || []);
-                handleItemClick({ key: item.children[0].key })
-              }}
-            />
-
-
-          </Sider>
-        ) : null
-      }
+            inlineCollapsed
+            mode="inline"
+            items={secondLevelMenuItems}
+            selectedKeys={secondLevelMenuSelectedKeys}
+            onClick={({ key }) => {
+              const item = flatMenuItems[key];
+              if (!item) {
+                setThirdLevelMenuItems([]);
+                return;
+              }
+              if (!item.children || item.children.length === 0) {
+                setThirdLevelMenuItems([]);
+                handleItemClick({ key });
+                return;
+              }
+              setThirdLevelMenuItems(item?.children || []);
+              handleItemClick({ key: item.children[0].key });
+            }}
+          />
+        </Sider>
+      ) : null}
 
       {thirdLevelMenuItems.length > 0 ? (
         <Sider
@@ -149,29 +152,31 @@ const MixDoubleColumnLayout = () => {
             className="flex-1 min-w-0 h-full"
             selectedKeys={firstLevelMenuSelectedKeys}
             onClick={({ key }) => {
-              const item = flatMenuItems.find(item => item.key === key)
+              const item = flatMenuItems[key];
               if (!item) {
-                return
+                return;
               }
               if (!item.children) {
                 handleItemClick({ key });
-                return
+                return;
               }
-              const secondLevelMenuItems = (item?.children || []).map(item => {
-                return {
-                  ...item,
-                  children: undefined
-                }
-              })
+              const secondLevelMenuItems = (item?.children || []).map(
+                (item) => {
+                  return {
+                    ...item,
+                    children: undefined,
+                  };
+                },
+              );
               handleItemClick({ key: item.children[0].key });
-              setSecondLevelMenuItems(secondLevelMenuItems)
+              setSecondLevelMenuItems(secondLevelMenuItems);
             }}
           />
         </AppHeader>
         <AppContent />
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default MixDoubleColumnLayout
+export default MixDoubleColumnLayout;

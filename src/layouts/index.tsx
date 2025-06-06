@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { useMount } from 'ahooks';
 import { App } from 'antd';
 
+import AppConfig from '@/components/app/AppConfig';
 import { KeepAliveProvider } from '@/components/RaKeepAlive';
 
 import storage from '@/utils/storage';
@@ -20,7 +21,7 @@ import { useInitMenu } from './hooks/useInitMenu';
 import type { LayoutType } from '@/store/appConfig';
 
 import useGoto from '@/hooks/useGoto';
-import useAppConfigStoreSelector from '@/store/appConfig';
+import useLayoutStoreSelector from '@/store/layout';
 
 const layoutComponents: Record<LayoutType, FC> = {
   vertical: VerticalLayout,
@@ -29,12 +30,12 @@ const layoutComponents: Record<LayoutType, FC> = {
   mixVertical: MixVerticalLayout,
   mixDoubleColumn: MixDoubleColumnLayout,
   fullScreen: FullScreenLayout,
-  side: SideLayout
+  side: SideLayout,
 };
 
 const BasicLayout = () => {
   useInitMenu();
-  const { layoutType } = useAppConfigStoreSelector(['layoutType'])
+  const { layoutType } = useLayoutStoreSelector(['layoutType']);
   const { message } = App.useApp();
   const { go } = useGoto();
   function goToLogin() {
@@ -60,6 +61,7 @@ const BasicLayout = () => {
   return (
     <KeepAliveProvider>
       <Layout />
+      <AppConfig />
     </KeepAliveProvider>
   );
 };

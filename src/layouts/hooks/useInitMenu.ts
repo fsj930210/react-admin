@@ -5,6 +5,8 @@ import { dfs } from '@/utils/utils';
 
 import { MenuService } from './MenuService';
 
+import type { MenuItem } from '@/types/menu';
+
 import routes from '@/router/routes';
 import { flattenRoutes } from '@/router/utils';
 import useAppConfigStoreSelector from '@/store/appConfig';
@@ -50,7 +52,14 @@ export function useInitMenu() {
       // 更新菜单状态
       setMenuItems(processedMenus);
       // 扁平化菜单
-      const flatMenuItems = dfs(processedMenus);
+      const flatMenuItemsArray = dfs(processedMenus);
+      const flatMenuItems = flatMenuItemsArray.reduce(
+        (acc, item) => {
+          acc[item.key] = item;
+          return acc;
+        },
+        {} as Record<string, MenuItem>,
+      );
       setFlatMenuItems(flatMenuItems);
     } catch (error) {
       console.error('Failed to initialize menus:', error);

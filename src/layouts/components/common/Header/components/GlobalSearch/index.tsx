@@ -26,14 +26,14 @@ const GlobalSearch = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value) {
-      const filteredList = flatMenuItems.filter(
+      const filteredList = Object.values(flatMenuItems).filter(
         (item) => item.label.includes(value) || item.key.includes(value),
       );
       setSearchContentList(
         filteredList.map((item) => ({
           ...item,
           label: t(`menu.${item.title}`),
-          icon: item['data-icon'],
+          icon: item.iconify_name,
         })),
       );
     } else {
@@ -91,7 +91,7 @@ const GlobalSearch = () => {
         onClick={() => setShowModal(true)}
         className="bg-[var(--ant-color-bg-layout)] h-8 flex gap-3 items-center cursor-pointer border-none rounded-full px-4 py-[4px] text-[var(--ant-color-text-tertiary)] hover:text-[var(--ant-color-text)] transition-all"
       >
-        <span className='flex-center'>
+        <span className="flex-center">
           <Icon icon="lucide:search" />{' '}
           <span>{t('search.outerPlaceholder')}</span>
         </span>
