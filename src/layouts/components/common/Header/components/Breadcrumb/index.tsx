@@ -46,18 +46,21 @@ const AppBreadcrumb = () => {
         {
           // 这里判断是最后一个或者是菜单时直接渲染，其他情况用Link组件渲染点击跳转到路由
           isLast || currentRoute?.menu ? (
-            <span>
+            <span className="flex-center">
               {currentRoute.icon ? (
                 <RaIcon fontSize={14} icon={currentRoute.icon as string} />
               ) : null}
-              <span>{currentRoute.title}</span>
+              <span className="ml-[4px]">{currentRoute.title}</span>
             </span>
           ) : (
-            <Link to={currentRoute.path as string}>
+            <Link
+              to={currentRoute.path as string}
+              className="!flex items-center"
+            >
               {currentRoute.icon ? (
                 <RaIcon fontSize={14} icon={currentRoute.icon as string} />
               ) : null}
-              <span> {currentRoute.title}</span>
+              <span className="ml-[4px]">{currentRoute.title}</span>
             </Link>
           )
         }

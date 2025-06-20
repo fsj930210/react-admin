@@ -10,7 +10,7 @@ import { KeepAlive } from '@/components/RaKeepAlive';
 import type { KeepAliveRef } from '@/components/RaKeepAlive/interface';
 
 import AppFooter from '../Footer';
-import LayoutTabs from '../Tabs';
+import LayoutTabs from '../LayoutTabs';
 
 import { LayoutTabsContext } from './LayoutTabsContext';
 

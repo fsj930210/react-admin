@@ -2,17 +2,17 @@ import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import RaIcon from '@/components/RaIcon';
-import type { Tab } from '@/components/RaTabs/interface';
 
 import { HOME_PATH, RA_CACHED_TABS_KEY } from '@/utils/constants';
 import storage from '@/utils/storage';
 
+import type { TabItem } from '../components/Tabs/interface';
 import type { MenuItem } from '@/types/menu';
 
 import useSiderStoreSelector from '@/store/menu';
 import useTabsStoreSelector from '@/store/tabs';
 
-export type UpdateTabFunc = (tabItems: Tab[]) => Tab[];
+export type UpdateTabFunc = (tabItems: TabItem[]) => TabItem[];
 export type UpdateTabItems = (updateFunc: UpdateTabFunc) => void;
 
 export function useTabs() {
@@ -23,32 +23,31 @@ export function useTabs() {
     'tabItems',
   ]);
   const { flatMenuItems } = useSiderStoreSelector(['flatMenuItems']);
-  const tabItemsRef = useRef<Tab[]>([]);
+  const tabItemsRef = useRef<TabItem[]>([]);
 
   /**
    * 根据菜单项创建标签页
    */
-  const createTabFromMenuItem = (menuItem: MenuItem): Tab => {
+  const createTabFromMenuItem = (menuItem: MenuItem): TabItem => {
     return {
       key: menuItem.key,
       label: menuItem.label,
       icon: <RaIcon icon={menuItem.iconify_name as string} />,
       closable: menuItem.key !== HOME_PATH,
-      pin: menuItem.key === HOME_PATH,
+      pinned: menuItem.key === HOME_PATH,
       disabled: false,
-      children: null,
       title: menuItem.title, // 主要用于国际化
-      'data-icon': menuItem.iconify_name,
+      iconName: menuItem.iconify_name,
     };
   };
 
   /**
    * 缓存标签页
    */
-  const cacheTabItems = (items: Tab[]) => {
+  const cacheTabItems = (items: TabItem[]) => {
     const itemsToCache = items.map((item) => ({
       ...item,
-      icon: item['data-icon'], // 只缓存图标名称
+      icon: item.iconName, // 只缓存图标名称
     }));
     storage.setItem(RA_CACHED_TABS_KEY, itemsToCache);
   };
@@ -57,12 +56,12 @@ export function useTabs() {
    * 恢复缓存的标签页
    */
   const restoreCachedTabs = () => {
-    const cachedItems = storage.getItem<Tab[]>(RA_CACHED_TABS_KEY);
+    const cachedItems = storage.getItem<TabItem[]>(RA_CACHED_TABS_KEY);
     if (cachedItems?.length) {
       tabItemsRef.current = cachedItems.map((tab) => ({
         ...tab,
         label: tab.label,
-        icon: <RaIcon icon={tab['data-icon'] as string} />,
+        icon: <RaIcon icon={tab.iconName as string} />,
       }));
       setTabItems(tabItemsRef.current);
     }
@@ -71,7 +70,7 @@ export function useTabs() {
   /**
    * 确保首页标签存在
    */
-  const ensureHomeTab = (currentItems: Tab[]) => {
+  const ensureHomeTab = (currentItems: TabItem[]) => {
     const homeMenuItem = flatMenuItems[HOME_PATH];
     if (!homeMenuItem) return currentItems;
 

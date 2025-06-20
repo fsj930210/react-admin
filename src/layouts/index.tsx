@@ -44,18 +44,18 @@ const BasicLayout = () => {
   }
   useMount(() => {
     // 全局401
-    emitter.on('api_401', () => {
-      storage.removeItem('access_token');
-      goToLogin();
-    });
+    // emitter.on('api_401', () => {
+    //   storage.removeItem('access_token');
+    //   goToLogin();
+    // });
     // 全局api错误
-    emitter.on('api_error', (error: any) => {
-      message.destroy();
-      message.error(error?.message || '系统内部异常');
-    });
-    if (!storage.getItem('access_token')) {
-      goToLogin();
-    }
+    // emitter.on('api_error', (error: any) => {
+    //   message.destroy();
+    //   message.error(error?.message || '系统内部异常');
+    // });
+    // if (!storage.getItem('access_token')) {
+    //   goToLogin();
+    // }
   });
   const Layout = layoutComponents[layoutType];
   return (

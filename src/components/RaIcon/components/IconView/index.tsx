@@ -15,12 +15,11 @@ import { icons as carbonIcons } from '@iconify-json/carbon';
 import { icons as lucideIcons } from '@iconify-json/lucide';
 import { icons as riIcons } from '@iconify-json/ri';
 import { useControllableValue } from 'ahooks';
-import { Input } from 'antd';
+import { Input, Tabs } from 'antd';
 import classNames from 'classnames';
 import memoize from 'memoize-one';
 
 import Icon from '@/components/RaIcon';
-import RaTabs from '@/components/RaTabs';
 
 import { getIconNames } from '../../utils/getIconNames';
 
@@ -242,14 +241,13 @@ const IconView = (props: IconViewProps) => {
 
   return (
     <div ref={containerRef} className="size-full overflow-hidden">
-      <RaTabs
+      <Tabs
         items={items}
         onChange={(activeKey) => {
           setActiveKey(activeKey);
         }}
         activeKey={activeKey}
         className={`h-full ${styles['icon-view-tabs']}`}
-        showInkBar
       />
     </div>
   );

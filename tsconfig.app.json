@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
+
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,10 +23,10 @@
     "noFallthroughCasesInSwitch": true,
     // 当导入的是type时使用import type 而不是直接引入
     "verbatimModuleSyntax": true,
-
+    "importsNotUsedAsValues": "remove", // 自动移除未使用的导入
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["vite-plugin-svgr/client", "node"]
   },

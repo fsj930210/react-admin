@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { useFullscreen } from 'ahooks';
 
-import type { Tab } from '@/components/RaTabs/interface';
-
 import { LayoutTabsContext } from '../../Content/LayoutTabsContext';
 
 import { HOME_PATH } from '@/utils/constants';
 
 import type { UpdateTabItems } from './useTabs';
+import type { TabItem } from '../components/Tabs/interface';
 
 import useAppConfigStoreSelector from '@/store/appConfig';
 
@@ -39,7 +38,7 @@ const useTabActions = ({
   };
   // 删除Tab
   const deleteTabFunc = (key: string) => {
-    updateTabItems((tabItems: Tab[]) => {
+    updateTabItems((tabItems: TabItem[]) => {
       const index = tabItems.findIndex((i) => i.key === key);
       const prevIndex = index - 1;
       if (index > -1) {
@@ -59,17 +58,17 @@ const useTabActions = ({
     });
   };
   // 固定 如果现有items有固定的则放到最后一个固定的后面
-  const togglePinTabFunc = (item: Tab) => {
-    updateTabItems((tabItems: Tab[]) => {
+  const togglePinTabFunc = (item: TabItem) => {
+    updateTabItems((tabItems: TabItem[]) => {
       const newItems = [...tabItems];
       const index = tabItems.findIndex((i) => i.key === item?.key);
       // 取消固定
-      if (item.pin) {
-        newItems.splice(index, 1, { ...item, pin: false });
+      if (item.pinned) {
+        newItems.splice(index, 1, { ...item, pinned: false });
       } else {
         const pinIndexArr = tabItems.reduce(
           (pre: number[], current, curIndex) => {
-            if (current.pin) {
+            if (current.pinned) {
               pre.push(curIndex);
             }
             return pre;
@@ -79,7 +78,7 @@ const useTabActions = ({
         const maxIndex = Math.max(...pinIndexArr);
         if (index > -1) {
           newItems.splice(index, 1);
-          item.pin = true;
+          item.pinned = true;
           item.closable = false;
           newItems.splice(maxIndex + 1, 0, item);
         }
@@ -88,14 +87,14 @@ const useTabActions = ({
     });
   };
   // 新窗口打开
-  const openNewWindowFunc = (item: Tab) => {
+  const openNewWindowFunc = (item: TabItem) => {
     const origin = window.location.origin;
     const url = origin + item.key;
     window.open(url, '_blank');
   };
   // 删除其他
   const deleteOtherTabsFunc = (key: string) => {
-    updateTabItems((tabItems: Tab[]) => {
+    updateTabItems((tabItems: TabItem[]) => {
       const deleteKeys = tabItems
         .filter((item) => item.closable && item.key !== key)
         .map((i) => i.key);
@@ -106,7 +105,7 @@ const useTabActions = ({
   };
   // 通过keys删除其他左侧或者右侧
   const deleteTabsByKeysFunc = (key: string, direction: 'left' | 'right') => {
-    updateTabItems((tabItems: Tab[]) => {
+    updateTabItems((tabItems: TabItem[]) => {
       const index = tabItems.findIndex((item) => item.key === key);
       if (index > -1) {
         const deleteKeys = tabItems
@@ -126,7 +125,7 @@ const useTabActions = ({
   };
   // 关闭全部
   const deleteAllFunc = () => {
-    updateTabItems((tabItems: Tab[]) => {
+    updateTabItems((tabItems: TabItem[]) => {
       const deleteKeys = tabItems
         .filter((item) => item.closable)
         .map((i) => i.key);

@@ -1,0 +1,133 @@
+.ra-chrome-tabs {
+  .ra-layout-tabs-tab-wrapper {
+    &:first-child {
+      .chrome-tabs-tab-divider {
+        opacity: 0;
+      }
+    }
+
+    &.ra-layout-tabs-tab-wrapper-active {
+      background-color: transparent !important;
+
+      & + .ra-layout-tabs-tab-wrapper {
+        .chrome-tabs-tab-divider {
+          opacity: 0;
+        }
+      }
+
+      .chrome-tabs-tab-divider {
+        opacity: 0;
+      }
+
+      .chrome-tabs-tab-background {
+        opacity: 1;
+      }
+
+      .chrome-tabs-tab-content {
+        color: var(--ant-color-primary);
+      }
+    }
+  }
+}
+
+.chrome-tabs-tab {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 0;
+
+  .chrome-tabs-tab-divider {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: 14px;
+    background-color: var(--ant-color-text-secondary);
+    transform: translateY(-50%);
+    transition: opacity 0.2s ease;
+  }
+
+  .chrome-tabs-tab-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    color: var(--ant-color-primary-bg);
+  }
+
+  .chrome-tabs-tab-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    overflow: hidden;
+    pointer-events: all;
+    border-radius: 8px;
+    transition: 0.2s ease;
+    color: var(--ant-color-text);
+    line-height: 1;
+  }
+
+  .chrome-tabs-tab-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+
+    & + .chrome-tabs-tab-text {
+      margin-left: 4px;
+    }
+  }
+
+  .chrome-tabs-tab-text {
+    flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    & + .chrome-tabs-tab-close {
+      margin-left: 4px;
+    }
+  }
+
+  .chrome-tabs-tab-close {
+    font-size: 12px;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+}
+
+@media (hover: hover) {
+  .ra-chrome-tabs {
+    .ra-layout-tabs-tab-wrapper:not(.ra-layout-tabs-tab-wrapper-active) {
+      &:hover {
+        .chrome-tabs-tab-divider {
+          opacity: 0;
+        }
+
+        & + .ra-layout-tabs-tab-wrapper {
+          .chrome-tabs-tab-divider {
+            opacity: 0;
+          }
+        }
+      }
+
+      .chrome-tabs-tab-content {
+        &:hover {
+          color: var(--ant-color-primary);
+          background-color: var(--ant-color-primary-bg-hover);
+        }
+      }
+    }
+  }
+}

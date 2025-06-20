@@ -1,11 +1,8 @@
-import classNames from 'classnames';
-
-import type { TabNodeProps } from '@/components/RaTabs/TabNavList/TabNode';
-
 import ChromeTab from '../ChromeTab';
 import TabDropdown from '../TabDropdown';
 
 import type { UpdateTabItems } from '../../hooks/useTabs';
+import type { TabNodeProps } from '../Tabs/interface';
 
 import useTabsStoreSelector from '@/store/tabs';
 
@@ -23,19 +20,10 @@ const LayoutTab = ({ node, props, index, updateTabItems }: LayoutTabProps) => {
   return (
     <TabDropdown tab={props.tab} updateTabItems={updateTabItems} index={index}>
       <div
-        className={classNames({
-          'layout-tabs-tab': true,
-          'layout-tabs-tab-wrapper-active': props.active,
-          'layout-tabs-tab-chrome': tabStyle === 'chrome',
-          'layout-tabs-tab-card': tabStyle === 'card',
-          'layout-tabs-tab-classic': tabStyle === 'classic',
-          'layout-tabs-tab-trapezoid': tabStyle === 'trapezoid',
-          'layout-tabs-tab-brisk': tabStyle === 'brisk',
-          'layout-tabs-tab-rhythm': tabStyle === 'rhythm',
-        })}
         onContextMenu={(e) => {
           e.preventDefault();
         }}
+        className="h-full max-w-[140px]"
       >
         {tabStyle === 'chrome' ? <ChromeTab {...props} /> : node}
       </div>

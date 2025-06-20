@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { Popover } from 'antd';
 
 import Icon from '@/components/RaIcon';
-import type { Tab } from '@/components/RaTabs/interface';
 
 import useTabActions from '../../hooks/useTabsActions';
 
+import type { TabItem } from '../Tabs/interface';
 import type { PopoverProps } from 'antd';
 
 import useTabsStoreSelector from '@/store/tabs';
@@ -16,9 +16,9 @@ import useTabsStoreSelector from '@/store/tabs';
 type TabDropdownProps = {
   children: React.ReactNode;
   trigger?: PopoverProps['trigger'];
-  tab?: Tab;
+  tab?: TabItem;
   index: number;
-  updateTabItems: (updateFunc: (prevTabItems: Tab[]) => Tab[]) => void;
+  updateTabItems: (updateFunc: (prevTabItems: TabItem[]) => TabItem[]) => void;
 };
 const TabDropdown = ({
   children,
@@ -116,7 +116,7 @@ const TabDropdown = ({
         onClick={() => doTabActions(() => togglePinTabFunc(tab!))}
       >
         <div className="flex items-center p-[2]  hover:bg-[var(--ant-color-bg-layout)] rounded-[4px]">
-          {tab?.pin ? (
+          {tab?.pinned ? (
             <>
               <Icon icon="lucide:pin-off" />
               <span className="ml-2">{t('tabs.cancelPin')}</span>
@@ -204,7 +204,9 @@ const TabDropdown = ({
         },
       }}
       open={open}
-      onOpenChange={(v) => setOpen(v)}
+      onOpenChange={(v) => {
+        setOpen(v);
+      }}
     >
       {children}
     </Popover>

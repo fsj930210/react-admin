@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Tabs from '@/components/RaTabs';
+import Tabs from '@/components/RaTabs-deprecated';
 
 import DraggableTabs from './components/DraggableTabs';
 import LayoutTab from './components/LayoutTab';

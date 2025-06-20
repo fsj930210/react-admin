@@ -8,7 +8,7 @@ import RegisterForm from './components/RegisterForm';
 import ResetPasswordForm from './components/ResetPasswordForm';
 import styles from './index.module.css';
 
-import AppFooter from '@/layouts/components/Footer';
+import AppFooter from '@/layouts/components/common/Footer';
 import useLoginStoreSelector, { LoginPageEnum } from '@/store/login';
 const LoginModal = () => {
   const { loginPage, changeLoginPage } = useLoginStoreSelector([

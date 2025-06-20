@@ -1,5 +1,5 @@
 import Icon from '@/components/RaIcon';
-import type { TabNodeProps } from '@/components/RaTabs/TabNavList/TabNode';
+import type { TabNodeProps } from '@/components/RaTabs-deprecated/TabNavList/TabNode';
 
 import ChromeTabBackground from '@/assets/images/chrome-tab-bg.svg?react';
 import './index.css';

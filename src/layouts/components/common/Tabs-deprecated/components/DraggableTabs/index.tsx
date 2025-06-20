@@ -15,8 +15,8 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import type { RenderTabBarProps } from '@/components/RaTabs/interface';
-import type { TabNavListProps } from '@/components/RaTabs/TabNavList';
+import type { RenderTabBarProps } from '@/components/RaTabs-deprecated/interface';
+import type { TabNavListProps } from '@/components/RaTabs-deprecated/TabNavList';
 
 import LayoutTab from '../LayoutTab';
 

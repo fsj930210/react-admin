@@ -1,5 +1,5 @@
 import Icon from '@/components/RaIcon';
-import type { Tab } from '@/components/RaTabs/interface';
+import type { Tab } from '@/components/RaTabs-deprecated/interface';
 
 import useTabActions from '../../hooks/useTabsActions';
 import TabDropdown from '../TabDropdown';

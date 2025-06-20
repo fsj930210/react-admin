@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import { Typography } from 'antd';
+import { Typography, Tabs } from 'antd';
 
 import AppLogo from '@/components/app/AppLogo';
-import Tabs from '@/components/RaTabs';
 
 import LoginForm from '../LoginForm';
 import QRCodeForm from '../QRCodeForm';
@@ -14,7 +13,7 @@ import { PUBLIC_PATH } from '@/utils/constants';
 
 import styles from './index.module.css';
 
-import AppFooter from '@/layouts/components/Footer';
+import AppFooter from '@/layouts/components/common/Footer';
 import useLoginStoreSelector, { LoginPageEnum } from '@/store/login';
 
 const { Title, Paragraph } = Typography;
@@ -86,7 +85,6 @@ const LoginPage = ({ material }: LoginPageProps) => {
             {loginPage === LoginPageEnum.login ? (
               <Tabs
                 className={styles['login-tab']}
-                showInkBar
                 animated
                 items={items}
                 tabBarExtraContent={null}

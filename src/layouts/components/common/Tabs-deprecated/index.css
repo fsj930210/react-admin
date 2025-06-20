@@ -93,7 +93,7 @@
   }
 
   /* 灵动样式 */
-  .layout-tabs-tab-brisk {
+  .layout-tabs-tab-line1 {
     border-right: 1px solid var(--ant-color-border);
 
     &:last-child {
@@ -210,7 +210,7 @@
   }
 
   /* 律动 */
-  .layout-tabs-tab-rhythm {
+  .layout-tabs-tab-line2 {
     border-right: 1px solid var(--ant-color-border);
 
     &:last-child {
