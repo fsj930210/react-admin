@@ -8,7 +8,7 @@ import MaterialInput from '@/components/RaMaterial/Input';
 import { validateUsername } from '@/utils/validate';
 
 import type { FormPageProps } from '@/store/login';
-import type { RuleObject } from 'antd/lib/form';
+import type { RuleObject } from 'antd/es/form';
 
 import { LoginPageEnum } from '@/store/login';
 

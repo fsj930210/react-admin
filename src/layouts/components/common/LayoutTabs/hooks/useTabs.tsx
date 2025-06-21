@@ -37,7 +37,7 @@ export function useTabs() {
       pinned: menuItem.key === HOME_PATH,
       disabled: false,
       title: menuItem.title, // 主要用于国际化
-      iconName: menuItem.iconify_name,
+      iconify_name: menuItem.iconify_name,
     };
   };
 
@@ -47,7 +47,7 @@ export function useTabs() {
   const cacheTabItems = (items: TabItem[]) => {
     const itemsToCache = items.map((item) => ({
       ...item,
-      icon: item.iconName, // 只缓存图标名称
+      icon: item.iconify_name, // 只缓存图标名称
     }));
     storage.setItem(RA_CACHED_TABS_KEY, itemsToCache);
   };
@@ -61,7 +61,7 @@ export function useTabs() {
       tabItemsRef.current = cachedItems.map((tab) => ({
         ...tab,
         label: tab.label,
-        icon: <RaIcon icon={tab.iconName as string} />,
+        icon: <RaIcon icon={tab.iconify_name as string} />,
       }));
       setTabItems(tabItemsRef.current);
     }

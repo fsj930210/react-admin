@@ -11,7 +11,7 @@ import ThirdForm from '../ThirdForm';
 import { validatePassword, validateUsername } from '@/utils/validate';
 
 import type { FormPageProps } from '@/store/login';
-import type { RuleObject } from 'antd/lib/form';
+import type { RuleObject } from 'antd/es/form';
 
 import ImageBg from '@/assets/images/1bg@2x.jpg';
 import ImagePuzzle from '@/assets/images/1puzzle@2x.png';

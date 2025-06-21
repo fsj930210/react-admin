@@ -1,6 +1,7 @@
+import type React from 'react';
 import type { RouteObject } from 'react-router-dom';
 
-import type { ItemType as BreadcrumbItemType } from 'antd/lib/breadcrumb/Breadcrumb';
+import type { ItemType as BreadcrumbItemType } from 'antd/es/breadcrumb/Breadcrumb';
 
 declare global {
   interface Window {
@@ -48,6 +49,11 @@ export type IRouteObject = RouteObject & {
 
 export type BreadcrumbItem = BreadcrumbItemType & {
   icon?: React.ReactNode;
+  collapse?: boolean; // 是否折叠
+  label?: React.ReactNode; // 面包屑显示的文本
+  path?: string; // 面包屑对应的路径
+  key?: React.Key; // 面包屑唯一标识
+  title?: React.ReactNode; // 面包屑标题
 };
 export type DropDownMapValue = {
   key: string;

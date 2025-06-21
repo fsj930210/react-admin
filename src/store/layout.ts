@@ -30,7 +30,7 @@ const useLayoutStore = create<LayoutState>()((set) => ({
   changeShowTabs: (showTabs: boolean) => set(() => ({ showTabs })),
   layoutType: 'vertical',
   changeLayoutType: (layoutType: LayoutType) => set(() => ({ layoutType })),
-  breadcrumbType: 'flat',
+  breadcrumbType: 'menu',
   changeBreadcrumbType: (breadcrumbType: BreadcrumbType) =>
     set(() => ({ breadcrumbType })),
 }));

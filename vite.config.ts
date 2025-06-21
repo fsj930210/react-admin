@@ -1,12 +1,11 @@
 import { resolve } from 'node:path';
 
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
 import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
 import postcssNesting from 'postcss-nesting';
 import { visualizer } from 'rollup-plugin-visualizer';
-// import UnoCSS from 'unocss/vite';
 import { defineConfig, loadEnv } from 'vite';
 import viteCompression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
@@ -43,7 +42,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       visualizer({
         open: true,
       }),
-      // UnoCSS(),
     ],
     resolve: {
       alias: {

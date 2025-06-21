@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import type { MenuItemType } from 'antd/lib/menu/interface';
+import type { MenuItemType } from 'antd/es/menu/interface';
 
 // 菜单项基础接口
 export interface BaseMenuItem extends MenuItemType {
@@ -25,7 +25,7 @@ export interface RouteMenuItem extends BaseMenuItem {
 
 // 后端接口菜单项
 export interface ApiMenuItem extends BaseMenuItem {
-  id: string; // 后端菜单ID
+  id?: string; // 后端菜单ID
   parent_id?: string; // 父菜单ID
   permission?: string; // 权限标识
 }

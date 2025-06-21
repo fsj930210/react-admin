@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import type { BreadcrumbItem } from '@/types/custom-types';
 import type { MenuItem } from '@/types/menu';
-import type { BreadcrumbProps } from 'antd/lib';
+import type { BreadcrumbProps } from 'antd/es';
 
 import useLayoutStoreSelector from '@/store/layout';
 import useMenuStoreSelector from '@/store/menu';
@@ -48,7 +48,8 @@ const useBreadcrumb = () => {
     const menu = flatMenuItems[path];
     return {
       key: path,
-      title: menu?.label || '',
+      label: menu?.label || '',
+      title: menu?.title || '',
       path,
       icon: menu?.iconify_name || null,
     };

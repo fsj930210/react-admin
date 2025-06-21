@@ -1,7 +1,6 @@
 @import url('tailwindcss');
 
 @layer utilities {
-  /* 或使用原生 CSS（避免依赖层叠顺序） */
   .size-full {
     width: 100%;
     height: 100%;

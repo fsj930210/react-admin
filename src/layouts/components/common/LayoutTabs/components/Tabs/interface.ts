@@ -8,7 +8,7 @@ export interface TabItem {
   label: ReactNode;
   title?: string;
   pinned?: boolean;
-  iconName?: string; // 用于缓存时存储图标名称
+  iconify_name?: string; // 用于缓存时存储图标名称
 }
 
 export interface LayoutTabsProps {
