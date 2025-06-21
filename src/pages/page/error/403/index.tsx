@@ -1,7 +1,24 @@
-import Error403 from '@/components/Error/403';
+import { useTranslation } from 'react-i18next';
 
-const Error403Page = () => {
-  return <Error403 />;
+import { Button, Result } from 'antd';
+
+import useGoto from '@/hooks/useGoto';
+
+const ErrorPage403 = () => {
+  const { goHome } = useGoto();
+  const { t } = useTranslation();
+  return (
+    <Result
+      status="403"
+      title="403"
+      subTitle="抱歉，您没有权限访问此页面。"
+      extra={
+        <Button type="primary" onClick={() => goHome({ replace: true })}>
+          {t('common.backHome')}
+        </Button>
+      }
+    />
+  );
 };
 
-export default Error403Page;
+export default ErrorPage403;

@@ -2,7 +2,7 @@
 .ra-layout-tabs {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 36px;
 
   .ra-layout-tabs-container {
     display: flex;

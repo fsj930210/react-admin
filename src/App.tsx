@@ -27,7 +27,7 @@ const App = () => {
     <AppContext.Provider
       value={{
         theme,
-        appCssTokenKey: RA_ANTD_APP_CSS_TOKEN_KEY
+        appCssTokenKey: RA_ANTD_APP_CSS_TOKEN_KEY,
       }}
     >
       <ConfigProvider

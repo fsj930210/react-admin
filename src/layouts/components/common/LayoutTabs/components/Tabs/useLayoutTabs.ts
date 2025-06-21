@@ -54,7 +54,7 @@ export const useLayoutTabs = ({
         isScrollingRef.current = true;
         targetTab.scrollIntoView({
           behavior: 'smooth',
-          inline: 'start',
+          inline: 'nearest',
         });
 
         // 等待滚动完成后更新状态
@@ -90,7 +90,6 @@ export const useLayoutTabs = ({
         const currentWidth = entry.contentRect.width;
         // 只在容器宽度变化时检查滚动状态
         if (prevWidthRef.current !== currentWidth) {
-          console.log('Container width changed:', currentWidth, activeKey);
           prevWidthRef.current = currentWidth;
           checkScrollState();
           scrollToActiveIntoView();
