@@ -1,4 +1,4 @@
-@import url('tailwindcss');
+@import 'tailwindcss';
 
 @layer utilities {
   .size-full {

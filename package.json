@@ -36,9 +36,6 @@
     ],
     "*.ts?(x)": [
       "prettier --parser=typescript --write"
-    ],
-    "*.css": [
-      "stylelint --fix"
     ]
   },
   "dependencies": {
